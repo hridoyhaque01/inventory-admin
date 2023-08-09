@@ -46,7 +46,20 @@ const inventoryApi = apiSlice.injectEndpoints({
       async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log(result);
+          const formData = JSON.parse(data?.get("data"));
+
+          // const formatedData = {
+          //   buyingPrice: data?.products.$.buyingPrice,
+          //   productCategory: data?.products.$.productCategory,
+          //   productId: data?.products.$.productId,
+          //   productName: data?.products.$.productName,
+          //   productQuantity: data?.products.$.productQuantity,
+          //   sellingPrice: data?.products.$.sellingPrice,
+          //   storeId: data?.products.$.storeId,
+          //   storeName: data?.products.$.storeName,
+          //   unit: data?.products.$.unit,
+          // };
+
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
@@ -58,7 +71,7 @@ const inventoryApi = apiSlice.injectEndpoints({
                   );
                   // console.log(JSON.stringify(draft));
                   if (index !== -1) {
-                    draft[index] = result?.data;
+                    draft[index] = formData;
                   }
                 }
               )

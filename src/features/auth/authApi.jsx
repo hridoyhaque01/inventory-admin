@@ -1,5 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
-import { setUser } from "./authSlice";
+import { setUser, updateUser } from "./authSlice";
 
 const authApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -60,31 +60,22 @@ const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          if (result?.data?.result?.matchedCount === 1) {
-            const { data, fileUrl, id, token } = args || {};
-            const formData = JSON.parse(data?.get("data"));
-            const admin = { ...formData, _id: id, fileUrl };
+
+          if (result?.data) {
+            const { data } = result?.data || {};
+            dispatch(updateUser(data));
             const localAuth = localStorage?.getItem("auth");
-            const parseAuth = JSON.parse(localAuth);
-            const auth = { admin, token, expireIn: parseAuth?.expireIn };
-            dispatch(setUser(auth));
+            const auth = JSON.parse(localAuth);
+            const { token, admin, expireIn } = auth || {};
+            const newData = { ...admin, ...data };
             localStorage.setItem(
               "auth",
               JSON.stringify({
-                token: auth.token,
-                admin: auth.admin,
-                expireIn: parseAuth?.expireIn,
+                token,
+                admin: newData,
+                expireIn,
               })
             );
-            // dispatch(
-            //   apiSlice.util.updateQueryData(
-            //     "login",
-            //     undefined,
-            //     (draft) => {
-            //       console.log(JSON.parse(draft))
-            //     }
-            //   )
-            // );
           }
         } catch (error) {
           console.log(error);

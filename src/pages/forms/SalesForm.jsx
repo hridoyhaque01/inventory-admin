@@ -1,12 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 function SalesForm() {
+  const { state } = useLocation();
+  const { payload } = state || {};
+  console.log(payload);
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Sell</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">Sales</h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -21,7 +24,9 @@ function SalesForm() {
                     type="text"
                     placeholder="Product ID"
                     name="productId"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 text-fadeColor border border-whiteLow outline-none rounded text-sm"
+                    readOnly
+                    defaultValue={payload?.productId}
                   />
                 </div>
 
@@ -34,7 +39,9 @@ function SalesForm() {
                     type="text"
                     placeholder="Product name"
                     name="productName"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    readOnly
+                    defaultValue={payload?.productName}
                   />
                 </div>
 
@@ -45,13 +52,12 @@ function SalesForm() {
                   </span>
                   <div className="relative w-full">
                     <select
-                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none"
+                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center  placeholder:text-blackSemi appearance-none outline-none"
                       name="productCategory"
+                      disabled
                       defaultValue=""
                     >
-                      <option value="" disabled>
-                        Select Category
-                      </option>
+                      <option value="">{payload?.productCategory}</option>
                     </select>
                     <div className="absolute inset-y-0 right-3 flex items-center text-secondaryColor pointer-events-none">
                       <svg
@@ -79,33 +85,34 @@ function SalesForm() {
                     type="text"
                     placeholder="Shop name"
                     name="shopName"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    readOnly
+                    defaultValue={payload?.storeName}
                   />
                 </div>
 
-                {/* Buying Price/Unit: */}
+                {/* Quantity */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Quantity:
                   </span>
-                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm">
+                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor text-sm">
                     <input
                       type="number"
                       name="quantity"
                       className="w-20 border-none outline-none"
                       placeholder="Quantity"
+                      readOnly
+                      defaultValue={payload?.unitCount}
                     />
 
                     <div className="relative w-full max-w-max">
                       <select
                         className="appearance-none outline-none  w-16"
                         name="quantityAction"
-                        defaultValue=""
+                        disabled
                       >
-                        <option value="KG">KG</option>
-                        <option value="Bosta">Bosta</option>
-                        <option value="Litter">Litter</option>
-                        <option value="Gram">Gram</option>
+                        <option value="">{payload?.unit}</option>
                       </select>
                       <div className="absolute inset-y-0 right-1 flex items-center text-secondaryColor pointer-events-none">
                         <svg
@@ -127,7 +134,7 @@ function SalesForm() {
                     type="number"
                     name="buyingPrice"
                     placeholder="Buying price"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
                   /> */}
                 </div>
 
@@ -140,7 +147,9 @@ function SalesForm() {
                     type="number"
                     name="sellingPrice"
                     placeholder="Selling price"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    readOnly
+                    defaultValue={payload?.unitPrice}
                   />
                 </div>
                 {/* edit button */}
@@ -149,16 +158,16 @@ function SalesForm() {
                   <div className="flex items-center gap-3">
                     <Link
                       to="/sales"
-                      className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
+                      className="w-[160px] p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      Cancel
+                      Back
                     </Link>
-                    <button
+                    {/* <button
                       type="submit"
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                     >
                       Save
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

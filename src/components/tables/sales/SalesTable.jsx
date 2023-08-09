@@ -13,8 +13,12 @@ function SalesTable({ data }) {
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
 
-  const handleNavigate = () => {
-    navigate("/sales-edit");
+  const handleNavigate = (data) => {
+    navigate("/sales-edit", {
+      state: {
+        payload: data,
+      },
+    });
   };
 
   return (
@@ -65,16 +69,18 @@ function SalesTable({ data }) {
           </thead>
           {currentRows?.length === 0 ? (
             <tbody>
-              <tr>
-                <td colSpan="6" className="">
-                  No data found
+              <tr className="border-none">
+                <td colSpan="10" className="py-6">
+                  <h2 className="text-center text-lg text-blackRgb font-medium">
+                    No data found!
+                  </h2>
                 </td>
               </tr>
             </tbody>
           ) : (
             <tbody className="text-center">
-              {currentRows?.map((sale, i) => (
-                <tr className="text-center" key={sale?._id}>
+              {currentRows?.map((item, i) => (
+                <tr className="text-center" key={item?._id}>
                   <th className="py-3">
                     <input
                       type="checkbox"
@@ -87,15 +93,15 @@ function SalesTable({ data }) {
                       ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
                       : rowsPerPage * (currentPage - 1) + i + 1}
                   </td>
-                  <td className="py-3">00004682</td>
+                  <td className="py-3">{item?.productId}</td>
 
-                  <td className="py-3">Pesticides</td>
-                  <td className="py-3">Pesticides</td>
-                  <td className="py-3">Pesticides</td>
-                  <td className="py-3">50 </td>
-                  <td className="py-3">5,000</td>
+                  <td className="py-3">{item?.productName}</td>
+                  <td className="py-3">{item?.productCategory}</td>
+                  <td className="py-3">{item?.storeName}</td>
+                  <td className="py-3">{item?.unitCount}</td>
+                  <td className="py-3">{item?.unitPrice}</td>
                   <td className="py-3">
-                    <button type="button" onClick={handleNavigate}>
+                    <button type="button" onClick={() => handleNavigate(item)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -117,13 +123,15 @@ function SalesTable({ data }) {
           )}
         </table>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        rowsPerPage={rowsPerPage}
-        setRowsPerPage={setRowsPerPage}
-        totalRows={data?.length}
-      ></Pagination>
+      <div className="pr-6">
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          totalRows={data?.length}
+        ></Pagination>
+      </div>
     </>
   );
 }

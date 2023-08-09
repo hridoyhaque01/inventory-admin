@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
+import NoData from "../../components/shared/ui/NoData";
 import InventoryTable from "../../components/tables/inventory/InventoryTable";
 import { useGetInventoriesQuery } from "../../features/inventory/inventoryApi";
 
@@ -31,7 +32,7 @@ function Inventory() {
   } else if (!isLoading && isError) {
     content = <div>Something went wrong</div>;
   } else if (!isLoading && !isError && data?.length === 0) {
-    content = <div>No data found</div>;
+    content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
     const newData = data?.filter(filterBySearch);
     content = <InventoryTable data={newData}></InventoryTable>;
@@ -39,7 +40,7 @@ function Inventory() {
 
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
-      <div className="shadow-sm w-full h-full rounded-2xl overflow-hidden">
+      <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
           title="Inventory"
           path="/inventory-add"

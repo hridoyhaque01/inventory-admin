@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
@@ -11,10 +11,9 @@ import getCompressedImage from "../../utils/getCompresedImage";
 function EditProfile() {
   const [updateAdmin, { isLoading }] = useUpdateAdminMutation();
   const { user, accessToken } = useSelector((state) => state.auth);
-  console.log(user);
   const profileRef = useRef();
   const [profile, setProfile] = useState(null);
-  const [profilePreveiw, setProfilePreveiw] = useState(null);
+  const [profilePreveiw, setProfilePreveiw] = useState(user?.fileUrl || null);
   const [isTypeError, setIsTypeError] = useState(false);
   // const [resetPassword, { isLoading }] = use ();
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -23,6 +22,7 @@ function EditProfile() {
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isShowConfirmIcon, setIsShowConfirmIcon] = useState(false);
   const [compressedLoading, setCompressedLoading] = useState(false);
+  const navigate = useNavigate();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -157,9 +157,10 @@ function EditProfile() {
         .unwrap()
         .then((res) => {
           infoNotify("User update successfull");
+          // navigate("/profile");
         })
         .catch((error) => {
-          errorNotify("Update user failed");
+          errorNotify("User update failed");
           console.log(error);
         });
     } else {

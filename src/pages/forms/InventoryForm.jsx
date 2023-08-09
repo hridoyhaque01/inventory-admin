@@ -122,8 +122,11 @@ function InventoryForm() {
                     placeholder="Enter product ID"
                     name="productId"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded ${
+                      type === "edit" ? "text-fadeColor" : "text-blackLow"
+                    } text-sm`}
                     defaultValue={payload?.productId}
+                    readOnly={type === "edit" ? true : false}
                   />
                 </div>
 
@@ -137,7 +140,7 @@ function InventoryForm() {
                     placeholder="Enter product name"
                     name="productName"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     defaultValue={payload?.productName}
                   />
                 </div>
@@ -153,6 +156,7 @@ function InventoryForm() {
                       name="productCategory"
                       defaultValue={payload ? payload?.productCategory : ""}
                       required
+                      disabled={type === "edit" ? true : false}
                     >
                       <option value="" disabled>
                         Select product Category
@@ -173,7 +177,7 @@ function InventoryForm() {
                       >
                         <path
                           d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
-                          fill="#303030"
+                          fill={type === "edit" ? "#808080" : "#303030"}
                         />
                       </svg>
                     </div>
@@ -194,6 +198,7 @@ function InventoryForm() {
                           ? `${payload?.storeName}-${payload?.storeId}`
                           : ""
                       }
+                      disabled={type === "edit" ? true : false}
                       required
                     >
                       <option value="" disabled>
@@ -215,7 +220,7 @@ function InventoryForm() {
                       >
                         <path
                           d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
-                          fill="#303030"
+                          fill={type === "edit" ? "#808080" : "#303030"}
                         />
                       </svg>
                     </div>
@@ -242,6 +247,7 @@ function InventoryForm() {
                         className="appearance-none outline-none  w-16"
                         name="unit"
                         defaultValue={`${payload?.unit}` || "KG"}
+                        disabled={type === "edit" ? true : false}
                       >
                         <option value="KG">KG</option>
                         <option value="Bosta">Bosta</option>
@@ -258,7 +264,7 @@ function InventoryForm() {
                         >
                           <path
                             d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
-                            fill="#303030"
+                            fill={type === "edit" ? "#808080" : "#303030"}
                           />
                         </svg>
                       </div>
@@ -268,7 +274,7 @@ function InventoryForm() {
                     type="number"
                     name="buyingPrice"
                     placeholder="Buying price"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded ${type==="edit" ? 'text-fadeColor' :'text-blackLow'} text-sm`}
                   /> */}
                 </div>
                 {/* Buying Price/Unit: */}
@@ -281,8 +287,11 @@ function InventoryForm() {
                     name="buyingPrice"
                     placeholder="Enter buying price"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded ${
+                      type === "edit" ? "text-fadeColor" : "text-blackLow"
+                    } text-sm`}
                     defaultValue={payload?.buyingPrice}
+                    readOnly={type === "edit" ? true : false}
                   />
                 </div>
 
@@ -296,8 +305,11 @@ function InventoryForm() {
                     name="sellingPrice"
                     placeholder="Enter selling price"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded ${
+                      type === "edit" ? "text-fadeColor" : "text-blackLow"
+                    } text-sm`}
                     defaultValue={payload?.sellingPrice}
+                    readOnly={type === "edit" ? true : false}
                   />
                 </div>
                 {/* edit button */}

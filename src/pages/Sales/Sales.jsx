@@ -1,12 +1,19 @@
 import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
+import NoData from "../../components/shared/ui/NoData";
 import SalesTable from "../../components/tables/sales/SalesTable";
 import { useGetSalesQuery } from "../../features/sales/salesApi";
+import { useGetStoresQuery } from "../../features/store/storeApi";
 
 function Sales() {
-  const [selectedShop, setSelectedShop] = useState("");
+  const [selectedShop, setSelectedShop] = useState("All Shop");
   const { data, isLoading, isError } = useGetSalesQuery();
+  const {
+    data: stores,
+    isLoading: storeLoading,
+    isError: storeError,
+  } = useGetStoresQuery();
 
   const [searchValue, setSearchValue] = useState("");
 
@@ -25,33 +32,44 @@ function Sales() {
     }
   };
 
+  const filterByStoreName = (data) => {
+    if (selectedShop === "All Shop") {
+      return true;
+    } else {
+      return data?.storeName
+        ?.toLowerCase()
+        .includes(selectedShop?.toLowerCase());
+    }
+  };
+
   let content = null;
 
-  if (isLoading) {
+  if (isLoading || storeLoading) {
     content = <SearchLoader></SearchLoader>;
-  } else if (!isLoading && isError) {
+  } else if (!isLoading && (isError || storeError)) {
     content = <div>Something went wrong</div>;
-  } else if (!isLoading && !isError && data?.length === 0) {
-    content = <div>No data found</div>;
-  } else if (!isLoading && !isError && data?.length > 0) {
-    const newData = data?.filter(filterBySearch);
+  } else if (!isLoading && (!isError || !storeError) && data?.length === 0) {
+    content = <NoData></NoData>;
+  } else if (!isLoading && (!isError || !storeError) && data?.length > 0) {
+    const newData = data?.filter(filterBySearch).filter(filterByStoreName);
     content = <SalesTable data={newData}></SalesTable>;
   }
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
-      <div className="shadow-sm w-full h-full rounded-2xl overflow-hidden">
+      <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
           title="Sell"
           path="/sales-add"
           value={searchValue}
           onChange={onChange}
+          isNotAddable={true}
         >
           <div className="dropdown dropdown-bottom">
             <label
               tabIndex={0}
               className="text-whiteHigh flex items-center gap-1 cursor-pointer"
             >
-              <span>{selectedShop ? selectedShop : "Shop Name"}</span>
+              <span>{selectedShop}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -68,14 +86,17 @@ function Sales() {
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-whiteHigh rounded w-52"
+              className="dropdown-content z-[1] menu p-2 shadow bg-whiteHigh rounded w-48 mt-2"
             >
-              <li onClick={() => setSelectedShop("Item 1")}>
-                <a>Item 1</a>
+              <li onClick={() => setSelectedShop("All Shop")}>
+                <p>All Shop</p>
               </li>
-              <li onClick={() => setSelectedShop("Item 2")}>
-                <a>Item 2</a>
-              </li>
+              {!storeLoading &&
+                stores?.map((store, i) => (
+                  <li onClick={() => setSelectedShop(store?.name)} key={i}>
+                    <p>{store?.name}</p>
+                  </li>
+                ))}
             </ul>
           </div>
         </SearchBar>

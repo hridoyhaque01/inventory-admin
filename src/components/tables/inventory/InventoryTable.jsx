@@ -71,9 +71,11 @@ function InventoryTable({ data }) {
           </thead>
           {currentRows?.length === 0 ? (
             <tbody>
-              <tr>
-                <td colSpan="6" className="">
-                  No data found
+              <tr className="border-none">
+                <td colSpan="10" className="py-6">
+                  <h2 className="text-center text-lg text-blackRgb font-medium">
+                    No data found!
+                  </h2>
                 </td>
               </tr>
             </tbody>
@@ -129,13 +131,15 @@ function InventoryTable({ data }) {
           )}
         </table>
       </div>
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        rowsPerPage={rowsPerPage}
-        setRowsPerPage={setRowsPerPage}
-        totalRows={data?.length}
-      ></Pagination>
+      <div className="pr-6">
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          totalRows={data?.length}
+        ></Pagination>
+      </div>
     </>
   );
 }

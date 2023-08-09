@@ -1,11 +1,13 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { avatar } from "../../../assets/getAssets";
 import { logout } from "../../../features/auth/authSlice";
 
 const TopNav = () => {
   const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.auth);
+
   return (
     <div className="navbar bg-primaryMainDarkest px-6 py-2">
       {/* top nav left */}
@@ -23,7 +25,11 @@ const TopNav = () => {
             className="btn btn-ghost btn-circle outline-none border-none avatar"
           >
             <div className="w-10 h-10 rounded-full">
-              <img src={avatar} alt="" className="w-full" />
+              <img
+                src={user?.fileUrl || avatar}
+                alt=""
+                className="w-full rounded-full bg-cover bg-center object-cover"
+              />
             </div>
           </label>
           <ul

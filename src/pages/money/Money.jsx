@@ -1,12 +1,11 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import { Pagination } from "../../components/shared/pagination/Pagination";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import MoneyOwedTable from "../../components/tables/moneyOwed/MoneyOwedTable";
 
 function Expenses() {
-  const { data } = useSelector((state) => state.inventories);
-  console.log(data);
+  // const { data } = useSelector((state) => state.inventories);
+  // console.log(data);
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full h-full rounded-2xl overflow-hidden">
