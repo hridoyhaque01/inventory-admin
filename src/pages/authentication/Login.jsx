@@ -82,7 +82,7 @@ function Login() {
                     required
                     name="email"
                     placeholder="Enter email"
-                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg"
+                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
                   />
                 </div>
                 {/* password  */}
