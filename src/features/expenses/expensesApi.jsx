@@ -1,29 +1,26 @@
 import { apiSlice } from "../api/apiSlice";
 
-const inventoryApi = apiSlice.injectEndpoints({
+const expensesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getInventories: builder.query({
+    getExpenses: builder.query({
       query: () => ({
-        url: "/products",
+        url: "/expenses",
       }),
-
-      // providesTags: ["products"],
     }),
 
-    addProducts: builder.mutation({
+    addExpense: builder.mutation({
       query: (data) => ({
-        url: "/products/add",
+        url: "/expenses/add",
         method: "POST",
         body: data,
       }),
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log(result);
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
-                "getInventories",
+                "getExpenses",
                 undefined,
                 (draft) => {
                   draft?.push(result?.data);
@@ -36,9 +33,9 @@ const inventoryApi = apiSlice.injectEndpoints({
         }
       },
     }),
-    updateProducts: builder.mutation({
+    updateExpense: builder.mutation({
       query: ({ data, id }) => ({
-        url: `/products/update/${id}`,
+        url: `/expenses/update/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -46,19 +43,21 @@ const inventoryApi = apiSlice.injectEndpoints({
       async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          const formData = JSON.parse(data?.get("data"));
+          console.log(result?.data);
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
-                "getInventories",
+                "getExpenses",
                 undefined,
                 (draft) => {
-                  const index = draft.findIndex(
-                    (prdouct) => prdouct.productId === id
+                  const updatedExpense = draft.find(
+                    (expense) => expense._id === id
                   );
                   // console.log(JSON.stringify(draft));
-                  if (index !== -1) {
-                    draft[index] = formData;
+                  if (updatedExpense) {
+                    updatedExpense.date = result?.data?.date;
+                    updatedExpense.description = result?.data?.description;
+                    updatedExpense.amount = result?.data?.amount;
                   }
                 }
               )
@@ -73,7 +72,7 @@ const inventoryApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetInventoriesQuery,
-  useAddProductsMutation,
-  useUpdateProductsMutation,
-} = inventoryApi;
+  useGetExpensesQuery,
+  useAddExpenseMutation,
+  useUpdateExpenseMutation,
+} = expensesApi;

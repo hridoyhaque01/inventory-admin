@@ -1,103 +1,124 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../modals/ConfirmationModal";
+import { Pagination } from "../../shared/pagination/Pagination";
 
-function MoneyOwedTable() {
+function MoneyOwedTable({ data }) {
   const navigate = useNavigate();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const indexOfLastRow = currentPage * rowsPerPage;
+  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
+  const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
 
-  const handleNavigate = () => {
-    navigate("/moneyOwed-edit");
+  const handleNavigate = (item) => {
+    navigate("/moneyOwed-edit", {
+      state: {
+        payload: item,
+      },
+    });
   };
 
   return (
-    <div>
-      <table className="table w-full">
-        <thead className=" p-0">
-          <tr className="font-bold text-center text-3xl">
-            <th className="bg-primaryMainLightest text-bold normal-case p-2">
-              <input
-                type="checkbox"
-                className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
-                name="checkbox"
-              />
-            </th>
-
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Serial
-            </th>
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Customer Id
-            </th>
-
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Due Amount
-            </th>
-
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Pay Date
-            </th>
-
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Action
-            </th>
-          </tr>
-        </thead>
-        <tbody className="text-center">
-          <tr className="text-center">
-            <th className="py-3">
-              <input
-                type="checkbox"
-                className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
-                name="checkbox"
-              />
-            </th>
-            <td className="py-3">1</td>
-            <td className="py-3">019456654265</td>
-
-            <td className="py-3">6654145645</td>
-            <td className="py-3">25/06/2023</td>
-            <td className="py-3">
-              <div className="dropdown dropdown-end">
-                <label
-                  tabIndex={0}
-                  className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer"
-                >
-                  Pay
-                </label>
-                <ul
-                  tabIndex={0}
-                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-28"
-                >
-                  <li>
-                    <label onClick={handleNavigate}>
-                      <p
-                        className={`text-warningColor active:bg-blackLow w-full rounded-t-md`}
-                      >
-                        Edit
-                      </p>
-                    </label>
-                  </li>
-                  <li className="active:bg-whiteHigh">
-                    <label
-                      className="active:bg-whiteHigh"
-                      htmlFor="confirmationPopup"
-                    >
-                      <p className={`text-errorColor  w-full rounded-t-md`}>
-                        Delete
-                      </p>
-                    </label>
-                  </li>
-                </ul>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
+    <>
       <div>
-        <ConfirmationModal status="delete"></ConfirmationModal>
+        <table className="table w-full">
+          <thead className=" p-0">
+            <tr className="font-bold text-center text-3xl">
+              <th className="bg-primaryMainLightest text-bold normal-case p-2">
+                <input
+                  type="checkbox"
+                  className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
+                  name="checkbox"
+                />
+              </th>
+
+              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                Serial
+              </th>
+              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
+                Customer Id
+              </th>
+
+              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                Due Amount
+              </th>
+
+              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                Pay Date
+              </th>
+
+              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                Action
+              </th>
+            </tr>
+          </thead>
+          {currentRows?.length === 0 ? (
+            <tbody>
+              <tr className="border-none">
+                <td colSpan="10" className="py-6">
+                  <h2 className="text-center text-lg text-blackRgb font-medium">
+                    No data found!
+                  </h2>
+                </td>
+              </tr>
+            </tbody>
+          ) : (
+            <tbody className="text-center">
+              {currentRows?.map((owe, i) => (
+                <tr className="text-center" key={i}>
+                  <th className="py-3">
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
+                      name="checkbox"
+                    />
+                  </th>
+                  <td className="py-3">
+                    {currentPage === 1 && i + 1 < 10
+                      ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
+                      : rowsPerPage * (currentPage - 1) + i + 1}
+                  </td>
+                  <td className="py-3">{owe?.customerId}</td>
+                  <td className="py-3">{owe?.dueAmount}</td>
+                  <td className="py-3">
+                    {new Date(owe?.payDate).toLocaleDateString("en-US")}
+                  </td>
+                  <td className="py-3">
+                    <button type="button" onClick={() => handleNavigate(owe)}>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                      >
+                        <path
+                          d="M2.9416 12.2289L2.94163 12.2289L2.93686 12.2243C2.65588 11.9507 2.49805 11.5709 2.49805 11.1725V4.0025C2.49805 3.17864 3.17419 2.5025 3.99805 2.5025H11.168C11.5671 2.5025 11.9495 2.66102 12.2245 2.93606L21.0545 11.7661C21.6509 12.3624 21.6476 13.3058 21.0645 13.8889L13.8945 21.0589C13.3098 21.6437 12.3563 21.6437 11.7716 21.0589L2.9416 12.2289ZM4.49805 6.5025C4.49805 7.60864 5.3919 8.5025 6.49805 8.5025C7.60419 8.5025 8.49805 7.60864 8.49805 6.5025C8.49805 5.39636 7.60419 4.5025 6.49805 4.5025C5.3919 4.5025 4.49805 5.39636 4.49805 6.5025Z"
+                          fill="#F4A100"
+                          stroke="#F4A100"
+                        />
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          )}
+        </table>
+
+        <div>
+          <ConfirmationModal status="delete"></ConfirmationModal>
+        </div>
       </div>
-    </div>
+      <Pagination
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        rowsPerPage={rowsPerPage}
+        setRowsPerPage={setRowsPerPage}
+        totalRows={data?.length}
+      ></Pagination>
+    </>
   );
 }
 

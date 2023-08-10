@@ -156,8 +156,8 @@ function EditProfile() {
       })
         .unwrap()
         .then((res) => {
-          infoNotify("User update successfull");
-          // navigate("/profile");
+          // infoNotify("User update successfull");
+          navigate("/profile");
         })
         .catch((error) => {
           errorNotify("User update failed");
@@ -178,7 +178,8 @@ function EditProfile() {
       })
         .unwrap()
         .then((res) => {
-          infoNotify("User update successfull");
+          // infoNotify("User update successfull");
+          navigate("/profile");
         })
         .catch((error) => {
           errorNotify("Update user failed");

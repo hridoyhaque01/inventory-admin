@@ -1,7 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import getIsoDateString from "../../utils/getIsoDateString";
 
 function MoneyOwedForm() {
+  const { state } = useLocation();
+  const { payload } = state || {};
+
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
@@ -15,39 +19,44 @@ function MoneyOwedForm() {
                 {/* productId */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Customer Id:
+                    Customer Id :
                   </span>
                   <input
-                    type="number"
+                    type="text"
                     placeholder="Customer id"
                     name="customerId"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    defaultValue={payload?.customerId}
                   />
                 </div>
 
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Due Amount:
+                    Total Amount :
                   </span>
                   <input
                     type="number"
-                    placeholder="Due amount"
-                    name="dueAmount"
+                    placeholder="Total amount"
+                    name="totalAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    defaultValue={payload?.totalAmount}
+                    readOnly
                   />
                 </div>
 
                 {/* Pay Date: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Pay Date:
+                    Pay Date :
                   </span>
                   <input
                     type="date"
                     placeholder="Pay date"
                     name="payDate"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    defaultValue={getIsoDateString(payload?.payDate)}
+                    readOnly
                   />
                 </div>
 
@@ -61,19 +70,23 @@ function MoneyOwedForm() {
                     placeholder="Paid amount"
                     name="due"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    defaultValue={payload?.paidAmount}
+                    readOnly
                   />
                 </div>
 
                 {/* Paid */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Remaining :
+                    Due Amount :
                   </span>
                   <input
                     type="number"
-                    placeholder="Remaining amount"
-                    name="remainingAmount"
+                    placeholder="Due amount"
+                    name="dueAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    defaultValue={payload?.dueAmount}
+                    readOnly
                   />
                 </div>
 
@@ -83,16 +96,10 @@ function MoneyOwedForm() {
                   <div className="flex items-center gap-3">
                     <Link
                       to="/moneyOwed"
-                      className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
+                      className="w-[160px] p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      Cancel
+                      Back
                     </Link>
-                    <button
-                      type="submit"
-                      className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
-                    >
-                      Save
-                    </button>
                   </div>
                 </div>
               </div>

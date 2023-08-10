@@ -236,10 +236,13 @@ function InventoryForm() {
                     <input
                       type="number"
                       name="productQuantity"
-                      className="w-28 border-none outline-none"
+                      className={`w-28 border-none outline-none ${
+                        type === "edit" ? "text-fadeColor" : "text-blackLow"
+                      }`}
                       placeholder="Enter quantity"
                       defaultValue={`${payload?.productQuantity}`}
                       required
+                      readOnly={type === "edit" ? true : false}
                     />
 
                     <div className="relative w-full max-w-max">
@@ -330,8 +333,6 @@ function InventoryForm() {
                       Save
                     </button>
                   </div>
-                  {isLoading && <div>loading....</div>}
-                  {isError && <div>Error....</div>}
                 </div>
               </div>
             </form>

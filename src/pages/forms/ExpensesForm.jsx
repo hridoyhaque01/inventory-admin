@@ -1,7 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import RequestLoader from "../../components/loaders/RequestLoader";
+import {
+  useAddExpenseMutation,
+  useUpdateExpenseMutation,
+} from "../../features/expenses/expensesApi";
 
 function ExpensesForm() {
+  const [date, setDate] = useState("");
+  const [addExpense, { isLoading }] = useAddExpenseMutation();
+  const [updateExpense, { isLoading: updateExpenseLoading }] =
+    useUpdateExpenseMutation();
+  const { state } = useLocation();
+  const { payload, type } = state || {};
+
+  const errorNotify = (message) =>
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  const infoNotify = (message) =>
+    toast.info(message, {
+      position: "top-right",
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const description = form.description.value;
+    const amount = form.amount.value;
+    const data = {
+      date,
+      description,
+      amount: Number(amount),
+    };
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(data));
+
+    if (type === "edit") {
+      updateExpense({ data: formData, id: payload?._id })
+        .unwrap()
+        .then((res) => {
+          infoNotify("Expense update successfull");
+        })
+        .catch((error) => {
+          errorNotify("Expense update failed");
+        });
+    } else {
+      addExpense(formData)
+        .unwrap()
+        .then((res) => {
+          infoNotify("Expense add successfull");
+          form.reset();
+          setDate("");
+        })
+        .catch((error) => {
+          errorNotify("Expense add failed");
+        });
+    }
+  };
+
+  useEffect(() => {
+    if (payload?._id) {
+      setDate(payload?.date);
+    }
+  }, [payload?._id]);
+
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
@@ -10,7 +90,7 @@ function ExpensesForm() {
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
-            <form action="">
+            <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col justify-start gap-6">
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
@@ -21,7 +101,10 @@ function ExpensesForm() {
                     type="date"
                     placeholder="Date"
                     name="date"
+                    value={date}
+                    onChange={(e) => setDate(e.target.value)}
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    required
                   />
                 </div>
 
@@ -32,9 +115,11 @@ function ExpensesForm() {
                   </span>
                   <input
                     type="text"
-                    placeholder="Description"
+                    placeholder="Enter description"
                     name="description"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    required
+                    defaultValue={payload?.description}
                   />
                 </div>
 
@@ -45,9 +130,12 @@ function ExpensesForm() {
                   </span>
                   <input
                     type="number"
-                    placeholder="Amount"
+                    placeholder="Enter amount"
                     name="amount"
+                    step="any"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    required
+                    defaultValue={payload?.amount}
                   />
                 </div>
 
@@ -72,6 +160,21 @@ function ExpensesForm() {
               </div>
             </form>
           </div>
+        </div>
+        {(isLoading || updateExpenseLoading) && <RequestLoader></RequestLoader>}
+        <div>
+          <ToastContainer
+            position="top-right"
+            autoClose={2000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+          />
         </div>
       </div>
     </section>
