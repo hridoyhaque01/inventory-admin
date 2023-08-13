@@ -77,7 +77,6 @@ function InventoryForm() {
       updateProducts({ data: formData, id: payload?.productId })
         .unwrap()
         .then((res) => {
-          // infoNotify("Product update successfull");
           navigate("/inventory");
         })
         .catch((error) => {

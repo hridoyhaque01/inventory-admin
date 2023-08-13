@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "../layout/Layout";
 import SecondaryLayout from "../layout/SecondaryLayout";
+import Error from "../pages/404/Error";
 import Sales from "../pages/Sales/Sales";
 import ForgetPassword from "../pages/authentication/ForgetPassword";
 import Login from "../pages/authentication/Login";
@@ -150,10 +151,6 @@ export const routes = createBrowserRouter([
   },
   {
     path: "*",
-    element: (
-      <h2 className="font-black py-6 text-3xl text-red-600 text-center">
-        Page Not Found!
-      </h2>
-    ),
+    element: <Error></Error>,
   },
 ]);

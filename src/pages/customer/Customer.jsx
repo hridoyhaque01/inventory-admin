@@ -27,7 +27,7 @@ function Customer() {
   if (isLoading) {
     content = <SearchLoader></SearchLoader>;
   } else if (!isLoading && isError) {
-    content = <div>Something went wrong</div>;
+    content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {

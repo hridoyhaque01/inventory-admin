@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import StoreTable from "../../components/tables/store/StoreTable";
 import { useGetStoresQuery } from "../../features/store/storeApi";
 
@@ -26,7 +27,7 @@ function Customer() {
   if (isLoading) {
     content = <div>Loading...</div>;
   } else if (!isLoading && isError) {
-    content = <div>Something went wrong</div>;
+    content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <div>No data found</div>;
   } else if (!isLoading && !isError && data?.length > 0) {

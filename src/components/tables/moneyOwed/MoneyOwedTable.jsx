@@ -25,13 +25,13 @@ function MoneyOwedTable({ data }) {
         <table className="table w-full">
           <thead className=" p-0">
             <tr className="font-bold text-center text-3xl">
-              <th className="bg-primaryMainLightest text-bold normal-case p-2">
+              {/* <th className="bg-primaryMainLightest text-bold normal-case p-2">
                 <input
                   type="checkbox"
                   className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
                   name="checkbox"
                 />
-              </th>
+              </th> */}
 
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
                 Serial
@@ -67,13 +67,13 @@ function MoneyOwedTable({ data }) {
             <tbody className="text-center">
               {currentRows?.map((owe, i) => (
                 <tr className="text-center" key={i}>
-                  <th className="py-3">
+                  {/* <th className="py-3">
                     <input
                       type="checkbox"
                       className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
                       name="checkbox"
                     />
-                  </th>
+                  </th> */}
                   <td className="py-3">
                     {currentPage === 1 && i + 1 < 10
                       ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)

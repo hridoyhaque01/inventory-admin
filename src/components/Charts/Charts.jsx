@@ -1,7 +1,7 @@
 import React from "react";
-import DashboardTable from "../tables/DashboardTable/DashboardTable";
 import ChartArea from "./ChartTypes/ChartArea";
 import ChartBar from "./ChartTypes/ChartBar";
+import ChartBarLoan from "./ChartTypes/ChartBarLoan";
 import ChartLine from "./ChartTypes/ChartLine";
 
 const Charts = () => {
@@ -20,24 +20,20 @@ const Charts = () => {
     { name: "Jan", uv: 200, pv: 1700, amt: 1500 },
   ];
   return (
-    <section className="grid grid-cols-1 xl:grid-cols-2 p-4 items-center justify-around gap-4">
+    <section className="grid grid-cols-1 xl:grid-cols-2 p-4 items-stretch justify-around gap-6">
       <div className="bg-whiteHigh rounded-xl p-6">
-        <DashboardTable title="Recent Wallpapers Added"></DashboardTable>
+        <ChartArea data={data} title="Annual Reserve"></ChartArea>
       </div>
       <div className="bg-whiteHigh rounded-xl p-6">
-        <DashboardTable title="Recent RingTone Added"></DashboardTable>
+        <ChartLine data={data} title="Annual Cost"></ChartLine>
       </div>
+
       <div className="bg-whiteHigh rounded-xl p-6">
-        <ChartArea data={data} title="In-App Purchase"></ChartArea>
+        <ChartBar data={data} title="Annual Dues"></ChartBar>
       </div>
+
       <div className="bg-whiteHigh rounded-xl p-6">
-        <ChartLine data={data} title="Users"></ChartLine>
-      </div>
-      <div className="bg-whiteHigh rounded-xl p-6">
-        <ChartLine data={data} title="Contributors"></ChartLine>
-      </div>
-      <div className="bg-whiteHigh rounded-xl p-6">
-        <ChartBar data={data} title="Content Uploaded"></ChartBar>
+        <ChartBarLoan data={data} title="Annual Loan"></ChartBarLoan>
       </div>
     </section>
   );

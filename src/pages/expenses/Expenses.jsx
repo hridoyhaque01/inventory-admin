@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import ExpensesTable from "../../components/tables/expenses/ExpensesTable";
 import { useGetExpensesQuery } from "../../features/expenses/expensesApi";
 
@@ -27,7 +28,7 @@ function Expenses() {
   if (isLoading) {
     content = <SearchLoader></SearchLoader>;
   } else if (!isLoading && isError) {
-    content = <div>Something went wrong</div>;
+    content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {

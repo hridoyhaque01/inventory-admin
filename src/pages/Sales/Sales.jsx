@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import SalesTable from "../../components/tables/sales/SalesTable";
 import { useGetSalesQuery } from "../../features/sales/salesApi";
 import { useGetStoresQuery } from "../../features/store/storeApi";
@@ -47,7 +48,7 @@ function Sales() {
   if (isLoading || storeLoading) {
     content = <SearchLoader></SearchLoader>;
   } else if (!isLoading && (isError || storeError)) {
-    content = <div>Something went wrong</div>;
+    content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && (!isError || !storeError) && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && (!isError || !storeError) && data?.length > 0) {

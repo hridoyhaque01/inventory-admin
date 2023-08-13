@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import {
-  Area,
+  Bar,
+  BarChart,
   CartesianGrid,
-  ComposedChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
+  YAxis,
 } from "recharts";
 import blue from "../../../Assets/round/blue.png";
 import red from "../../../Assets/round/red.png";
 
-const ChartArea = ({ title, data }) => {
+const ChartBarLoan = ({ title, data }) => {
   const [activeChart, setActiveChart] = useState("weekly");
   const handleChart = (value) => {
     setActiveChart(value);
   };
 
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between ">
       <section className="flex items-center justify-between">
         <p className="text-2xl text-blackHigh  font-bold">{title}</p>
         <div className="flex items-center gap-2">
@@ -79,43 +80,47 @@ const ChartArea = ({ title, data }) => {
       </section>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
         <ResponsiveContainer width="100%" height={300}>
-          <ComposedChart
+          <BarChart
             data={data}
             margin={{
               top: 5,
               right: 5,
-              bottom: 5,
               left: 5,
+              bottom: 5,
             }}
           >
             <defs>
-              <linearGradient id="gradientColor" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="10%" stopColor="#FFC227" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#F3BDB6" stopOpacity={0.2} />
+              <linearGradient id="gradientLoan" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#54ADAA" />
+                <stop offset="100%" stopColor="rgba(84, 173, 170, 0.40)" />
               </linearGradient>
             </defs>
-            <CartesianGrid stroke="#E8E8E8" />
+            <defs>
+              <linearGradient id="gradientLoanTwo" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#FD5D5D" />
+                <stop offset="100%" stopColor="rgba(253, 93, 93, 0.40)" />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
             <XAxis dataKey="name" />
+            <YAxis />
             <Tooltip />
-            <Area
-              type="monotone"
-              dataKey="uv"
-              fill="url(#gradientColor)"
-              stroke="#FFC227"
-              strokeWidth={2}
-            />
-            <Area
-              type="monotone"
+            {/* <Legend /> */}
+            <Bar
               dataKey="pv"
-              fill="none"
-              stroke="#54ADAA"
-              strokeWidth={2}
+              fill="url(#gradientLoanTwo)"
+              radius={[24, 24, 0, 0]}
             />
-          </ComposedChart>
+            <Bar
+              dataKey="uv"
+              fill="url(#gradientLoan)"
+              radius={[24, 24, 0, 0]}
+            />
+          </BarChart>
         </ResponsiveContainer>
       </section>
     </div>
   );
 };
 
-export default ChartArea;
+export default ChartBarLoan;

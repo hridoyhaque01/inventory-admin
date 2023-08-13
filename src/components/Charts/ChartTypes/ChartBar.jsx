@@ -1,23 +1,74 @@
-import React from "react";
-import blue from "../../../Assets/round/blue.png";
-import red from "../../../Assets/round/red.png";
+import React, { useState } from "react";
 import {
-  BarChart,
   Bar,
+  BarChart,
   CartesianGrid,
-  Legend,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  Tooltip,
 } from "recharts";
+import blue from "../../../Assets/round/blue.png";
+import red from "../../../Assets/round/red.png";
 
 const ChartBar = ({ title, data }) => {
+  const [activeChart, setActiveChart] = useState("weekly");
+  const handleChart = (value) => {
+    setActiveChart(value);
+  };
+
   return (
-    <div className="flex flex-col justify-between h-96">
+    <div className="flex flex-col justify-between">
       <section className="flex items-center justify-between">
-        <p className="text-2xl text-blackMid  font-bold">{title}</p>
+        <p className="text-2xl text-blackHigh  font-bold">{title}</p>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
+              activeChart === "weekly"
+                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
+                : " border-fadeHigh"
+            }`}
+            onClick={() => handleChart("weekly")}
+          >
+            Weekly
+          </button>
+          <button
+            type="button"
+            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
+              activeChart === "monthly"
+                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
+                : " border-fadeHigh"
+            }`}
+            onClick={() => handleChart("monthly")}
+          >
+            Monthly
+          </button>
+          <button
+            type="button"
+            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
+              activeChart === "half-yearly"
+                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
+                : " border-fadeHigh"
+            }`}
+            onClick={() => handleChart("half-yearly")}
+          >
+            Half yearly
+          </button>
+          <button
+            type="button"
+            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
+              activeChart === "yearly"
+                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
+                : " border-fadeHigh"
+            }`}
+            onClick={() => handleChart("yearly")}
+          >
+            Yearly
+          </button>
+        </div>
       </section>
-      <section className="flex items-center justify-start gap-6 mb-6">
+      <section className="flex items-center justify-start gap-6 mt-14 mb-8">
         <div className="flex items-center justify-center gap-2">
           <img src={red} alt="" />
           <p>This Year</p>
@@ -28,25 +79,41 @@ const ChartBar = ({ title, data }) => {
         </div>
       </section>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
-        <BarChart
-          width={550}
-          height={300}
-          data={data}
-          margin={{
-            top: 5,
-            right: 5,
-            left: 5,
-            bottom: 5,
-          }}
-        >
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="name" />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#FC5B2B" />
-          <Bar dataKey="uv" fill="#37B6B6" />
-        </BarChart>
+        <ResponsiveContainer width="100%" height={300}>
+          <BarChart
+            data={data}
+            margin={{
+              top: 5,
+              right: 5,
+              left: 5,
+              bottom: 5,
+            }}
+          >
+            <defs>
+              <linearGradient id="gradient" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#54ADAA" />
+                <stop offset="100%" stopColor="rgba(84, 173, 170, 0.40)" />
+              </linearGradient>
+            </defs>
+            <defs>
+              <linearGradient id="gradientTwo" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#234B4C" />
+                <stop offset="100%" stopColor="rgba(35, 75, 76, 0.40)" />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
+            <XAxis dataKey="name" />
+            <YAxis />
+            <Tooltip />
+            {/* <Legend /> */}
+            <Bar
+              dataKey="pv"
+              fill="url(#gradientTwo)"
+              radius={[24, 24, 0, 0]}
+            />
+            <Bar dataKey="uv" fill="url(#gradient)" radius={[24, 24, 0, 0]} />
+          </BarChart>
+        </ResponsiveContainer>
       </section>
     </div>
   );

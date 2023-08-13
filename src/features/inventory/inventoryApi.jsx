@@ -56,7 +56,6 @@ const inventoryApi = apiSlice.injectEndpoints({
                   const index = draft.findIndex(
                     (prdouct) => prdouct.productId === id
                   );
-                  // console.log(JSON.stringify(draft));
                   if (index !== -1) {
                     draft[index] = formData;
                   }

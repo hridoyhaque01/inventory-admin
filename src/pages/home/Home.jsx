@@ -38,7 +38,6 @@ const Dashboard = () => {
           ))}
         </section>
         <Charts></Charts>
-        {/* temporary for testing only */}
       </div>
     </div>
   );
