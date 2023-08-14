@@ -27,11 +27,11 @@ export const Pagination = ({
   };
 
   return (
-    <section className="flex items-center justify-end gap-4 py-4 text-darkHigh">
+    <section className="flex items-center justify-end gap-4 text-darkHigh w-full flex-nowrap whitespace-nowrap pr-6">
       {/* <div>{renderPagination()}</div> */}
 
       <div className="flex items-center gap-2">
-        <p className="font-semibold">Item per page:</p>
+        <p className="font-semibold text-sm sm:text-base ">Item per page:</p>
         <div className="dropdown dropdown-top dropdown-end">
           <label
             tabIndex={3}
@@ -76,10 +76,6 @@ export const Pagination = ({
         </div>
       </div>
       <div>
-        {/* <p>
-          {Math.min(rowsPerPage * currentPage - rowsPerPage + 1, totalRows)} -{" "}
-          {Math.min(rowsPerPage * currentPage, totalRows)} of {totalRows}
-        </p> */}
         <p>
           {currentPage} - {Math.min(rowsPerPage * currentPage, totalRows)} of{" "}
           {totalRows}

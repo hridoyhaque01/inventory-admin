@@ -48,7 +48,7 @@ function Inventory() {
           value={searchValue}
           onChange={onChange}
         ></SearchBar>
-        <div className="h-[calc(100%-80px)] overflow-auto flex flex-col justify-between pb-4">
+        <div className="h-[calc(100%-80px)] overflow-auto flex flex-col justify-between flex-wrap pb-4">
           {content}
         </div>
       </div>
