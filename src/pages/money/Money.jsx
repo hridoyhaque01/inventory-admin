@@ -31,6 +31,10 @@ function Expenses() {
     }
   };
 
+  const filterByDue = (data) => {
+    return data?.dueAmount !== "0";
+  };
+
   const filterByStoreName = (data) => {
     if (selectedShop === "All Shop") {
       return true;
@@ -50,7 +54,10 @@ function Expenses() {
   } else if (!isLoading && (!isError || !storeError) && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && (!isError || !storeError) && data?.length > 0) {
-    const newData = data?.filter(filterBySearch).filter(filterByStoreName);
+    const newData = data
+      ?.filter(filterByDue)
+      .filter(filterBySearch)
+      .filter(filterByStoreName);
     content = <MoneyOwedTable data={newData}></MoneyOwedTable>;
   }
   return (
