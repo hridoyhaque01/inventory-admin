@@ -6,9 +6,8 @@ import {
   ResponsiveContainer,
   Tooltip,
   XAxis,
+  YAxis,
 } from "recharts";
-import blue from "../../../Assets/round/blue.png";
-import red from "../../../Assets/round/red.png";
 
 const ChartArea = ({ title, data }) => {
   const [activeChart, setActiveChart] = useState("weekly");
@@ -19,8 +18,8 @@ const ChartArea = ({ title, data }) => {
   return (
     <div className="flex flex-col justify-between">
       <section className="flex items-center justify-between">
-        <p className="text-2xl text-blackHigh  font-bold">Total Sales</p>
-        <div className="flex items-center gap-2">
+        <p className="text-2xl text-blackHigh  font-bold">{title}</p>
+        {/* <div className="flex items-center gap-2">
           <button
             type="button"
             className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
@@ -65,20 +64,21 @@ const ChartArea = ({ title, data }) => {
           >
             Yearly
           </button>
-        </div>
+        </div> */}
       </section>
       <section className="flex items-center justify-start gap-6 mt-14 mb-8">
         <div className="flex items-center justify-center gap-2">
-          <img src={red} alt="" />
+          <div className="w-4 h-4 rounded-full bg-warningColor"></div>
+          {/* <img src={red} alt="" /> */}
           <p>This Year</p>
         </div>
-        <div className="flex items-center justify-center gap-2">
+        {/* <div className="flex items-center justify-center gap-2">
           <img src={blue} alt="" />
           <p>Last Year</p>
-        </div>
+        </div> */}
       </section>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
             data={data}
             margin={{
@@ -96,6 +96,7 @@ const ChartArea = ({ title, data }) => {
             </defs>
             <CartesianGrid stroke="#E8E8E8" />
             <XAxis dataKey="name" />
+            <YAxis />
             <Tooltip />
             <Area
               type="monotone"

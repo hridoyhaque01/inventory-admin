@@ -12,7 +12,8 @@ const Dashboard = () => {
   const { data, isLoading, isError } = useGetDashboardResultQuery();
   const [dashboardData, setDashboardData] = useState([]);
 
-  const { salesData, totalSales } = data || {};
+  const { salesData, totalSales, costsData, totalCosts, totalDues } =
+    data || {};
 
   let content = null;
 
@@ -30,7 +31,7 @@ const Dashboard = () => {
             <HomeTopCard data={dashboardData} key={index}></HomeTopCard>
           ))}
         </section>
-        <Charts data={salesData}></Charts>
+        <Charts salesData={salesData} costsData={costsData}></Charts>
       </>
     );
   }
@@ -43,6 +44,21 @@ const Dashboard = () => {
           title: "Total Sales",
           number: totalSales,
           color: "bg-successColor",
+        },
+        {
+          title: "Total Costs",
+          number: totalCosts,
+          color: "bg-secondaryMainLight",
+        },
+        {
+          title: "Total Revenue",
+          number: totalSales - totalDues,
+          color: "bg-infoColor",
+        },
+        {
+          title: "Total Dues",
+          number: totalDues,
+          color: "bg-errorMidColor",
         },
       ]);
     }
