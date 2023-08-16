@@ -19,7 +19,7 @@ const ChartArea = ({ title, data }) => {
   return (
     <div className="flex flex-col justify-between">
       <section className="flex items-center justify-between">
-        <p className="text-2xl text-blackHigh  font-bold">{title}</p>
+        <p className="text-2xl text-blackHigh  font-bold">Total Sales</p>
         <div className="flex items-center gap-2">
           <button
             type="button"
@@ -99,18 +99,18 @@ const ChartArea = ({ title, data }) => {
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="uv"
+              dataKey="sales"
               fill="url(#gradientColor)"
               stroke="#FFC227"
               strokeWidth={2}
             />
-            <Area
+            {/* <Area
               type="monotone"
-              dataKey="pv"
+              dataKey="sales"
               fill="none"
               stroke="#54ADAA"
               strokeWidth={2}
-            />
+            /> */}
           </ComposedChart>
         </ResponsiveContainer>
       </section>

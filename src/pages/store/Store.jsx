@@ -1,12 +1,13 @@
 import React, { useState } from "react";
+import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
+import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import StoreTable from "../../components/tables/store/StoreTable";
 import { useGetStoresQuery } from "../../features/store/storeApi";
 
-function Customer() {
+function Store() {
   const { data, isLoading, isError } = useGetStoresQuery();
-
   const [searchValue, setSearchValue] = useState("");
 
   const onChange = (e) => {
@@ -25,11 +26,11 @@ function Customer() {
   let content = null;
 
   if (isLoading) {
-    content = <div>Loading...</div>;
+    content = <SearchLoader></SearchLoader>;
   } else if (!isLoading && isError) {
     content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && !isError && data?.length === 0) {
-    content = <div>No data found</div>;
+    content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
     const newData = data?.filter(filterBySearch);
     content = <StoreTable data={newData}></StoreTable>;
@@ -37,7 +38,7 @@ function Customer() {
 
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
-      <div className="shadow-sm w-full h-full rounded-2xl overflow-hidden">
+      <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
           title="Store"
           path="/store-add"
@@ -53,4 +54,4 @@ function Customer() {
   );
 }
 
-export default Customer;
+export default Store;

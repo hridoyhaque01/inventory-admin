@@ -37,7 +37,7 @@ function Expenses() {
   }
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
-      <div className="shadow-sm w-full h-full rounded-2xl overflow-hidden">
+      <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
           title="My Expenses"
           path="/expenses-add"

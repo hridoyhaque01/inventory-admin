@@ -41,6 +41,9 @@ function CustomerTable({ data }) {
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
               Address
             </th>
+            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              Shop Name
+            </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
               Action
@@ -60,7 +63,7 @@ function CustomerTable({ data }) {
         ) : (
           <tbody className="text-center">
             {currentRows?.map((customer, i) => (
-              <tr className="text-center">
+              <tr className="text-center" key={i}>
                 {/* <th className="py-3">
                     <input
                       type="checkbox"
@@ -77,6 +80,7 @@ function CustomerTable({ data }) {
 
                 <td className="py-3">{customer?.customerPhone}</td>
                 <td className="py-3">{customer?.customerAddress}</td>
+                <td className="py-3">{customer?.storeName}</td>
                 <td className="py-3">
                   <button
                     type="button"

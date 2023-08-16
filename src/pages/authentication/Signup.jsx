@@ -162,7 +162,7 @@ function Signup() {
                   /> */}
                 </div>
                 {/* remember  */}
-
+                {/* 
                 <div className="flex items-center gap-2">
                   <input
                     type="checkbox"
@@ -176,7 +176,7 @@ function Signup() {
                   >
                     Remeber me
                   </label>
-                </div>
+                </div> */}
 
                 <div className="mt-8">
                   <button
