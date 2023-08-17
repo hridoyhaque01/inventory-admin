@@ -81,7 +81,41 @@ const dashboardApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getStoreDashboardResult: builder.query({
+      async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
+        // get a random user
+        const { data: invoices } = await fetchWithBQ(`/invoices/store/${_arg}`);
+
+        const totalSales = invoices?.reduce(
+          (accumulator, currentValue) =>
+            accumulator + currentValue?.totalAmount,
+          0
+        );
+
+        const totalCosts = invoices?.reduce(
+          (accumulator, currentValue) =>
+            accumulator +
+            Number(currentValue?.totalAmount) * currentValue?.unitCount,
+          0
+        );
+
+        const totalDues = invoices?.reduce(
+          (accumulator, currentValue) =>
+            accumulator + Number(currentValue?.dueAmount),
+          0
+        );
+
+        return {
+          data: {
+            totalSales,
+            totalCosts,
+            totalDues,
+          },
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetDashboardResultQuery } = dashboardApi;
+export const { useGetDashboardResultQuery, useGetStoreDashboardResultQuery } =
+  dashboardApi;

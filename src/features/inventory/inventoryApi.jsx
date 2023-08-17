@@ -37,27 +37,30 @@ const inventoryApi = apiSlice.injectEndpoints({
       },
     }),
     updateProducts: builder.mutation({
-      query: ({ data, id }) => ({
-        url: `/products/update/${id}`,
+      query: ({ data, storeId }) => ({
+        url: `/products/update/${storeId}`,
         method: "PATCH",
         body: data,
       }),
       // invalidatesTags: ["products"],
-      async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
+      async onQueryStarted({ data, storeId }, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          const formData = JSON.parse(data?.get("data"));
+          const formData = JSON.parse(data.get("data"));
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
                 "getInventories",
                 undefined,
                 (draft) => {
-                  const index = draft.findIndex(
-                    (prdouct) => prdouct.productId === id
+                  const changeObj = draft.find(
+                    (prdouct) =>
+                      prdouct.productId === formData?.productId &&
+                      prdouct.storeId === storeId
                   );
-                  if (index !== -1) {
-                    draft[index] = formData;
+
+                  if (changeObj) {
+                    changeObj.productName = formData.productName;
                   }
                 }
               )

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import StoreCard from "../../components/Cards/StoreCard";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import ResetPasswordModal from "../../components/modals/ResetPasswordModal";
+import { useGetStoreDashboardResultQuery } from "../../features/dashboard/dashboardApi";
 import { useUpdateStorePasswordMutation } from "../../features/store/storeApi";
 
 function StoreDetails() {
@@ -12,6 +13,15 @@ function StoreDetails() {
   const navigate = useNavigate();
   const { state } = useLocation() || {};
   const { payload } = state || {};
+  const [storeData, setStoreData] = useState([]);
+
+  const {
+    data: dashboardData,
+    isLoading: dataFetching,
+    isError,
+  } = useGetStoreDashboardResultQuery(payload?._id);
+
+  const { totalSales, totalCosts, totalDues } = dashboardData || {};
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -41,25 +51,40 @@ function StoreDetails() {
     navigate("/store-details");
   };
 
-  const data = [
-    {
-      title: "Total Reserve",
-      number: 784645,
-      color: "bg-successColor",
-    },
-    {
-      title: "Total Cost",
-      number: 327,
-      color: "bg-secondaryMainLight",
-    },
-  ];
+  useEffect(() => {
+    if (!dataFetching && !isError && totalSales) {
+      setStoreData((prev) => [
+        ...prev,
+        {
+          title: "Total Sales",
+          number: totalSales,
+          color: "bg-successColor",
+        },
+        {
+          title: "Total Costs",
+          number: totalCosts,
+          color: "bg-secondaryMainLight",
+        },
+        {
+          title: "Total Revenue",
+          number: totalSales - totalDues,
+          color: "bg-infoColor",
+        },
+        {
+          title: "Total Dues",
+          number: totalDues,
+          color: "bg-errorMidColor",
+        },
+      ]);
+    }
+  }, [isLoading, isError, totalSales]);
 
   return (
     <div className="w-full overflow-auto pt-10 pb-6 pr-10">
       <div className="flex flex-col justify-around pty-10 gap-4 w-full">
         {/* 4 top cards */}
         <section className="flex items-stretch gap-8 px-4">
-          {data.map((data, index) => (
+          {storeData.map((data, index) => (
             <StoreCard data={data} key={index}></StoreCard>
           ))}
         </section>

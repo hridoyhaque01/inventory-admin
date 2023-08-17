@@ -63,18 +63,11 @@ function InventoryForm() {
     const data = {
       productId,
       productName,
-      productCategory,
-      productQuantity,
-      unit,
-      buyingPrice,
-      sellingPrice,
-      storeName,
-      storeId,
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
     if (type === "edit") {
-      updateProducts({ data: formData, id: payload?.productId })
+      updateProducts({ data: formData, storeId: storeId })
         .unwrap()
         .then((res) => {
           navigate("/inventory");
@@ -84,6 +77,20 @@ function InventoryForm() {
           console.log(error);
         });
     } else {
+      const data = {
+        productId,
+        productName,
+        productCategory,
+        productQuantity,
+        unit,
+        buyingPrice,
+        sellingPrice,
+        storeName,
+        storeId,
+        unitLeft: productQuantity,
+      };
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(data));
       addProducts(formData)
         .unwrap()
         .then((res) => {
