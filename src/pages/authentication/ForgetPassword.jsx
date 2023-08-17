@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { logo } from "../../assets/getAssets";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import { useSendResetPasswordEmailMutation } from "../../features/auth/authApi";
 function ForgetPassword() {
@@ -72,7 +73,9 @@ function ForgetPassword() {
         </div>
         <div className="w-full max-w-[400px] mx-auto">
           <div className="text-center">
-            <p>logo</p>
+            <div className="text-center lg:text-left mb-6">
+              <img src={logo} alt="" className="w-20 h-20" />
+            </div>
             <h2 className="text-2xl text-blackSemi font-bold mt-2">
               Reset Password
             </h2>

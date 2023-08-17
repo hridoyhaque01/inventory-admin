@@ -5,7 +5,19 @@ import wrong from "./images/505.png";
 import avatar from "./images/avatar.png";
 import noData from "./images/empty-box.png";
 import lense from "./images/lense.png";
+import logo from "./images/logo.png";
 import blue from "./round/blue.png";
 import red from "./round/red.png";
 
-export { authLoader, avatar, blue, error, lense, loader, noData, red, wrong };
+export {
+  authLoader,
+  avatar,
+  blue,
+  error,
+  lense,
+  loader,
+  logo,
+  noData,
+  red,
+  wrong,
+};

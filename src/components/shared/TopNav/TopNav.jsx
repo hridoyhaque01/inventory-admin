@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { avatar } from "../../../assets/getAssets";
+import { avatar, logo } from "../../../assets/getAssets";
 import { logout } from "../../../features/auth/authSlice";
 
 const TopNav = () => {
@@ -13,7 +13,9 @@ const TopNav = () => {
       {/* top nav left */}
       <div className="flex-1 text-whiteHigh">
         <h1 className="text-2xl">
-          <Link to="/">logo</Link>
+          <Link to="/">
+            <img src={logo} alt="" className="w-16 h-16" />
+          </Link>
         </h1>
       </div>
       {/* top nav right */}
