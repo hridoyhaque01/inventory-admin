@@ -47,10 +47,6 @@ function StoreDetails() {
       theme: "light",
     });
 
-  const handleNavigate = () => {
-    navigate("/store-details");
-  };
-
   useEffect(() => {
     if (!dataFetching && !isError && totalSales) {
       setStoreData((prev) => [
@@ -83,11 +79,20 @@ function StoreDetails() {
     <div className="w-full overflow-auto pt-10 pb-6 pr-10">
       <div className="flex flex-col justify-around pty-10 gap-4 w-full">
         {/* 4 top cards */}
-        <section className="flex items-stretch gap-8 px-4">
-          {storeData.map((data, index) => (
-            <StoreCard data={data} key={index}></StoreCard>
-          ))}
-        </section>
+        {dataFetching ? (
+          <div>Loading...</div>
+        ) : isError ? (
+          <div>Something went wrong</div>
+        ) : storeData?.length === 0 ? (
+          <div>No store data found</div>
+        ) : (
+          <section className="flex items-stretch gap-8 px-4">
+            {storeData.map((data, index) => (
+              <StoreCard data={data} key={index}></StoreCard>
+            ))}
+          </section>
+        )}
+
         {/* single store details */}
         <div className="p-6 rounded-2xl bg-whiteHigh shadow-md mt-6">
           <h4 className="text-xl font-bold">Staff </h4>

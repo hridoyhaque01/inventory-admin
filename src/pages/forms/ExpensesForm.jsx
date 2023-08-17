@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
@@ -15,6 +15,7 @@ function ExpensesForm() {
     useUpdateExpenseMutation();
   const { state } = useLocation();
   const { payload, type } = state || {};
+  const navigate = useNavigate();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -57,7 +58,7 @@ function ExpensesForm() {
       updateExpense({ data: formData, id: payload?._id })
         .unwrap()
         .then((res) => {
-          infoNotify("Expense update successfull");
+          navigate("/expenses");
         })
         .catch((error) => {
           errorNotify("Expense update failed");
