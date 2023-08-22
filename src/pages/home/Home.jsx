@@ -10,10 +10,35 @@ const Dashboard = () => {
   const [userType] = useState("Admin");
 
   const { data, isLoading, isError } = useGetDashboardResultQuery();
-  const [dashboardData, setDashboardData] = useState([]);
 
   const { salesData, totalSales, costsData, totalCosts, totalDues } =
     data || {};
+
+  const [sales, setSales] = useState([]);
+  const [costs, setCosts] = useState([]);
+
+  const [dashboardData, setDashboardData] = useState([
+    {
+      title: "Total Sales",
+      color: "bg-successColor",
+      number: 0,
+    },
+    {
+      title: "Total Costs",
+      color: "bg-secondaryMainLight",
+      number: 0,
+    },
+    {
+      title: "Total Revenue",
+      color: "bg-infoColor",
+      number: 0,
+    },
+    {
+      title: "Total Dues",
+      color: "bg-errorMidColor",
+      number: 0,
+    },
+  ]);
 
   let content = null;
 
@@ -31,42 +56,27 @@ const Dashboard = () => {
             <HomeTopCard data={dashboardData} key={index}></HomeTopCard>
           ))}
         </section>
-        <Charts salesData={salesData} costsData={costsData}></Charts>
+        <Charts salesData={sales} costsData={costs}></Charts>
       </>
     );
   }
 
   useEffect(() => {
-    if (!isLoading && !isError && totalSales) {
-      setDashboardData((prev) => [
-        ...prev,
-        {
-          title: "Total Sales",
-          number: totalSales,
-          color: "bg-successColor",
-        },
-        {
-          title: "Total Costs",
-          number: totalCosts,
-          color: "bg-secondaryMainLight",
-        },
-        {
-          title: "Total Revenue",
-          number: totalSales - totalDues,
-          color: "bg-infoColor",
-        },
-        {
-          title: "Total Dues",
-          number: totalDues,
-          color: "bg-errorMidColor",
-        },
-      ]);
+    if (!isLoading && !isError) {
+      const updatedData = [...dashboardData];
+      updatedData[0].number = totalSales || 0;
+      updatedData[1].number = totalCosts || 0;
+      updatedData[2].number = Number(totalSales) - Number(totalDues) || 0;
+      updatedData[3].number = totalDues || 0;
+      setSales(salesData);
+      setCosts(costsData);
+      setDashboardData(updatedData);
     }
-  }, [isLoading, isError, totalSales]);
+  }, [totalSales, totalCosts, totalDues, isLoading, isError]);
 
   return (
-    <div className="w-full overflow-auto pt-10 pb-6 pr-10">
-      <div className="flex flex-col justify-around pty-10 gap-4 w-full">
+    <div className="w-full overflow-auto pb-6 pr-10">
+      <div className="flex flex-col justify-around pt-6 md:pt-10 gap-4 w-full">
         {/* 4 top cards */}
         {content}
       </div>

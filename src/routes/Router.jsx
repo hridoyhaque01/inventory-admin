@@ -14,14 +14,18 @@ import EditProfile from "../pages/forms/EditProfile";
 import ExpensesForm from "../pages/forms/ExpensesForm";
 import InventoryForm from "../pages/forms/InventoryForm";
 import MoneyOwedForm from "../pages/forms/MoneyOwedForm";
+import ProductsForm from "../pages/forms/ProductsForm";
 import SalesForm from "../pages/forms/SalesForm";
 import StoreForm from "../pages/forms/StoreForm";
+import SupplierForm from "../pages/forms/SupplierForm";
 import Home from "../pages/home/Home";
 import Inventory from "../pages/inventory/Inventory";
 import Money from "../pages/money/Money";
+import Products from "../pages/products/Products";
 import Profile from "../pages/profile/Profile";
 import Store from "../pages/store/Store";
 import StoreDetails from "../pages/store/StoreDetails";
+import Suppliers from "../pages/supplier/Suppliers";
 import PrivateRouter from "./PrivateRouter";
 
 export const routes = createBrowserRouter([
@@ -60,6 +64,14 @@ export const routes = createBrowserRouter([
       {
         path: "/store",
         element: <Store></Store>,
+      },
+      {
+        path: "/suppliers",
+        element: <Suppliers></Suppliers>,
+      },
+      {
+        path: "/products",
+        element: <Products></Products>,
       },
       {
         path: "/inventory-add",
@@ -109,6 +121,26 @@ export const routes = createBrowserRouter([
         path: "/store-details",
         element: <StoreDetails></StoreDetails>,
       },
+      {
+        path: "/supplier-add",
+        element: <SupplierForm></SupplierForm>,
+      },
+      {
+        path: "/supplier-edit",
+        element: <SupplierForm></SupplierForm>,
+      },
+      {
+        path: "/products-add",
+        element: <ProductsForm></ProductsForm>,
+      },
+      {
+        path: "/products-edit",
+        element: <ProductsForm></ProductsForm>,
+      },
+      // {
+      //   path: "/store-details",
+      //   element: <StoreDetails></StoreDetails>,
+      // },
     ],
   },
   {

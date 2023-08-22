@@ -13,7 +13,6 @@ function StoreDetails() {
   const navigate = useNavigate();
   const { state } = useLocation() || {};
   const { payload } = state || {};
-  const [storeData, setStoreData] = useState([]);
 
   const {
     data: dashboardData,
@@ -47,51 +46,54 @@ function StoreDetails() {
       theme: "light",
     });
 
-  useEffect(() => {
-    if (!dataFetching && !isError && totalSales) {
-      setStoreData((prev) => [
-        ...prev,
-        {
-          title: "Total Sales",
-          number: totalSales,
-          color: "bg-successColor",
-        },
-        {
-          title: "Total Costs",
-          number: totalCosts,
-          color: "bg-secondaryMainLight",
-        },
-        {
-          title: "Total Revenue",
-          number: totalSales - totalDues,
-          color: "bg-infoColor",
-        },
-        {
-          title: "Total Dues",
-          number: totalDues,
-          color: "bg-errorMidColor",
-        },
-      ]);
-    }
-  }, [isLoading, isError, totalSales]);
+  const [data, setData] = useState([
+    {
+      title: "Total Sales",
+      color: "bg-successColor",
+      number: 0,
+    },
+    {
+      title: "Total Costs",
+      color: "bg-secondaryMainLight",
+      number: 0,
+    },
+    {
+      title: "Total Revenue",
+      color: "bg-infoColor",
+      number: 0,
+    },
+    {
+      title: "Total Dues",
+      color: "bg-errorMidColor",
+      number: 0,
+    },
+  ]);
 
-  return (
+  useEffect(() => {
+    if (!dataFetching && !isError) {
+      const updatedData = [...data];
+      updatedData[0].number = totalSales || 0;
+      updatedData[1].number = totalCosts || 0;
+      updatedData[2].number = Number(totalSales) - Number(totalDues) || 0;
+      updatedData[3].number = totalDues || 0;
+      setData(updatedData);
+    }
+  }, [totalSales, totalCosts, totalDues, dataFetching, isError]);
+
+  return dataFetching ? (
+    <div>loading...</div>
+  ) : isError ? (
+    <div>Something went wrong!</div>
+  ) : (
     <div className="w-full overflow-auto pt-10 pb-6 pr-10">
       <div className="flex flex-col justify-around pty-10 gap-4 w-full">
         {/* 4 top cards */}
-        {dataFetching ? (
-          <div>Loading...</div>
-        ) : isError ? (
-          <div>Something went wrong</div>
-        ) : storeData?.length === 0 ? (
-          <div>No store data found</div>
-        ) : (
-          <section className="flex items-stretch gap-8 px-4">
-            {storeData.map((data, index) => (
-              <StoreCard data={data} key={index}></StoreCard>
-            ))}
-          </section>
-        )}
+
+        <section className="flex items-stretch gap-8 px-4">
+          {data.map((data, index) => (
+            <StoreCard data={data} key={index}></StoreCard>
+          ))}
+        </section>
 
         {/* single store details */}
         <div className="p-6 rounded-2xl bg-whiteHigh shadow-md mt-6">
