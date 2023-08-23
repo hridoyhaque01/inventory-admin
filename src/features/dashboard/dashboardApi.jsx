@@ -188,6 +188,89 @@ const dashboardApi = apiSlice.injectEndpoints({
         };
       },
     }),
+    getAllStoreResult: builder.query({
+      async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
+        // get a random user
+        const { data: storeData } = await fetchWithBQ(`/stores`);
+        const resultData = {};
+
+        storeData.forEach((store) => {
+          const storeName = store.name;
+
+          // Group paidToOwner by date for the current store
+          const groupedPayments = {};
+          store.paidToOwner.forEach((payment) => {
+            const date = new Date(payment.timestamp * 1000).toLocaleDateString(
+              "en-US"
+            );
+            if (!groupedPayments[date]) {
+              groupedPayments[date] = 0; // Initialize totalPaid for the date
+            }
+            groupedPayments[date] += parseInt(payment.payment);
+          });
+
+          // Group invoices by date for the current store
+          const groupedInvoices = {};
+          store.invoices.forEach((invoice) => {
+            const date = new Date(invoice.timestamp * 1000).toLocaleDateString(
+              "en-US"
+            );
+            if (!groupedInvoices[date]) {
+              groupedInvoices[date] = [];
+            }
+            groupedInvoices[date].push(invoice);
+          });
+
+          // Calculate required values for each date for the current store
+          const storeDetails = [];
+          for (const date in groupedInvoices) {
+            const invoiceGroup = groupedInvoices[date];
+            const totalDue = invoiceGroup.reduce(
+              (acc, invoice) => acc + parseInt(invoice.dueAmount),
+              0
+            );
+            const totalSales = invoiceGroup.reduce(
+              (acc, invoice) => acc + invoice.totalAmount,
+              0
+            );
+            const totalCost = invoiceGroup.reduce(
+              (acc, invoice) => acc + invoice.buyingPrice * invoice.unitCount,
+              0
+            );
+
+            const totalPaidToOwner = groupedPayments[date] || 0;
+            const invoiceRevenue = invoiceGroup.reduce(
+              (acc, invoice) => acc + parseInt(invoice.paidAmount),
+              0
+            );
+            const paymentRevenue = totalPaidToOwner;
+            const revenue = invoiceRevenue + paymentRevenue;
+            const remaining = revenue - totalPaidToOwner;
+
+            const storeDetailsEntry = {
+              totalDue: totalDue,
+              revenue: revenue,
+              totalCost: totalCost,
+              totalSales: totalSales,
+              date: date,
+              totalPaidToOwner: totalPaidToOwner,
+              remaining: remaining,
+            };
+            storeDetails.push(storeDetailsEntry);
+          }
+
+          // Sort storeDetails array by latest date for the current store
+          storeDetails.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+          resultData[storeName] = storeDetails;
+        });
+
+        console.log(resultData);
+        return {
+          data: true,
+        };
+      },
+    }),
   }),
 });
 
@@ -195,4 +278,5 @@ export const {
   useGetDashboardResultQuery,
   useGetDashboardNewResultQuery,
   useGetStoreDashboardResultQuery,
+  useGetAllStoreResultQuery,
 } = dashboardApi;

@@ -6,6 +6,7 @@ import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import DashboardTable from "../../components/tables/DashboardTable/DashboardTable";
 import {
+  useGetAllStoreResultQuery,
   useGetDashboardNewResultQuery,
   useGetDashboardResultQuery,
 } from "../../features/dashboard/dashboardApi";
@@ -20,6 +21,9 @@ const Dashboard = () => {
     isError: storeError,
   } = useGetDashboardNewResultQuery("64e5eb6a4e801b12325265e2");
 
+  const { data: storeData } = useGetAllStoreResultQuery();
+
+  console.log(storeData);
   const { salesData, totalSales, costsData, totalCosts, totalDues } =
     data || {};
 
