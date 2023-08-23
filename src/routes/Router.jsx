@@ -11,10 +11,12 @@ import BuySupplies from "../pages/buySupplies/BuySupplies";
 import Customer from "../pages/customer/Customer";
 import Expenses from "../pages/expenses/Expenses";
 import BuySuppliesForm from "../pages/forms/BuySuppliesForm";
+import BuySuppliesView from "../pages/forms/BuySuppliesView";
 import CustomerForm from "../pages/forms/CustomerForm";
 import EditProfile from "../pages/forms/EditProfile";
 import ExpensesForm from "../pages/forms/ExpensesForm";
 import InventoryForm from "../pages/forms/InventoryForm";
+import InventoryUpdateForm from "../pages/forms/InventoryUpdateForm";
 import MoneyOwedForm from "../pages/forms/MoneyOwedForm";
 import ProductsForm from "../pages/forms/ProductsForm";
 import SalesForm from "../pages/forms/SalesForm";
@@ -85,7 +87,7 @@ export const routes = createBrowserRouter([
       },
       {
         path: "/inventory-edit",
-        element: <InventoryForm></InventoryForm>,
+        element: <InventoryUpdateForm></InventoryUpdateForm>,
       },
       {
         path: "/sales-add",
@@ -148,8 +150,8 @@ export const routes = createBrowserRouter([
         element: <BuySuppliesForm></BuySuppliesForm>,
       },
       {
-        path: "/supplies-edit",
-        element: <BuySuppliesForm></BuySuppliesForm>,
+        path: "/supplies-details",
+        element: <BuySuppliesView></BuySuppliesView>,
       },
       // {
       //   path: "/store-details",

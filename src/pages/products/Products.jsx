@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import ProductsTable from "../../components/tables/products/ProductsTable";
 import { useGetProductsQuery } from "../../features/products/productsApi";
 

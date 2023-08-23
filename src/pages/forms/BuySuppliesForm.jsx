@@ -12,7 +12,6 @@ import { useGetSuppliersQuery } from "../../features/supplier/supplierApi";
 function BuySuppliesForm() {
   const { state } = useLocation();
   const [addSupplies, { isLoading }] = useAddSuppliesMutation();
-  const { payload, type } = state || {};
   const [selectedProduct, setSelectedProduct] = useState({});
   const [productValue, setProductValue] = useState("");
   const [selectedSupplier, setSelectedSupplier] = useState({});
@@ -125,7 +124,7 @@ function BuySuppliesForm() {
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Add </h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">Buy Supplies</h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -170,9 +169,7 @@ function BuySuppliesForm() {
                     <input
                       type="number"
                       name="unitCount"
-                      className={`w-28 border-none outline-none ${
-                        type === "edit" ? "text-fadeColor" : "text-blackLow"
-                      }`}
+                      className={`w-28 border-none outline-none text-blackLow`}
                       placeholder="Quantity"
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
@@ -240,7 +237,7 @@ function BuySuppliesForm() {
                   />
                 </div>
 
-                {/* Shop Name: */}
+                {/* Paid Amount : */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Paid Amount :

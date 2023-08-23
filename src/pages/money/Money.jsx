@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import MoneyOwedTable from "../../components/tables/moneyOwed/MoneyOwedTable";
 import { useGetAllOwesQuery } from "../../features/owes/owesApi";
 import { useGetStoresQuery } from "../../features/store/storeApi";

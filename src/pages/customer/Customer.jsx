@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import CustomerTable from "../../components/tables/customer/CustomerTable";
 import { useGetCustomersQuery } from "../../features/customers/customerApi";
 import { useGetStoresQuery } from "../../features/store/storeApi";

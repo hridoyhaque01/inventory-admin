@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import SupplierTable from "../../components/tables/supplier/SupplierTable";
 import { useGetSuppliersQuery } from "../../features/supplier/supplierApi";
 

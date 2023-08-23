@@ -4,6 +4,7 @@ import Charts from "../../components/Charts/Charts";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
+import DashboardTable from "../../components/tables/DashboardTable/DashboardTable";
 import { useGetDashboardResultQuery } from "../../features/dashboard/dashboardApi";
 
 const Dashboard = () => {
@@ -51,11 +52,12 @@ const Dashboard = () => {
   } else if (!isLoading && !isError && totalSales) {
     content = (
       <>
-        <section className="flex justify-between gap-8 px-4">
+        <section className="flex justify-between gap-8">
           {dashboardData.map((dashboardData, index) => (
             <HomeTopCard data={dashboardData} key={index}></HomeTopCard>
           ))}
         </section>
+        <DashboardTable title={"data"}></DashboardTable>
         <Charts salesData={sales} costsData={costs}></Charts>
       </>
     );
@@ -76,7 +78,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full overflow-auto pb-6 pr-10">
-      <div className="flex flex-col justify-around pt-6 md:pt-10 gap-4 w-full">
+      <div className="flex flex-col justify-around pt-6 gap-6 w-full">
         {/* 4 top cards */}
         {content}
       </div>

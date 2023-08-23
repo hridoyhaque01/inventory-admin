@@ -95,7 +95,7 @@ function ProductsForm() {
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
-            {type === "edit" ? "Edit" : "Add"} Products
+            Products
           </h4>
         </div>
         <div className="bg-whiteHigh w-full px-4">

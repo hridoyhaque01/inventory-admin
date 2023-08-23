@@ -1,33 +1,22 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
-import ProductSuggestions from "../../components/shared/autosuggestions/ProductSuggestions";
-import { useAddProductsMutation } from "../../features/inventory/inventoryApi";
-import { useGetProductsQuery } from "../../features/products/productsApi";
-import { useGetStoresQuery } from "../../features/store/storeApi";
+import {
+  useAddProductsMutation,
+  useUpdateProductsMutation,
+} from "../../features/inventory/inventoryApi";
 
-function InventoryForm() {
+function InventoryUpdateForm() {
   const { state } = useLocation() || {};
-  const [selectedProduct, setSelectedProduct] = useState({});
-  const [productValue, setProductValue] = useState("");
-  const [quantity, setQuantity] = useState("");
+  const { payload, type } = state || {};
   const [addProducts, { isLoading }] = useAddProductsMutation();
-
-  const {
-    data: products,
-    isLoading: productsLoading,
-    isError: productError,
-  } = useGetProductsQuery();
-
+  const [updateProducts, { isLoading: updateProductLoading }] =
+    useUpdateProductsMutation();
   const navigate = useNavigate();
 
-  const {
-    data: stores,
-    isLoading: storeLoading,
-    isError,
-  } = useGetStoresQuery();
+  console.log(payload);
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -56,57 +45,19 @@ function InventoryForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    const productQuantity = form.unitCount.value;
-    const buyingPrice = Number(form.buyingPrice.value);
-    const sellingPrice = Number(form.sellingPrice.value);
-    const store = form.store.value;
-    const splitStore = store?.split("-");
-    const storeName = splitStore[0] || "";
-    const storeId = splitStore[1] || "";
+    const productName = form.productName.value;
 
     const data = {
-      productId: selectedProduct?.productId,
-      productName: selectedProduct?.productName,
-      productCategory: selectedProduct?.productCategory,
-      productQuantity,
-      unit: selectedProduct?.productUnit,
-      buyingPrice,
-      sellingPrice,
-      storeName,
-      storeId,
-      unitLeft: productQuantity,
+      productId: payload?.productId,
+      productName,
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    addProducts(formData)
-      .unwrap()
-      .then((res) => {
-        infoNotify("Add product successfull");
-        form.reset();
-        setSelectedProduct({});
-        setProductValue("");
-        setQuantity("");
-      })
-      .catch((error) => {
-        errorNotify("Add product failed");
-      });
+
     console.log(data);
   };
 
-  const handleQuantity = (event) => {
-    const value = event.target.value;
-    if (Number(value) > Number(selectedProduct?.productLeft)) {
-      return;
-    } else {
-      setQuantity(value);
-    }
-  };
-
-  return storeLoading || productsLoading ? (
-    <div>Loading...</div>
-  ) : isError || productError ? (
-    <div>Something went wrong</div>
-  ) : (
+  return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
@@ -117,47 +68,48 @@ function InventoryForm() {
             <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col justify-start gap-6">
                 {/* productId */}
-                {/* productId */}
-                <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap sm:text-base text-left md:text-right">
-                    Product ID :
+                <div className="flex items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                    Product Id:
                   </span>
-                  <div className="w-full relative">
-                    <ProductSuggestions
-                      suggestions={products}
-                      setSelectedProduct={setSelectedProduct}
-                      setValue={setProductValue}
-                      value={productValue}
-                    ></ProductSuggestions>
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="Enter product name"
+                    name="productId"
+                    required
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    defaultValue={payload?.productId}
+                    readOnly
+                  />
                 </div>
 
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Name :
+                    Product Name:
                   </span>
                   <input
                     type="text"
-                    placeholder="Product name"
+                    placeholder="Enter product name"
                     name="productName"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor`}
-                    defaultValue={selectedProduct?.productName}
-                    readOnly
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow `}
+                    defaultValue={payload?.productName}
                   />
                 </div>
+
+                {/* Product Category  */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Category :
+                    Product Category:
                   </span>
                   <input
                     type="text"
-                    placeholder="Product name"
+                    placeholder="Product category"
                     name="productCategory"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor`}
-                    defaultValue={selectedProduct?.productCategory}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    defaultValue={payload?.productCategory}
                     readOnly
                   />
                 </div>
@@ -167,54 +119,31 @@ function InventoryForm() {
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Shop Name :
                   </span>
-                  <div className="relative w-full">
-                    <select
-                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-blackLow placeholder:text-blackSemi appearance-none outline-none"
-                      name="store"
-                      defaultValue=""
-                      required
-                    >
-                      <option value="" disabled>
-                        Select shop name
-                      </option>
-                      {stores?.map((store, i) => (
-                        <option value={`${store?.name}-${store?._id}`} key={i}>
-                          {store?.name}
-                        </option>
-                      ))}
-                    </select>
-                    <div className="absolute inset-y-0 right-3 flex items-center text-secondaryColor pointer-events-none">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="17"
-                        height="16"
-                        viewBox="0 0 17 16"
-                        fill="none"
-                      >
-                        <path
-                          d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
-                          fill="#303030"
-                        />
-                      </svg>
-                    </div>
-                  </div>
+                  <input
+                    type="text"
+                    placeholder="Store name"
+                    name="storeName"
+                    required
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    defaultValue={payload?.storeName}
+                    readOnly
+                  />
                 </div>
 
+                {/* Quantity Price/Unit: */}
                 {/* Quantity Price/Unit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Quantity:
                   </span>
-                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow">
+                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor ">
                     <input
                       type="number"
                       name="unitCount"
-                      className={`w-28 border-none outline-none text-blackLow`}
+                      className={`w-28 border-none outline-none text-fadeColor`}
                       placeholder="Quantity"
-                      value={quantity}
-                      onChange={(e) => handleQuantity(e)}
-                      required
-                      readOnly={selectedProduct?._id ? false : true}
+                      defaultValue={payload?.productQuantity}
+                      readOnly
                     />
 
                     <div className="relative w-full max-w-max">
@@ -222,7 +151,7 @@ function InventoryForm() {
                         type="text"
                         className="appearance-none outline-none  w-16 text-fadeColor"
                         readOnly
-                        defaultValue={selectedProduct?.productUnit}
+                        defaultValue={payload?.unit}
                       />
                     </div>
                   </div>
@@ -237,7 +166,9 @@ function InventoryForm() {
                     name="buyingPrice"
                     placeholder="Enter buying price"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow`}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    defaultValue={payload?.buyingPrice}
+                    readOnly
                   />
                 </div>
 
@@ -251,7 +182,9 @@ function InventoryForm() {
                     name="sellingPrice"
                     placeholder="Enter selling price"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow`}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    defaultValue={payload?.sellingPrice}
+                    readOnly
                   />
                 </div>
                 {/* edit button */}
@@ -278,7 +211,7 @@ function InventoryForm() {
           </div>
         </div>
       </div>
-      {isLoading && <RequestLoader></RequestLoader>}
+      {(isLoading || updateProductLoading) && <RequestLoader></RequestLoader>}
       <div>
         <ToastContainer
           position="top-right"
@@ -297,4 +230,4 @@ function InventoryForm() {
   );
 }
 
-export default InventoryForm;
+export default InventoryUpdateForm;

@@ -4,7 +4,7 @@ import ChartLine from "./ChartTypes/ChartLine";
 
 const Charts = ({ salesData, costsData }) => {
   return (
-    <section className="grid grid-cols-1 xl:grid-cols-2 p-4 items-stretch justify-around gap-6">
+    <section className="grid grid-cols-1 xl:grid-cols-2 items-stretch justify-around gap-6">
       <div className="bg-whiteHigh rounded-xl p-6">
         <ChartArea data={salesData} title="Total Sales"></ChartArea>
       </div>
