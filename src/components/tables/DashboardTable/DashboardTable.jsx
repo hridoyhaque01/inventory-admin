@@ -3,20 +3,19 @@ import { useNavigate } from "react-router-dom";
 import PaidToOwnerModal from "../../modals/PaidToOwnerModal";
 import { Pagination } from "../../shared/pagination/Pagination";
 
-const DashboardTable = ({ title, isLoading = false }) => {
-  const data = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+const DashboardTable = ({ results }) => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = results?.slice(indexOfFirstRow, indexOfLastRow);
   return (
     <section>
       <div className="flex flex-col h-[640px]">
         <section className="flex items-center  bg-primaryMainDarkest p-3 rounded-t-md">
           <p className="text-right text-2xl text-whiteHigh font-bold">
-            {title}
+            {results[0]?.storeName}
           </p>
         </section>
         <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4 bg-whiteHigh rounded-b-md">
@@ -66,25 +65,24 @@ const DashboardTable = ({ title, isLoading = false }) => {
             ) : (
               <tbody className="text-center">
                 {/* {currentRows?.map((customer, i)=>) */}
-                {currentRows?.map((expense, i) => (
+                {currentRows?.map((result, i) => (
                   <tr className="text-center" key={i}>
                     <td className="py-2">
                       {currentPage === 1 && i + 1 < 10
                         ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
                         : rowsPerPage * (currentPage - 1) + i + 1}
                     </td>
-                    <td className="py-2">1200</td>
-
-                    <td className="py-2">1200</td>
-                    <td className="py-2">1200</td>
-                    <td className="py-2">1200</td>
-                    <td className="py-2">1200</td>
-                    <td className="py-2">1200</td>
-                    <td className="py-2">23/08/2023</td>
+                    <td className="py-2">{result?.totalPaidToOwner}</td>
+                    <td className="py-2">{result?.remaining}</td>
+                    <td className="py-2">{result?.revenue}</td>
+                    <td className="py-2">{result?.totalCost}</td>
+                    <td className="py-2">{result?.totalDue}</td>
+                    <td className="py-2">{result?.totalSales}</td>
+                    <td className="py-2">{result?.date}</td>
                     <td className="py-2">
                       <label
                         type="button"
-                        // onClick={() => handleNavigate(expense)}
+                        // onClick={() => handleNavigate(result)}
                         htmlFor="paidToOwnerModal"
                         className="cursor-pointer"
                       >
@@ -114,7 +112,7 @@ const DashboardTable = ({ title, isLoading = false }) => {
             setCurrentPage={setCurrentPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-            totalRows={data?.length}
+            totalRows={results?.length}
           ></Pagination>
         </div>
       </div>

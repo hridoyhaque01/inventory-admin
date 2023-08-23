@@ -5,12 +5,20 @@ import SearchLoader from "../../components/loaders/SearchLoader";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import DashboardTable from "../../components/tables/DashboardTable/DashboardTable";
-import { useGetDashboardResultQuery } from "../../features/dashboard/dashboardApi";
+import {
+  useGetDashboardNewResultQuery,
+  useGetDashboardResultQuery,
+} from "../../features/dashboard/dashboardApi";
 
 const Dashboard = () => {
   const [userType] = useState("Admin");
 
   const { data, isLoading, isError } = useGetDashboardResultQuery();
+  const {
+    data: results,
+    isLoading: storeLoading,
+    isError: storeError,
+  } = useGetDashboardNewResultQuery("64e5eb6a4e801b12325265e2");
 
   const { salesData, totalSales, costsData, totalCosts, totalDues } =
     data || {};
@@ -43,9 +51,9 @@ const Dashboard = () => {
 
   let content = null;
 
-  if (isLoading) {
+  if (isLoading || storeLoading) {
     content = <SearchLoader></SearchLoader>;
-  } else if (!isLoading && isError) {
+  } else if ((!isLoading || !storeLoading) && (isError || storeError)) {
     content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && !isError && !totalSales) {
     content = <NoData></NoData>;
@@ -57,7 +65,7 @@ const Dashboard = () => {
             <HomeTopCard data={dashboardData} key={index}></HomeTopCard>
           ))}
         </section>
-        <DashboardTable title={"data"}></DashboardTable>
+        <DashboardTable results={results}></DashboardTable>
         <Charts salesData={sales} costsData={costs}></Charts>
       </>
     );
