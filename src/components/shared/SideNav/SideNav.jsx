@@ -226,7 +226,7 @@ const SideNav = () => {
         {/* buy-supplies */}
         <div className="w-full overflow-hidden capitalize">
           <NavLink
-            to="/buy-supplies"
+            to="/supplies"
             className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
           >
             <span>

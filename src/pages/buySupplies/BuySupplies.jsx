@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
-import SupplierTable from "../../components/tables/supplier/SupplierTable";
-import { useGetSuppliersQuery } from "../../features/supplier/supplierApi";
+import BuySuppliesTable from "../../components/tables/buySupplies/BuySuppliesTable";
+import { useGetSuppliesQuery } from "../../features/buySupplies/buySuppliesApi";
 
-function Suppliers() {
-  const { data, isLoading, isError } = useGetSuppliersQuery();
+function BuySupplies() {
+  const { data, isLoading, isError } = useGetSuppliesQuery();
   const [searchValue, setSearchValue] = useState("");
 
   const onChange = (e) => {
@@ -34,15 +34,15 @@ function Suppliers() {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
     const newData = data.filter(filterBySearch);
-    content = <SupplierTable data={newData}></SupplierTable>;
+    content = <BuySuppliesTable data={newData}></BuySuppliesTable>;
   }
 
   return (
     <section className="h-full w-full overflow-auto pr-6 py-6">
       <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
-          title="Suppliers"
-          path="/supplier-add"
+          title="Supplies"
+          path="/supplies-add"
           value={searchValue}
           onChange={onChange}
         ></SearchBar>
@@ -54,4 +54,4 @@ function Suppliers() {
   );
 }
 
-export default Suppliers;
+export default BuySupplies;

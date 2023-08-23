@@ -128,33 +128,33 @@ function SupplierForm() {
                   />
                 </div>
 
-                {/* Supplier Phone */}
-                <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Supplier Phone :
-                  </span>
-                  <input
-                    type="number"
-                    placeholder="Enter supplier phone number"
-                    name="supplierPhone"
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
-                    required
-                    defaultValue={payload?.supplierPhone}
-                  />
-                </div>
-
                 {/* product Address */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Supplier Address :
+                    Address :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter supplier address"
+                    placeholder="Enter address"
                     name="supplierAddress"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     required
                     defaultValue={payload?.supplierAddress}
+                  />
+                </div>
+
+                {/* Supplier Phone */}
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                    Phone :
+                  </span>
+                  <input
+                    type="number"
+                    placeholder="Enter phone number"
+                    name="supplierPhone"
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
+                    required
+                    defaultValue={payload?.supplierPhone}
                   />
                 </div>
 
@@ -223,7 +223,7 @@ function SupplierForm() {
             </form>
           </div>
         </div>
-        {isLoading && <RequestLoader></RequestLoader>}
+        {(isLoading || updateFetching) && <RequestLoader></RequestLoader>}
         <div>
           <ToastContainer
             position="top-right"

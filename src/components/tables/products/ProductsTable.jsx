@@ -76,8 +76,8 @@ function ProductsTable({ data }) {
                 </td>
                 <td className="py-3">{item?.productId}</td>
                 <td className="py-3">{item?.productName}</td>
-                <td className="py-3">{item?.productAddress}</td>
-                <td className="py-3">{item?.paid}</td>
+                <td className="py-3">{item?.productUnit}</td>
+                <td className="py-3">{item?.productLeft}</td>
 
                 <td className="py-3">
                   <button type="button" onClick={() => handleNavigate(item)}>

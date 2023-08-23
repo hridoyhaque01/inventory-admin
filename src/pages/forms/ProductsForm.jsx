@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
-import { useAddSupplierMutation } from "../../features/supplier/supplierApi";
+import {
+  useAddProductMutation,
+  useUpdateProductMutation,
+} from "../../features/products/productsApi";
 
 function ProductsForm() {
-  const [addSupplier, { isLoading }] = useAddSupplierMutation();
+  const [addProduct, { isLoading }] = useAddProductMutation();
+  const [updateProduct, { isLoading: productUpdateLoading }] =
+    useUpdateProductMutation();
   const { state } = useLocation();
   const { payload, type } = state || {};
-  const [paidAmount, setPaidAmount] = useState("");
-  const [buyingPrice, setBuyingPrice] = useState("");
-  const [productQuantity, setProductQuantity] = useState("");
-  const totalPrice = productQuantity
-    ? buyingPrice * Number(productQuantity)
-    : buyingPrice;
+  const navigate = useNavigate();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -43,68 +43,59 @@ function ProductsForm() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const form = event.target;
-    const supplierName = form.supplierName.value;
-    const supplierPhone = form.supplierPhone.value;
     const productId = form.productId.value;
     const productName = form.productName.value;
     const productCategory = form.productCategory.value;
-    const productQuantity = form.productQuantity.value;
-    const unit = form.unit.value;
-    const totalPrice = form.totalPrice.value;
-    const paid = form.paid.value;
-    const pricePerUnit = form.pricePerUnit.value;
+    const productUnit = form.productUnit.value;
 
     const data = {
-      supplierName,
-      supplierPhone,
       productId,
       productName,
       productCategory,
-      productQuantity: Number(productQuantity),
-      unit,
-      pricePerUnit: pricePerUnit,
-      totalPrice: Number(totalPrice),
-      paid: Number(paid),
+      productUnit,
     };
+
+    if (type !== "edit") {
+      data.productLeft = "0";
+    }
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    addSupplier(formData)
-      .unwrap()
-      .then((res) => {
-        infoNotify("Add supplier successfull");
-        form.reset();
-        setPaidAmount("");
-        setBuyingPrice("");
-        setProductQuantity("");
-      })
-      .catch((error) => {
-        errorNotify("Add supplier failed");
-      });
+
+    if (type === "edit") {
+      updateProduct({ data: formData, id: payload?._id })
+        .unwrap()
+        .then((res) => {
+          form.reset();
+          navigate("/products");
+        })
+        .catch((error) => {
+          errorNotify("Add product failed");
+        });
+    } else {
+      addProduct(formData)
+        .unwrap()
+        .then((res) => {
+          infoNotify("Add product successfull");
+          form.reset();
+        })
+        .catch((error) => {
+          errorNotify("Add product failed");
+        });
+    }
   };
 
   useEffect(() => {
     if (payload?._id) {
-      setBuyingPrice(payload?.totalPrice);
-      setPaidAmount(payload?.paid);
-      setProductQuantity(payload?.productQuantity);
     }
   }, [payload?._id]);
-
-  const handlePaid = (event) => {
-    const value = event.target.value;
-    if (totalPrice < Number(value)) {
-      return;
-    } else {
-      setPaidAmount(value);
-    }
-  };
 
   return (
     <section className="h-full w-full overflow-auto px-6 md:px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
-            Add Products
+            {type === "edit" ? "Edit" : "Add"} Products
           </h4>
         </div>
         <div className="bg-whiteHigh w-full px-4">
@@ -137,7 +128,6 @@ function ProductsForm() {
                     name="productName"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     required
-                    readOnly={type === "edit" ? true : false}
                     defaultValue={payload?.productName}
                   />
                 </div>
@@ -145,7 +135,7 @@ function ProductsForm() {
                 {/* Product Category: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Category:
+                    Category:
                   </span>
                   <div className="relative w-full">
                     <select
@@ -153,7 +143,6 @@ function ProductsForm() {
                       name="productCategory"
                       defaultValue={payload ? payload?.productCategory : ""}
                       required
-                      disabled={type === "edit" ? true : false}
                     >
                       <option value="" disabled>
                         Select product Category
@@ -181,58 +170,37 @@ function ProductsForm() {
                   </div>
                 </div>
 
-                {/* Quantity Price/Unit: */}
+                {/* Quantity Price/productUnit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Quantity:
+                    unit:
                   </span>
-                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm">
-                    <input
-                      type="number"
-                      name="productQuantity"
-                      className={`w-28 border-none outline-none ${
-                        type === "edit" ? "text-fadeColor" : "text-blackLow"
-                      }`}
-                      placeholder="Enter quantity"
-                      defaultValue={`${payload?.productQuantity}`}
-                      required
-                      readOnly={type === "edit" ? true : false}
-                    />
-
-                    <div className="relative w-full max-w-max">
-                      <select
-                        className="appearance-none outline-none  w-16"
-                        name="unit"
-                        defaultValue={`${payload?.unit}` || "KG"}
-                        disabled={type === "edit" ? true : false}
+                  <div className="relative w-full">
+                    <select
+                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none"
+                      name="productUnit"
+                      defaultValue={`${payload?.productUnit}` || "KG"}
+                    >
+                      <option value="KG">KG</option>
+                      <option value="Bosta">Bosta</option>
+                      <option value="Litter">Litter</option>
+                      <option value="Gram">Gram</option>
+                    </select>
+                    <div className="absolute inset-y-0 right-3 flex items-center text-secondaryColor pointer-events-none">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="17"
+                        height="16"
+                        viewBox="0 0 17 16"
+                        fill="none"
                       >
-                        <option value="KG">KG</option>
-                        <option value="Bosta">Bosta</option>
-                        <option value="Litter">Litter</option>
-                        <option value="Gram">Gram</option>
-                      </select>
-                      <div className="absolute inset-y-0 right-1 flex items-center text-secondaryColor pointer-events-none">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="17"
-                          height="16"
-                          viewBox="0 0 17 16"
-                          fill="none"
-                        >
-                          <path
-                            d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
-                            fill={type === "edit" ? "#808080" : "#303030"}
-                          />
-                        </svg>
-                      </div>
+                        <path
+                          d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
+                          fill={type === "edit" ? "#808080" : "#303030"}
+                        />
+                      </svg>
                     </div>
                   </div>
-                  {/* <input
-                    type="number"
-                    name="buyingPrice"
-                    placeholder="Buying price"
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded ${type==="edit" ? 'text-fadeColor' :'text-blackLow'} text-sm`}
-                  /> */}
                 </div>
 
                 {/* product id */}
@@ -266,7 +234,7 @@ function ProductsForm() {
             </form>
           </div>
         </div>
-        {isLoading && <RequestLoader></RequestLoader>}
+        {(isLoading || productUpdateLoading) && <RequestLoader></RequestLoader>}
         <div>
           <ToastContainer
             position="top-right"

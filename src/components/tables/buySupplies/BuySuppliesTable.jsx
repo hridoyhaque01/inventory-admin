@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../modals/ConfirmationModal";
 import { Pagination } from "../../shared/pagination/Pagination";
 
-function SupplierTable({ data }) {
+function BuySuppliesTable({ data }) {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -12,7 +12,7 @@ function SupplierTable({ data }) {
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
 
   const handleNavigate = (item) => {
-    navigate("/supplier-edit", {
+    navigate("/supplies-edit", {
       state: {
         payload: item,
         type: "edit",
@@ -28,19 +28,26 @@ function SupplierTable({ data }) {
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
               Serial
             </th>
+            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              Product Id
+            </th>
+            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              Product Name
+            </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
               Supplier Name
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Supplier Address
+              Quantity
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Supplier Phone
+              Unit Price
             </th>
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Due Amount
+            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
+              Total Price
             </th>
+
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
               Action
             </th>
@@ -72,10 +79,12 @@ function SupplierTable({ data }) {
                     ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
                     : rowsPerPage * (currentPage - 1) + i + 1}
                 </td>
+                <td className="py-3">{item?.productId}</td>
+                <td className="py-3">{item?.productName}</td>
                 <td className="py-3">{item?.supplierName}</td>
-                <td className="py-3">{item?.supplierAddress}</td>
-                <td className="py-3">{item?.supplierPhone}</td>
-                <td className="py-3">{item?.supplierDue}</td>
+                <td className="py-3">{item?.unitCount}</td>
+                <td className="py-3">{item?.unitPrice}</td>
+                <td className="py-3">{item?.totalAmount}</td>
 
                 <td className="py-3">
                   <button type="button" onClick={() => handleNavigate(item)}>
@@ -114,4 +123,4 @@ function SupplierTable({ data }) {
   );
 }
 
-export default SupplierTable;
+export default BuySuppliesTable;

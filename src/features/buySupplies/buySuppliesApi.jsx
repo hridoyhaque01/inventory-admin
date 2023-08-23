@@ -1,25 +1,26 @@
 import { apiSlice } from "../api/apiSlice";
 
-export const supplierApi = apiSlice.injectEndpoints({
+export const buySuppliesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getSuppliers: builder.query({
+    getSupplies: builder.query({
       query: () => ({
-        url: `/suppliers`,
+        url: `/supplierinvoices`,
       }),
     }),
-    addSupplier: builder.mutation({
+    addSupplies: builder.mutation({
       query: (data) => ({
-        url: "/suppliers/add",
+        url: "/supplierinvoices/add",
         method: "POST",
         body: data,
       }),
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          console.log(result);
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
-                "getSuppliers",
+                "getSupplies",
                 undefined,
                 (draft) => {
                   draft?.push(result?.data);
@@ -47,7 +48,7 @@ export const supplierApi = apiSlice.injectEndpoints({
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
-                "getSuppliers",
+                "getSupplies",
                 undefined,
                 (draft) => {
                   const changeObj = draft.find(
@@ -74,7 +75,7 @@ export const supplierApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetSuppliersQuery,
+  useGetSuppliesQuery,
   useUpdateSuppliersMutation,
-  useAddSupplierMutation,
-} = supplierApi;
+  useAddSuppliesMutation,
+} = buySuppliesApi;

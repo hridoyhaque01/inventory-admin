@@ -7,8 +7,10 @@ import ForgetPassword from "../pages/authentication/ForgetPassword";
 import Login from "../pages/authentication/Login";
 import ResetPassword from "../pages/authentication/ResetPassword";
 import Signup from "../pages/authentication/Signup";
+import BuySupplies from "../pages/buySupplies/BuySupplies";
 import Customer from "../pages/customer/Customer";
 import Expenses from "../pages/expenses/Expenses";
+import BuySuppliesForm from "../pages/forms/BuySuppliesForm";
 import CustomerForm from "../pages/forms/CustomerForm";
 import EditProfile from "../pages/forms/EditProfile";
 import ExpensesForm from "../pages/forms/ExpensesForm";
@@ -68,6 +70,10 @@ export const routes = createBrowserRouter([
       {
         path: "/suppliers",
         element: <Suppliers></Suppliers>,
+      },
+      {
+        path: "/supplies",
+        element: <BuySupplies></BuySupplies>,
       },
       {
         path: "/products",
@@ -136,6 +142,14 @@ export const routes = createBrowserRouter([
       {
         path: "/products-edit",
         element: <ProductsForm></ProductsForm>,
+      },
+      {
+        path: "/supplies-add",
+        element: <BuySuppliesForm></BuySuppliesForm>,
+      },
+      {
+        path: "/supplies-edit",
+        element: <BuySuppliesForm></BuySuppliesForm>,
       },
       // {
       //   path: "/store-details",

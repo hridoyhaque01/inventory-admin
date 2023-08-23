@@ -3,14 +3,11 @@ import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
 import ProductsTable from "../../components/tables/products/ProductsTable";
-import { useGetSuppliersQuery } from "../../features/supplier/supplierApi";
+import { useGetProductsQuery } from "../../features/products/productsApi";
 
 function Products() {
-  const { data, isLoading, isError } = useGetSuppliersQuery();
+  const { data, isLoading, isError } = useGetProductsQuery();
   const [searchValue, setSearchValue] = useState("");
-
-  console.log(data);
-
   const onChange = (e) => {
     const value = e.target.value;
     setSearchValue(value);

@@ -1,25 +1,26 @@
 import { apiSlice } from "../api/apiSlice";
 
-export const supplierApi = apiSlice.injectEndpoints({
+export const productsApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getSuppliers: builder.query({
+    getProducts: builder.query({
       query: () => ({
-        url: `/suppliers`,
+        url: `/addproducts`,
       }),
     }),
-    addSupplier: builder.mutation({
+    addProduct: builder.mutation({
       query: (data) => ({
-        url: "/suppliers/add",
+        url: "/addproducts/add",
         method: "POST",
         body: data,
       }),
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
+          console.log(result);
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
-                "getSuppliers",
+                "getProducts",
                 undefined,
                 (draft) => {
                   draft?.push(result?.data);
@@ -33,9 +34,9 @@ export const supplierApi = apiSlice.injectEndpoints({
       },
     }),
 
-    updateSuppliers: builder.mutation({
+    updateProduct: builder.mutation({
       query: ({ data, id }) => ({
-        url: `/suppliers/update/${id}`,
+        url: `/addproducts/update/${id}`,
         method: "PATCH",
         body: data,
       }),
@@ -47,19 +48,14 @@ export const supplierApi = apiSlice.injectEndpoints({
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
-                "getSuppliers",
+                "getProducts",
                 undefined,
                 (draft) => {
-                  const changeObj = draft.find(
-                    (supplier) => supplier._id === id
-                  );
+                  const changeObj = draft.find((product) => product._id === id);
                   if (changeObj) {
-                    changeObj.supplierName = formData.supplierName;
-                    changeObj.supplierPhone = formData.supplierPhone;
-                    changeObj.supplierAddress = formData.supplierAddress;
-                    if (formData.supplierDue) {
-                      changeObj.supplierDue = formData.supplierDue;
-                    }
+                    changeObj.productName = formData.productName;
+                    changeObj.productCategory = formData.productCategory;
+                    changeObj.productUnit = formData.productUnit;
                   }
                 }
               )
@@ -74,7 +70,7 @@ export const supplierApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useGetSuppliersQuery,
-  useUpdateSuppliersMutation,
-  useAddSupplierMutation,
-} = supplierApi;
+  useGetProductsQuery,
+  useUpdateProductMutation,
+  useAddProductMutation,
+} = productsApi;
