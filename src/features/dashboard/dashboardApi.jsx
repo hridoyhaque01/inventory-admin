@@ -192,7 +192,7 @@ const dashboardApi = apiSlice.injectEndpoints({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
         // get a random user
         const { data: storeData } = await fetchWithBQ(`/stores`);
-        const resultData = {};
+        const resultData = [];
 
         storeData.forEach((store) => {
           const storeName = store.name;
@@ -262,12 +262,15 @@ const dashboardApi = apiSlice.injectEndpoints({
           // Sort storeDetails array by latest date for the current store
           storeDetails.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-          resultData[storeName] = storeDetails;
+          const storeObject = {};
+          storeObject[storeName] = storeDetails;
+
+          console.log(storeDetails);
+          resultData.push(storeObject);
         });
 
-        console.log(resultData);
         return {
-          data: true,
+          data: resultData,
         };
       },
     }),

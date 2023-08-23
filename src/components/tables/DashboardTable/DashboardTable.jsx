@@ -4,19 +4,18 @@ import PaidToOwnerModal from "../../modals/PaidToOwnerModal";
 import { Pagination } from "../../shared/pagination/Pagination";
 
 const DashboardTable = ({ results }) => {
+  const data = [1, 2, 34, 45, 5];
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = results?.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
   return (
     <section>
       <div className="flex flex-col h-[640px]">
         <section className="flex items-center  bg-primaryMainDarkest p-3 rounded-t-md">
-          <p className="text-right text-2xl text-whiteHigh font-bold">
-            {results[0]?.storeName}
-          </p>
+          <p className="text-right text-2xl text-whiteHigh font-bold">{}</p>
         </section>
         <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4 bg-whiteHigh rounded-b-md">
           <table className="table w-full ">
@@ -112,7 +111,7 @@ const DashboardTable = ({ results }) => {
             setCurrentPage={setCurrentPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-            totalRows={results?.length}
+            totalRows={data?.length}
           ></Pagination>
         </div>
       </div>

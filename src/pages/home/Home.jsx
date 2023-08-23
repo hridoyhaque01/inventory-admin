@@ -7,7 +7,6 @@ import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import DashboardTable from "../../components/tables/DashboardTable/DashboardTable";
 import {
   useGetAllStoreResultQuery,
-  useGetDashboardNewResultQuery,
   useGetDashboardResultQuery,
 } from "../../features/dashboard/dashboardApi";
 
@@ -15,13 +14,12 @@ const Dashboard = () => {
   const [userType] = useState("Admin");
 
   const { data, isLoading, isError } = useGetDashboardResultQuery();
+
   const {
-    data: results,
+    data: storeData,
     isLoading: storeLoading,
     isError: storeError,
-  } = useGetDashboardNewResultQuery("64e5eb6a4e801b12325265e2");
-
-  const { data: storeData } = useGetAllStoreResultQuery();
+  } = useGetAllStoreResultQuery();
 
   console.log(storeData);
   const { salesData, totalSales, costsData, totalCosts, totalDues } =
@@ -69,7 +67,11 @@ const Dashboard = () => {
             <HomeTopCard data={dashboardData} key={index}></HomeTopCard>
           ))}
         </section>
-        <DashboardTable results={results}></DashboardTable>
+        <section className="flex flex-col justify-between gap-8">
+          {storeData?.map((store, index) => (
+            <DashboardTable results={store} key={index}></DashboardTable>
+          ))}
+        </section>
         <Charts salesData={sales} costsData={costs}></Charts>
       </>
     );
