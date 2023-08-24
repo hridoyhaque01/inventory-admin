@@ -1,17 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
-const PaidToOwnerModal = ({ email, errorNotify, infoNotify, handler }) => {
+const PaidToOwnerModal = ({
+  activeStore,
+  errorNotify,
+  infoNotify,
+  handler,
+}) => {
+  const [payment, setPayment] = useState("");
+  const handlePayment = (event) => {
+    const value = event.target.value;
+
+    if (Number(value) > activeStore?.remaining) {
+      return;
+    } else {
+      setPayment(value);
+    }
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
-    const form = event.target;
-    const paidAmount = form.paidAmount.value;
     const data = {
-      paidAmount,
+      payment: payment,
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    console.log(data);
+    console.log(activeStore); // Use the activeStore prop here
+    console.log(data); // Use the activeStore prop here
+
+    handler({ id: activeStore?.id, data: formData })
+      .unwrap()
+      .then((res) => {
+        infoNotify("Update payment successfull");
+      })
+      .catch((error) => {
+        errorNotify("Update payment successfull");
+      });
   };
+
   return (
     <section>
       <input type="checkbox" id="paidToOwnerModal" className="modal-toggle" />
@@ -30,13 +54,14 @@ const PaidToOwnerModal = ({ email, errorNotify, infoNotify, handler }) => {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
-                    Due Amount :
+                    Remaining :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter due amount"
+                    placeholder="Total remaining"
                     name="dueAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    defaultValue={activeStore?.remaining}
                     readOnly
                   />
                 </div>
@@ -44,13 +69,16 @@ const PaidToOwnerModal = ({ email, errorNotify, infoNotify, handler }) => {
                 {/* Paid Amount : */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
-                    Paid Amount :
+                    Recived Amount :
                   </span>
                   <input
                     type="text"
-                    placeholder="Paid amount"
+                    placeholder="Recived amount"
                     name="paidAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    value={payment}
+                    required
+                    onChange={(e) => handlePayment(e)}
                   />
                 </div>
 

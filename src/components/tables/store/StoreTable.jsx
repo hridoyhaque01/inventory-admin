@@ -4,9 +4,7 @@ import { Pagination } from "../../shared/pagination/Pagination";
 
 function StoreTable({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [activeButton, setActiveButton] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [imageUrl, setImageUrl] = useState();
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
@@ -19,6 +17,8 @@ function StoreTable({ data }) {
       },
     });
   };
+
+  console.log(currentRows);
 
   return (
     <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4">

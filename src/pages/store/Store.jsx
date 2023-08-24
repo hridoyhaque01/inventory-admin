@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
@@ -9,6 +10,9 @@ import { useGetStoresQuery } from "../../features/store/storeApi";
 function Store() {
   const { data, isLoading, isError } = useGetStoresQuery();
   const [searchValue, setSearchValue] = useState("");
+
+  const { storeData } = useSelector((state) => state.storeData);
+  console.log(storeData);
 
   const onChange = (e) => {
     const value = e.target.value;

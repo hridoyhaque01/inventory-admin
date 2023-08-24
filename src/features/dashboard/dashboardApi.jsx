@@ -121,19 +121,19 @@ const dashboardApi = apiSlice.injectEndpoints({
         const { invoices, paidToOwner } = storeData || {};
         const groupedPayments = {};
         paidToOwner.forEach((payment) => {
-          const date = new Date(payment.timestamp * 1000).toLocaleDateString(
+          const date = new Date(payment?.timestamp * 1000).toLocaleDateString(
             "en-US"
           );
           if (!groupedPayments[date]) {
             groupedPayments[date] = 0; // Initialize totalPaid for the date
           }
-          groupedPayments[date] += parseInt(payment.payment);
+          groupedPayments[date] += parseInt(payment?.payment);
         });
 
         // Group invoices by date
         const groupedInvoices = {};
         invoices.forEach((invoice) => {
-          const date = new Date(invoice.timestamp * 1000).toLocaleDateString(
+          const date = new Date(invoice?.timestamp * 1000).toLocaleDateString(
             "en-US"
           );
           if (!groupedInvoices[date]) {
@@ -147,21 +147,21 @@ const dashboardApi = apiSlice.injectEndpoints({
         for (const date in groupedInvoices) {
           const invoiceGroup = groupedInvoices[date];
           const totalDue = invoiceGroup.reduce(
-            (acc, invoice) => acc + parseInt(invoice.dueAmount),
+            (acc, invoice) => acc + parseInt(invoice?.dueAmount),
             0
           );
           const totalSales = invoiceGroup.reduce(
-            (acc, invoice) => acc + invoice.totalAmount,
+            (acc, invoice) => acc + invoice?.totalAmount,
             0
           );
           const totalCost = invoiceGroup.reduce(
-            (acc, invoice) => acc + invoice.buyingPrice * invoice.unitCount,
+            (acc, invoice) => acc + invoice?.buyingPrice * invoice?.unitCount,
             0
           );
 
           const totalPaidToOwner = groupedPayments[date] || 0;
           const invoiceRevenue = invoiceGroup.reduce(
-            (acc, invoice) => acc + parseInt(invoice.paidAmount),
+            (acc, invoice) => acc + parseInt(invoice?.paidAmount),
             0
           );
           const paymentRevenue = totalPaidToOwner;
@@ -192,27 +192,50 @@ const dashboardApi = apiSlice.injectEndpoints({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
         // get a random user
         const { data: storeData } = await fetchWithBQ(`/stores`);
+        const { data: expenses } = await fetchWithBQ(`/expenses`);
+        const { data: supplierinvoices } = await fetchWithBQ(
+          `/supplierinvoices`
+        );
         const resultData = [];
+        const mainData = [];
+
+        const totalSuppliesCosts = supplierinvoices?.reduce(
+          (acc, supplies) => acc + parseInt(supplies?.totalAmount),
+          0
+        );
+
+        const totalExpenses = expenses.reduce(
+          (acc, supplies) => acc + parseInt(supplies?.amount),
+          0
+        );
+
+        const totalCosts = totalSuppliesCosts + totalExpenses;
+        let totalRevenueInit = 0;
+        let totalDueInit = 0;
+        let totalSalesInit = 0;
+        let totalPaidToOwnerInit = 0;
+        const cardData = {};
 
         storeData.forEach((store) => {
-          const storeName = store.name;
+          const storeName = store?.name;
+          const storeId = store?._id;
 
           // Group paidToOwner by date for the current store
           const groupedPayments = {};
           store.paidToOwner.forEach((payment) => {
-            const date = new Date(payment.timestamp * 1000).toLocaleDateString(
+            const date = new Date(payment?.timestamp * 1000).toLocaleDateString(
               "en-US"
             );
             if (!groupedPayments[date]) {
               groupedPayments[date] = 0; // Initialize totalPaid for the date
             }
-            groupedPayments[date] += parseInt(payment.payment);
+            groupedPayments[date] += parseInt(payment?.payment);
           });
 
           // Group invoices by date for the current store
           const groupedInvoices = {};
           store.invoices.forEach((invoice) => {
-            const date = new Date(invoice.timestamp * 1000).toLocaleDateString(
+            const date = new Date(invoice?.timestamp * 1000).toLocaleDateString(
               "en-US"
             );
             if (!groupedInvoices[date]) {
@@ -226,25 +249,25 @@ const dashboardApi = apiSlice.injectEndpoints({
           for (const date in groupedInvoices) {
             const invoiceGroup = groupedInvoices[date];
             const totalDue = invoiceGroup.reduce(
-              (acc, invoice) => acc + parseInt(invoice.dueAmount),
+              (acc, invoice) => acc + parseInt(invoice?.dueAmount),
               0
             );
             const totalSales = invoiceGroup.reduce(
-              (acc, invoice) => acc + invoice.totalAmount,
+              (acc, invoice) => acc + invoice?.totalAmount,
               0
             );
             const totalCost = invoiceGroup.reduce(
-              (acc, invoice) => acc + invoice.buyingPrice * invoice.unitCount,
+              (acc, invoice) => acc + invoice?.buyingPrice * invoice?.unitCount,
               0
             );
 
             const totalPaidToOwner = groupedPayments[date] || 0;
             const invoiceRevenue = invoiceGroup.reduce(
-              (acc, invoice) => acc + parseInt(invoice.paidAmount),
+              (acc, invoice) => acc + parseInt(invoice?.paidAmount),
               0
             );
             const paymentRevenue = totalPaidToOwner;
-            const revenue = invoiceRevenue + paymentRevenue;
+            const revenue = invoiceRevenue;
             const remaining = revenue - totalPaidToOwner;
 
             const storeDetailsEntry = {
@@ -255,22 +278,35 @@ const dashboardApi = apiSlice.injectEndpoints({
               date: date,
               totalPaidToOwner: totalPaidToOwner,
               remaining: remaining,
+              storeName,
+              storeId,
             };
             storeDetails.push(storeDetailsEntry);
+
+            totalRevenueInit += revenue;
+            totalDueInit += totalDue;
+            totalSalesInit += totalSales;
+            totalPaidToOwnerInit += totalPaidToOwner;
           }
 
-          // Sort storeDetails array by latest date for the current store
-          storeDetails.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-          const storeObject = {};
-          storeObject[storeName] = storeDetails;
-
-          console.log(storeDetails);
-          resultData.push(storeObject);
+          resultData.push(storeDetails);
         });
+        cardData.totalRevenue = totalRevenueInit;
+        cardData.totalDue = totalDueInit;
+        cardData.totalSales = totalSalesInit;
+        cardData.totalPaidToOwner = totalPaidToOwnerInit;
+        cardData.totalCosts = totalCosts;
+
+        //       const totalrevenue = results.reduce((acc, result) => acc + result.revenue, 0);
+        // const totalDue = results.reduce((acc, result) => acc + result.totalDue, 0);
+        // const totalCost = results.reduce((acc, result) => acc + result.totalCost, 0);
+        // const totalSales = results.reduce(
+        //   (acc, result) => acc + result.totalSales,
+        //   0
+        // );
 
         return {
-          data: resultData,
+          data: { resultData, cardData },
         };
       },
     }),
