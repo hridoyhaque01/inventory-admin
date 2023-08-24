@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import StoreCard from "../../components/Cards/StoreCard";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import ResetPasswordModal from "../../components/modals/ResetPasswordModal";
-import { useGetStoreDashboardResultQuery } from "../../features/dashboard/dashboardApi";
 import { useUpdateStorePasswordMutation } from "../../features/store/storeApi";
 
 function StoreDetails() {
@@ -14,13 +12,13 @@ function StoreDetails() {
   const { state } = useLocation() || {};
   const { payload } = state || {};
 
-  const {
-    data: dashboardData,
-    isLoading: dataFetching,
-    isError,
-  } = useGetStoreDashboardResultQuery(payload?._id);
+  // const {
+  //   data: dashboardData,
+  //   isLoading: dataFetching,
+  //   isError,
+  // } = useGetStoreDashboardResultQuery(payload?._id);
 
-  const { totalSales, totalCosts, totalDues } = dashboardData || {};
+  // const { totalSales, totalCosts, totalDues } = dashboardData || {};
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -69,31 +67,27 @@ function StoreDetails() {
     },
   ]);
 
-  useEffect(() => {
-    if (!dataFetching && !isError) {
-      const updatedData = [...data];
-      updatedData[0].number = totalSales || 0;
-      updatedData[1].number = totalCosts || 0;
-      updatedData[2].number = Number(totalSales) - Number(totalDues) || 0;
-      updatedData[3].number = totalDues || 0;
-      setData(updatedData);
-    }
-  }, [totalSales, totalCosts, totalDues, dataFetching, isError]);
+  // useEffect(() => {
+  //   if (!dataFetching && !isError) {
+  //     const updatedData = [...data];
+  //     updatedData[0].number = totalSales || 0;
+  //     updatedData[1].number = totalCosts || 0;
+  //     updatedData[2].number = Number(totalSales) - Number(totalDues) || 0;
+  //     updatedData[3].number = totalDues || 0;
+  //     setData(updatedData);
+  //   }
+  // }, [totalSales, totalCosts, totalDues, dataFetching, isError]);
 
-  return dataFetching ? (
-    <div>loading...</div>
-  ) : isError ? (
-    <div>Something went wrong!</div>
-  ) : (
+  return (
     <div className="w-full overflow-auto pt-10 pb-6 pr-10">
       <div className="flex flex-col justify-around pty-10 gap-4 w-full">
         {/* 4 top cards */}
 
-        <section className="flex items-stretch gap-8 px-4">
+        {/* <section className="flex items-stretch gap-8 px-4">
           {data.map((data, index) => (
             <StoreCard data={data} key={index}></StoreCard>
           ))}
-        </section>
+        </section> */}
 
         {/* single store details */}
         <div className="p-6 rounded-2xl bg-whiteHigh shadow-md mt-6">

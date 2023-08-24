@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomeTopCard from "../../Components/Cards/HomeTopCard";
-import Charts from "../../components/Charts/Charts";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import PaidToOwnerModal from "../../components/modals/PaidToOwnerModal";
@@ -89,7 +88,7 @@ const Dashboard = () => {
   } else if (!isLoading && !isError && resultData?.length > 0) {
     content = (
       <>
-        <Charts salesData={sales} costsData={costs}></Charts>
+        {/* <Charts salesData={sales} costsData={costs}></Charts> */}
         <section className="flex flex-col justify-between gap-8">
           {resultData?.map((store, index) => (
             <DashboardTable
@@ -111,6 +110,14 @@ const Dashboard = () => {
       updatedData[2].number = cardData?.totalSales || 0;
       updatedData[4].number = cardData?.totalPaidToOwner;
       setDashboardData(updatedData);
+
+      console.log(
+        cardData?.totalCosts,
+        cardData?.totalDue,
+        cardData?.totalRevenue,
+        cardData?.totalSales,
+        cardData?.totalPaidToOwner
+      );
     }
   }, [isLoading, isError]);
 

@@ -18,7 +18,7 @@ const dashboardApi = apiSlice.injectEndpoints({
           0
         );
 
-        const totalExpenses = expenses.reduce(
+        const totalExpenses = expenses?.reduce(
           (acc, supplies) => acc + parseInt(supplies?.amount),
           0
         );
@@ -42,7 +42,7 @@ const dashboardApi = apiSlice.injectEndpoints({
 
           // Group paidToOwner by date for the current store
           const groupedPayments = {};
-          store?.paidToOwner.forEach((payment) => {
+          store?.paidToOwner?.forEach((payment) => {
             const date = new Date(payment?.timestamp * 1000).toLocaleDateString(
               "en-US"
             );
@@ -54,7 +54,7 @@ const dashboardApi = apiSlice.injectEndpoints({
 
           // Group invoices by date for the current store
           const groupedInvoices = {};
-          store?.invoices.forEach((invoice) => {
+          store?.invoices?.forEach((invoice) => {
             const date = new Date(invoice?.timestamp * 1000).toLocaleDateString(
               "en-US"
             );
@@ -66,7 +66,7 @@ const dashboardApi = apiSlice.injectEndpoints({
 
           // chart data
 
-          store?.invoices.forEach((invoice) => {
+          store?.invoices?.forEach((invoice) => {
             const payDate = new Date(invoice?.timestamp * 1000);
             const month = payDate.toLocaleString("default", { month: "short" });
 
@@ -95,12 +95,14 @@ const dashboardApi = apiSlice.injectEndpoints({
             // console.log(monthlyCostMap);
           });
 
+          // console.log(monthlySalesMap);
+
           monthlySalesMap?.forEach((sales, month) => {
-            summarizedSales.push({ name: month, sales: sales });
+            summarizedSales?.push({ name: month, sales: sales });
           });
 
           monthlyCostMap?.forEach((costs, month) => {
-            summarizedCosts.push({ name: month, costs: costs });
+            summarizedCosts?.push({ name: month, costs: costs });
           });
 
           // Calculate required values for each date for the current store
@@ -149,18 +151,14 @@ const dashboardApi = apiSlice.injectEndpoints({
           }
 
           resultData.push(storeDetails);
+
+          console.log(storeDetails);
         });
-
-        console.log(monthlySalesMap);
-
         cardData.totalRevenue = totalRevenueInit;
         cardData.totalDue = totalDueInit;
         cardData.totalSales = totalSalesInit;
         cardData.totalPaidToOwner = totalPaidToOwnerInit;
         cardData.totalCosts = totalCosts;
-
-        console.log(summarizedCosts);
-        console.log(summarizedSales);
 
         //       const totalrevenue = results.reduce((acc, result) => acc + result.revenue, 0);
         // const totalDue = results.reduce((acc, result) => acc + result.totalDue, 0);

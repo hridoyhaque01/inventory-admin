@@ -27,6 +27,10 @@ const DashboardTable = ({ results, setActiveStore }) => {
     0
   );
 
+  if (results?.length === 0) {
+    return <div>No data found</div>;
+  }
+
   return (
     <section>
       <div className="flex flex-col h-[640px]">
