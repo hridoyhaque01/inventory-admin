@@ -106,8 +106,8 @@ const Dashboard = () => {
       const updatedData = [...dashboardData];
       updatedData[0].number = cardData?.totalCosts || 0;
       updatedData[1].number = cardData?.totalDue || 0;
-      updatedData[3].number = cardData?.totalRevenue || 0;
-      updatedData[2].number = cardData?.totalSales || 0;
+      updatedData[3].number = cardData?.totalSales || 0;
+      updatedData[2].number = cardData?.totalRevenue || 0;
       updatedData[4].number = cardData?.totalPaidToOwner;
       setDashboardData(updatedData);
 

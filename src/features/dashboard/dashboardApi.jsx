@@ -29,6 +29,9 @@ const dashboardApi = apiSlice.injectEndpoints({
         let totalSalesInit = 0;
         let totalPaidToOwnerInit = 0;
         const cardData = {};
+        let tablePaidToOwnerInit = 0;
+        let tableRevenueInit = 0;
+        let tableTableRemainingInit = 0;
 
         const monthlySalesMap = new Map();
         const monthlyCostMap = new Map();
@@ -51,6 +54,17 @@ const dashboardApi = apiSlice.injectEndpoints({
             }
             groupedPayments[date] += parseInt(payment?.payment);
           });
+
+          tablePaidToOwnerInit = store?.paidToOwner?.reduce(
+            (acc, invoice) => acc + parseInt(invoice?.payment),
+            0
+          );
+          tableRevenueInit = store?.invoices?.reduce(
+            (acc, invoice) => acc + parseInt(invoice?.paidAmount),
+            0
+          );
+
+          tableTableRemainingInit = tableRevenueInit - tablePaidToOwnerInit;
 
           // Group invoices by date for the current store
           const groupedInvoices = {};
@@ -107,6 +121,7 @@ const dashboardApi = apiSlice.injectEndpoints({
 
           // Calculate required values for each date for the current store
           const storeDetails = [];
+
           for (const date in groupedInvoices) {
             const invoiceGroup = groupedInvoices[date];
             const totalDue = invoiceGroup.reduce(
@@ -131,17 +146,24 @@ const dashboardApi = apiSlice.injectEndpoints({
             const revenue = invoiceRevenue;
             const remaining = revenue - totalPaidToOwner;
 
+            console.log(revenue);
+            console.log(remaining);
+
             const storeDetailsEntry = {
-              totalDue: totalDue,
-              revenue: revenue,
-              totalCost: totalCost,
-              totalSales: totalSales,
+              totalDue: totalDue || 0,
+              revenue: revenue || 0,
+              totalCost: totalCost || 0,
+              totalSales: totalSales || 0,
               date: date,
-              totalPaidToOwner: totalPaidToOwner,
-              remaining: remaining,
+              totalPaidToOwner: totalPaidToOwner || 0,
+              finalPaid: tablePaidToOwnerInit || 0,
+              finalRemaining: tableTableRemainingInit || 0,
+              remaining: remaining || 0,
+
               storeName,
               storeId,
             };
+
             storeDetails.push(storeDetailsEntry);
 
             totalRevenueInit += revenue;
@@ -151,22 +173,12 @@ const dashboardApi = apiSlice.injectEndpoints({
           }
 
           resultData.push(storeDetails);
-
-          console.log(storeDetails);
         });
         cardData.totalRevenue = totalRevenueInit;
         cardData.totalDue = totalDueInit;
         cardData.totalSales = totalSalesInit;
         cardData.totalPaidToOwner = totalPaidToOwnerInit;
         cardData.totalCosts = totalCosts;
-
-        //       const totalrevenue = results.reduce((acc, result) => acc + result.revenue, 0);
-        // const totalDue = results.reduce((acc, result) => acc + result.totalDue, 0);
-        // const totalCost = results.reduce((acc, result) => acc + result.totalCost, 0);
-        // const totalSales = results.reduce(
-        //   (acc, result) => acc + result.totalSales,
-        //   0
-        // );
 
         return {
           data: { resultData, cardData },

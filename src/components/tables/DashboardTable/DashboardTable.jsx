@@ -11,19 +11,25 @@ const DashboardTable = ({ results, setActiveStore }) => {
   const currentRows = results?.slice(indexOfFirstRow, indexOfLastRow);
   const navigate = useNavigate();
 
-  const totalPaidToOwner = results.reduce(
-    (acc, result) => acc + result.totalPaidToOwner,
+  const totalPaidToOwner = results?.reduce(
+    (acc, result) => acc + result?.totalPaidToOwner,
     0
   );
-  const totalRemaining = results.reduce(
+  const totalRemaining = results?.reduce(
     (acc, result) => acc + result.remaining,
     0
   );
-  const totalrevenue = results.reduce((acc, result) => acc + result.revenue, 0);
-  const totalDue = results.reduce((acc, result) => acc + result.totalDue, 0);
-  const totalCost = results.reduce((acc, result) => acc + result.totalCost, 0);
-  const totalSales = results.reduce(
-    (acc, result) => acc + result.totalSales,
+  const totalrevenue = results?.reduce(
+    (acc, result) => acc + result?.revenue,
+    0
+  );
+  const totalDue = results?.reduce((acc, result) => acc + result?.totalDue, 0);
+  const totalCost = results?.reduce(
+    (acc, result) => acc + result?.totalCost,
+    0
+  );
+  const totalSales = results?.reduce(
+    (acc, result) => acc + result?.totalSales,
     0
   );
 
@@ -144,11 +150,11 @@ const DashboardTable = ({ results, setActiveStore }) => {
                 Total
               </th>
               <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {totalPaidToOwner}
+                {results[0]?.finalPaid}
               </th>
 
               <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {totalRemaining}
+                {results[0]?.finalRemaining}
               </th>
 
               <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
@@ -173,7 +179,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
                   onClick={() =>
                     setActiveStore({
                       id: results[0]?.storeId,
-                      remaining: totalRemaining,
+                      remaining: results[0]?.finalRemaining,
                       storeName: results[0].storeName,
                     })
                   }
