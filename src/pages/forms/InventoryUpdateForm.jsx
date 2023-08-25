@@ -1,22 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import RequestLoader from "../../components/loaders/RequestLoader";
-import {
-  useAddProductsMutation,
-  useUpdateProductsMutation,
-} from "../../features/inventory/inventoryApi";
+import { useUpdateProductsMutation } from "../../features/inventory/inventoryApi";
+import { useGetProductsByIdQuery } from "../../features/products/productsApi";
 
 function InventoryUpdateForm() {
   const { state } = useLocation() || {};
   const { payload, type } = state || {};
-  const [addProducts, { isLoading }] = useAddProductsMutation();
-  const [updateProducts, { isLoading: updateProductLoading }] =
-    useUpdateProductsMutation();
+  const [updateProducts, { isLoading }] = useUpdateProductsMutation();
   const navigate = useNavigate();
+  const {
+    data,
+    isError,
+    isLoading: productLoading,
+  } = useGetProductsByIdQuery(payload?.productId);
 
-  console.log(payload);
+  const [quantity, setQuantity] = useState("");
+  const [productLeft, setProductLeft] = useState("");
+
+  const [isSubmitAcc, setIsSubmitAcc] = useState(true);
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -47,17 +50,70 @@ function InventoryUpdateForm() {
     const form = event.target;
     const productName = form.productName.value;
 
-    const data = {
+    const inventoryData = {
       productId: payload?.productId,
       productName,
+      productQuantity: quantity,
+      unitLeft: productLeft,
     };
-    const formData = new FormData();
-    formData.append("data", JSON.stringify(data));
 
-    console.log(data);
+    const productLeftInit =
+      parseInt(data?.productLeft) -
+      (parseInt(quantity) - parseInt(payload?.productQuantity));
+
+    const productData = {
+      productLeft: productLeftInit,
+    };
+
+    const formData = new FormData();
+    formData.append("data", JSON.stringify(inventoryData));
+
+    const productForm = new FormData();
+    productForm.append("data", JSON.stringify(productData));
+    updateProducts({
+      data: formData,
+      storeId: payload?.storeId,
+      productData: productForm,
+      productId: data?._id,
+    })
+      .unwrap()
+      .then((res) => {
+        navigate("/inventory");
+      })
+      .catch((error) => {
+        errorNotify("Update inventory failed");
+      });
   };
 
-  return (
+  const handleQuantity = (e) => {
+    const value = e.target.value;
+    if (
+      parseInt(value) < parseInt(payload?.productQuantity) ||
+      parseInt(value) > parseInt(data?.productLeft)
+    ) {
+      setIsSubmitAcc(false);
+    } else {
+      setIsSubmitAcc(true);
+    }
+    setQuantity(value);
+    const unitLeft =
+      parseInt(payload?.unitLeft) +
+      (parseInt(value) - parseInt(payload?.productQuantity));
+    setProductLeft(unitLeft);
+  };
+
+  useEffect(() => {
+    if (payload?.productId) {
+      setQuantity(payload?.productQuantity);
+      setProductLeft(payload?.unitLeft);
+    }
+  }, [payload?.productId, payload?.productQuantity, payload?.unitLeft]);
+
+  return productLoading ? (
+    <div>Loading...</div>
+  ) : isError ? (
+    <div>Something went wrong</div>
+  ) : (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
@@ -77,7 +133,7 @@ function InventoryUpdateForm() {
                     placeholder="Enter product name"
                     name="productId"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.productId}
                     readOnly
                   />
@@ -93,7 +149,7 @@ function InventoryUpdateForm() {
                     placeholder="Enter product name"
                     name="productName"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow `}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow`}
                     defaultValue={payload?.productName}
                   />
                 </div>
@@ -108,7 +164,7 @@ function InventoryUpdateForm() {
                     placeholder="Product category"
                     name="productCategory"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.productCategory}
                     readOnly
                   />
@@ -124,7 +180,7 @@ function InventoryUpdateForm() {
                     placeholder="Store name"
                     name="storeName"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.storeName}
                     readOnly
                   />
@@ -140,10 +196,11 @@ function InventoryUpdateForm() {
                     <input
                       type="number"
                       name="unitCount"
-                      className={`w-28 border-none outline-none text-fadeColor`}
+                      className={`w-28 border-none outline-none text-blackLow`}
                       placeholder="Quantity"
-                      defaultValue={payload?.productQuantity}
-                      readOnly
+                      value={quantity}
+                      onChange={(e) => handleQuantity(e)}
+                      // readOnly
                     />
 
                     <div className="relative w-full max-w-max">
@@ -166,7 +223,7 @@ function InventoryUpdateForm() {
                     name="buyingPrice"
                     placeholder="Enter buying price"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.buyingPrice}
                     readOnly
                   />
@@ -182,7 +239,7 @@ function InventoryUpdateForm() {
                     name="sellingPrice"
                     placeholder="Enter selling price"
                     required
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor `}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.sellingPrice}
                     readOnly
                   />
@@ -199,8 +256,8 @@ function InventoryUpdateForm() {
                     </Link>
                     <button
                       type="submit"
-                      disabled={isLoading}
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
+                      disabled={!isSubmitAcc}
                     >
                       Save
                     </button>
@@ -211,7 +268,7 @@ function InventoryUpdateForm() {
           </div>
         </div>
       </div>
-      {(isLoading || updateProductLoading) && <RequestLoader></RequestLoader>}
+      {/* {(isLoading || updateProductLoading) && <RequestLoader></RequestLoader>} */}
       <div>
         <ToastContainer
           position="top-right"

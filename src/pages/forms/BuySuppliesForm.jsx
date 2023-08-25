@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
@@ -10,7 +10,6 @@ import { useGetProductsQuery } from "../../features/products/productsApi";
 import { useGetSuppliersQuery } from "../../features/supplier/supplierApi";
 
 function BuySuppliesForm() {
-  const { state } = useLocation();
   const [addSupplies, { isLoading }] = useAddSuppliesMutation();
   const [selectedProduct, setSelectedProduct] = useState({});
   const [productValue, setProductValue] = useState("");
@@ -20,6 +19,7 @@ function BuySuppliesForm() {
   const [paidAmount, setPaidAmount] = useState("");
   const [unitPrice, setUnitPrice] = useState("");
   let totalPrice = quantity && unitPrice ? Number(quantity) * unitPrice : "";
+  const navigate = useNavigate();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -94,11 +94,33 @@ function BuySuppliesForm() {
       unitCount,
     };
 
+    // supplies data
     const formData = new FormData();
-    console.log(data);
     formData.append("data", JSON.stringify(data));
 
-    addSupplies(formData)
+    // product form data
+
+    const productLeftCount =
+      parseInt(selectedProduct?.productLeft) + parseInt(unitCount);
+    const productdata = { productLeft: productLeftCount };
+    const productForm = new FormData();
+    productForm.append("data", JSON.stringify(productdata));
+
+    // supplier form data
+
+    const supplierForm = new FormData();
+    const supplierDueData =
+      parseInt(selectedSupplier?.supplierDue) + parseInt(dueAmount);
+    const supplierData = { supplierDue: supplierDueData };
+    supplierForm.append("data", JSON.stringify(supplierData));
+
+    addSupplies({
+      data: formData,
+      productId: selectedProduct?._id,
+      productData: productForm,
+      supplierId: supplierId,
+      supplierData: supplierForm,
+    })
       .unwrap()
       .then((res) => {
         infoNotify("Add supplies invoice successfull");
@@ -110,6 +132,7 @@ function BuySuppliesForm() {
         setQuantity("");
         setPaidAmount("");
         setUnitPrice("");
+        navigate("/supplies");
       })
       .catch((error) => {
         errorNotify("Add supplies invoice failed");

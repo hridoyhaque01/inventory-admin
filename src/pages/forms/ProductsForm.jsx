@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -76,19 +76,14 @@ function ProductsForm() {
       addProduct(formData)
         .unwrap()
         .then((res) => {
-          infoNotify("Add product successfull");
           form.reset();
+          navigate("/products");
         })
         .catch((error) => {
           errorNotify("Add product failed");
         });
     }
   };
-
-  useEffect(() => {
-    if (payload?._id) {
-    }
-  }, [payload?._id]);
 
   return (
     <section className="h-full w-full overflow-auto px-6 md:px-10 py-6">
@@ -111,7 +106,11 @@ function ProductsForm() {
                     type="text"
                     placeholder="Enter product Id"
                     name="productId"
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded  text-sm ${
+                      type === "edit"
+                        ? "bg-whiteMid text-fadeColor"
+                        : "bg-transparent text-blackLow"
+                    }`}
                     required
                     readOnly={type === "edit" ? true : false}
                     defaultValue={payload?.productId}

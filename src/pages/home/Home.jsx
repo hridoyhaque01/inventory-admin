@@ -46,9 +46,6 @@ const Dashboard = () => {
 
   const { resultData, cardData } = storeData || {};
 
-  const [sales, setSales] = useState([]);
-  const [costs, setCosts] = useState([]);
-
   const [dashboardData, setDashboardData] = useState([
     {
       title: "Total Costs",
@@ -81,7 +78,7 @@ const Dashboard = () => {
 
   if (isLoading) {
     content = <SearchLoader></SearchLoader>;
-  } else if (isLoading && isError) {
+  } else if (!isLoading && isError) {
     content = <SomethingWrong></SomethingWrong>;
   } else if (!isLoading && !isError && resultData?.length === 0) {
     content = <NoData></NoData>;
@@ -110,16 +107,10 @@ const Dashboard = () => {
       updatedData[2].number = cardData?.totalRevenue || 0;
       updatedData[4].number = cardData?.totalPaidToOwner;
       setDashboardData(updatedData);
-
-      console.log(
-        cardData?.totalCosts,
-        cardData?.totalDue,
-        cardData?.totalRevenue,
-        cardData?.totalSales,
-        cardData?.totalPaidToOwner
-      );
     }
   }, [isLoading, isError]);
+
+  console.log(storeData);
 
   return (
     <div className="w-full overflow-auto pb-6 pr-10">

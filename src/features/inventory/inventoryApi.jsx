@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { productsApi } from "../products/productsApi";
 
 const inventoryApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -11,15 +12,17 @@ const inventoryApi = apiSlice.injectEndpoints({
     }),
 
     addProducts: builder.mutation({
-      query: (data) => ({
+      query: ({ data, productData, productId }) => ({
         url: "/products/add",
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+      async onQueryStarted(
+        { data, productData, productId },
+        { queryFulfilled, dispatch }
+      ) {
         try {
           const result = await queryFulfilled;
-          console.log(result);
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
@@ -30,6 +33,13 @@ const inventoryApi = apiSlice.injectEndpoints({
                 }
               )
             );
+
+            dispatch(
+              productsApi.endpoints.updateProduct.initiate({
+                data: productData,
+                id: productId,
+              })
+            );
           }
         } catch (error) {
           console.log(error);
@@ -37,13 +47,16 @@ const inventoryApi = apiSlice.injectEndpoints({
       },
     }),
     updateProducts: builder.mutation({
-      query: ({ data, storeId }) => ({
+      query: ({ data, storeId, productData, productId }) => ({
         url: `/products/update/${storeId}`,
         method: "PATCH",
         body: data,
       }),
       // invalidatesTags: ["products"],
-      async onQueryStarted({ data, storeId }, { queryFulfilled, dispatch }) {
+      async onQueryStarted(
+        { data, storeId, productData, productId },
+        { queryFulfilled, dispatch }
+      ) {
         try {
           const result = await queryFulfilled;
           const formData = JSON.parse(data.get("data"));
@@ -58,12 +71,19 @@ const inventoryApi = apiSlice.injectEndpoints({
                       prdouct.productId === formData?.productId &&
                       prdouct.storeId === storeId
                   );
-
                   if (changeObj) {
                     changeObj.productName = formData.productName;
+                    changeObj.productQuantity = formData.productQuantity;
+                    changeObj.unitLeft = formData.unitLeft;
                   }
                 }
               )
+            );
+            dispatch(
+              productsApi.endpoints.updateProduct.initiate({
+                data: productData,
+                id: productId,
+              })
             );
           }
         } catch (error) {

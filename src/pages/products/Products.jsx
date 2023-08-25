@@ -16,7 +16,7 @@ function Products() {
 
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
-      return data?.customerId
+      return data?.productId
         ?.toLowerCase()
         .includes(searchValue?.toLowerCase());
     } else {

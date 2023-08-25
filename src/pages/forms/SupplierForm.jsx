@@ -81,9 +81,9 @@ function SupplierForm() {
       addSupplier(formData)
         .unwrap()
         .then((res) => {
-          infoNotify("Add supplier successfull");
           form.reset();
           setPaidAmount("");
+          navigate("/suppliers");
         })
         .catch((error) => {
           console.log(error);
@@ -172,7 +172,11 @@ function SupplierForm() {
                         placeholder="due amount"
                         name="supplierDue"
                         step="any"
-                        className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
+                        className={`w-full py-3 px-4 border border-whiteLow outline-none rounded  text-sm ${
+                          type === "edit"
+                            ? "bg-whiteMid text-fadeColor"
+                            : "bg-transparent text-blackLow"
+                        }`}
                         required
                         readOnly={type === "edit" ? true : false}
                         defaultValue={payload?.supplierDue}

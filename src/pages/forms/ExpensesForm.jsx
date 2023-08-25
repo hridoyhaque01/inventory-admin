@@ -67,9 +67,9 @@ function ExpensesForm() {
       addExpense(formData)
         .unwrap()
         .then((res) => {
-          infoNotify("Expense add successfull");
           form.reset();
           setDate("");
+          navigate("/expenses");
         })
         .catch((error) => {
           errorNotify("Expense add failed");
@@ -81,7 +81,7 @@ function ExpensesForm() {
     if (payload?._id) {
       setDate(payload?.date);
     }
-  }, [payload?._id]);
+  }, [payload?._id, payload?.date]);
 
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">

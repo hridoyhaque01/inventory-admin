@@ -21,7 +21,6 @@ function ProductsTable({ data }) {
   };
 
   console.log(data);
-
   return (
     <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4">
       <table className="table w-full">

@@ -28,7 +28,7 @@ const ProductSuggestions = ({
   };
 
   const renderSuggestion = (suggestion) => (
-    <div className="px-4 py-2 cursor-pointer hover:bg-whiteHigh">
+    <div className="px-4 py-2 cursor-pointer hover:bg-whiteHigh z-50">
       <div>{suggestion.productId}</div>
     </div>
   );

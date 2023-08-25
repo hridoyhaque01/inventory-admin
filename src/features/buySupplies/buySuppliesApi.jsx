@@ -1,4 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
+import { productsApi } from "../products/productsApi";
+import { supplierApi } from "../supplier/supplierApi";
 
 export const buySuppliesApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
@@ -8,15 +10,18 @@ export const buySuppliesApi = apiSlice.injectEndpoints({
       }),
     }),
     addSupplies: builder.mutation({
-      query: (data) => ({
+      query: ({ data, productId, productData, supplierId, supplierData }) => ({
         url: "/supplierinvoices/add",
         method: "POST",
         body: data,
       }),
-      async onQueryStarted(args, { queryFulfilled, dispatch }) {
+      async onQueryStarted(
+        { productId, productData, supplierId, supplierData },
+        { queryFulfilled, dispatch }
+      ) {
         try {
           const result = await queryFulfilled;
-          console.log(result);
+
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
@@ -27,43 +32,19 @@ export const buySuppliesApi = apiSlice.injectEndpoints({
                 }
               )
             );
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      },
-    }),
 
-    updateSuppliers: builder.mutation({
-      query: ({ data, id }) => ({
-        url: `/suppliers/update/${id}`,
-        method: "PATCH",
-        body: data,
-      }),
-      // invalidatesTags: ["products"],
-      async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
-        try {
-          const result = await queryFulfilled;
-          const formData = JSON.parse(data.get("data"));
-          if (result?.data) {
             dispatch(
-              apiSlice.util.updateQueryData(
-                "getSupplies",
-                undefined,
-                (draft) => {
-                  const changeObj = draft.find(
-                    (supplier) => supplier._id === id
-                  );
-                  if (changeObj) {
-                    changeObj.supplierName = formData.supplierName;
-                    changeObj.supplierPhone = formData.supplierPhone;
-                    changeObj.supplierAddress = formData.supplierAddress;
-                    if (formData.supplierDue) {
-                      changeObj.supplierDue = formData.supplierDue;
-                    }
-                  }
-                }
-              )
+              productsApi.endpoints.updateProduct.initiate({
+                data: productData,
+                id: productId,
+              })
+            );
+
+            dispatch(
+              supplierApi.endpoints.updateSuppliers.initiate({
+                data: supplierData,
+                id: supplierId,
+              })
             );
           }
         } catch (error) {

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
@@ -9,19 +9,17 @@ import { useGetProductsQuery } from "../../features/products/productsApi";
 import { useGetStoresQuery } from "../../features/store/storeApi";
 
 function InventoryForm() {
-  const { state } = useLocation() || {};
   const [selectedProduct, setSelectedProduct] = useState({});
   const [productValue, setProductValue] = useState("");
   const [quantity, setQuantity] = useState("");
   const [addProducts, { isLoading }] = useAddProductsMutation();
+  const navigate = useNavigate();
 
   const {
     data: products,
     isLoading: productsLoading,
     isError: productError,
   } = useGetProductsQuery();
-
-  const navigate = useNavigate();
 
   const {
     data: stores,
@@ -31,18 +29,6 @@ function InventoryForm() {
 
   const errorNotify = (message) =>
     toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const infoNotify = (message) =>
-    toast.info(message, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -74,23 +60,36 @@ function InventoryForm() {
       sellingPrice,
       storeName,
       storeId,
+      product_id: selectedProduct?._id,
       unitLeft: productQuantity,
     };
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    addProducts(formData)
+
+    const productLeftInit =
+      parseInt(selectedProduct?.productLeft) - parseInt(productQuantity);
+    const productData = { productLeft: productLeftInit };
+    const productForm = new FormData();
+
+    productForm.append("data", JSON.stringify(productData));
+
+    addProducts({
+      data: formData,
+      productData: productForm,
+      productId: selectedProduct?._id,
+    })
       .unwrap()
       .then((res) => {
-        infoNotify("Add product successfull");
         form.reset();
         setSelectedProduct({});
         setProductValue("");
         setQuantity("");
+        navigate("/inventory");
       })
       .catch((error) => {
         errorNotify("Add product failed");
       });
-    console.log(data);
   };
 
   const handleQuantity = (event) => {
@@ -266,7 +265,7 @@ function InventoryForm() {
                     </Link>
                     <button
                       type="submit"
-                      disabled={isLoading}
+                      disabled={Number(quantity) <= 0}
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                     >
                       Save

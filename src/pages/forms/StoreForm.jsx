@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
@@ -13,6 +13,7 @@ function StoreForm() {
   const [isStrong, setIsStrong] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isShowConfirmIcon, setIsShowConfirmIcon] = useState(false);
+  const navigate = useNavigate();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -87,8 +88,8 @@ function StoreForm() {
       registerStore(formData)
         .unwrap()
         .then((res) => {
-          infoNotify("Store register successfull");
           form.reset();
+          navigate("/store");
         })
         .catch((error) => {
           errorNotify("Store register failed");

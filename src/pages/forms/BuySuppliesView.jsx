@@ -27,7 +27,7 @@ function BuySuppliesView() {
                       type="text"
                       placeholder="Product name"
                       name="productName"
-                      className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                      className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid "
                       readOnly
                       defaultValue={payload?.productId}
                     />
@@ -43,7 +43,7 @@ function BuySuppliesView() {
                     type="text"
                     placeholder="Product name"
                     name="productName"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     readOnly
                     defaultValue={payload?.productName}
                   />
@@ -54,11 +54,11 @@ function BuySuppliesView() {
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Quantity:
                   </span>
-                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm">
+                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm  bg-whiteMid">
                     <input
                       type="number"
                       name="unitCount"
-                      className={`w-28 border-none outline-none ${
+                      className={`w-28 border-none outline-none bg-transparent ${
                         type === "edit" ? "text-fadeColor" : "text-blackLow"
                       }`}
                       placeholder="Quantity"
@@ -69,7 +69,7 @@ function BuySuppliesView() {
                     <div className="relative w-full max-w-max">
                       <input
                         type="text"
-                        className="appearance-none outline-none  w-16 text-fadeColor"
+                        className="appearance-none outline-none  w-16 text-fadeColor bg-transparent"
                         readOnly
                         defaultValue={payload?.unit}
                       />
@@ -92,7 +92,7 @@ function BuySuppliesView() {
                       type="text"
                       placeholder="Product name"
                       name="productName"
-                      className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                      className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                       readOnly
                       defaultValue={payload?.supplierName}
                     />
@@ -108,7 +108,7 @@ function BuySuppliesView() {
                     type="text"
                     placeholder="Enter unit count"
                     name="unitPrice"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     defaultValue={payload?.unitPrice}
                     readOnly
                   />
@@ -123,7 +123,7 @@ function BuySuppliesView() {
                     type="text"
                     placeholder="Total price"
                     name="totalAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     readOnly
                     defaultValue={payload?.totalAmount}
                   />
@@ -138,7 +138,7 @@ function BuySuppliesView() {
                     type="text"
                     placeholder="Enter paid amount"
                     name="paidAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     defaultValue={payload?.paidAmount}
                     readOnly
                   />
@@ -153,7 +153,7 @@ function BuySuppliesView() {
                     type="text"
                     placeholder="Enter due amount"
                     name="dueAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     readOnly
                     defaultValue={
                       Number(payload?.totalAmount) - Number(payload?.paidAmount)

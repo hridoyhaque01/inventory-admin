@@ -43,6 +43,7 @@ input[type="number"] {
   box-shadow: 0 2px 5px rgba(150, 150, 150, 0.4);
   overflow: auto;
   background-color: #f9f9f9;
+  z-index: 100;
 }
 
 .customer .react-autosuggest__container input {

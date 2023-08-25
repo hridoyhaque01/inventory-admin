@@ -8,41 +8,35 @@ const DashboardTable = ({ results, setActiveStore }) => {
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = results?.slice(indexOfFirstRow, indexOfLastRow);
+  const currentRows = results?.storeDetails?.slice(
+    indexOfFirstRow,
+    indexOfLastRow
+  );
   const navigate = useNavigate();
 
-  const totalPaidToOwner = results?.reduce(
-    (acc, result) => acc + result?.totalPaidToOwner,
-    0
-  );
-  const totalRemaining = results?.reduce(
-    (acc, result) => acc + result.remaining,
-    0
-  );
-  const totalrevenue = results?.reduce(
+  const totalrevenue = results?.storeDetails?.reduce(
     (acc, result) => acc + result?.revenue,
     0
   );
-  const totalDue = results?.reduce((acc, result) => acc + result?.totalDue, 0);
-  const totalCost = results?.reduce(
+  const totalDue = results?.storeDetails?.reduce(
+    (acc, result) => acc + result?.totalDue,
+    0
+  );
+  const totalCost = results?.storeDetails?.reduce(
     (acc, result) => acc + result?.totalCost,
     0
   );
-  const totalSales = results?.reduce(
+  const totalSales = results?.storeDetails?.reduce(
     (acc, result) => acc + result?.totalSales,
     0
   );
-
-  if (results?.length === 0) {
-    return <div>No data found</div>;
-  }
 
   return (
     <section>
       <div className="flex flex-col h-[640px]">
         <section className="flex items-center bg-primaryMainDarkest px-6 py-3.5 rounded-t-md">
           <p className="text-right text-2xl text-whiteHigh font-bold capitalize">
-            {results[0].storeName}
+            {results?.storeName}
           </p>
         </section>
         <div className="h-full w-full overflow-auto flex flex-col items-end flex-wrap justify-between pb-4 gap-4 bg-whiteHigh rounded-b-md">
@@ -74,11 +68,13 @@ const DashboardTable = ({ results, setActiveStore }) => {
                 </th>
               </tr>
             </thead>
-            {currentRows?.length === 0 ? (
+            {results?.storeDetails?.length === 0 ? (
               <tbody>
-                <tr>
-                  <td colSpan="6" className="">
-                    No data found
+                <tr className="border-none">
+                  <td colSpan="8" className="py-6">
+                    <h2 className="text-center text-lg text-blackRgb font-medium">
+                      No data found!
+                    </h2>
                   </td>
                 </tr>
               </tbody>
@@ -109,7 +105,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
             setCurrentPage={setCurrentPage}
             rowsPerPage={rowsPerPage}
             setRowsPerPage={setRowsPerPage}
-            totalRows={results?.length}
+            totalRows={results?.storeDetails?.length}
           ></Pagination>
         </div>
       </div>
@@ -145,49 +141,60 @@ const DashboardTable = ({ results, setActiveStore }) => {
                 Action
               </th>
             </tr>
-            <tr className="font-bold text-center text-3xl">
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case py-6">
-                Total
-              </th>
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {results[0]?.finalPaid}
-              </th>
+            {results?.storeDetails?.length > 0 ? (
+              <tr className="font-bold text-center text-3xl">
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case py-6">
+                  Total
+                </th>
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  {results?.storeDetails[0]?.finalPaid}
+                </th>
 
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {results[0]?.finalRemaining}
-              </th>
+                {console.log(results)}
 
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {totalDue}
-              </th>
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  {results?.storeDetails[0]?.finalRemaining}
+                </th>
 
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {totalrevenue}
-              </th>
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {totalCost}
-              </th>
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                {totalSales}
-              </th>
-              <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
-                <label
-                  type="button"
-                  // onClick={() => handleNavigate(result)}
-                  htmlFor="paidToOwnerModal"
-                  className="cursor-pointer inline-block px-6 py-2 bg-whiteHigh rounded-lg text-sm"
-                  onClick={() =>
-                    setActiveStore({
-                      id: results[0]?.storeId,
-                      remaining: results[0]?.finalRemaining,
-                      storeName: results[0].storeName,
-                    })
-                  }
-                >
-                  Recieve
-                </label>
-              </th>
-            </tr>
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  {totalDue}
+                </th>
+
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  {totalrevenue}
+                </th>
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  {totalCost}
+                </th>
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  {totalSales}
+                </th>
+                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                  <label
+                    type="button"
+                    // onClick={() => handleNavigate(result)}
+                    htmlFor="paidToOwnerModal"
+                    className="cursor-pointer inline-block px-6 py-2 bg-whiteHigh rounded-lg text-sm"
+                    onClick={() =>
+                      setActiveStore({
+                        id: results?.storeId,
+                        remaining: results?.storeDetails[0]?.finalRemaining,
+                      })
+                    }
+                  >
+                    Recieve
+                  </label>
+                </th>
+              </tr>
+            ) : (
+              <tr className="border-none">
+                <th colSpan="8" className="py-6">
+                  <h2 className="text-center text-lg text-blackRgb font-medium">
+                    No data found!
+                  </h2>
+                </th>
+              </tr>
+            )}
           </thead>
         </table>
       </div>

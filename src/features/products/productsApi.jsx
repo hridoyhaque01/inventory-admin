@@ -16,7 +16,6 @@ export const productsApi = apiSlice.injectEndpoints({
       async onQueryStarted(args, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          console.log(result);
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
@@ -44,18 +43,17 @@ export const productsApi = apiSlice.injectEndpoints({
       async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          const formData = JSON.parse(data.get("data"));
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
                 "getProducts",
                 undefined,
                 (draft) => {
-                  const changeObj = draft.find((product) => product._id === id);
-                  if (changeObj) {
-                    changeObj.productName = formData.productName;
-                    changeObj.productCategory = formData.productCategory;
-                    changeObj.productUnit = formData.productUnit;
+                  const index = draft.findIndex(
+                    (prdouct) => prdouct._id === id
+                  );
+                  if (index !== -1) {
+                    draft[index] = { ...draft[index], ...result?.data };
                   }
                 }
               )
@@ -66,6 +64,19 @@ export const productsApi = apiSlice.injectEndpoints({
         }
       },
     }),
+    getProductsById: builder.query({
+      async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
+        // get a random user
+        const { data } = await fetchWithBQ(`/addproducts`);
+        const findObj = data?.find((item) => {
+          return item?.productId === _arg;
+        });
+
+        return {
+          data: findObj,
+        };
+      },
+    }),
   }),
 });
 
@@ -73,4 +84,5 @@ export const {
   useGetProductsQuery,
   useUpdateProductMutation,
   useAddProductMutation,
+  useGetProductsByIdQuery,
 } = productsApi;

@@ -24,7 +24,7 @@ function Profile() {
                     type="text"
                     placeholder="Name"
                     readOnly
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={user?.firstName + " " + user?.lastName}
                   />
                 </div>
@@ -50,7 +50,7 @@ function Profile() {
                     type="text"
                     placeholder="Email address"
                     readOnly
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={user?.email}
                   />
                 </div>
@@ -63,7 +63,7 @@ function Profile() {
                     type="text"
                     placeholder="Phone number"
                     readOnly
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={user?.phoneNumber}
                   />
                 </div>

@@ -1,6 +1,6 @@
 import { apiSlice } from "../api/apiSlice";
 
-const dashboardApi = apiSlice.injectEndpoints({
+export const dashboardApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAllStoreResult: builder.query({
       async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
@@ -64,7 +64,11 @@ const dashboardApi = apiSlice.injectEndpoints({
             0
           );
 
-          tableTableRemainingInit = tableRevenueInit - tablePaidToOwnerInit;
+          tableTableRemainingInit = tablePaidToOwnerInit
+            ? tableRevenueInit - tablePaidToOwnerInit
+            : tableRevenueInit;
+
+          // console.log(tableTableRemainingInit);
 
           // Group invoices by date for the current store
           const groupedInvoices = {};
@@ -146,9 +150,6 @@ const dashboardApi = apiSlice.injectEndpoints({
             const revenue = invoiceRevenue;
             const remaining = revenue - totalPaidToOwner;
 
-            console.log(revenue);
-            console.log(remaining);
-
             const storeDetailsEntry = {
               totalDue: totalDue || 0,
               revenue: revenue || 0,
@@ -159,20 +160,16 @@ const dashboardApi = apiSlice.injectEndpoints({
               finalPaid: tablePaidToOwnerInit || 0,
               finalRemaining: tableTableRemainingInit || 0,
               remaining: remaining || 0,
-
-              storeName,
-              storeId,
             };
-
             storeDetails.push(storeDetailsEntry);
-
+            // console.log(storeDetailsEntry);
             totalRevenueInit += revenue;
             totalDueInit += totalDue;
             totalSalesInit += totalSales;
             totalPaidToOwnerInit += totalPaidToOwner;
           }
 
-          resultData.push(storeDetails);
+          resultData.push({ storeDetails, storeName, storeId });
         });
         cardData.totalRevenue = totalRevenueInit;
         cardData.totalDue = totalDueInit;
@@ -180,6 +177,7 @@ const dashboardApi = apiSlice.injectEndpoints({
         cardData.totalPaidToOwner = totalPaidToOwnerInit;
         cardData.totalCosts = totalCosts;
 
+        // console.log(tablePaidToOwnerInit);
         return {
           data: { resultData, cardData },
         };
@@ -188,9 +186,4 @@ const dashboardApi = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetDashboardResultQuery,
-  useGetDashboardNewResultQuery,
-  useGetStoreDashboardResultQuery,
-  useGetAllStoreResultQuery,
-} = dashboardApi;
+export const { useGetAllStoreResultQuery } = dashboardApi;

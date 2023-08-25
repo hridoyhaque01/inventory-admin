@@ -27,6 +27,8 @@ const expensesApi = apiSlice.injectEndpoints({
                 }
               )
             );
+            // dispatch(dashboardApi.endpoints.getAllStoreResult.initiate());
+            // console.log("eeee----------------");
           }
         } catch (error) {
           console.log(error);
@@ -62,6 +64,9 @@ const expensesApi = apiSlice.injectEndpoints({
                 }
               )
             );
+
+            // dispatch(dashboardApi.endpoints.getAllStoreResult.initiate());
+            // console.log("eeee----------------");
           }
         } catch (error) {
           console.log(error);

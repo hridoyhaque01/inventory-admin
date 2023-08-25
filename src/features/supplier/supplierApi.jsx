@@ -39,27 +39,20 @@ export const supplierApi = apiSlice.injectEndpoints({
         method: "PATCH",
         body: data,
       }),
-      // invalidatesTags: ["products"],
       async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          const formData = JSON.parse(data.get("data"));
           if (result?.data) {
             dispatch(
               apiSlice.util.updateQueryData(
                 "getSuppliers",
                 undefined,
                 (draft) => {
-                  const changeObj = draft.find(
+                  const index = draft.findIndex(
                     (supplier) => supplier._id === id
                   );
-                  if (changeObj) {
-                    changeObj.supplierName = formData.supplierName;
-                    changeObj.supplierPhone = formData.supplierPhone;
-                    changeObj.supplierAddress = formData.supplierAddress;
-                    if (formData.supplierDue) {
-                      changeObj.supplierDue = formData.supplierDue;
-                    }
+                  if (index !== -1) {
+                    draft[index] = { ...draft[index], ...result?.data };
                   }
                 }
               )

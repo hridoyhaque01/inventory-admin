@@ -53,7 +53,7 @@ const PaidToOwnerModal = ({
 
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Remaining :
                   </span>
                   <input
@@ -68,7 +68,7 @@ const PaidToOwnerModal = ({
 
                 {/* Paid Amount : */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     Recived Amount :
                   </span>
                   <input
@@ -85,7 +85,7 @@ const PaidToOwnerModal = ({
                 {/* submit button  */}
 
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right"></span>
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right"></span>
                   <div className="modal-action flex items-center justify-center">
                     <label
                       htmlFor="paidToOwnerModal"

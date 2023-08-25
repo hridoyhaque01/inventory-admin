@@ -161,7 +161,6 @@ function EditProfile() {
         })
         .catch((error) => {
           errorNotify("User update failed");
-          console.log(error);
         });
     } else {
       const data = {
@@ -183,7 +182,6 @@ function EditProfile() {
         })
         .catch((error) => {
           errorNotify("Update user failed");
-          console.log(error);
         });
     }
   };
