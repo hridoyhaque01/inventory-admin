@@ -1,0 +1,15 @@
+{
+  "navigations": {
+    "dashboard": "Dashboard",
+    "products": "products",
+    "inventory": "Inventory",
+    "sales": "Sales",
+    "customers": "Customers",
+    "expenses": "Expenses",
+    "owes": "Money Owed",
+    "suppliers": "suppliers",
+    "buySup": "Buy Supplies",
+    "store": "Store",
+    "logout": "Logout"
+  }
+}

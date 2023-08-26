@@ -1,0 +1,15 @@
+{
+  "navigations": {
+    "dashboard": "ড্যাশবোর্ড",
+    "products": "পণ্য",
+    "inventory": "জায়",
+    "sales": "বিক্রয়",
+    "customers": "গ্রাহক",
+    "expenses": "খরচ",
+    "owes": "পাওনা টাকা",
+    "suppliers": "সরবরাহকারী",
+    "buySup": "সরবরাহ",
+    "store": "দোকান",
+    "logout": "প্রস্থান"
+  }
+}

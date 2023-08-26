@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { logout } from "../../../features/auth/authSlice";
@@ -6,6 +7,8 @@ import "./SideNav.css";
 
 const SideNav = () => {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   return (
     <div
       className={`w-52 bg-primaryMainDarkest flex flex-col gap-1 h-full sideNav pb-24 overflow-auto text-whiteHigh shrink-0`}
@@ -33,7 +36,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>dashboard</span>
+              <span>{t("navigations.dashboard")}</span>
             </span>
           </NavLink>
         </div>
@@ -59,7 +62,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Products</span>
+              <span>{t("navigations.products")}</span>
             </span>
           </NavLink>
         </div>
@@ -88,7 +91,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Inventory</span>
+              <span>{t("navigations.inventory")}</span>
             </span>
           </NavLink>
         </div>
@@ -114,7 +117,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Sales</span>
+              <span>{t("navigations.sales")}</span>
             </span>
           </NavLink>
         </div>
@@ -140,7 +143,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Customer</span>
+              <span>{t("navigations.customers")}</span>
             </span>
           </NavLink>
         </div>
@@ -166,7 +169,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>My Expenses</span>
+              <span>{t("navigations.expenses")}</span>
             </span>
           </NavLink>
         </div>
@@ -192,7 +195,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Money Owed</span>
+              <span>{t("navigations.owes")}</span>
             </span>
           </NavLink>
         </div>
@@ -218,7 +221,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Suppliers</span>
+              <span>{t("navigations.suppliers")}</span>
             </span>
           </NavLink>
         </div>
@@ -244,7 +247,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Buy Supplies</span>
+              <span>{t("navigations.buySup")}</span>
             </span>
           </NavLink>
         </div>
@@ -270,7 +273,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Store</span>
+              <span>{t("navigations.store")}</span>
             </span>
           </NavLink>
         </div>
@@ -300,7 +303,7 @@ const SideNav = () => {
               </svg>
             </span>
             <span className={`flex-1 shrink-0`}>
-              <span>Logout</span>
+              <span>{t("navigations.logout")}</span>
             </span>
           </button>
         </div>
