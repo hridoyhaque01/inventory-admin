@@ -46,9 +46,9 @@ const DashboardTable = ({ results, setActiveStore }) => {
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
                   Serial
                 </th>
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
+                {/* <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
                   Paid to Owner
-                </th>
+                </th> */}
 
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
                   Total Due
@@ -88,7 +88,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
                         ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
                         : rowsPerPage * (currentPage - 1) + i + 1}
                     </td>
-                    <td className="py-2">{result?.totalPaidToOwner}</td>
+                    {/* <td className="py-2">{result?.totalPaidToOwner}</td> */}
                     <td className="py-2">{result?.totalDue}</td>
                     <td className="py-2">{result?.revenue}</td>
                     <td className="py-2">{result?.totalCost}</td>
@@ -149,8 +149,6 @@ const DashboardTable = ({ results, setActiveStore }) => {
                 <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
                   {results?.storeDetails[0]?.finalPaid}
                 </th>
-
-                {console.log(results)}
 
                 <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
                   {results?.storeDetails[0]?.finalRemaining}

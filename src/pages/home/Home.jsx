@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomeTopCard from "../../Components/Cards/HomeTopCard";
@@ -9,12 +10,12 @@ import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import DashboardTable from "../../components/tables/DashboardTable/DashboardTable";
 import { useGetAllStoreResultQuery } from "../../features/dashboard/dashboardApi";
+import { setStoreData } from "../../features/dashboard/dashboardSlice";
 import { useUpdatePaymentMutation } from "../../features/store/storeApi";
 const Dashboard = () => {
-  const [userType] = useState("Admin");
   const [activeStore, setActiveStore] = useState({});
-  const [data, setData] = useState({});
-
+  const { storeData: storeHouse } = useSelector((state) => state.storeData);
+  const dispatch = useDispatch();
   const errorNotify = (message) =>
     toast.error(message, {
       position: "top-right",
@@ -43,8 +44,7 @@ const Dashboard = () => {
     useUpdatePaymentMutation();
 
   const { data: storeData, isLoading, isError } = useGetAllStoreResultQuery();
-
-  const { resultData, cardData } = storeData || {};
+  const { resultData, cardData } = storeHouse || {};
 
   const [dashboardData, setDashboardData] = useState([
     {
@@ -107,10 +107,9 @@ const Dashboard = () => {
       updatedData[2].number = cardData?.totalRevenue || 0;
       updatedData[4].number = cardData?.totalPaidToOwner;
       setDashboardData(updatedData);
+      dispatch(setStoreData(storeData));
     }
-  }, [isLoading, isError]);
-
-  console.log(storeData);
+  }, [isLoading, isError, cardData]);
 
   return (
     <div className="w-full overflow-auto pb-6 pr-10">

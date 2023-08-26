@@ -23,13 +23,11 @@ const PaidToOwnerModal = ({
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
-    console.log(activeStore); // Use the activeStore prop here
-    console.log(data); // Use the activeStore prop here
-
     handler({ id: activeStore?.id, data: formData })
       .unwrap()
       .then((res) => {
         infoNotify("Update payment successfull");
+        setPayment("");
       })
       .catch((error) => {
         errorNotify("Update payment successfull");
