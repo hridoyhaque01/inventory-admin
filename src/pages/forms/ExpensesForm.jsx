@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,21 +17,10 @@ function ExpensesForm() {
   const { state } = useLocation();
   const { payload, type } = state || {};
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const infoNotify = (message) =>
-    toast.info(message, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -87,7 +77,9 @@ function ExpensesForm() {
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">My Expenses</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("tableTitle.expenses")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -96,7 +88,7 @@ function ExpensesForm() {
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Date :
+                    {t("date")} :
                   </span>
                   <input
                     type="date"
@@ -112,11 +104,11 @@ function ExpensesForm() {
                 {/* Description */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Description :
+                    {t("forms.description")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter description"
+                    placeholder={t("placeholders.enterDescription")}
                     name="description"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
                     required
@@ -127,11 +119,11 @@ function ExpensesForm() {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Amount :
+                    {t("tables.amount")} :
                   </span>
                   <input
                     type="number"
-                    placeholder="Enter amount"
+                    placeholder={t("placeholders.enterAmount")}
                     name="amount"
                     step="any"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
@@ -148,13 +140,13 @@ function ExpensesForm() {
                       to="/expenses"
                       className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
                     >
-                      Cancel
+                      {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                     >
-                      Save
+                      {t("buttons.save")}
                     </button>
                   </div>
                 </div>

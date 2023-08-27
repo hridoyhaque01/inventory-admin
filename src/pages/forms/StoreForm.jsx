@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -14,6 +15,7 @@ function StoreForm() {
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isShowConfirmIcon, setIsShowConfirmIcon] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -101,7 +103,9 @@ function StoreForm() {
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Store</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("tableTitle.store")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -109,12 +113,12 @@ function StoreForm() {
               <div className="flex flex-col justify-start gap-6">
                 {/* Name: */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Name :
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.name")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter store name"
+                    placeholder={t("placeholders.storeName")}
                     name="name"
                     required
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow "
@@ -123,12 +127,12 @@ function StoreForm() {
 
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Email Address :
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.email")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter email address"
+                    placeholder={t("placeholders.enterEmail")}
                     name="email"
                     required
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow "
@@ -137,12 +141,12 @@ function StoreForm() {
 
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Address :
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                    {t("tables.address")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter store address"
+                    placeholder={t("placeholders.storeAddress")}
                     name="location"
                     required
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow "
@@ -153,8 +157,8 @@ function StoreForm() {
 
                 <div className="">
                   <div className="flex items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                      Password :
+                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                      {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
                       isShowPassword={isShowPassword}
@@ -163,15 +167,14 @@ function StoreForm() {
                       isShowIcon={isShowIcon}
                       name="password"
                       required
-                      placeholder="Enter password"
+                      placeholder={t("forms.enterNewPass")}
                     ></PasswordInput>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right"></span>
+                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right"></span>
                     {!isStrong && (
                       <p className="text-[10px] text-fadeColor mt-1">
-                        Must contain more than 7 character with uppercase,
-                        lowercase, symble and number
+                        {t("forms.restriction")}
                       </p>
                     )}
                   </div>
@@ -179,8 +182,8 @@ function StoreForm() {
                 {/* confirm PASSWORD  */}
 
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Confirm Password :
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
                     <PasswordInput
@@ -190,27 +193,27 @@ function StoreForm() {
                       isShowIcon={isShowConfirmIcon}
                       name="confirmPassword"
                       required
-                      placeholder="Enter confirm password"
+                      placeholder={t("placeholders.enterConfirmPass")}
                     ></PasswordInput>
                   </div>
                 </div>
 
                 {/* edit button */}
                 <div className="flex items-center gap-3 mt-4">
-                  <span className="w-[140px]"></span>
+                  <span className="w-[170px]"></span>
                   <div className="flex items-center gap-3">
                     <Link
                       to="/store"
                       className="btn h-auto w-[160px] px-4 py-5 bg-transparent hover:bg-transparent hover:border-errorLightColor rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
                     >
-                      Cancel
+                      {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
                       className="btn h-auto w-[160px] px-4 py-5 rounded-full bg-primaryMainLight hover:bg-primaryMainLight font-medium text-whiteHigh text-center"
                       disabled={!isStrong}
                     >
-                      Save
+                      {t("buttons.save")}
                     </button>
                   </div>
                 </div>

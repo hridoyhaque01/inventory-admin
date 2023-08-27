@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -16,6 +17,7 @@ function SupplierForm() {
   const { payload, type } = state || {};
   const [paidAmount, setPaidAmount] = useState("");
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -106,7 +108,7 @@ function SupplierForm() {
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
-            Supplier
+            {t("tableTitle.supplier")}
           </h4>
         </div>
         <div className="bg-whiteHigh w-full px-4">
@@ -116,11 +118,11 @@ function SupplierForm() {
                 {/* Supplier Name */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Supplier Name :
+                    {t("tables.supplierName")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter supplier name"
+                    placeholder={t("placeholders.enterSupplierName")}
                     name="supplierName"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     required
@@ -131,11 +133,11 @@ function SupplierForm() {
                 {/* product Address */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Address :
+                    {t("tables.address")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter address"
+                    placeholder={t("placeholders.enterAddress")}
                     name="supplierAddress"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     required
@@ -146,11 +148,11 @@ function SupplierForm() {
                 {/* Supplier Phone */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Phone :
+                    {t("tables.phone")} :
                   </span>
                   <input
                     type="number"
-                    placeholder="Enter phone number"
+                    placeholder={t("placeholders.enterPhone")}
                     name="supplierPhone"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     required
@@ -165,11 +167,11 @@ function SupplierForm() {
                   <>
                     <div className="flex flex-col md:flex-row md:items-center gap-3">
                       <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                        Due Amount :
+                        {t("tables.dueAmount")} :
                       </span>
                       <input
                         type="number"
-                        placeholder="due amount"
+                        placeholder={t("tables.dueAmount")}
                         name="supplierDue"
                         step="any"
                         className={`w-full py-3 px-4 border border-whiteLow outline-none rounded  text-sm ${
@@ -184,11 +186,11 @@ function SupplierForm() {
                     </div>
                     <div className="flex flex-col md:flex-row md:items-center gap-3">
                       <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                        Paid :
+                        {t("forms.paid")} :
                       </span>
                       <input
                         type="number"
-                        placeholder="Enter paid amount"
+                        placeholder={t("placeholders.enterPaid")}
                         name="paid"
                         step="any"
                         className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
@@ -207,13 +209,13 @@ function SupplierForm() {
                       to="/suppliers"
                       className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
                     >
-                      Back
+                      {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
                       className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      Submit
+                      {t("buttons.save")}
                     </button>
                     {/* <button
                       type="submit"

@@ -1,16 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 
 function BuySuppliesView() {
   const { state } = useLocation();
   const { payload, type } = state || {};
+  const { t } = useTranslation();
+
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-2xl font-bold">
-            Supplies Details
+            {t("tableTitle.supplies")}
           </h4>
         </div>
         <div className="bg-whiteHigh w-full">
@@ -20,7 +23,7 @@ function BuySuppliesView() {
                 {/* productId */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Product ID :
+                    {t("tables.productId")} :
                   </span>
                   <div className="w-full relative">
                     <input
@@ -37,11 +40,11 @@ function BuySuppliesView() {
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Name:
+                    {t("tables.productName")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Product name"
+                    placeholder={t("tables.productName")}
                     name="productName"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     readOnly
@@ -52,7 +55,7 @@ function BuySuppliesView() {
                 {/* Quantity Price/Unit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Quantity:
+                    {t("tables.quantity")} :
                   </span>
                   <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm  bg-whiteMid">
                     <input
@@ -61,7 +64,7 @@ function BuySuppliesView() {
                       className={`w-28 border-none outline-none bg-transparent ${
                         type === "edit" ? "text-fadeColor" : "text-blackLow"
                       }`}
-                      placeholder="Quantity"
+                      placeholder={t("tables.quantity")}
                       defaultValue={payload?.unitCount}
                       readOnly
                     />
@@ -85,7 +88,7 @@ function BuySuppliesView() {
 
                 <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Supplier Name :
+                    {t("tables.supplierName")} :
                   </span>
                   <div className="w-full relative">
                     <input
@@ -102,11 +105,11 @@ function BuySuppliesView() {
                 {/* Unit Count */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Unit price :
+                    {t("tables.unitPrice")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter unit count"
+                    placeholder={t("placeholders.enterUnitPrice")}
                     name="unitPrice"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     defaultValue={payload?.unitPrice}
@@ -117,11 +120,11 @@ function BuySuppliesView() {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Total Price :
+                    {t("forms.paidAmount")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Total price"
+                    placeholder={t("placeholders.enterPaid")}
                     name="totalAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     readOnly
@@ -132,11 +135,11 @@ function BuySuppliesView() {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Paid Amount :
+                    {t("forms.paidAmount")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter paid amount"
+                    placeholder={t("placeholders.enterPaid")}
                     name="paidAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     defaultValue={payload?.paidAmount}
@@ -147,11 +150,11 @@ function BuySuppliesView() {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Due Amount :
+                    {t("tables.dueAmount")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter due amount"
+                    placeholder={t("placeholders.enterDueAmount")}
                     name="dueAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm  bg-whiteMid"
                     readOnly
@@ -169,7 +172,7 @@ function BuySuppliesView() {
                       to="/supplies"
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                     >
-                      Back
+                      {t("buttons.back")}
                     </Link>
                   </div>
                 </div>

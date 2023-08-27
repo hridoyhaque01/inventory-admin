@@ -1,16 +1,20 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import getIsoDateString from "../../utils/getIsoDateString";
 
 function MoneyOwedForm() {
   const { state } = useLocation();
   const { payload } = state || {};
+  const { t } = useTranslation();
 
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Money Owed</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("tableTitle.owes")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -19,13 +23,13 @@ function MoneyOwedForm() {
                 {/* productId */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Customer Id :
+                    {t("tables.customerId")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Customer id"
+                    placeholder={t("tables.customerId")}
                     name="customerId"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={payload?.customerId}
                   />
                 </div>
@@ -33,13 +37,13 @@ function MoneyOwedForm() {
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Total Amount :
+                    {t("forms.totalAmount")} :
                   </span>
                   <input
                     type="number"
-                    placeholder="Total amount"
+                    placeholder={t("forms.totalAmount")}
                     name="totalAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={payload?.totalAmount}
                     readOnly
                   />
@@ -48,13 +52,13 @@ function MoneyOwedForm() {
                 {/* Pay Date: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Pay Date :
+                    {t("tables.payDate")} :
                   </span>
                   <input
                     type="date"
-                    placeholder="Pay date"
+                    placeholder={t("tables.payDate")}
                     name="payDate"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={getIsoDateString(payload?.payDate)}
                     readOnly
                   />
@@ -63,13 +67,13 @@ function MoneyOwedForm() {
                 {/* Paid */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Paid :
+                    {t("forms.paid")} :
                   </span>
                   <input
                     type="number"
-                    placeholder="Paid amount"
+                    placeholder={t("forms.paid")}
                     name="due"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={payload?.paidAmount}
                     readOnly
                   />
@@ -78,13 +82,13 @@ function MoneyOwedForm() {
                 {/* Paid */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Due Amount :
+                    {t("tables.dueAmount")} :
                   </span>
                   <input
                     type="number"
-                    placeholder="Due amount"
+                    placeholder={t("tables.dueAmount")}
                     name="dueAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={payload?.dueAmount}
                     readOnly
                   />
@@ -98,7 +102,7 @@ function MoneyOwedForm() {
                       to="/moneyOwed"
                       className="w-[160px] p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      Back
+                      {t("buttons.back")}
                     </Link>
                   </div>
                 </div>

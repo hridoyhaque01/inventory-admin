@@ -5,6 +5,7 @@
   "noData": "No data found",
   "search": "Search here",
   "allShop": "All Shop",
+  "welcome": "Welcome Back",
   "pagination": {
     "perPage": "Items per page"
   },
@@ -31,18 +32,24 @@
     "avatar": "Avatar",
     "140": "(140X140)",
     "newPassword": "New Password",
+    "password": "Password",
     "confirmPassword": "Confirm Password",
     "upload": "Upload Image ",
     "upload_drop": "or Drag and Drop JPG, JPEG or PNG",
     "restriction": "Must contain more than 7 character with uppercase, lowercase, symble and number",
     "supported": "Only JPG, JPEG and PNG file are supported",
     "paidToOwner": "Paid To Owner",
+    "paid": "Paid",
     "remaining": "Remaining",
-    "recivedAmount": "Recived Amount"
+    "recivedAmount": "Recived Amount",
+    "description": "Description",
+    "totalAmount": "Total Amount",
+    "paidAmount": "Paid Amount"
   },
   "placeholders": {
     "enterFirstName": "Enter first name",
     "enterLastName": "Enter last name",
+    "enterFullName": "Enter full name",
     "enterEmail": "Enter email address",
     "enterPhone": "Enter phone number",
     "enterNewPass": "Enter new password",
@@ -62,7 +69,8 @@
     "enterUnitPrice": "Enter unit price",
     "enterTotalPrice": "Enter total price",
     "enterDueAmount": "Enter due amount",
-    "storeAddress": "Enter store address"
+    "storeAddress": "Enter store address",
+    "storeName": "Enter store name"
   },
   "buttons": {
     "cancel": "Cancel",
@@ -71,7 +79,9 @@
     "editProfile": "Edit Profile",
     "save": "Save",
     "recieve": "Recieve",
-    "details": "See Details"
+    "details": "See Details",
+    "back": "Back",
+    "reset": "Reset Password"
   },
   "cards": {
     "totalCost": "Total Cost",
@@ -95,6 +105,7 @@
     "productName": "Product Name",
     "name": "Name",
     "category": "Category",
+    "productCategory": "Product Category",
     "shopName": "Shop Name",
     "quantity": "Quantity",
     "buyingPrice": "Buying Price / Unit",
@@ -114,13 +125,15 @@
   },
   "tableTitle": {
     "dashboard": "Dashboard",
-    "products": "products",
+    "products": "Products",
     "inventory": "Inventory",
     "sales": "Sales",
     "customers": "Customers",
-    "expenses": "My Expenses",
+    "customer": "Customer",
+    "expenses": "Expenses",
     "owes": "Money Owed",
     "suppliers": "suppliers",
+    "supplier": "supplier",
     "supplies": "Supplies",
     "store": "Store"
   }

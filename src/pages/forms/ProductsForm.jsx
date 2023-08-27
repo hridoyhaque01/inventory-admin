@@ -102,11 +102,11 @@ function ProductsForm() {
                 {/* Supplier Name */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Product Id :
+                    {t("tables.productId")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter product Id"
+                    placeholder={t("placeholders.enterProductId")}
                     name="productId"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded  text-sm ${
                       type === "edit"
@@ -121,11 +121,11 @@ function ProductsForm() {
                 {/* product Name */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    product Name :
+                    {t("tables.productName")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter product name"
+                    placeholder={t("placeholders.enterProductName")}
                     name="productName"
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm`}
                     required
@@ -136,7 +136,7 @@ function ProductsForm() {
                 {/* Product Category: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Category:
+                    {t("tables.category")} :
                   </span>
                   <div className="relative w-full">
                     <select
@@ -146,7 +146,7 @@ function ProductsForm() {
                       required
                     >
                       <option value="" disabled>
-                        Select product Category
+                        {t("placeholders.selectProductCat")}
                       </option>
                       <option value="category one">Category one</option>
                       <option value="category two">Category two</option>
@@ -174,7 +174,7 @@ function ProductsForm() {
                 {/* Quantity Price/productUnit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    unit:
+                    {t("placeholders.unit")}
                   </span>
                   <div className="relative w-full">
                     <select
@@ -215,13 +215,13 @@ function ProductsForm() {
                       to="/products"
                       className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
                     >
-                      Back
+                      {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
                       className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      Submit
+                      {t("buttons.save")}
                     </button>
                     {/* <button
                       type="submit"

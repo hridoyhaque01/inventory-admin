@@ -30,7 +30,7 @@ function ExpensesTable({ data }) {
               {t("tables.serial")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              {t("tables.date")}
+              {t("date")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -20,6 +21,7 @@ function BuySuppliesForm() {
   const [unitPrice, setUnitPrice] = useState("");
   let totalPrice = quantity && unitPrice ? Number(quantity) * unitPrice : "";
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -147,7 +149,9 @@ function BuySuppliesForm() {
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Buy Supplies</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("tableTitle.supplies")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -156,7 +160,7 @@ function BuySuppliesForm() {
                 {/* productId */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Product ID :
+                    {t("tables.productId")} :
                   </span>
                   <div className="w-full relative">
                     <ProductSuggestions
@@ -171,11 +175,11 @@ function BuySuppliesForm() {
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Name:
+                    {t("tables.productName")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Product name"
+                    placeholder={t("tables.productName")}
                     name="productName"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
                     readOnly
@@ -186,14 +190,14 @@ function BuySuppliesForm() {
                 {/* Quantity Price/Unit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Quantity:
+                    {t("tables.quantity")} :
                   </span>
                   <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm">
                     <input
                       type="number"
                       name="unitCount"
                       className={`w-28 border-none outline-none text-blackLow`}
-                      placeholder="Quantity"
+                      placeholder={t("tables.quantity")}
                       value={quantity}
                       onChange={(e) => setQuantity(e.target.value)}
                       required
@@ -218,7 +222,7 @@ function BuySuppliesForm() {
 
                 <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    Supplier Name :
+                    {t("tables.supplierName")} :
                   </span>
                   <div className="w-full relative">
                     <SupplierSuggestions
@@ -233,11 +237,11 @@ function BuySuppliesForm() {
                 {/* Unit Count */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Unit price :
+                    {t("tables.unitPrice")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter unit count"
+                    placeholder={t("placeholders.enterUnitPrice")}
                     name="unitPrice"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
                     value={unitPrice}
@@ -248,11 +252,11 @@ function BuySuppliesForm() {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Total Price :
+                    {t("tables.totalPrice")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Total price"
+                    placeholder={t("placeholders.enterTotalPrice")}
                     name="totalAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
                     readOnly
@@ -263,11 +267,11 @@ function BuySuppliesForm() {
                 {/* Paid Amount : */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Paid Amount :
+                    {t("forms.paidAmount")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter paid amount"
+                    placeholder={t("placeholders.enterPaid")}
                     name="paidAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
                     value={totalPrice ? paidAmount : ""}
@@ -278,11 +282,11 @@ function BuySuppliesForm() {
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Due Amount :
+                    {t("tables.dueAmount")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter due amount"
+                    placeholder={t("placeholders.enterDueAmount")}
                     name="dueAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
                     readOnly
@@ -294,7 +298,7 @@ function BuySuppliesForm() {
                   />
                 </div>
 
-                {/* edit button */}
+                {/* submit button */}
                 <div className="flex items-center gap-3 mt-4">
                   <span className="w-[140px]"></span>
                   <div className="flex items-center gap-3">
@@ -302,13 +306,13 @@ function BuySuppliesForm() {
                       to="/supplies"
                       className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
                     >
-                      Cancel
+                      {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                     >
-                      Save
+                      {t("buttons.save")}
                     </button>
                   </div>
                 </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Autosuggest from "react-autosuggest";
+import { useTranslation } from "react-i18next";
 
 const SupplierSuggestions = ({
   suggestions,
@@ -8,6 +9,7 @@ const SupplierSuggestions = ({
   value,
 }) => {
   const [suggestionsList, setSuggestionsList] = useState([]);
+  const { t } = useTranslation();
 
   const getSuggestions = (inputValue) => {
     return suggestions.filter((suggestion) =>
@@ -34,7 +36,7 @@ const SupplierSuggestions = ({
   );
 
   const inputProps = {
-    placeholder: "Enter supplier name",
+    placeholder: t("placeholders.enterSupplierName"),
     required: true,
     value,
     onChange: (event, { newValue }) => {

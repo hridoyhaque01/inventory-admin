@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import RequestLoader from "../../components/loaders/RequestLoader";
 import { useUpdateProductsMutation } from "../../features/inventory/inventoryApi";
 import { useGetProductsByIdQuery } from "../../features/products/productsApi";
 
@@ -15,6 +17,7 @@ function InventoryUpdateForm() {
     isError,
     isLoading: productLoading,
   } = useGetProductsByIdQuery(payload?.productId);
+  const { t } = useTranslation();
 
   const [quantity, setQuantity] = useState("");
   const [productLeft, setProductLeft] = useState("");
@@ -23,18 +26,6 @@ function InventoryUpdateForm() {
 
   const errorNotify = (message) =>
     toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const infoNotify = (message) =>
-    toast.info(message, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -117,7 +108,9 @@ function InventoryUpdateForm() {
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Inventory</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("tableTitle.inventory")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -126,11 +119,11 @@ function InventoryUpdateForm() {
                 {/* productId */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Id:
+                    {t("tables.productId")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter product name"
+                    placeholder={t("placeholders.enterProductId")}
                     name="productId"
                     required
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
@@ -142,11 +135,11 @@ function InventoryUpdateForm() {
                 {/* Product Name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Name:
+                    {t("tables.productName")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Enter product name"
+                    placeholder={t("tables.productName")}
                     name="productName"
                     required
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow`}
@@ -157,11 +150,11 @@ function InventoryUpdateForm() {
                 {/* Product Category  */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Product Category:
+                    {t("tables.productCategory")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Product category"
+                    placeholder={t("tables.productCategory")}
                     name="productCategory"
                     required
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
@@ -173,11 +166,11 @@ function InventoryUpdateForm() {
                 {/* Shop name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Shop Name :
+                    {t("tables.shopName")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Store name"
+                    placeholder={t("tables.shopName")}
                     name="storeName"
                     required
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
@@ -190,14 +183,14 @@ function InventoryUpdateForm() {
                 {/* Quantity Price/Unit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Quantity:
+                    {t("tables.quantity")} :
                   </span>
                   <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor ">
                     <input
                       type="number"
                       name="unitCount"
                       className={`w-28 border-none outline-none text-blackLow`}
-                      placeholder="Quantity"
+                      placeholder={t("tables.quantity")}
                       value={quantity}
                       onChange={(e) => handleQuantity(e)}
                       // readOnly
@@ -216,12 +209,12 @@ function InventoryUpdateForm() {
                 {/* Buying Price/Unit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Buying Price/Unit:
+                    {t("tables.buyingPrice")} :
                   </span>
                   <input
                     type="number"
                     name="buyingPrice"
-                    placeholder="Enter buying price"
+                    placeholder={t("placeholders.enterBuyingPrice")}
                     required
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.buyingPrice}
@@ -232,12 +225,12 @@ function InventoryUpdateForm() {
                 {/* Selling Price/Unit: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Selling Price/Unit:
+                    {t("tables.sellingPrice")} :
                   </span>
                   <input
                     type="number"
                     name="sellingPrice"
-                    placeholder="Enter selling price"
+                    placeholder={t("placeholders.enterSellingPrice")}
                     required
                     className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid`}
                     defaultValue={payload?.sellingPrice}
@@ -252,14 +245,14 @@ function InventoryUpdateForm() {
                       to="/inventory"
                       className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
                     >
-                      Cancel
+                      {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
                       className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                       disabled={!isSubmitAcc}
                     >
-                      Save
+                      {t("buttons.save")}
                     </button>
                   </div>
                 </div>
@@ -268,7 +261,7 @@ function InventoryUpdateForm() {
           </div>
         </div>
       </div>
-      {/* {(isLoading || updateProductLoading) && <RequestLoader></RequestLoader>} */}
+      {(isLoading || productLoading) && <RequestLoader></RequestLoader>}
       <div>
         <ToastContainer
           position="top-right"

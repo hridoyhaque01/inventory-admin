@@ -31,6 +31,7 @@
     "avatar": "অবতার",
     "140": "(১৪০X১৪০)",
     "newPassword": "নতুন পাসওয়ার্ড",
+    "password": "পাসওয়ার্ড",
     "confirmPassword": "পাসওয়ার্ড নিশ্চিত করুন",
     "upload": "ছবি আপলোড করুন ",
     "upload_drop": "অথবা JPG, JPEG বা PNG টেনে আনুন",
@@ -38,11 +39,16 @@
     "supported": "শুধুমাত্র JPG, JPEG এবং PNG ফাইল সমর্থিত",
     "paidToOwner": "মালিককে অর্থ প্রদান",
     "remaining": "অবশিষ্ট",
-    "recivedAmount": "প্রাপ্ত পরিমাণ"
+    "recivedAmount": "প্রাপ্ত পরিমাণ",
+    "description": "বর্ণনা",
+    "totalAmount": "সর্বমোট পরিমাণ",
+    "paid": "পরিশোধ",
+    "paidAmount": "প্রদত্ত পরিমাণ"
   },
   "placeholders": {
     "enterFirstName": "নামের প্রথম অংশ লিখুন",
     "enterLastName": "নামের শেষ অংশ লিখুন",
+    "enterFullName": "পুরো নাম লিখুন",
     "enterEmail": "ইমেইল অ্যাড্রেস লিখুন",
     "enterPhone": "ফোন নম্বর লিখুন",
     "enterNewPass": "নতুন পাসওয়ার্ড লিখুন",
@@ -63,7 +69,8 @@
     "enterUnitPrice": "ইউনিট মূল্য লিখুন",
     "enterTotalPrice": "মোট মূল্য লিখুন",
     "enterDueAmount": "প্রাপ্য মূল্য লিখুন",
-    "storeAddress": "দোকানের ঠিকানা লিখুন"
+    "storeAddress": "দোকানের ঠিকানা লিখুন",
+    "storeName": "দোকানের নাম লিখুন"
   },
   "buttons": {
     "cancel": "বাতিল",
@@ -72,7 +79,9 @@
     "editProfile": "প্রোফাইল আপডেট করুন",
     "save": "সংরক্ষণ করুন",
     "recieve": "গ্রহণ",
-    "details": "বিস্তারিত দেখুন"
+    "details": "বিস্তারিত দেখুন",
+    "back": "পেছনে",
+    "reset": "পাসওয়ার্ড রিসেট করুন"
   },
   "cards": {
     "totalCost": "মোট খরচ",
@@ -94,6 +103,7 @@
     "phone": "ফোন নম্বর",
     "productId": "পণ্যের আইডি",
     "productName": "পণ্যের নাম",
+    "productCategory": "পণ্যের বিভাগ",
     "name": "নাম",
     "category": "বিভাগ",
     "shopName": "দোকানের নাম",
@@ -119,9 +129,11 @@
     "inventory": "ইনভেন্টরি",
     "sales": "বিক্রয়",
     "customers": "গ্রাহক",
-    "expenses": "আমার খরচসমূহ",
+    "customer": "গ্রাহক",
+    "expenses": "খরচসমূহ",
     "owes": "পাওনা টাকা",
     "suppliers": "সরবরাহকারী",
+    "supplier": "সরবরাহকারী",
     "supplies": "সরবরাহ",
     "store": "দোকান"
   }

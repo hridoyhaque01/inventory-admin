@@ -98,7 +98,7 @@ function ResetPassword() {
       <div className="w-full max-w-[760px] bg-whiteHigh px-6 py-14 relative">
         <div className="w-full max-w-[400px] mx-auto">
           <div className="text-center">
-            <div className="text-center lg:text-left mb-6">
+            <div className="text-center flex items-center justify-center lg:text-left mb-6">
               <img src={logo} alt="" className="w-20 h-20" />
             </div>
             <h2 className="text-2xl text-blackSemi font-bold mt-2">

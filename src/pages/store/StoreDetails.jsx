@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -11,6 +12,7 @@ function StoreDetails() {
   const navigate = useNavigate();
   const { state } = useLocation() || {};
   const { payload } = state || {};
+  const { t } = useTranslation();
 
   // const {
   //   data: dashboardData,
@@ -91,7 +93,7 @@ function StoreDetails() {
 
         {/* single store details */}
         <div className="p-6 rounded-2xl bg-whiteHigh shadow-md mt-6">
-          <h4 className="text-xl font-bold">Staff </h4>
+          <h4 className="text-xl font-bold">{t("tableTitle.store")} </h4>
           <div className="mt-6">
             <table className="table w-full">
               <thead className=" p-0">
@@ -105,25 +107,25 @@ function StoreDetails() {
                   </th>
 
                   <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                    Serial
+                    {t("tables.serial")}
                   </th>
                   <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                    Created
+                    {t("tables.created")}
                   </th>
                   <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                    Name
-                  </th>
-
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                    Email
+                    {t("tables.name")}
                   </th>
 
                   <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                    Password
+                    {t("forms.email")}
+                  </th>
+
+                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                    {t("forms.password")}
                   </th>
 
                   <th className="bg-primaryMainLightest text-blackHigh text-base normal-case text-center">
-                    Action
+                    {t("tables.action")}
                   </th>
                 </tr>
               </thead>
@@ -149,7 +151,7 @@ function StoreDetails() {
                       htmlFor="resetPasswordModal"
                       className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer"
                     >
-                      Reset Password
+                      {t("buttons.reset")}
                     </label>
                   </td>
                 </tr>

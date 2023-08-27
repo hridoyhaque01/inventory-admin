@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import PasswordInput from "../shared/ui/PasswordInput";
 
 const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
@@ -7,6 +8,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
   const [isStrong, setIsStrong] = useState(false);
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isShowConfirmIcon, setIsShowConfirmIcon] = useState(false);
+  const { t } = useTranslation();
 
   const handleInput = (event) => {
     setIsShowIcon(event.target.value.trim().length > 0);
@@ -65,7 +67,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
           <div className="w-full max-w-[618px]">
             <div className="flex justify-center mb-6">
               <span className="inline-block p-3 rounded-full font-medium bg-warningLowColor">
-                Reset Password
+                {t("buttons.reset")}
               </span>
             </div>
             <form action="" className="w-full" onSubmit={handleSubmit}>
@@ -74,8 +76,8 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
 
                 <div className="">
                   <div className="flex items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                      New Password :
+                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                      {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
                       isShowPassword={isShowPassword}
@@ -84,15 +86,14 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                       isShowIcon={isShowIcon}
                       name="newPassword"
                       required
-                      placeholder="Enter new password"
+                      placeholder={t("placeholders.enterNewPass")}
                     ></PasswordInput>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right"></span>
+                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right"></span>
                     {!isStrong && (
                       <p className="text-[10px] text-fadeColor mt-1">
-                        Must contain more than 7 character with uppercase,
-                        lowercase, symble and number
+                        {t("forms.restriction")}
                       </p>
                     )}
                   </div>
@@ -100,8 +101,8 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                 {/* confirm PASSWORD  */}
 
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Confirm Password :
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
                     <PasswordInput
@@ -111,7 +112,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                       isShowIcon={isShowConfirmIcon}
                       name="confirmPassword"
                       required
-                      placeholder="Enter confirm password"
+                      placeholder={t("placeholders.enterConfirmPass")}
                     ></PasswordInput>
                   </div>
                 </div>
@@ -119,13 +120,13 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                 {/* submit button  */}
 
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right"></span>
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right"></span>
                   <div className="modal-action flex items-center justify-center">
                     <label
                       htmlFor="resetPasswordModal"
                       className="btn rounded-full w-[160px] bg-transparent text-errorLowColor border-errorLowColor hover:border-errorLowColor hover:bg-transparent cursor-pointer"
                     >
-                      Cancel
+                      {t("buttons.cancel")}
                     </label>
                     <button type="submit" disabled={!isStrong}>
                       <label
@@ -133,7 +134,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                         className="btn rounded-full w-[160px] bg-primaryMainLight hover:bg-primaryMainLight border-secondaryColor hover:border-primaryMainLight text-whiteHigh cursor-pointer"
                         disabled={!isStrong}
                       >
-                        Save
+                        {t("buttons.save")}
                       </label>
                     </button>
                   </div>
