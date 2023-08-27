@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const PaidToOwnerModal = ({
   activeStore,
@@ -6,6 +7,8 @@ const PaidToOwnerModal = ({
   infoNotify,
   handler,
 }) => {
+  const { t } = useTranslation();
+
   const [payment, setPayment] = useState("");
   const handlePayment = (event) => {
     const value = event.target.value;
@@ -42,7 +45,7 @@ const PaidToOwnerModal = ({
           <div className="w-full max-w-[540px]">
             <div className="flex justify-center mb-6">
               <span className="inline-block p-3 rounded-full font-medium bg-warningLowColor">
-                Paid To Owner
+                {t("forms.paidToOwner")}
               </span>
             </div>
             <form action="" className="w-full" onSubmit={handleSubmit}>
@@ -52,11 +55,11 @@ const PaidToOwnerModal = ({
                 {/* Shop Name: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Remaining :
+                    {t("forms.remaining")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Total remaining"
+                    placeholder={t("forms.remaining")}
                     name="dueAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
                     defaultValue={activeStore?.remaining}
@@ -67,11 +70,11 @@ const PaidToOwnerModal = ({
                 {/* Paid Amount : */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Recived Amount :
+                    {t("forms.recivedAmount")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Recived amount"
+                    placeholder={t("forms.recivedAmount")}
                     name="paidAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
                     value={payment}
@@ -89,14 +92,14 @@ const PaidToOwnerModal = ({
                       htmlFor="paidToOwnerModal"
                       className="btn rounded-full w-[160px] bg-transparent text-errorLowColor border-errorLowColor hover:border-errorLowColor hover:bg-transparent cursor-pointer"
                     >
-                      Cancel
+                      {t("buttons.cancel")}
                     </label>
                     <button type="submit">
                       <label
                         htmlFor="paidToOwnerModal"
                         className="btn rounded-full w-[160px] bg-primaryMainLight hover:bg-primaryMainLight border-secondaryColor hover:border-primaryMainLight text-whiteHigh cursor-pointer"
                       >
-                        Save
+                        {t("buttons.save")}
                       </label>
                     </button>
                   </div>

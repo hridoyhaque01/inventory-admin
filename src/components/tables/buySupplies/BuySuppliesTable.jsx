@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../modals/ConfirmationModal";
 import { Pagination } from "../../shared/pagination/Pagination";
@@ -10,6 +11,7 @@ function BuySuppliesTable({ data }) {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
+  const { t } = useTranslation();
 
   const handleNavigate = (item) => {
     navigate("/supplies-details", {
@@ -26,30 +28,30 @@ function BuySuppliesTable({ data }) {
         <thead className=" p-0">
           <tr className="font-bold text-center text-3xl">
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Serial
+              {t("tables.serial")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Product Id
+              {t("tables.productId")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Product Name
+              {t("tables.productName")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Supplier Name
+              {t("tables.supplierName")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Quantity
+              {t("tables.quantity")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Unit Price
+              {t("tables.unitPrice")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Total Price
+              {t("tables.totalPrice")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Action
+              {t("tables.action")}
             </th>
           </tr>
         </thead>
@@ -58,7 +60,7 @@ function BuySuppliesTable({ data }) {
             <tr className="border-none">
               <td colSpan="10" className="py-6">
                 <h2 className="text-center text-lg text-blackRgb font-medium">
-                  No data found!
+                  {t("noData")}
                 </h2>
               </td>
             </tr>
@@ -67,13 +69,6 @@ function BuySuppliesTable({ data }) {
           <tbody className="text-center">
             {currentRows?.map((item, i) => (
               <tr className="text-center" key={i}>
-                {/* <th className="py-3">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
-                      name="checkbox"
-                    />
-                  </th> */}
                 <td className="py-3">
                   {currentPage === 1 && i + 1 < 10
                     ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
@@ -92,7 +87,7 @@ function BuySuppliesTable({ data }) {
                     onClick={() => handleNavigate(item)}
                     className="bg-successLight text-successMain py-1.5 px-4 rounded-lg text-sm"
                   >
-                    See Details
+                    {t("buttons.details")}
                   </button>
                 </td>
               </tr>

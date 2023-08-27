@@ -1,6 +1,7 @@
 import i18next from "i18next";
 import Cookies from "js-cookie";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { avatar, logo } from "../../../assets/getAssets";
@@ -11,6 +12,7 @@ const TopNav = () => {
   const { user } = useSelector((state) => state.auth);
   const currentLanguage = Cookies.get("i18next");
   const [lang, setLang] = useState(currentLanguage);
+  const { t } = useTranslation();
 
   const handleLanguage = (e) => {
     if (e.target.checked) {
@@ -67,16 +69,32 @@ const TopNav = () => {
           >
             <li className="">
               <Link to="/profile" className=" active:bg-primaryMain">
-                Profile
+                {t("profile")}
                 {/* <span className="badge">New</span> */}
               </Link>
             </li>
             <li>
               <button
                 onClick={() => dispatch(logout())}
-                className="active:bg-primaryMain text-errorLightColor hover:text-errorLightColor"
+                className="active:bg-primaryMain text-errorLightColor hover:text-errorLightColor inline-flex gap-1"
               >
-                Logout
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  viewBox="0 0 18 18"
+                  fill="none"
+                >
+                  <path
+                    d="M2.10352 2H8.10352C8.65352 2 9.10352 1.55 9.10352 1C9.10352 0.45 8.65352 0 8.10352 0H2.10352C1.00352 0 0.103516 0.9 0.103516 2V16C0.103516 17.1 1.00352 18 2.10352 18H8.10352C8.65352 18 9.10352 17.55 9.10352 17C9.10352 16.45 8.65352 16 8.10352 16H2.10352V2Z"
+                    fill="#FD5D5D"
+                  />
+                  <path
+                    d="M17.7535 8.65L14.9635 5.86C14.6435 5.54 14.1035 5.76 14.1035 6.21V8H7.10352C6.55352 8 6.10352 8.45 6.10352 9C6.10352 9.55 6.55352 10 7.10352 10H14.1035V11.79C14.1035 12.24 14.6435 12.46 14.9535 12.14L17.7435 9.35C17.9435 9.16 17.9435 8.84 17.7535 8.65Z"
+                    fill="#FD5D5D"
+                  />
+                </svg>
+                <span>{t("navigations.logout")}</span>
               </button>
             </li>
           </ul>

@@ -43,7 +43,7 @@ function Inventory() {
     <section className="h-full w-full overflow-auto pr-6 py-6">
       <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
-          title="Inventory"
+          title="tableTitle.inventory"
           path="/inventory-add"
           value={searchValue}
           onChange={onChange}

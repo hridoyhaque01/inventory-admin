@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
@@ -17,6 +18,7 @@ function Sales() {
   } = useGetStoresQuery();
 
   const [searchValue, setSearchValue] = useState("");
+  const { t } = useTranslation();
 
   const onChange = (e) => {
     const value = e.target.value;
@@ -59,7 +61,7 @@ function Sales() {
     <section className="h-full w-full overflow-auto pr-6 py-6">
       <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
-          title="Sell"
+          title="tableTitle.sales"
           path="/sales-add"
           value={searchValue}
           onChange={onChange}
@@ -70,7 +72,9 @@ function Sales() {
               tabIndex={0}
               className="text-whiteHigh flex items-center gap-1 cursor-pointer"
             >
-              <span>{selectedShop}</span>
+              <span>
+                {selectedShop === "All Shop" ? t("allShop") : selectedShop}
+              </span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"
@@ -90,7 +94,7 @@ function Sales() {
               className="dropdown-content z-[1] menu p-2 shadow bg-whiteHigh rounded w-48 mt-2"
             >
               <li onClick={() => setSelectedShop("All Shop")}>
-                <p>All Shop</p>
+                <p>{t("allShop")}</p>
               </li>
               {!storeLoading &&
                 stores?.map((store, i) => (

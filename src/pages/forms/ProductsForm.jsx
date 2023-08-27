@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +16,7 @@ function ProductsForm() {
   const { state } = useLocation();
   const { payload, type } = state || {};
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -90,7 +92,7 @@ function ProductsForm() {
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
-            Products
+            {t("tableTitle.products")}
           </h4>
         </div>
         <div className="bg-whiteHigh w-full px-4">

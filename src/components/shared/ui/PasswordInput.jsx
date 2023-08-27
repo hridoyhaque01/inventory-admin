@@ -12,7 +12,7 @@ function PasswordInput({
       <input
         type={isShowPassword ? "text" : "password"}
         onInput={handleInput}
-        className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
+        className="w-full py-3 px-4 border border-fadeLight outline-none text-sm rounded-lg text-blackLow placeholder:text-fadeColor"
         autoComplete="false"
         {...rest}
       />

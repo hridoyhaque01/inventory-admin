@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../shared/pagination/Pagination";
 
@@ -9,6 +10,7 @@ function StoreTable({ data }) {
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleNavigate = (store) => {
     navigate("/store-details", {
@@ -18,37 +20,27 @@ function StoreTable({ data }) {
     });
   };
 
-  console.log(currentRows);
-
   return (
     <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4">
       <table className="table w-full">
         <thead className=" p-0">
           <tr className="font-bold text-3xl">
-            {/* <th className="bg-primaryMainLightest text-bold normal-case p-2">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
-                  name="checkbox"
-                />
-              </th> */}
-
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Serial
+              {t("tables.serial")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Created
+              {t("tables.created")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Name
+              {t("tables.name")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Location
+              {t("tables.address")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case text-center">
-              Action
+              {t("tables.action")}
             </th>
           </tr>
         </thead>
@@ -57,7 +49,7 @@ function StoreTable({ data }) {
             <tr className="border-none">
               <td colSpan="10" className="py-6">
                 <h2 className="text-center text-lg text-blackRgb font-medium">
-                  No data found!
+                  {t("noData")}
                 </h2>
               </td>
             </tr>
@@ -90,7 +82,7 @@ function StoreTable({ data }) {
                     className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer"
                     onClick={() => handleNavigate(store)}
                   >
-                    See Details
+                    {t("buttons.details")}
                   </button>
                 </td>
               </tr>

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../shared/pagination/Pagination";
 
@@ -9,6 +10,7 @@ function CustomerTable({ data }) {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
+  const { t } = useTranslation();
 
   const handleNavigate = (item) => {
     navigate("/customer-edit", { state: { payload: item } });
@@ -19,34 +21,26 @@ function CustomerTable({ data }) {
       <table className="table w-full">
         <thead className=" p-0">
           <tr className="font-bold text-center text-3xl">
-            {/* <th className="bg-primaryMainLightest text-bold normal-case p-2">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
-                  name="checkbox"
-                />
-              </th> */}
-
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Serial
+              {t("tables.serial")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Name
+              {t("tables.name")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Phone Number
+              {t("tables.phone")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Address
+              {t("tables.address")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Shop Name
+              {t("tables.shopName")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Action
+              {t("tables.action")}
             </th>
           </tr>
         </thead>
@@ -55,7 +49,7 @@ function CustomerTable({ data }) {
             <tr className="border-none">
               <td colSpan="10" className="py-6">
                 <h2 className="text-center text-lg text-blackRgb font-medium">
-                  No data found!
+                  {t("noData")}
                 </h2>
               </td>
             </tr>
@@ -64,13 +58,6 @@ function CustomerTable({ data }) {
           <tbody className="text-center">
             {currentRows?.map((customer, i) => (
               <tr className="text-center" key={i}>
-                {/* <th className="py-3">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
-                      name="checkbox"
-                    />
-                  </th> */}
                 <td className="py-3">
                   {currentPage === 1 && i + 1 < 10
                     ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)

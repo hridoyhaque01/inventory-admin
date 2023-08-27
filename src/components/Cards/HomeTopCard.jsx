@@ -1,6 +1,9 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const HomeTopCard = ({ data }) => {
+  const { t } = useTranslation();
+
   return (
     <section
       className={`flex items-center gap-4 px-4 w-full md:py-4 lg:py-14 rounded-xl relative overflow-hidden ${data?.color}`}
@@ -20,7 +23,7 @@ const HomeTopCard = ({ data }) => {
         </svg>
       </div>
       <div className="text-whiteHigh">
-        <p>{data?.title}</p>
+        <p>{t(data?.title)}</p>
         <p className="text-4xl font-bold">{data?.number}</p>
       </div>
       <div

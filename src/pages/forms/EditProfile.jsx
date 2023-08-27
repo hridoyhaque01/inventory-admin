@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -23,21 +24,10 @@ function EditProfile() {
   const [isShowConfirmIcon, setIsShowConfirmIcon] = useState(false);
   const [compressedLoading, setCompressedLoading] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const infoNotify = (message) =>
-    toast.info(message, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -190,7 +180,9 @@ function EditProfile() {
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Edit Profile</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("editProfile")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -198,36 +190,36 @@ function EditProfile() {
               <div className="flex flex-col justify-start gap-6">
                 {/* name */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    First Name :
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.firstName")} :
                   </span>
                   <input
                     required
                     type="text"
                     name="firstName"
-                    placeholder="Enter firstname"
+                    placeholder={t("placeholders.enterFirstName")}
                     defaultValue={user?.firstName}
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm placeholder:text-fadeColor"
                   />
                 </div>
                 {/* name */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Last Name :
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.lastName")} :
                   </span>
                   <input
                     required
                     type="text"
                     name="lastName"
-                    placeholder="Enter lastname"
+                    placeholder={t("placeholders.enterLastName")}
                     defaultValue={user?.lastName}
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm placeholder:text-fadeColor"
                   />
                 </div>
                 {/* profile */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Avatar (140X140):
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.avatar")} {t("forms.140")} :
                   </span>
                   <div className="w-full relative">
                     {!profilePreveiw ? (
@@ -250,15 +242,14 @@ function EditProfile() {
                               />
                             </svg>
                           </div>
-                          <p className="text-sm font-medium text-center text-fadeColor">
+                          <p className="text-sm font-medium text-center text-fadeColor max-w-[200px] mx-auto">
                             <label
                               htmlFor="profile"
                               className="text-primaryMainDarkest cursor-pointer"
                             >
-                              Upload Image
+                              {t("forms.upload")}
                             </label>{" "}
-                            or Drag and Drop <br />
-                            JPG, JPEG or PNG
+                            {t("forms.upload_drop")}
                           </p>
                         </div>
                       </div>
@@ -303,21 +294,21 @@ function EditProfile() {
                     />
                     {isTypeError && (
                       <p className="text-errorLightColor text-sm">
-                        Only JPG, JPEG and PNG file are supported
+                        {t("forms.supported")}
                       </p>
                     )}
                   </div>
                 </div>
                 {/* email */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Email:
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.email")} :
                   </span>
                   <input
                     required
                     type="email"
                     name="email"
-                    placeholder="Your email address"
+                    placeholder={t("placeholders.enterEmail")}
                     defaultValue={user?.email}
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm placeholder:text-fadeColor"
                   />
@@ -325,14 +316,14 @@ function EditProfile() {
 
                 {/* phone */}
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Phone No :
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.phone")} :
                   </span>
                   <input
                     required
                     type="number"
                     name="phoneNumber"
-                    placeholder="Enter phone number"
+                    placeholder={t("placeholders.enterPhone")}
                     defaultValue={user?.phoneNumber}
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm placeholder:text-fadeColor appearance-none"
                   />
@@ -340,7 +331,7 @@ function EditProfile() {
 
                 {/* Old Password : */}
                 {/* <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
                     Old Password :
                   </span>
                   <input
@@ -355,8 +346,8 @@ function EditProfile() {
 
                 <div className="">
                   <div className="flex items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                      New Password :
+                    <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                      {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
                       isShowPassword={isShowPassword}
@@ -364,15 +355,14 @@ function EditProfile() {
                       handleInput={handleInput}
                       isShowIcon={isShowIcon}
                       name="newPassword"
-                      placeholder="Enter new password"
+                      placeholder={t("placeholders.enterNewPass")}
                     ></PasswordInput>
                   </div>
                   <div className="flex items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right"></span>
+                    <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right"></span>
                     {!isStrong && (
                       <p className="text-[10px] text-fadeColor mt-1">
-                        Must contain more than 7 character with uppercase,
-                        lowercase, symble and number
+                        {t("forms.restriction")}
                       </p>
                     )}
                   </div>
@@ -380,8 +370,8 @@ function EditProfile() {
                 {/* confirm PASSWORD  */}
 
                 <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
-                    Confirm Password :
+                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                    {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
                     <PasswordInput
@@ -390,7 +380,7 @@ function EditProfile() {
                       handleInput={handleInputTwo}
                       isShowIcon={isShowConfirmIcon}
                       name="confirmPassword"
-                      placeholder="Enter confirm password"
+                      placeholder={t("placeholders.enterConfirmPass")}
                     ></PasswordInput>
                   </div>
                 </div>
@@ -401,14 +391,14 @@ function EditProfile() {
                     to="/profile"
                     className="w-full max-w-[160px] p-4 rounded-full font-medium border border-errorLightColor text-errorLightColor text-center"
                   >
-                    Cancel
+                    {t("buttons.cancel")}
                   </Link>
                   <button
                     type="submit"
                     className="w-full max-w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                     disabled={isShowIcon ? (isStrong ? false : true) : false}
                   >
-                    Save
+                    {t("buttons.save")}
                   </button>
                 </div>
               </div>

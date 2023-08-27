@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 import { Pagination } from "../../shared/pagination/Pagination";
 
@@ -12,7 +12,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
     indexOfFirstRow,
     indexOfLastRow
   );
-  const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const totalrevenue = results?.storeDetails?.reduce(
     (acc, result) => acc + result?.revenue,
@@ -44,27 +44,27 @@ const DashboardTable = ({ results, setActiveStore }) => {
             <thead className=" p-0">
               <tr className="font-bold text-center text-3xl">
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                  Serial
+                  {t("tables.serial")}
                 </th>
                 {/* <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
                   Paid to Owner
                 </th> */}
 
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                  Total Due
+                  {t("tables.totalDue")}
                 </th>
 
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                  Revenue
+                  {t("tables.totalRevenue")}
                 </th>
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                  Total Costs
+                  {t("tables.totalCost")}
                 </th>
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                  Total sales
+                  {t("tables.totalSales")}
                 </th>
                 <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                  Date
+                  {t("date")}
                 </th>
               </tr>
             </thead>
@@ -73,7 +73,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
                 <tr className="border-none">
                   <td colSpan="8" className="py-6">
                     <h2 className="text-center text-lg text-blackRgb font-medium">
-                      No data found!
+                      {t("noData")}
                     </h2>
                   </td>
                 </tr>
@@ -114,31 +114,31 @@ const DashboardTable = ({ results, setActiveStore }) => {
           <thead className=" p-0">
             <tr className="font-bold text-center text-3xl">
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Serial
+                {t("tables.serial")}
               </th>
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-                Paid to Owner
+                {t("tables.totalPaidOwner")}
               </th>
 
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Remaining
+                {t("tables.totalRemaining")}
               </th>
 
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Total Due
+                {t("tables.totalDue")}
               </th>
 
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Revenue
+                {t("tables.totalRevenue")}
               </th>
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Total Costs
+                {t("tables.totalCost")}
               </th>
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Total sales
+                {t("tables.totalSales")}
               </th>
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                Action
+                {t("tables.action")}
               </th>
             </tr>
             {results?.storeDetails?.length > 0 ? (
@@ -180,7 +180,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
                       })
                     }
                   >
-                    Recieve
+                    {t("buttons.recieve")}
                   </label>
                 </th>
               </tr>
@@ -188,7 +188,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
               <tr className="border-none">
                 <th colSpan="8" className="py-6">
                   <h2 className="text-center text-lg text-blackRgb font-medium">
-                    No data found!
+                    {t("noData")}
                   </h2>
                 </th>
               </tr>

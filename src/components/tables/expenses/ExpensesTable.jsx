@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../shared/pagination/Pagination";
 
@@ -9,6 +10,7 @@ function ExpensesTable({ data }) {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
+  const { t } = useTranslation();
 
   const handleNavigate = (item) => {
     navigate("/expenses-edit", {
@@ -24,31 +26,23 @@ function ExpensesTable({ data }) {
       <table className="table w-full">
         <thead className=" p-0">
           <tr className="font-bold text-center text-3xl">
-            {/* <th className="bg-primaryMainLightest text-bold normal-case p-2">
-                <input
-                  type="checkbox"
-                  className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
-                  name="checkbox"
-                />
-              </th> */}
-
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Serial
+              {t("tables.serial")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Date
+              {t("tables.date")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Description
+              {t("tables.description")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Amount
+              {t("tables.amount")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Action
+              {t("tables.action")}
             </th>
           </tr>
         </thead>
@@ -56,22 +50,14 @@ function ExpensesTable({ data }) {
           <tbody>
             <tr>
               <td colSpan="6" className="">
-                No data found
+                {t("noData")}
               </td>
             </tr>
           </tbody>
         ) : (
           <tbody className="text-center">
-            {/* {currentRows?.map((customer, i)=>) */}
             {currentRows?.map((expense, i) => (
               <tr className="text-center" key={i}>
-                {/* <th className="py-3">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
-                      name="checkbox"
-                    />
-                  </th> */}
                 <td className="py-3">
                   {currentPage === 1 && i + 1 < 10
                     ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import ConfirmationModal from "../../modals/ConfirmationModal";
 import { Pagination } from "../../shared/pagination/Pagination";
@@ -10,6 +11,7 @@ function ProductsTable({ data }) {
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
+  const { t } = useTranslation();
 
   const handleNavigate = (item) => {
     navigate("/products-edit", {
@@ -20,30 +22,29 @@ function ProductsTable({ data }) {
     });
   };
 
-  console.log(data);
   return (
     <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4">
       <table className="table w-full">
         <thead className=" p-0">
           <tr className="font-bold text-center text-3xl">
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Serial
+              {t("tables.serial")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Product Id
+              {t("tables.productId")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Product Name
+              {t("tables.productName")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Product Category
+              {t("tables.category")}
             </th>
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
-              Product Left
+              {t("tables.productLeft")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              Action
+              {t("tables.action")}
             </th>
           </tr>
         </thead>
@@ -52,7 +53,7 @@ function ProductsTable({ data }) {
             <tr className="border-none">
               <td colSpan="10" className="py-6">
                 <h2 className="text-center text-lg text-blackRgb font-medium">
-                  No data found!
+                  {t("noData")}
                 </h2>
               </td>
             </tr>

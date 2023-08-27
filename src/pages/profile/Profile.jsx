@@ -1,15 +1,19 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { avatar } from "../../assets/getAssets";
 
 function Profile() {
   const { user } = useSelector((state) => state.auth);
+  const { t } = useTranslation();
   return (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">Edit Profile</h4>
+          <h4 className=" text-whiteHigh text-2xl font-bold">
+            {t("editProfile")}
+          </h4>
         </div>
         <div className="bg-whiteHigh w-full">
           <div className=" w-full max-w-[620px] mx-auto py-6">
@@ -18,11 +22,11 @@ function Profile() {
                 {/* name */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
-                    Name:
+                    {t("forms.name")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Name"
+                    placeholder={t("forms.name")}
                     readOnly
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={user?.firstName + " " + user?.lastName}
@@ -31,7 +35,7 @@ function Profile() {
                 {/* profile pic */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
-                    Profile Image:
+                    {t("forms.profile_img")} :
                   </span>
                   <div>
                     <img
@@ -44,11 +48,11 @@ function Profile() {
                 {/* Email: */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
-                    Email:
+                    {t("forms.email")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Email address"
+                    placeholder={t("forms.email")}
                     readOnly
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={user?.email}
@@ -57,11 +61,11 @@ function Profile() {
                 {/* phone no */}
                 <div className="flex items-center gap-3">
                   <span className="inline-block w-[100px] shrink-0 whitespace-nowrap text-right">
-                    Phone No :
+                    {t("forms.phone")} :
                   </span>
                   <input
                     type="text"
-                    placeholder="Phone number"
+                    placeholder={t("forms.phone")}
                     readOnly
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={user?.phoneNumber}
@@ -71,15 +75,15 @@ function Profile() {
                 <div className="flex items-center justify-end gap-6">
                   <Link
                     to="/"
-                    className="w-full max-w-[160px] p-4 rounded-full font-medium border border-errorLightColor text-errorLightColor text-center"
+                    className="w-full max-w-max p-4 px-10 rounded-full font-medium border border-errorLightColor text-errorLightColor text-center"
                   >
-                    Cancel
+                    {t("buttons.cancel")}
                   </Link>
                   <Link
                     to="/edit-profile"
-                    className="w-full max-w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
+                    className="w-full max-w-max p-4 px-6 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
                   >
-                    Edit Profile
+                    {t("buttons.editProfile")}
                   </Link>
                 </div>
               </div>

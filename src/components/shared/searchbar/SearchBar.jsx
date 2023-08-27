@@ -1,11 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function SearchBar({ title, value, onChange, path, isNotAddable, children }) {
+  const { t } = useTranslation();
   return (
     <div className="bg-primaryMainDarkest p-4 flex items-center justify-between">
       <div className="flex items-center gap-8">
-        <h4 className=" text-whiteHigh text-2xl font-bold">{title}</h4>
+        <h4 className=" text-whiteHigh text-2xl font-bold">{t(title)}</h4>
         {children}
       </div>
       <div className="flex items-center gap-6">
@@ -35,7 +37,7 @@ function SearchBar({ title, value, onChange, path, isNotAddable, children }) {
             className="pl-9 p-3 h-[48px] w-[512px] text-blackMid rounded-md border-none focus:outline-none bg-whiteHigh"
             type="text"
             name="searchInput"
-            placeholder="Search"
+            placeholder={t("search")}
           />
         </div>
         <div>

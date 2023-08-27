@@ -12,6 +12,7 @@ import DashboardTable from "../../components/tables/DashboardTable/DashboardTabl
 import { useGetAllStoreResultQuery } from "../../features/dashboard/dashboardApi";
 import { setStoreData } from "../../features/dashboard/dashboardSlice";
 import { useUpdatePaymentMutation } from "../../features/store/storeApi";
+
 const Dashboard = () => {
   const [activeStore, setActiveStore] = useState({});
   const { storeData: storeHouse } = useSelector((state) => state.storeData);
@@ -48,27 +49,27 @@ const Dashboard = () => {
 
   const [dashboardData, setDashboardData] = useState([
     {
-      title: "Total Costs",
+      title: "cards.totalCost",
       color: "bg-successColor",
       number: 0,
     },
     {
-      title: "Total Due",
+      title: "cards.totalDue",
       color: "bg-secondaryMainLight",
       number: 0,
     },
     {
-      title: "Total Revenue",
+      title: "cards.totalRevenue",
       color: "bg-infoColor",
       number: 0,
     },
     {
-      title: "Total Sales",
+      title: "cards.totalSales",
       color: "bg-errorMidColor",
       number: 0,
     },
     {
-      title: "Total Paid To Owner",
+      title: "cards.totalPaidOwner",
       color: "bg-secondaryMain",
       number: 0,
     },

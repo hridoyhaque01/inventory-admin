@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 export const Pagination = ({
   currentPage,
   setCurrentPage,
@@ -5,6 +7,8 @@ export const Pagination = ({
   setRowsPerPage,
   totalRows,
 }) => {
+  const { t } = useTranslation();
+
   const handleIncrement = () => {
     if (currentPage * rowsPerPage >= totalRows) {
       return;
@@ -31,7 +35,9 @@ export const Pagination = ({
       {/* <div>{renderPagination()}</div> */}
 
       <div className="flex items-center gap-2">
-        <p className="font-semibold text-sm sm:text-base ">Item per page:</p>
+        <p className="font-semibold text-sm sm:text-base ">
+          {t("pagination.perPage")} :
+        </p>
         <div className="dropdown dropdown-top dropdown-end">
           <label
             tabIndex={3}
