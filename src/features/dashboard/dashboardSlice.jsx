@@ -16,16 +16,10 @@ const dashboardSlice = createSlice({
       const { storeId, payment } = action.payload;
 
       state.storeData.resultData = state.storeData?.resultData?.map((item) => {
-        console.log("phase 1");
-
         if (item?.storeId === storeId) {
-          console.log("phase 2");
-
           return {
             ...item,
             storeDetails: item?.storeDetails?.map((detail) => {
-              console.log("phase 3");
-
               return {
                 ...detail,
                 finalPaid: parseInt(detail.finalPaid) + parseInt(payment),

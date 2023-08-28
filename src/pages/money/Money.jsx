@@ -24,6 +24,10 @@ function Expenses() {
     setSearchValue(value);
   };
 
+  const sortByTime = (a, b) => {
+    return b.payDate - a.payDate;
+  };
+
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
       return data?.customerId
@@ -35,7 +39,7 @@ function Expenses() {
   };
 
   const filterByDue = (data) => {
-    return data?.dueAmount !== "0";
+    return parseInt(data?.dueAmount) !== 0;
   };
 
   const filterByStoreName = (data) => {
@@ -57,10 +61,11 @@ function Expenses() {
   } else if (!isLoading && (!isError || !storeError) && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && (!isError || !storeError) && data?.length > 0) {
-    const newData = data
+    const newData = [...data]
       ?.filter(filterByDue)
-      .filter(filterBySearch)
-      .filter(filterByStoreName);
+      ?.sort(sortByTime)
+      ?.filter(filterBySearch)
+      ?.filter(filterByStoreName);
     content = <MoneyOwedTable data={newData}></MoneyOwedTable>;
   }
   return (

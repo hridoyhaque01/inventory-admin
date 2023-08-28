@@ -142,9 +142,9 @@ function BuySuppliesForm() {
   };
 
   return productsLoading || suppliersLoading ? (
-    <div>Loading...</div>
+    <div>{t("loading")}...</div>
   ) : productError || suppliersError ? (
-    <div>Something went wrong</div>
+    <div>{t("somethingWrong")}</div>
   ) : (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
@@ -181,7 +181,7 @@ function BuySuppliesForm() {
                     type="text"
                     placeholder={t("tables.productName")}
                     name="productName"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     readOnly
                     defaultValue={selectedProduct?.productName}
                   />
@@ -258,7 +258,7 @@ function BuySuppliesForm() {
                     type="text"
                     placeholder={t("placeholders.enterTotalPrice")}
                     name="totalAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     readOnly
                     defaultValue={totalPrice}
                   />
@@ -288,7 +288,7 @@ function BuySuppliesForm() {
                     type="text"
                     placeholder={t("placeholders.enterDueAmount")}
                     name="dueAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     readOnly
                     defaultValue={
                       totalPrice && paidAmount

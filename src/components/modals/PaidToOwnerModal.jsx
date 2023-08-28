@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useDispatch } from "react-redux";
+import { dashboardApi } from "../../features/dashboard/dashboardApi";
 
 const PaidToOwnerModal = ({
   activeStore,
@@ -8,6 +10,7 @@ const PaidToOwnerModal = ({
   handler,
 }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
 
   const [payment, setPayment] = useState("");
   const handlePayment = (event) => {
@@ -29,6 +32,7 @@ const PaidToOwnerModal = ({
     handler({ id: activeStore?.id, data: formData })
       .unwrap()
       .then((res) => {
+        dispatch(dashboardApi.endpoints.getAllStoreResult.initiate());
         infoNotify("Update payment successfull");
         setPayment("");
       })

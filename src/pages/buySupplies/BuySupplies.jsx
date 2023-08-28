@@ -15,6 +15,10 @@ function BuySupplies() {
     setSearchValue(value);
   };
 
+  const sortByTime = (a, b) => {
+    return b.timestamp - a.timestamp;
+  };
+
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
       return data?.customerId
@@ -34,7 +38,7 @@ function BuySupplies() {
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
-    const newData = data.filter(filterBySearch);
+    const newData = [...data]?.sort(sortByTime)?.filter(filterBySearch);
     content = <BuySuppliesTable data={newData}></BuySuppliesTable>;
   }
 

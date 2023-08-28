@@ -39,7 +39,7 @@ function SalesTable({ data }) {
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-              {t("tables.category")}
+              {t("cards.totalSales")}
             </th>
 
             <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
@@ -88,7 +88,9 @@ function SalesTable({ data }) {
                 <td className="py-3">{item?.productId}</td>
 
                 <td className="py-3">{item?.productName}</td>
-                <td className="py-3">{item?.productCategory}</td>
+                <td className="py-3">
+                  {parseInt(item?.unitCount) * parseInt(item?.unitPrice)}
+                </td>
                 <td className="py-3">{item?.storeName}</td>
                 <td className="py-3">{item?.unitCount}</td>
                 <td className="py-3">{item?.unitPrice}</td>

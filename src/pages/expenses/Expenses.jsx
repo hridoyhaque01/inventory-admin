@@ -23,6 +23,10 @@ function Expenses() {
     }
   };
 
+  const sortByTime = (a, b) => {
+    return b.timestamp - a.timestamp;
+  };
+
   let content = null;
 
   if (isLoading) {
@@ -32,7 +36,7 @@ function Expenses() {
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
-    const newData = data?.filter(filterBySearch);
+    const newData = [...data]?.sort(sortByTime)?.filter(filterBySearch);
     content = <ExpensesTable data={newData}></ExpensesTable>;
   }
   return (

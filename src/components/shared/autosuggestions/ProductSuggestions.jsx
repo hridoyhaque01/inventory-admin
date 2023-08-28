@@ -53,7 +53,6 @@ const ProductSuggestions = ({
       getSuggestionValue={(suggestion) => suggestion.productId}
       renderSuggestion={renderSuggestion}
       inputProps={inputProps}
-      placeholder="Enter product id"
     />
   );
 };

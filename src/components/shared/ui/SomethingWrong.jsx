@@ -1,10 +1,12 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { wrong } from "../../../assets/getAssets";
 
 function SomethingWrong() {
   const handleReloadClick = () => {
     window.location.reload();
   };
+  const { t } = useTranslation();
   return (
     <section className="w-full h-full flex items-center justify-center">
       <div>
@@ -13,14 +15,14 @@ function SomethingWrong() {
             <img src={wrong} alt="" className="w-full" />
           </div>
           <h2 className="text-2xl sm:text-3xl font-bold">
-            Something Went Wrong
+            {t("somethingWrong")}
           </h2>
           <button
             type="button"
             className="btn rounded-full bg-primaryMainLight hover:bg-primaryMainLight border-secondaryColor hover:border-primaryMainLight text-whiteHigh w-full max-w-max normal-case font-normal"
             onClick={handleReloadClick}
           >
-            Reload Page
+            {t("reload")}
           </button>
         </div>
       </div>

@@ -31,6 +31,7 @@ function MoneyOwedForm() {
                     name="customerId"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm bg-whiteMid"
                     defaultValue={payload?.customerId}
+                    readOnly
                   />
                 </div>
 

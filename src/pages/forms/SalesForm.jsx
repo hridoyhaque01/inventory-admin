@@ -28,7 +28,7 @@ function SalesForm() {
                     type="text"
                     placeholder={t("tables.productId")}
                     name="productId"
-                    className="w-full py-3 px-4 text-fadeColor border border-whiteLow outline-none rounded text-sm"
+                    className="w-full py-3 px-4 text-fadeColor border border-whiteLow outline-none rounded text-sm bg-whiteMid"
                     readOnly
                     defaultValue={payload?.productId}
                   />
@@ -43,7 +43,7 @@ function SalesForm() {
                     type="text"
                     placeholder={t("tables.productName")}
                     name="productName"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     readOnly
                     defaultValue={payload?.productName}
                   />
@@ -54,7 +54,15 @@ function SalesForm() {
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     {t("tables.category")} :
                   </span>
-                  <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder={t("tables.category")}
+                    name="productName"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
+                    readOnly
+                    defaultValue={payload?.productCategory}
+                  />
+                  {/* <div className="relative w-full">
                     <select
                       className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center  placeholder:text-blackSemi appearance-none outline-none"
                       name="productCategory"
@@ -77,7 +85,7 @@ function SalesForm() {
                         />
                       </svg>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 {/* Shop Name: */}
@@ -87,9 +95,9 @@ function SalesForm() {
                   </span>
                   <input
                     type="text"
-                    placeholder="Shop name"
+                    placeholder={t("tables.shopName")}
                     name="shopName"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     readOnly
                     defaultValue={payload?.storeName}
                   />
@@ -100,16 +108,23 @@ function SalesForm() {
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
                     {t("tables.quantity")} :
                   </span>
-                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor text-sm">
+                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid">
                     <input
                       type="number"
                       name="quantity"
-                      className="w-20 border-none outline-none"
+                      className="w-20 border-none outline-none bg-transparent"
                       placeholder={t("tables.quantity")}
                       readOnly
                       defaultValue={payload?.unitCount}
                     />
-
+                    <input
+                      type="text"
+                      name="unit"
+                      className="border-none outline-none w-16 bg-transparent"
+                      readOnly
+                      defaultValue={payload?.unit}
+                    />
+                    {/* 
                     <div className="relative w-full max-w-max">
                       <select
                         className="appearance-none outline-none  w-16"
@@ -132,13 +147,13 @@ function SalesForm() {
                           />
                         </svg>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   {/* <input
                     type="number"
                     name="buyingPrice"
                     placeholder="Buying price"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                   /> */}
                 </div>
 
@@ -151,7 +166,7 @@ function SalesForm() {
                     type="number"
                     name="sellingPrice"
                     placeholder={t("tables.sellingPrice")}
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     readOnly
                     defaultValue={payload?.unitPrice}
                   />
@@ -164,7 +179,7 @@ function SalesForm() {
                       to="/sales"
                       className="w-[160px] p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      Back
+                      {t("buttons.back")}
                     </Link>
                     {/* <button
                       type="submit"

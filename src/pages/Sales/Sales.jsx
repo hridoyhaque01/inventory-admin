@@ -20,6 +20,10 @@ function Sales() {
   const [searchValue, setSearchValue] = useState("");
   const { t } = useTranslation();
 
+  const sortByTime = (a, b) => {
+    return b.timestamp - a.timestamp;
+  };
+
   const onChange = (e) => {
     const value = e.target.value;
     setSearchValue(value);
@@ -54,7 +58,10 @@ function Sales() {
   } else if (!isLoading && (!isError || !storeError) && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && (!isError || !storeError) && data?.length > 0) {
-    const newData = data?.filter(filterBySearch).filter(filterByStoreName);
+    const newData = [...data]
+      ?.sort(sortByTime)
+      ?.filter(filterBySearch)
+      .filter(filterByStoreName);
     content = <SalesTable data={newData}></SalesTable>;
   }
   return (

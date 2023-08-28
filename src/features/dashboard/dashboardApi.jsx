@@ -10,8 +10,8 @@ export const dashboardApi = apiSlice.injectEndpoints({
         const { data: supplierinvoices } = await fetchWithBQ(
           `/supplierinvoices`
         );
+
         const resultData = [];
-        const mainData = [];
 
         const totalSuppliesCosts = supplierinvoices?.reduce(
           (acc, supplies) => acc + parseInt(supplies?.totalAmount),
@@ -59,6 +59,8 @@ export const dashboardApi = apiSlice.injectEndpoints({
             (acc, invoice) => acc + parseInt(invoice?.payment),
             0
           );
+
+          // console.log({ tablePaidToOwnerInit });
           tableRevenueInit = store?.invoices?.reduce(
             (acc, invoice) => acc + parseInt(invoice?.paidAmount),
             0
@@ -174,7 +176,7 @@ export const dashboardApi = apiSlice.injectEndpoints({
         cardData.totalRevenue = totalRevenueInit;
         cardData.totalDue = totalDueInit;
         cardData.totalSales = totalSalesInit;
-        cardData.totalPaidToOwner = totalPaidToOwnerInit;
+        cardData.totalPaidToOwner = tablePaidToOwnerInit;
         cardData.totalCosts = totalCosts;
 
         // console.log(tablePaidToOwnerInit);

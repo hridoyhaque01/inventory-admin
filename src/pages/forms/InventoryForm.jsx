@@ -104,9 +104,9 @@ function InventoryForm() {
   };
 
   return storeLoading || productsLoading ? (
-    <div>Loading...</div>
+    <div>{t("loading")}...</div>
   ) : isError || productError ? (
-    <div>Something went wrong</div>
+    <div>{t("somethingWrong")}</div>
   ) : (
     <section className="h-full w-full overflow-auto px-10 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">

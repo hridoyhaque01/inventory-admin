@@ -47,6 +47,8 @@ const Dashboard = () => {
   const { data: storeData, isLoading, isError } = useGetAllStoreResultQuery();
   const { resultData, cardData } = storeHouse || {};
 
+  // console.log(storeData);
+
   const [dashboardData, setDashboardData] = useState([
     {
       title: "cards.totalCost",

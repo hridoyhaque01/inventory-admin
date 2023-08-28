@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -22,6 +23,8 @@ function Login() {
   const handleInput = (event) => {
     setIsShowIcon(event.target.value.trim().length > 0);
   };
+
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -70,7 +73,7 @@ function Login() {
                 <img src={logo} alt="" className="w-20 h-20" />
               </div>
               <h2 className="text-blackSemi text-2xl font-bold">
-                Welcome Back!
+                {t("welcome")}
               </h2>
             </div>
             <form action="#" onSubmit={handleSubmit}>
@@ -78,13 +81,13 @@ function Login() {
                 {/* email  */}
                 <div className="inline-flex flex-col justify-start items-start gap-4 ">
                   <span className="text-xs text-fadeColor font-medium leading-none">
-                    Email
+                    {t("forms.email")}
                   </span>
                   <input
                     type="email"
                     required
                     name="email"
-                    placeholder="Enter email"
+                    placeholder={t("placeholders.enterEmail")}
                     className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
                   />
                 </div>
@@ -92,7 +95,7 @@ function Login() {
 
                 <div className="inline-flex flex-col justify-start items-start gap-4 ">
                   <span className="text-xs text-fadeColor font-medium leading-none">
-                    Password
+                    {t("forms.password")}
                   </span>
                   <PasswordInput
                     isShowPassword={isShowPassword}
@@ -101,16 +104,16 @@ function Login() {
                     isShowIcon={isShowIcon}
                     required
                     name="password"
-                    placeholder="Enter password"
+                    placeholder={t("placeholders.enterPass")}
                   ></PasswordInput>
                 </div>
 
                 <div className="mt-8">
                   <button
                     type="submit"
-                    className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh"
+                    className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh uppercase"
                   >
-                    SIGN IN
+                    {t("buttons.signIn")}
                   </button>
                 </div>
               </div>
@@ -118,13 +121,13 @@ function Login() {
 
             <div className="text-center mt-6">
               <Link to="/forget-password" className="text-navyDark">
-                Forgot Password?
+                {t("buttons.forgetPass")}?
               </Link>
             </div>
             <div className="text-center mt-20 text-blackLow">
-              Dont have account?{" "}
+              {t("buttons.noAcc")}{" "}
               <Link to="/signup" className="text-primaryMainLight">
-                Sign Up.
+                {t("buttons.signUp")}.
               </Link>
             </div>
           </div>

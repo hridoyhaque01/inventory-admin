@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -8,6 +9,8 @@ import { useSendResetPasswordEmailMutation } from "../../features/auth/authApi";
 function ForgetPassword() {
   const [sendResetPasswordEmail, { isLoading }] =
     useSendResetPasswordEmailMutation();
+
+  const { t } = useTranslation();
 
   const errorNotify = (message) =>
     toast.error(message, {
@@ -74,16 +77,12 @@ function ForgetPassword() {
         <div className="w-full max-w-[400px] mx-auto">
           <div className="text-center">
             <div className="text-center lg:text-left mb-6">
-              <img src={logo} alt="" className="w-20 h-20" />
+              <img src={logo} alt="" className="w-20 h-20 mx-auto" />
             </div>
             <h2 className="text-2xl text-blackSemi font-bold mt-2">
-              Reset Password
+              {t("buttons.reset")}
             </h2>
-            <p className="text-fadeColor mt-10">
-              Enter your username, or the email address you used to register. We
-              will send you an email containing your username and a link to
-              reset your password.
-            </p>
+            <p className="text-fadeColor mt-10">{t("resetDesc")}</p>
           </div>
 
           <form action="" className="w-full mt-10" onSubmit={handleSubmit}>
@@ -91,22 +90,22 @@ function ForgetPassword() {
 
             <div className="w-full inline-flex  flex-col justify-start items-start gap-4 ">
               <span className="text-xs text-fadeColor font-medium leading-none">
-                Your Email
+                {t("forms.email")}
               </span>
               <input
                 type="email"
                 required
                 name="email"
-                placeholder="Enter email"
+                placeholder={t("placeholders.enterEmail")}
                 className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg"
               />
             </div>
             <div className="mt-8">
               <button
                 type="submit"
-                className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh"
+                className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh uppercase"
               >
-                SEND
+                {t("buttons.send")}
               </button>
             </div>
           </form>

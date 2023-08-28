@@ -25,6 +25,10 @@ function Customer() {
     setSearchValue(value);
   };
 
+  const sortByTime = (a, b) => {
+    return b.timestamp - a.timestamp;
+  };
+
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
       return data?.customerPhone
@@ -54,7 +58,10 @@ function Customer() {
   } else if (!isLoading && (!isError || !storeError) && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && (!isError || !storeError) && data?.length > 0) {
-    const newData = data?.filter(filterBySearch).filter(filterByStoreName);
+    const newData = [...data]
+      ?.sort(sortByTime)
+      ?.filter(filterBySearch)
+      .filter(filterByStoreName);
     content = <CustomerTable data={newData}></CustomerTable>;
   }
   return (

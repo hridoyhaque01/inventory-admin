@@ -114,7 +114,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
           <thead className=" p-0">
             <tr className="font-bold text-center text-3xl">
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
-                {t("tables.serial")}
+                {/* {t("tables.serial")} */}
               </th>
               <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
                 {t("tables.totalPaidOwner")}
@@ -144,7 +144,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
             {results?.storeDetails?.length > 0 ? (
               <tr className="font-bold text-center text-3xl">
                 <th className="bg-secondaryMain text-blackHigh text-base normal-case py-6">
-                  Total
+                  {t("tables.total")}
                 </th>
                 <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
                   {results?.storeDetails[0]?.finalPaid}

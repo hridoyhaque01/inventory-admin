@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
@@ -11,8 +10,9 @@ function Store() {
   const { data, isLoading, isError } = useGetStoresQuery();
   const [searchValue, setSearchValue] = useState("");
 
-  const { storeData } = useSelector((state) => state.storeData);
-  console.log(storeData);
+  const sortByTime = (a, b) => {
+    return b.timestamp - a.timestamp;
+  };
 
   const onChange = (e) => {
     const value = e.target.value;
@@ -36,7 +36,7 @@ function Store() {
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
-    const newData = data?.filter(filterBySearch);
+    const newData = [...data]?.sort(sortByTime)?.filter(filterBySearch);
     content = <StoreTable data={newData}></StoreTable>;
   }
 

@@ -7,6 +7,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
+import { useTranslation } from "react-i18next";
 import "swiper/css";
 import "swiper/css/pagination";
 import { logo } from "../../assets/getAssets";
@@ -20,6 +21,7 @@ function Signup() {
   const [isShowIcon, setIsShowIcon] = useState(false);
   const [isStrong, setIsStrong] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const handleInput = (event) => {
     setIsShowIcon(event.target.value.trim().length > 0);
@@ -90,7 +92,7 @@ function Signup() {
                 <img src={logo} alt="" className="w-20 h-20" />
               </div>
               <h2 className="text-blackSemi text-2xl font-bold">
-                Welcome Back!
+                {t("welcome")}
               </h2>
             </div>
             <form action="#" onSubmit={handleSubmit}>
@@ -98,39 +100,39 @@ function Signup() {
                 {/* first name  */}
                 <div className="inline-flex flex-col justify-start items-start gap-4 ">
                   <span className="text-xs text-fadeColor font-medium leading-none">
-                    Last Name
+                    {t("forms.firstName")}
                   </span>
                   <input
                     type="text"
                     required
                     name="firstName"
-                    placeholder="Enter firstname"
+                    placeholder={t("placeholders.enterFirstName")}
                     className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
                   />
                 </div>
                 {/* last name  */}
                 <div className="inline-flex flex-col justify-start items-start gap-4 ">
                   <span className="text-xs text-fadeColor font-medium leading-none">
-                    Last Name
+                    {t("forms.lastName")}
                   </span>
                   <input
                     type="text"
                     required
                     name="lastName"
-                    placeholder="Enter lastname"
+                    placeholder={t("placeholders.enterLastName")}
                     className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
                   />
                 </div>
                 {/* email  */}
                 <div className="inline-flex flex-col justify-start items-start gap-4 ">
                   <span className="text-xs text-fadeColor font-medium leading-none">
-                    Email
+                    {t("forms.email")}
                   </span>
                   <input
                     type="email"
                     required
                     name="email"
-                    placeholder="Enter email"
+                    placeholder={t("placeholders.enterEmail")}
                     className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
                   />
                 </div>
@@ -138,7 +140,7 @@ function Signup() {
 
                 <div className="inline-flex flex-col justify-start items-start gap-4 ">
                   <span className="text-xs text-fadeColor font-medium leading-none">
-                    Password
+                    {t("forms.password")}
                   </span>
                   <div className="w-full">
                     <PasswordInput
@@ -147,55 +149,31 @@ function Signup() {
                       handleInput={handleInput}
                       isShowIcon={isShowIcon}
                       name="password"
-                      placeholder="Enter password"
+                      placeholder={t("placeholders.enterPass")}
                     ></PasswordInput>
                     {!isStrong && (
                       <p className="text-[10px] text-fadeColor mt-1">
-                        must contain more than 7 character with uppercase,
-                        lowercase, symble and number
+                        {t("forms.restriction")}
                       </p>
                     )}
                   </div>
-                  {/* <input
-                    type="password"
-                    required
-                    name="password"
-                    placeholder="Enter password"
-                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg"
-                  /> */}
                 </div>
-                {/* remember  */}
-                {/* 
-                <div className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    name="remember"
-                    className="bg-whiteLow"
-                    id="remember"
-                  />
-                  <label
-                    htmlFor="remember"
-                    className="text-blackLow font-medium"
-                  >
-                    Remeber me
-                  </label>
-                </div> */}
 
                 <div className="mt-8">
                   <button
                     type="submit"
-                    className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh"
+                    className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh uppercase"
                     disabled={!isStrong}
                   >
-                    SIGN UP
+                    {t("buttons.signUp")}
                   </button>
                 </div>
               </div>
             </form>
             <div className="text-center mt-20 text-blackLow">
-              Already have account?{" "}
+              {t("buttons.haveAcc")}{" "}
               <Link to="/login" className="text-primaryMainLight">
-                Login
+                {t("buttons.signIn")}
               </Link>
             </div>
           </div>

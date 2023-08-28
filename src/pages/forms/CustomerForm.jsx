@@ -27,10 +27,10 @@ function CustomerForm() {
                   </span>
                   <input
                     type="number"
-                    placeholder={t("tables.enterPhone")}
+                    placeholder={t("placeholders.enterPhone")}
                     name="customerPhone"
                     readOnly
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     defaultValue={payload?.customerPhone}
                   />
                 </div>
@@ -42,10 +42,10 @@ function CustomerForm() {
                   </span>
                   <input
                     type="text"
-                    placeholder={t("tables.enterFullName")}
+                    placeholder={t("placeholders.enterFullName")}
                     name="customerName"
                     readOnly
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     defaultValue={payload?.customerName}
                   />
                 </div>
@@ -57,10 +57,10 @@ function CustomerForm() {
                   </span>
                   <input
                     type="text"
-                    placeholder={t("tables.enterAddress")}
+                    placeholder={t("placeholders.enterAddress")}
                     name="location"
                     readOnly
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     defaultValue={payload?.customerAddress}
                   />
                 </div>
@@ -71,16 +71,10 @@ function CustomerForm() {
                   <div className="flex items-center gap-3">
                     <Link
                       to="/customer"
-                      className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
+                      className="w-[160px] p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
-                      {t("buttons.cancel")}
+                      {t("buttons.back")}
                     </Link>
-                    <button
-                      type="submit"
-                      className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
-                    >
-                      {t("buttons.save")}
-                    </button>
                   </div>
                 </div>
               </div>

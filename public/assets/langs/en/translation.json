@@ -6,6 +6,10 @@
   "search": "Search here",
   "allShop": "All Shop",
   "welcome": "Welcome Back",
+  "loading": "Loading...",
+  "somethingWrong": "Something went wrong",
+  "reload": "Reload Page",
+  "resetDesc": "Enter your email address you used to register. We will send you an email containing your username and a link to reset your password.",
   "pagination": {
     "perPage": "Items per page"
   },
@@ -53,6 +57,7 @@
     "enterEmail": "Enter email address",
     "enterPhone": "Enter phone number",
     "enterNewPass": "Enter new password",
+    "enterPass": "Enter password",
     "enterConfirmPass": "Enter confirm password",
     "enterProductId": "Enter product id",
     "enterProductName": "Enter product name",
@@ -61,7 +66,7 @@
     "selectShopName": "Select shop name",
     "enterBuyingPrice": "Enter buying price",
     "enterSellingPrice": "Enter selling price",
-    "unit": "unit",
+    "unit": "Unit",
     "enterDescription": "Enter description",
     "enterAmount": "Enter amount",
     "enterAddress": "Enter address",
@@ -81,7 +86,12 @@
     "recieve": "Recieve",
     "details": "See Details",
     "back": "Back",
-    "reset": "Reset Password"
+    "reset": "Reset Password",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "forgetPass": "Forgot Password",
+    "noAcc": "Dont have account?",
+    "haveAcc": "Already have account?"
   },
   "cards": {
     "totalCost": "Total Cost",
@@ -94,6 +104,7 @@
     "serial": "Serial",
     "totalCost": "Total Cost",
     "totalDue": "Total Due",
+    "total": "Total",
     "totalRevenue": "Total Revenue",
     "totalSales": "Total Sales",
     "totalPaidOwner": "Total Paid to Owner",

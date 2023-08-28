@@ -16,11 +16,15 @@ function Inventory() {
     setSearchValue(value);
   };
 
+  const sortByTime = (a, b) => {
+    return b.timestamp - a.timestamp;
+  };
+
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
       return data?.productName
         ?.toLowerCase()
-        .includes(searchValue?.toLowerCase());
+        ?.includes(searchValue?.toLowerCase());
     } else {
       return true;
     }
@@ -35,7 +39,7 @@ function Inventory() {
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
-    const newData = data?.filter(filterBySearch);
+    const newData = [...data]?.sort(sortByTime)?.filter(filterBySearch);
     content = <InventoryTable data={newData}></InventoryTable>;
   }
 
