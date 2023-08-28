@@ -75,8 +75,8 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                 {/* NEW PASSWORD  */}
 
                 <div className="">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                       {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
@@ -89,10 +89,10 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                       placeholder={t("placeholders.enterNewPass")}
                     ></PasswordInput>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right"></span>
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right"></span>
                     {!isStrong && (
-                      <p className="text-[10px] text-fadeColor mt-1">
+                      <p className="text-[10px] text-fadeColor md:mt-1">
                         {t("forms.restriction")}
                       </p>
                     )}
@@ -100,8 +100,8 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                 </div>
                 {/* confirm PASSWORD  */}
 
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
@@ -119,19 +119,19 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
 
                 {/* submit button  */}
 
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right"></span>
-                  <div className="modal-action flex items-center justify-center">
+                <div className="flex flex-col md:flex-row md:items-center gap-3 mt-4">
+                  <span className="w-[140px]"></span>
+                  <div className="flex items-center gap-3">
                     <label
                       htmlFor="resetPasswordModal"
-                      className="btn rounded-full w-[160px] bg-transparent text-errorLowColor border-errorLowColor hover:border-errorLowColor hover:bg-transparent cursor-pointer"
+                      className="btn bg-transparent hover:bg-transparent w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </label>
                     <button type="submit" disabled={!isStrong}>
                       <label
                         htmlFor="resetPasswordModal"
-                        className="btn rounded-full w-[160px] bg-primaryMainLight hover:bg-primaryMainLight border-secondaryColor hover:border-primaryMainLight text-whiteHigh cursor-pointer"
+                        className="btn w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                         disabled={!isStrong}
                       >
                         {t("buttons.save")}

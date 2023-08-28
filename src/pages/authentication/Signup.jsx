@@ -83,15 +83,15 @@ function Signup() {
       });
   };
   return (
-    <section className="h-screen w-full text-whiteHigh">
+    <section className="min-h-screen md:h-screen w-full text-whiteHigh overflow-auto">
       <div className="flex items-center w-full h-full">
-        <div className="w-full max-w-[630px] h-full flex items-center justify-center p-4">
+        <div className="w-full max-w-[630px] h-full flex items-center justify-center py-8 px-4">
           <div className="w-full max-w-[296px]">
             <div className="mb-10">
-              <div className="text-center lg:text-left mb-6">
-                <img src={logo} alt="" className="w-20 h-20" />
+              <div className="flex justify-center lg:justify-start mb-6">
+                <img src={logo} alt="" className="w-20 h-20 " />
               </div>
-              <h2 className="text-blackSemi text-2xl font-bold">
+              <h2 className="text-blackSemi text-lg lg:text-2xl text-center lg:text-left font-bold">
                 {t("welcome")}
               </h2>
             </div>
@@ -107,7 +107,7 @@ function Signup() {
                     required
                     name="firstName"
                     placeholder={t("placeholders.enterFirstName")}
-                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
+                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black text-sm sm:text-base"
                   />
                 </div>
                 {/* last name  */}
@@ -120,7 +120,7 @@ function Signup() {
                     required
                     name="lastName"
                     placeholder={t("placeholders.enterLastName")}
-                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
+                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black text-sm sm:text-base"
                   />
                 </div>
                 {/* email  */}
@@ -133,7 +133,7 @@ function Signup() {
                     required
                     name="email"
                     placeholder={t("placeholders.enterEmail")}
-                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black"
+                    className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black text-sm sm:text-base"
                   />
                 </div>
                 {/* password  */}
@@ -170,7 +170,7 @@ function Signup() {
                 </div>
               </div>
             </form>
-            <div className="text-center mt-20 text-blackLow">
+            <div className="text-center mt-10 md:mt-20 text-blackLow">
               {t("buttons.haveAcc")}{" "}
               <Link to="/login" className="text-primaryMainLight">
                 {t("buttons.signIn")}
@@ -178,7 +178,7 @@ function Signup() {
             </div>
           </div>
         </div>
-        <div className="w-full h-full bg-login bg-cover bg-center object-cover flex items-end pb-24">
+        <div className="hidden w-full h-full bg-login bg-cover bg-center object-cover lg:flex items-end pb-24">
           <div className="w-full max-w-[490px] mx-auto">
             <Swiper
               // install Swiper modules

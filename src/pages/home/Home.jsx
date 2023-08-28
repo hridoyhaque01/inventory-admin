@@ -115,11 +115,11 @@ const Dashboard = () => {
   }, [isLoading, isError, cardData, storeData]);
 
   return (
-    <div className="w-full overflow-auto pb-6 pr-10">
+    <div className="w-full overflow-auto  pb-6 px-4 md:px-6 ">
       <div className="flex flex-col justify-around pt-6 gap-6 w-full">
         {/* 4 top cards */}
 
-        <section className="flex justify-between gap-8">
+        <section className="grid sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 xl:gap-6">
           {dashboardData.map((dashboardData, index) => (
             <HomeTopCard data={dashboardData} key={index}></HomeTopCard>
           ))}

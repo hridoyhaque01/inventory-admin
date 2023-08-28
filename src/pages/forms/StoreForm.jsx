@@ -100,20 +100,20 @@ function StoreForm() {
   };
 
   return (
-    <section className="h-full w-full overflow-auto px-10 py-6">
+    <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-2xl font-bold">
             {t("tableTitle.store")}
           </h4>
         </div>
-        <div className="bg-whiteHigh w-full">
+        <div className="bg-whiteHigh w-full px-4">
           <div className=" w-full max-w-[620px] mx-auto py-6">
             <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col justify-start gap-6">
                 {/* Name: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.name")} :
                   </span>
                   <input
@@ -121,13 +121,13 @@ function StoreForm() {
                     placeholder={t("placeholders.storeName")}
                     name="name"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow "
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm sm:text-base"
                   />
                 </div>
 
                 {/* Product Name */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.email")} :
                   </span>
                   <input
@@ -135,13 +135,13 @@ function StoreForm() {
                     placeholder={t("placeholders.enterEmail")}
                     name="email"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow "
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm sm:text-base "
                   />
                 </div>
 
                 {/* Product Name */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.address")} :
                   </span>
                   <input
@@ -149,15 +149,15 @@ function StoreForm() {
                     placeholder={t("placeholders.storeAddress")}
                     name="location"
                     required
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow "
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm sm:text-base "
                   />
                 </div>
 
                 {/* NEW PASSWORD  */}
 
                 <div className="">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                       {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
@@ -167,13 +167,13 @@ function StoreForm() {
                       isShowIcon={isShowIcon}
                       name="password"
                       required
-                      placeholder={t("forms.enterNewPass")}
+                      placeholder={t("placeholders.enterNewPass")}
                     ></PasswordInput>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right"></span>
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right"></span>
                     {!isStrong && (
-                      <p className="text-[10px] text-fadeColor mt-1">
+                      <p className="text-[10px] text-fadeColor md:mt-1">
                         {t("forms.restriction")}
                       </p>
                     )}
@@ -181,8 +181,8 @@ function StoreForm() {
                 </div>
                 {/* confirm PASSWORD  */}
 
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
@@ -199,18 +199,18 @@ function StoreForm() {
                 </div>
 
                 {/* edit button */}
-                <div className="flex items-center gap-3 mt-4">
-                  <span className="w-[170px]"></span>
+                <div className="flex flex-col md:flex-row md:items-center gap-3 mt-2">
+                  <span className="w-[140px]"></span>
                   <div className="flex items-center gap-3">
                     <Link
                       to="/store"
-                      className="btn h-auto w-[160px] px-4 py-5 bg-transparent hover:bg-transparent hover:border-errorLightColor rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
+                      className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
-                      className="btn h-auto w-[160px] px-4 py-5 rounded-full bg-primaryMainLight hover:bg-primaryMainLight font-medium text-whiteHigh text-center"
+                      className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                       disabled={!isStrong}
                     >
                       {t("buttons.save")}

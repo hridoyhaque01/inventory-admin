@@ -45,8 +45,8 @@ const PaidToOwnerModal = ({
     <section>
       <input type="checkbox" id="paidToOwnerModal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box w-[640px] max-w-[640px] flex flex-col items-center justify-center gap-4 bg-white">
-          <div className="w-full max-w-[540px]">
+        <div className="modal-box w-11/12 max-w-5xl flex flex-col items-center justify-center gap-4 bg-white">
+          <div className="w-full max-w-[618px]">
             <div className="flex justify-center mb-6">
               <span className="inline-block p-3 rounded-full font-medium bg-warningLowColor">
                 {t("forms.paidToOwner")}
@@ -57,23 +57,23 @@ const PaidToOwnerModal = ({
                 {/* NEW PASSWORD  */}
 
                 {/* Shop Name: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.remaining")} :
                   </span>
                   <input
                     type="text"
                     placeholder={t("forms.remaining")}
                     name="dueAmount"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
+                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
                     defaultValue={activeStore?.remaining}
                     readOnly
                   />
                 </div>
 
                 {/* Paid Amount : */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.recivedAmount")} :
                   </span>
                   <input
@@ -89,19 +89,19 @@ const PaidToOwnerModal = ({
 
                 {/* submit button  */}
 
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right"></span>
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right"></span>
                   <div className="modal-action flex items-center justify-center">
                     <label
                       htmlFor="paidToOwnerModal"
-                      className="btn rounded-full w-[160px] bg-transparent text-errorLowColor border-errorLowColor hover:border-errorLowColor hover:bg-transparent cursor-pointer"
+                      className="btn bg-transparent hover:bg-transparent w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </label>
                     <button type="submit">
                       <label
                         htmlFor="paidToOwnerModal"
-                        className="btn rounded-full w-[160px] bg-primaryMainLight hover:bg-primaryMainLight border-secondaryColor hover:border-primaryMainLight text-whiteHigh cursor-pointer"
+                        className="btn w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                       >
                         {t("buttons.save")}
                       </label>

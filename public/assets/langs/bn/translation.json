@@ -48,7 +48,8 @@
     "description": "বর্ণনা",
     "totalAmount": "সর্বমোট পরিমাণ",
     "paid": "পরিশোধ",
-    "paidAmount": "প্রদত্ত পরিমাণ"
+    "paidAmount": "প্রদত্ত পরিমাণ",
+    "passReset": "পাসওয়ার্ড রিসেট করুন"
   },
   "placeholders": {
     "enterFirstName": "নামের প্রথম অংশ লিখুন",

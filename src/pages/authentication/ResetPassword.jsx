@@ -18,6 +18,7 @@ function ResetPassword() {
   const handleInputTwo = (event) => {
     setIsShowConfirmIcon(event.target.value.trim().length > 0);
   };
+
   const handleInput = (event) => {
     setIsShowIcon(event.target.value.trim().length > 0);
     const password = event.target.value;

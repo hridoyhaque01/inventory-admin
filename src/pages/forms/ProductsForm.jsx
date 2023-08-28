@@ -88,7 +88,7 @@ function ProductsForm() {
   };
 
   return (
-    <section className="h-full w-full overflow-auto px-6 md:px-10 py-6">
+    <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
@@ -108,7 +108,7 @@ function ProductsForm() {
                     type="text"
                     placeholder={t("placeholders.enterProductId")}
                     name="productId"
-                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded  text-sm ${
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded  text-sm sm:text-base ${
                       type === "edit"
                         ? "bg-whiteMid text-fadeColor"
                         : "bg-transparent text-blackLow"
@@ -134,13 +134,13 @@ function ProductsForm() {
                 </div>
 
                 {/* Product Category: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.category")} :
                   </span>
                   <div className="relative w-full">
                     <select
-                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none"
+                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none text-sm sm:text-base"
                       name="productCategory"
                       defaultValue={payload ? payload?.productCategory : ""}
                       required
@@ -172,13 +172,13 @@ function ProductsForm() {
                 </div>
 
                 {/* Quantity Price/productUnit: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("placeholders.unit")}
                   </span>
                   <div className="relative w-full">
                     <select
-                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none"
+                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none text-sm sm:text-base"
                       name="productUnit"
                       defaultValue={`${payload?.productUnit}` || "KG"}
                     >
@@ -213,22 +213,16 @@ function ProductsForm() {
                   <div className="flex items-center gap-3">
                     <Link
                       to="/products"
-                      className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
+                      className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
-                      className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
+                      className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
                       {t("buttons.save")}
                     </button>
-                    {/* <button
-                      type="submit"
-                      className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
-                    >
-                      Save
-                    </button> */}
                   </div>
                 </div>
               </div>

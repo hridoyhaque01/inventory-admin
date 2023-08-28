@@ -6,8 +6,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { avatar, logo } from "../../../assets/getAssets";
 import { logout } from "../../../features/auth/authSlice";
+import { toggleSidebar } from "../../../features/nav/navSlice";
 
-const TopNav = () => {
+const TopNav = ({ isShowButton }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.auth);
   const currentLanguage = Cookies.get("i18next");
@@ -25,14 +26,34 @@ const TopNav = () => {
   };
 
   return (
-    <div className="navbar bg-primaryMainDarkest px-6 py-2">
+    <div className="navbar bg-primaryMainDarkest px-6 py-2 relative z-[9999]">
       {/* top nav left */}
       <div className="flex-1 text-whiteHigh">
-        <h1 className="text-2xl">
+        <button
+          type="button"
+          className={`${isShowButton ? "" : "hidden"} lg:hidden`}
+          onClick={() => dispatch(toggleSidebar())}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            enableBackground="new 0 0 24 24"
+            viewBox="0 0 24 24"
+            id="menu-bar"
+            className="h-8 w-8 fill-whiteHigh"
+          >
+            <rect width="24" height="24" fill="none"></rect>
+            <path
+              d="M18.2,12.7H5.8C5.3,12.7,5,12.4,5,12s0.3-0.7,0.7-0.7h12.5c0.4,0,0.7,0.3,0.7,0.7S18.7,12.7,18.2,12.7z M19,7.8
+		C19,7.3,18.7,7,18.3,7H5.8C5.3,7,5,7.4,5,7.8s0.3,0.7,0.7,0.7h12.5C18.7,8.5,19,8.2,19,7.8z M19,16.2c0-0.4-0.3-0.7-0.7-0.7H5.8
+		c-0.4,0-0.7,0.3-0.7,0.7C5,16.6,5.4,17,5.8,17h12.5C18.7,17,19,16.7,19,16.2z"
+            ></path>
+          </svg>
+        </button>
+        <div>
           <Link to="/">
             <img src={logo} alt="" className="w-10 h-10" />
           </Link>
-        </h1>
+        </div>
       </div>
       {/* top nav right */}
       <div className="flex-none">

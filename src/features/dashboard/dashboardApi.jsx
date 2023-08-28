@@ -170,7 +170,7 @@ export const dashboardApi = apiSlice.injectEndpoints({
             totalSalesInit += totalSales;
             totalPaidToOwnerInit += totalPaidToOwner;
           }
-
+          storeDetails.sort((a, b) => new Date(b.date) - new Date(a.date));
           resultData.push({ storeDetails, storeName, storeId });
         });
         cardData.totalRevenue = totalRevenueInit;

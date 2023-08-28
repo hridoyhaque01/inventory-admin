@@ -146,19 +146,19 @@ function BuySuppliesForm() {
   ) : productError || suppliersError ? (
     <div>{t("somethingWrong")}</div>
   ) : (
-    <section className="h-full w-full overflow-auto px-10 py-6">
+    <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">
+          <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
             {t("tableTitle.supplies")}
           </h4>
         </div>
-        <div className="bg-whiteHigh w-full">
+        <div className="bg-whiteHigh w-full px-4">
           <div className=" w-full max-w-[620px] mx-auto py-6">
             <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col justify-start gap-6">
                 {/* productId */}
-                <div className="flex flex-col md:flex-row md:items-center gap-3 relative">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.productId")} :
                   </span>
@@ -173,8 +173,8 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* Product Name */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.productName")} :
                   </span>
                   <input
@@ -188,8 +188,8 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* Quantity Price/Unit: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.quantity")} :
                   </span>
                   <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-blackLow text-sm">
@@ -235,8 +235,8 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* Unit Count */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.unitPrice")} :
                   </span>
                   <input
@@ -250,8 +250,8 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* Shop Name: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.totalPrice")} :
                   </span>
                   <input
@@ -265,8 +265,8 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* Paid Amount : */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.paidAmount")} :
                   </span>
                   <input
@@ -280,8 +280,8 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* Shop Name: */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.dueAmount")} :
                   </span>
                   <input
@@ -299,18 +299,18 @@ function BuySuppliesForm() {
                 </div>
 
                 {/* submit button */}
-                <div className="flex items-center gap-3 mt-4">
+                <div className="flex flex-col md:flex-row md:items-center gap-3 mt-4">
                   <span className="w-[140px]"></span>
                   <div className="flex items-center gap-3">
                     <Link
                       to="/supplies"
-                      className="w-[160px] p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center"
+                      className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
-                      className="w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
+                      className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
                       {t("buttons.save")}
                     </button>

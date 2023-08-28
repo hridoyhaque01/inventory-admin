@@ -42,28 +42,28 @@ const DashboardTable = ({ results, setActiveStore }) => {
         <div className="h-full w-full overflow-auto flex flex-col items-end flex-wrap justify-between pb-4 gap-4 bg-whiteHigh rounded-b-md">
           <table className="table w-full overflow-auto">
             <thead className=" p-0">
-              <tr className="font-bold text-center text-3xl">
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <tr className="text-center font-bold text-sm sm:text-base ms:text-xl">
+                <th className="bg-primaryMainLightest text-blackHigh normal-case">
                   {t("tables.serial")}
                 </th>
-                {/* <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
+                {/* <th className="bg-primaryMainLightest text-blackHigh normal-case p-2">
                   Paid to Owner
                 </th> */}
 
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                <th className="bg-primaryMainLightest text-blackHigh normal-case">
                   {t("tables.totalDue")}
                 </th>
 
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                <th className="bg-primaryMainLightest text-blackHigh normal-case">
                   {t("tables.totalRevenue")}
                 </th>
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                <th className="bg-primaryMainLightest text-blackHigh normal-case">
                   {t("tables.totalCost")}
                 </th>
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                <th className="bg-primaryMainLightest text-blackHigh normal-case">
                   {t("tables.totalSales")}
                 </th>
-                <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                <th className="bg-primaryMainLightest text-blackHigh normal-case">
                   {t("date")}
                 </th>
               </tr>
@@ -82,7 +82,7 @@ const DashboardTable = ({ results, setActiveStore }) => {
               <tbody className="text-center">
                 {/* {currentRows?.map((customer, i)=>) */}
                 {currentRows?.map((result, i) => (
-                  <tr className="text-center" key={i}>
+                  <tr className="text-center text-xs sm:text-base" key={i}>
                     <td className="py-2">
                       {currentPage === 1 && i + 1 < 10
                         ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
@@ -99,75 +99,76 @@ const DashboardTable = ({ results, setActiveStore }) => {
               </tbody>
             )}
           </table>
-
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            rowsPerPage={rowsPerPage}
-            setRowsPerPage={setRowsPerPage}
-            totalRows={results?.storeDetails?.length}
-          ></Pagination>
+          <div className="pr-6">
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              rowsPerPage={rowsPerPage}
+              setRowsPerPage={setRowsPerPage}
+              totalRows={results?.storeDetails?.length}
+            ></Pagination>
+          </div>
         </div>
       </div>
       <div className=" w-full overflow-auto flex flex-col items-end flex-wrap justify-between gap-4 bg-whiteHigh rounded-b-md">
         <table className="table w-full overflow-auto">
           <thead className=" p-0">
-            <tr className="font-bold text-center text-3xl">
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+            <tr className="font-bold text-center  text-sm sm:text-base ms:text-xl">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {/* {t("tables.serial")} */}
               </th>
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case p-2">
                 {t("tables.totalPaidOwner")}
               </th>
 
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.totalRemaining")}
               </th>
 
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.totalDue")}
               </th>
 
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.totalRevenue")}
               </th>
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.totalCost")}
               </th>
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.totalSales")}
               </th>
-              <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.action")}
               </th>
             </tr>
             {results?.storeDetails?.length > 0 ? (
-              <tr className="font-bold text-center text-3xl">
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case py-6">
+              <tr className="text-center text-xs sm:text-base">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-6">
                   {t("tables.total")}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   {results?.storeDetails[0]?.finalPaid}
                 </th>
 
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   {results?.storeDetails[0]?.finalRemaining}
                 </th>
 
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   {totalDue}
                 </th>
 
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   {totalrevenue}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   {totalCost}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   {totalSales}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh text-base normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
                   <label
                     type="button"
                     // onClick={() => handleNavigate(result)}

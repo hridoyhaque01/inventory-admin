@@ -56,8 +56,8 @@ function ForgetPassword() {
       });
   };
   return (
-    <section className="h-screen w-full bg-reset bg-cover bg-center object-cover flex items-center justify-center">
-      <div className="w-full max-w-[760px] bg-whiteHigh px-6 py-14 relative">
+    <section className="h-screen w-full bg-transparent md:bg-reset bg-cover bg-center object-cover flex items-center justify-center overflow-auto">
+      <div className="w-full max-w-[760px] h-full md:h-auto bg-whiteHigh px-4 py-8 relative overflow-auto">
         <div className="absolute top-6 left-6">
           <Link to="/login">
             <svg
@@ -74,15 +74,17 @@ function ForgetPassword() {
             </svg>
           </Link>
         </div>
-        <div className="w-full max-w-[400px] mx-auto">
+        <div className="w-full max-w-[400px] mx-auto mt-8 md:mt-0">
           <div className="text-center">
             <div className="text-center lg:text-left mb-6">
               <img src={logo} alt="" className="w-20 h-20 mx-auto" />
             </div>
-            <h2 className="text-2xl text-blackSemi font-bold mt-2">
+            <h2 className="text-blackSemi text-lg lg:text-2xl text-center  font-bold">
               {t("buttons.reset")}
             </h2>
-            <p className="text-fadeColor mt-10">{t("resetDesc")}</p>
+            <p className="text-fadeColor text-sm md:text-base mt-4 md:mt-6 lg:mt-10">
+              {t("resetDesc")}
+            </p>
           </div>
 
           <form action="" className="w-full mt-10" onSubmit={handleSubmit}>

@@ -25,23 +25,23 @@ function ExpensesTable({ data }) {
     <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4">
       <table className="table w-full">
         <thead className=" p-0">
-          <tr className="font-bold text-center text-3xl">
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+          <tr className="font-bold text-center text-sm sm:text-base ms:text-xl">
+            <th className="bg-primaryMainLightest text-blackHigh normal-case">
               {t("tables.serial")}
             </th>
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case p-2">
+            <th className="bg-primaryMainLightest text-blackHigh normal-case p-2">
               {t("date")}
             </th>
 
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+            <th className="bg-primaryMainLightest text-blackHigh normal-case">
               {t("tables.description")}
             </th>
 
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+            <th className="bg-primaryMainLightest text-blackHigh normal-case">
               {t("tables.amount")}
             </th>
 
-            <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+            <th className="bg-primaryMainLightest text-blackHigh normal-case">
               {t("tables.action")}
             </th>
           </tr>
@@ -57,7 +57,7 @@ function ExpensesTable({ data }) {
         ) : (
           <tbody className="text-center">
             {currentRows?.map((expense, i) => (
-              <tr className="text-center" key={i}>
+              <tr className="text-center text-xs sm:text-base" key={i}>
                 <td className="py-3">
                   {currentPage === 1 && i + 1 < 10
                     ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
@@ -89,14 +89,15 @@ function ExpensesTable({ data }) {
           </tbody>
         )}
       </table>
-
-      <Pagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        rowsPerPage={rowsPerPage}
-        setRowsPerPage={setRowsPerPage}
-        totalRows={data?.length}
-      ></Pagination>
+      <div className="pr-6">
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          rowsPerPage={rowsPerPage}
+          setRowsPerPage={setRowsPerPage}
+          totalRows={data?.length}
+        ></Pagination>
+      </div>
     </div>
   );
 }

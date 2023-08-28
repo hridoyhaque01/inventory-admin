@@ -81,8 +81,8 @@ function StoreDetails() {
   // }, [totalSales, totalCosts, totalDues, dataFetching, isError]);
 
   return (
-    <div className="w-full overflow-auto pt-10 pb-6 pr-10">
-      <div className="flex flex-col justify-around pty-10 gap-4 w-full">
+    <div className="w-full overflow-hidden px-4 md:px-6 mt-6">
+      <div className="flex flex-col justify-around px-4 py-6 gap-4 w-full bg-whiteHigh shadow-md rounded-2xl">
         {/* 4 top cards */}
 
         {/* <section className="flex items-stretch gap-8 px-4">
@@ -92,52 +92,39 @@ function StoreDetails() {
         </section> */}
 
         {/* single store details */}
-        <div className="p-6 rounded-2xl bg-whiteHigh shadow-md mt-6">
-          <h4 className="text-xl font-bold">{t("tableTitle.store")} </h4>
+        <div className=" mt-6 overflow-auto">
+          <h4 className="text-base md:text-xl font-bold">
+            {t("tableTitle.store")}{" "}
+          </h4>
           <div className="mt-6">
-            <table className="table w-full">
+            <table className="table w-full  ">
               <thead className=" p-0">
-                <tr className="font-bold text-3xl">
-                  <th className="bg-primaryMainLightest text-bold normal-case p-2">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-accent border-fadeHigh text-base  checkbox-sm rounded "
-                      name="checkbox"
-                    />
-                  </th>
-
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                <tr className="font-bold text-sm sm:text-base ms:text-xl">
+                  <th className="bg-primaryMainLightest text-blackHigh normal-case">
                     {t("tables.serial")}
                   </th>
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                  <th className="bg-primaryMainLightest text-blackHigh normal-case">
                     {t("tables.created")}
                   </th>
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                  <th className="bg-primaryMainLightest text-blackHigh normal-case">
                     {t("tables.name")}
                   </th>
 
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                  <th className="bg-primaryMainLightest text-blackHigh normal-case">
                     {t("forms.email")}
                   </th>
 
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case">
+                  <th className="bg-primaryMainLightest text-blackHigh normal-case">
                     {t("forms.password")}
                   </th>
 
-                  <th className="bg-primaryMainLightest text-blackHigh text-base normal-case text-center">
+                  <th className="bg-primaryMainLightest text-blackHigh normal-case text-center">
                     {t("tables.action")}
                   </th>
                 </tr>
               </thead>
               <tbody className="">
-                <tr className="border-none">
-                  <th className="p-2">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
-                      name="checkbox"
-                    />
-                  </th>
+                <tr className="border-none text-xs sm:text-base">
                   <td className="py-3">01</td>
                   <td className="py-3">
                     {new Date(payload?.timestamp).toLocaleDateString("en-US")}
@@ -149,7 +136,7 @@ function StoreDetails() {
                   <td className="py-3 text-center">
                     <label
                       htmlFor="resetPasswordModal"
-                      className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer"
+                      className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer whitespace-nowrap"
                     >
                       {t("buttons.reset")}
                     </label>

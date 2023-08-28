@@ -177,20 +177,20 @@ function EditProfile() {
   };
 
   return (
-    <section className="h-full w-full overflow-auto px-10 py-6">
+    <section className="h-full w-full overflow-auto px-6 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
-          <h4 className=" text-whiteHigh text-2xl font-bold">
+          <h4 className=" text-whiteHigh text-lg sm:text-xl md:text-2xl font-bold">
             {t("editProfile")}
           </h4>
         </div>
-        <div className="bg-whiteHigh w-full">
+        <div className="bg-whiteHigh w-full px-4">
           <div className=" w-full max-w-[620px] mx-auto py-6">
             <form action="" onSubmit={handleSubmit}>
               <div className="flex flex-col justify-start gap-6">
                 {/* name */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.firstName")} :
                   </span>
                   <input
@@ -203,8 +203,8 @@ function EditProfile() {
                   />
                 </div>
                 {/* name */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.lastName")} :
                   </span>
                   <input
@@ -217,8 +217,8 @@ function EditProfile() {
                   />
                 </div>
                 {/* profile */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.avatar")} {t("forms.140")} :
                   </span>
                   <div className="w-full relative">
@@ -300,8 +300,8 @@ function EditProfile() {
                   </div>
                 </div>
                 {/* email */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.email")} :
                   </span>
                   <input
@@ -315,8 +315,8 @@ function EditProfile() {
                 </div>
 
                 {/* phone */}
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.phone")} :
                   </span>
                   <input
@@ -329,24 +329,11 @@ function EditProfile() {
                   />
                 </div>
 
-                {/* Old Password : */}
-                {/* <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
-                    Old Password :
-                  </span>
-                  <input
-                    type="text"
-                    name="oldPassword"
-                    placeholder="Old password"
-                    className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm placeholder:text-fadeColor"
-                  />
-                </div> */}
-
                 {/* NEW PASSWORD  */}
 
                 <div className="">
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                  <div className="flex flex-col md:flex-row md:items-center gap-3">
+                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                       {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
@@ -358,8 +345,8 @@ function EditProfile() {
                       placeholder={t("placeholders.enterNewPass")}
                     ></PasswordInput>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right"></span>
+                  <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right"></span>
                     {!isStrong && (
                       <p className="text-[10px] text-fadeColor mt-1">
                         {t("forms.restriction")}
@@ -369,8 +356,8 @@ function EditProfile() {
                 </div>
                 {/* confirm PASSWORD  */}
 
-                <div className="flex items-center gap-3">
-                  <span className="inline-block w-[180px] shrink-0 whitespace-nowrap text-right">
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
@@ -389,13 +376,13 @@ function EditProfile() {
                 <div className="flex items-center justify-end gap-3">
                   <Link
                     to="/profile"
-                    className="w-full max-w-[160px] p-4 rounded-full font-medium border border-errorLightColor text-errorLightColor text-center"
+                    className="w-full max-w-[120px] lg:max-w-[160px] p-4 rounded-full font-medium border border-errorLightColor text-errorLightColor text-center text-[10px] sm:text-base"
                   >
                     {t("buttons.cancel")}
                   </Link>
                   <button
                     type="submit"
-                    className="w-full max-w-[160px] p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center"
+                    className="w-full max-w-[120px] lg:max-w-[160px] p-4 px-4 sm:px-6 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center text-[10px] sm:text-base"
                     disabled={isShowIcon ? (isStrong ? false : true) : false}
                   >
                     {t("buttons.save")}

@@ -43,7 +43,7 @@ function BuySupplies() {
   }
 
   return (
-    <section className="h-full w-full overflow-auto pr-6 py-6">
+    <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
           title="tableTitle.supplies"

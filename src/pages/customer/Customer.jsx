@@ -65,7 +65,7 @@ function Customer() {
     content = <CustomerTable data={newData}></CustomerTable>;
   }
   return (
-    <section className="h-full w-full overflow-auto pr-6 py-6">
+    <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="shadow-sm bg-whiteHigh w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
           title="tableTitle.customers"
@@ -74,10 +74,10 @@ function Customer() {
           onChange={onChange}
           isNotAddable={true}
         >
-          <div className="dropdown dropdown-bottom">
+          <div className="dropdown dropdown-bottom z-50">
             <label
               tabIndex={0}
-              className="text-whiteHigh flex items-center gap-1 cursor-pointer"
+              className="text-whiteHigh flex items-center gap-1 cursor-pointer  text-sm md:text-base whitespace-nowrap"
             >
               <span>
                 {selectedShop === "All Shop" ? t("allShop") : selectedShop}
@@ -98,7 +98,7 @@ function Customer() {
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-2 shadow bg-whiteHigh rounded w-48 mt-2"
+              className="dropdown-content z-[1] menu p-1 shadow bg-whiteHigh rounded w-36 sm:w-48 mt-2 text-sm md:text-base whitespace-nowrap overflow-visible"
             >
               <li onClick={() => setSelectedShop("All Shop")}>
                 <p>{t("allShop")}</p>

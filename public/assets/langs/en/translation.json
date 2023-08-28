@@ -48,7 +48,8 @@
     "recivedAmount": "Recived Amount",
     "description": "Description",
     "totalAmount": "Total Amount",
-    "paidAmount": "Paid Amount"
+    "paidAmount": "Paid Amount",
+    "passReset": "Reset Password"
   },
   "placeholders": {
     "enterFirstName": "Enter first name",

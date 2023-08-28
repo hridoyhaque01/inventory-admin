@@ -6,9 +6,9 @@ const HomeTopCard = ({ data }) => {
 
   return (
     <section
-      className={`flex items-center gap-4 px-4 w-full md:py-4 lg:py-14 rounded-xl relative overflow-hidden ${data?.color}`}
+      className={`flex  items-center gap-4 px-4 w-full py-12 xl:py-14 rounded-xl relative overflow-hidden ${data?.color}`}
     >
-      <div className="p-4 bg-whiteHigh bg-opacity-30 rounded-full">
+      <div className="p-4 bg-whiteHigh bg-opacity-30 rounded-full ">
         <svg
           width="24"
           height="24"
@@ -22,9 +22,9 @@ const HomeTopCard = ({ data }) => {
           />
         </svg>
       </div>
-      <div className="text-whiteHigh">
+      <div className="text-whiteHigh lg:text-center">
         <p>{t(data?.title)}</p>
-        <p className="text-4xl font-bold">{data?.number}</p>
+        <p className="text-2xl xl:text-3xl font-bold">{data?.number}</p>
       </div>
       <div
         className="w-24 h-36 bg-gradient-primary absolute -top-6 -right-2.5 rounded-2xl"
