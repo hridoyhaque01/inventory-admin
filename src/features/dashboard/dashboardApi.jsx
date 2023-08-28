@@ -184,6 +184,7 @@ export const dashboardApi = apiSlice.injectEndpoints({
           data: { resultData, cardData },
         };
       },
+      providesTags: ["dashboard"],
     }),
   }),
 });

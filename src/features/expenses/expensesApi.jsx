@@ -34,6 +34,7 @@ const expensesApi = apiSlice.injectEndpoints({
           console.log(error);
         }
       },
+      invalidatesTags: ["dashboard"],
     }),
     updateExpense: builder.mutation({
       query: ({ data, id }) => ({
@@ -72,6 +73,7 @@ const expensesApi = apiSlice.injectEndpoints({
           console.log(error);
         }
       },
+      invalidatesTags: ["dashboard"],
     }),
   }),
 });

@@ -51,6 +51,7 @@ export const buySuppliesApi = apiSlice.injectEndpoints({
           console.log(error);
         }
       },
+      invalidatesTags: ["dashboard"],
     }),
   }),
 });

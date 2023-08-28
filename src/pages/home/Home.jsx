@@ -112,7 +112,7 @@ const Dashboard = () => {
       setDashboardData(updatedData);
       dispatch(setStoreData(storeData));
     }
-  }, [isLoading, isError, cardData]);
+  }, [isLoading, isError, cardData, storeData]);
 
   return (
     <div className="w-full overflow-auto pb-6 pr-10">
