@@ -198,7 +198,7 @@ const storeApi = apiSlice.injectEndpoints({
 
         // console.log(tablePaidToOwnerInit);
         return {
-          data: { resultData, cardData },
+          data: resultData,
         };
       },
       providesTags: ["store"],
@@ -252,7 +252,7 @@ const storeApi = apiSlice.injectEndpoints({
           console.log(error);
         }
       },
-      invalidatesTags: ["dashboard"],
+      invalidatesTags: ["store"],
     }),
   }),
 });

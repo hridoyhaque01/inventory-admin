@@ -147,6 +147,9 @@
     "suppliers": "সরবরাহকারী",
     "supplier": "সরবরাহকারী",
     "supplies": "সরবরাহ",
-    "store": "দোকান"
+    "store": "দোকান",
+    "storeSetting": "স্টোর সেটিংস",
+    "financial": "আর্থিক লেনদেন",
+    "transactions": "লেনদেন"
   }
 }

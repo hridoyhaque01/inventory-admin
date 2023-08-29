@@ -8,8 +8,6 @@ import {
   XAxis,
   YAxis,
 } from "recharts";
-import blue from "../../../Assets/round/blue.png";
-import red from "../../../Assets/round/red.png";
 
 const ChartBarLoan = ({ title, data }) => {
   const [activeChart, setActiveChart] = useState("weekly");
@@ -21,61 +19,15 @@ const ChartBarLoan = ({ title, data }) => {
     <div className="flex flex-col justify-between ">
       <section className="flex items-center justify-between">
         <p className="text-2xl text-blackHigh  font-bold">{title}</p>
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "weekly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("weekly")}
-          >
-            Weekly
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "monthly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("monthly")}
-          >
-            Monthly
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "half-yearly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("half-yearly")}
-          >
-            Half yearly
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "yearly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("yearly")}
-          >
-            Yearly
-          </button>
-        </div>
       </section>
       <section className="flex items-center justify-start gap-6 mt-14 mb-8">
         <div className="flex items-center justify-center gap-2">
-          <img src={red} alt="" />
-          <p>This Year</p>
+          <div className="w-5 h-5 rounded-full bg-primaryMainLight"></div>
+          <p>This Month</p>
         </div>
         <div className="flex items-center justify-center gap-2">
-          <img src={blue} alt="" />
-          <p>Last Year</p>
+          <div className="w-5 h-5 rounded-full bg-secondaryMain"></div>
+          <p>Last Month</p>
         </div>
       </section>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">

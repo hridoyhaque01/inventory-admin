@@ -3,19 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomeTopCard from "../../Components/Cards/HomeTopCard";
+import Charts from "../../components/Charts/Charts";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import SearchLoader from "../../components/loaders/SearchLoader";
 import PaidToOwnerModal from "../../components/modals/PaidToOwnerModal";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
-import DashboardTable from "../../components/tables/DashboardTable/DashboardTable";
-import { useGetAllStoreResultQuery } from "../../features/dashboard/dashboardApi";
+import {
+  useGetAllStoreResultQuery,
+  useGetChartDataQuery,
+} from "../../features/dashboard/dashboardApi";
 import { setStoreData } from "../../features/dashboard/dashboardSlice";
 import { useUpdatePaymentMutation } from "../../features/store/storeApi";
 
 const Dashboard = () => {
   const [activeStore, setActiveStore] = useState({});
   const { storeData: storeHouse } = useSelector((state) => state.storeData);
+  const { data } = useGetChartDataQuery();
+
+  console.log(data);
   const dispatch = useDispatch();
   const errorNotify = (message) =>
     toast.error(message, {
@@ -28,6 +34,21 @@ const Dashboard = () => {
       progress: undefined,
       theme: "light",
     });
+
+  const chartData = [
+    { name: "Feb", uv: 400, pv: 1100, amt: 1800 },
+    { name: "Mar", uv: 200, pv: 1400, amt: 1300 },
+    { name: "Apr", uv: 400, pv: 1500, amt: 1200 },
+    { name: "May", uv: 100, pv: 1100, amt: 1900 },
+    { name: "Jun", uv: 600, pv: 1200, amt: 1400 },
+    { name: "Jul", uv: 300, pv: 1200, amt: 1900 },
+    { name: "Aug", uv: 100, pv: 1700, amt: 1700 },
+    { name: "Sep", uv: 800, pv: 1400, amt: 1100 },
+    { name: "Oct", uv: 300, pv: 1600, amt: 1500 },
+    { name: "Nov", uv: 100, pv: 1100, amt: 1700 },
+    { name: "Dec", uv: 800, pv: 1400, amt: 1100 },
+    { name: "Jan", uv: 200, pv: 1700, amt: 1500 },
+  ];
 
   const infoNotify = (message) =>
     toast.info(message, {
@@ -88,16 +109,8 @@ const Dashboard = () => {
   } else if (!isLoading && !isError && resultData?.length > 0) {
     content = (
       <>
-        {/* <Charts salesData={sales} costsData={costs}></Charts> */}
-        <section className="flex flex-col justify-between gap-8">
-          {resultData?.map((store, index) => (
-            <DashboardTable
-              results={store}
-              key={index}
-              setActiveStore={setActiveStore}
-            ></DashboardTable>
-          ))}
-        </section>
+        <Charts data={chartData}></Charts>
+        <section className="flex flex-col justify-between gap-8"></section>
       </>
     );
   }

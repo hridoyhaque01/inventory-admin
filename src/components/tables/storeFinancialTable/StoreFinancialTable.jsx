@@ -36,7 +36,7 @@ const StoreFinancialTable = ({ results, setActiveStore }) => {
       <div className="flex flex-col h-[640px]">
         <section className="flex items-center bg-primaryMainDarkest px-6 py-3.5 rounded-t-md">
           <p className="text-right text-2xl text-whiteHigh font-bold capitalize">
-            {results?.storeName}
+            {results?.storeData?.name}
           </p>
         </section>
         <div className="h-full w-full overflow-auto flex flex-col items-end flex-wrap justify-between pb-4 gap-4 bg-whiteHigh rounded-b-md">
@@ -71,7 +71,7 @@ const StoreFinancialTable = ({ results, setActiveStore }) => {
             {results?.storeDetails?.length === 0 ? (
               <tbody>
                 <tr className="border-none">
-                  <td colSpan="8" className="py-6">
+                  <td colSpan="8" className="md:py-6">
                     <h2 className="text-center text-lg text-blackRgb font-medium">
                       {t("noData")}
                     </h2>
@@ -144,31 +144,31 @@ const StoreFinancialTable = ({ results, setActiveStore }) => {
             </tr>
             {results?.storeDetails?.length > 0 ? (
               <tr className="text-center text-xs sm:text-base">
-                <th className="bg-secondaryMain text-blackHigh normal-case py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {t("tables.total")}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {results?.storeDetails[0]?.finalPaid}
                 </th>
 
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {results?.storeDetails[0]?.finalRemaining}
                 </th>
 
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {totalDue}
                 </th>
 
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {totalrevenue}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {totalCost}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   {totalSales}
                 </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
+                <th className="bg-secondaryMain text-blackHigh normal-case py-2 sm:py-4 md:py-6">
                   <label
                     type="button"
                     // onClick={() => handleNavigate(result)}
@@ -176,7 +176,7 @@ const StoreFinancialTable = ({ results, setActiveStore }) => {
                     className="cursor-pointer inline-block px-6 py-2 bg-whiteHigh rounded-lg text-sm"
                     onClick={() =>
                       setActiveStore({
-                        id: results?.storeId,
+                        id: results?.storeData?._id,
                         remaining: results?.storeDetails[0]?.finalRemaining,
                       })
                     }
@@ -187,7 +187,7 @@ const StoreFinancialTable = ({ results, setActiveStore }) => {
               </tr>
             ) : (
               <tr className="border-none">
-                <th colSpan="8" className="py-6">
+                <th colSpan="8" className="md:py-6">
                   <h2 className="text-center text-lg text-blackRgb font-medium">
                     {t("noData")}
                   </h2>

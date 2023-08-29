@@ -4,14 +4,11 @@ import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import StoreTable from "../../components/tables/store/StoreTable";
-import { useGetStoresResultQuery } from "../../features/store/storeApi";
+import { useGetStoresQuery } from "../../features/store/storeApi";
 
 function Store() {
-  // const { data, isLoading, isError } = useGetStoresQuery();
+  const { data, isLoading, isError } = useGetStoresQuery();
   const [searchValue, setSearchValue] = useState("");
-  const { data, isLoading, isError } = useGetStoresResultQuery();
-
-  const { resultData } = data || {};
 
   const sortByTime = (a, b) => {
     return b.timestamp - a.timestamp;
@@ -36,10 +33,10 @@ function Store() {
     content = <SearchLoader></SearchLoader>;
   } else if (!isLoading && isError) {
     content = <SomethingWrong></SomethingWrong>;
-  } else if (!isLoading && !isError && resultData?.length === 0) {
+  } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
-  } else if (!isLoading && !isError && resultData?.length > 0) {
-    const newData = [...resultData]?.sort(sortByTime)?.filter(filterBySearch);
+  } else if (!isLoading && !isError && data?.length > 0) {
+    const newData = [...data]?.sort(sortByTime)?.filter(filterBySearch);
     content = <StoreTable data={newData}></StoreTable>;
   }
 

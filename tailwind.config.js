@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: ["./src/**/*.{html,js,jsx}", "node_modules/preline/dist/*.js"],
   theme: {
     colors: {
       transparent: "transparent",
@@ -80,7 +80,7 @@ module.exports = {
       },
     },
   },
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"), require("preline/plugin")],
   daisyui: {
     themes: ["light"],
   },

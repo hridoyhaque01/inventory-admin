@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
@@ -7,15 +7,25 @@ import { toggleSidebar } from "../../../features/nav/navSlice";
 import "./SideNav.css";
 
 const SideNav = () => {
+  const [isSubmenuOpen, setIsSubmenuOpen] = useState({});
+  const submenuRef = useRef({});
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { isShowSidebar } = useSelector((state) => state.nav);
+
+  const handleDropdown = (menu, submenuOpen) => {
+    if (!submenuOpen) {
+      setIsSubmenuOpen((prev) => ({
+        [menu]: !prev[menu],
+      }));
+    }
+  };
 
   return (
     <>
       <div
         className={`bg-primaryMainDarkest min-h-screen pt-[66px] lg:pt-0 overflow-auto shrink-0 fixed top-0 bottom-0 left-0 lg:relative ${
-          isShowSidebar ? "w-52" : "w-0 lg:w-52"
+          isShowSidebar ? "w-56" : "w-0 lg:w-56"
         }  text-whiteHigh sidebar duration-300 shrink-0 z-[80]`}
       >
         {/* routes */}
@@ -267,7 +277,7 @@ const SideNav = () => {
           </div>
 
           {/* Store */}
-          <div className="w-full overflow-hidden capitalize">
+          {/* <div className="w-full overflow-hidden capitalize">
             <NavLink
               to="/store"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
@@ -291,12 +301,71 @@ const SideNav = () => {
                 <span>{t("navigations.store")}</span>
               </span>
             </NavLink>
-          </div>
+          </div> */}
 
+          <div className="w-full overflow-hidden capitalize">
+            <div
+              className={`flex items-center px-4  py-2 gap-2 cursor-pointer select-none`}
+              onClick={() => handleDropdown("Wallpapers")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+              >
+                <path
+                  d="M20.16 7.8C20.07 7.34 19.66 7 19.18 7H4.82C4.34 7 3.93 7.34 3.84 7.8L3 12V13C3 13.55 3.45 14 4 14V19C4 19.55 4.45 20 5 20H13C13.55 20 14 19.55 14 19V14H18V19C18 19.55 18.45 20 19 20C19.55 20 20 19.55 20 19V14C20.55 14 21 13.55 21 13V12L20.16 7.8ZM12 18H6V14H12V18ZM5 6H19C19.55 6 20 5.55 20 5C20 4.45 19.55 4 19 4H5C4.45 4 4 4.45 4 5C4 5.55 4.45 6 5 6Z"
+                  fill="white"
+                />
+              </svg>
+              <p className={`flex-1  "hidden"} shrink-0`}>
+                <span>{t("tableTitle.store")}</span>
+              </p>
+              <span
+                className={`duration-100 ${
+                  isSubmenuOpen["Wallpapers"] ? "rotate-90" : "rotate-0"
+                }  "hidden"}`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 16 16"
+                  fill="none"
+                >
+                  <path
+                    d="M5.99999 5.41676L8.58666 8.00343L5.99999 10.5901C5.73999 10.8501 5.73999 11.2701 5.99999 11.5301C6.25999 11.7901 6.67999 11.7901 6.93999 11.5301L9.99999 8.4701C10.26 8.2101 10.26 7.7901 9.99999 7.5301L6.93999 4.4701C6.67999 4.2101 6.25999 4.2101 5.99999 4.4701C5.74666 4.7301 5.73999 5.15676 5.99999 5.41676Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </div>
+            {/* submenu  */}
+
+            <div
+              ref={(ref) => (submenuRef.current["Wallpapers"] = ref)}
+              className={`flex flex-col gap-1 duration-200`}
+              style={{
+                maxHeight: isSubmenuOpen["Wallpapers"]
+                  ? `${submenuRef.current["Wallpapers"]?.scrollHeight}px`
+                  : "0",
+              }}
+            >
+              {/* Submenu items */}
+              <NavLink to="/stores-settings" className="py-3 pl-12">
+                <p>{t("tableTitle.storeSetting")}</p>
+              </NavLink>
+              <NavLink to="/stores-financial" className="py-3 pl-12">
+                <p>{t("tableTitle.transactions")}</p>
+              </NavLink>
+            </div>
+          </div>
           {/* logout */}
           <div className="w-full overflow-hidden capitalize">
             <button
-              className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
+              className="flex items-center pl-5 px-4 py-2 gap-2 cursor-pointer select-none"
               onClick={() => dispatch(logout())}
             >
               <span>

@@ -63,3 +63,7 @@ input[type="number"] {
   overflow: auto;
   background-color: #f9f9f9;
 }
+
+.tabs-container::-webkit-scrollbar {
+  width: 0;
+}

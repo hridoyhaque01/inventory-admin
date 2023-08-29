@@ -19,63 +19,16 @@ const ChartArea = ({ title, data }) => {
     <div className="flex flex-col justify-between">
       <section className="flex items-center justify-between">
         <p className="text-2xl text-blackHigh  font-bold">{title}</p>
-        {/* <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "weekly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("weekly")}
-          >
-            Weekly
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "monthly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("monthly")}
-          >
-            Monthly
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "half-yearly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("half-yearly")}
-          >
-            Half yearly
-          </button>
-          <button
-            type="button"
-            className={`py-2 px-4 rounded-full text-blackMid text-sm border ${
-              activeChart === "yearly"
-                ? "bg-primaryMainLight text-whiteHigh border-primaryMainLight"
-                : " border-fadeHigh"
-            }`}
-            onClick={() => handleChart("yearly")}
-          >
-            Yearly
-          </button>
-        </div> */}
       </section>
       <section className="flex items-center justify-start gap-6 mt-14 mb-8">
         <div className="flex items-center justify-center gap-2">
-          <div className="w-4 h-4 rounded-full bg-warningColor"></div>
-          {/* <img src={red} alt="" /> */}
-          <p>This Year</p>
+          <div className="w-5 h-5 rounded-full bg-primaryMainLight"></div>
+          <p>This Month</p>
         </div>
-        {/* <div className="flex items-center justify-center gap-2">
-          <img src={blue} alt="" />
-          <p>Last Year</p>
-        </div> */}
+        <div className="flex items-center justify-center gap-2">
+          <div className="w-5 h-5 rounded-full bg-secondaryMain"></div>
+          <p>Last Month</p>
+        </div>
       </section>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
         <ResponsiveContainer width="100%" height={400}>
@@ -100,18 +53,18 @@ const ChartArea = ({ title, data }) => {
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="sales"
+              dataKey="pv"
               fill="url(#gradientColor)"
               stroke="#FFC227"
               strokeWidth={2}
             />
-            {/* <Area
+            <Area
               type="monotone"
-              dataKey="sales"
+              dataKey="uv"
               fill="none"
               stroke="#54ADAA"
               strokeWidth={2}
-            /> */}
+            />
           </ComposedChart>
         </ResponsiveContainer>
       </section>

@@ -67,7 +67,7 @@ export const routes = createBrowserRouter([
         element: <Sales></Sales>,
       },
       {
-        path: "/store",
+        path: "/stores-settings",
         element: <Store></Store>,
       },
       {
@@ -155,7 +155,7 @@ export const routes = createBrowserRouter([
         element: <BuySuppliesView></BuySuppliesView>,
       },
       {
-        path: "/store-financial",
+        path: "/stores-financial",
         element: <StoreFinancial></StoreFinancial>,
       },
       // {

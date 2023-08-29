@@ -186,7 +186,104 @@ export const dashboardApi = apiSlice.injectEndpoints({
       },
       providesTags: ["dashboard"],
     }),
+    getChartData: builder.query({
+      async queryFn(_arg, _queryApi, _extraOptions, fetchWithBQ) {
+        // get a random user
+        const { data } = await fetchWithBQ(`/stores`);
+        // Function to get the last day of a given month and year
+        function getLastDayOfMonth(year, month) {
+          return new Date(year, month + 1, 0).getDate();
+        }
+
+        // Get current date
+        const currentDate = new Date();
+
+        // Prepare the result arrays
+        const totalSales = [];
+        const totalRevenue = [];
+
+        // Iterate through the days of the current month
+        const currentYear = currentDate.getFullYear();
+        const currentMonth = currentDate.getMonth();
+        const lastDay = getLastDayOfMonth(currentYear, currentMonth);
+
+        for (let day = 1; day <= lastDay; day++) {
+          const dayEntry = { day: day };
+
+          // Calculate totalSales and totalRevenue for the current day
+          let previousMonthSales = 0;
+          let currentMonthSales = 0;
+          let previousMonthRevenue = 0;
+          let currentMonthRevenue = 0;
+
+          for (const store of data) {
+            for (const invoice of store.invoices) {
+              const invoiceDate = new Date(invoice.payDate * 1000);
+              if (invoiceDate.getDate() === day) {
+                if (invoiceDate.getMonth() === currentMonth) {
+                  currentMonthSales += parseFloat(invoice.totalAmount);
+                  currentMonthRevenue += parseFloat(invoice.paidAmount);
+                } else if (invoiceDate.getMonth() === currentMonth - 1) {
+                  previousMonthSales += parseFloat(invoice.totalAmount);
+                  previousMonthRevenue += parseFloat(invoice.paidAmount);
+                }
+              }
+            }
+          }
+
+          dayEntry[
+            `${getMonthName(currentMonth)}/${day.toString().padStart(2, "0")}`
+          ] = previousMonthSales;
+          dayEntry[
+            `${getMonthName(currentMonth + 1)}/${day
+              .toString()
+              .padStart(2, "0")}`
+          ] = currentMonthSales;
+
+          totalSales.push(dayEntry);
+
+          dayEntry[
+            `${getMonthName(currentMonth)}/${day.toString().padStart(2, "0")}`
+          ] = previousMonthRevenue;
+          dayEntry[
+            `${getMonthName(currentMonth + 1)}/${day
+              .toString()
+              .padStart(2, "0")}`
+          ] = currentMonthRevenue;
+
+          totalRevenue.push(dayEntry);
+        }
+
+        console.log("Total Sales:", totalSales);
+        console.log("Total Revenue:", totalRevenue);
+
+        // Helper function to get month name
+        function getMonthName(month) {
+          const monthNames = [
+            "",
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "July",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          return monthNames[month];
+        }
+        // console.log(tablePaidToOwnerInit);
+        return {
+          data: { totalRevenue, totalSales },
+        };
+      },
+      providesTags: ["dashboard"],
+    }),
   }),
 });
 
-export const { useGetAllStoreResultQuery } = dashboardApi;
+export const { useGetAllStoreResultQuery, useGetChartDataQuery } = dashboardApi;

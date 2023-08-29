@@ -1,26 +1,25 @@
 import React, { useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
+import SearchLoader from "../../components/loaders/SearchLoader";
 import PaidToOwnerModal from "../../components/modals/PaidToOwnerModal";
-import { Pagination } from "../../components/shared/pagination/Pagination";
-import { useUpdatePaymentMutation } from "../../features/store/storeApi";
+import NoData from "../../components/shared/ui/NoData";
+import SomethingWrong from "../../components/shared/ui/SomethingWrong";
+import StoreFinancialTable from "../../components/tables/storeFinancialTable/StoreFinancialTable";
+import {
+  useGetStoresResultQuery,
+  useUpdatePaymentMutation,
+} from "../../features/store/storeApi";
+import { setActiveTab } from "../../features/store/storeSlice";
 function StoreFinancial() {
-  const { state } = useLocation() || {};
-  const { payload } = state || {};
-  const { t } = useTranslation();
+  const { data, isLoading, isError } = useGetStoresResultQuery();
   const [updatePayment, { isLoading: paymentLoading }] =
     useUpdatePaymentMutation();
-  const { storeData, storeDetails: results } = payload || {};
   const [activeStore, setActiveStore] = useState({});
-  const [currentPage, setCurrentPage] = useState(1);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const indexOfLastRow = currentPage * rowsPerPage;
-  const indexOfFirstRow = indexOfLastRow - rowsPerPage;
-  const currentRows = results?.slice(indexOfFirstRow, indexOfLastRow);
-
+  const { activeTab } = useSelector((state) => state.store);
+  const dispatch = useDispatch();
   const errorNotify = (message) =>
     toast.error(message, {
       position: "top-right",
@@ -45,186 +44,63 @@ function StoreFinancial() {
       theme: "light",
     });
 
-  const totalrevenue = results?.reduce(
-    (acc, result) => acc + result?.revenue,
-    0
-  );
-  const totalDue = results?.reduce((acc, result) => acc + result?.totalDue, 0);
-  const totalCost = results?.reduce(
-    (acc, result) => acc + result?.totalCost,
-    0
-  );
-  const totalSales = results?.reduce(
-    (acc, result) => acc + result?.totalSales,
-    0
-  );
+  let content = null;
+
+  if (isLoading) {
+    content = <SearchLoader></SearchLoader>;
+  } else if (!isLoading && isError) {
+    content = <SomethingWrong></SomethingWrong>;
+  } else if (!isLoading && !isError && data?.length === 0) {
+    content = <NoData></NoData>;
+  } else if (!isLoading && !isError && data?.length > 0) {
+    content = (
+      <>
+        <nav
+          className="w-full flex items-center px-1 gap-2 rounded-sm  overflow-auto tabs-container"
+          aria-label="Tabs"
+          role="tablist"
+        >
+          {data?.map((item, i) => (
+            <button
+              type="button"
+              className={`hs-tab-active:bg-primaryMainLight hs-tab-active:text-whiteHigh bg-whiteHigh border-transparent rounded py-2 px-6 inline-flex items-center gap-2 text-sm whitespace-nowrap font-medium ${
+                activeTab === "store" + i ? "active" : ""
+              }`}
+              id={item?.storeData?.email}
+              data-hs-tab={`#store${i}`}
+              aria-controls={`store${i}`}
+              role="tab"
+              key={i}
+              onClick={() => dispatch(setActiveTab(`store${i}`))}
+            >
+              {item?.storeData?.name}
+            </button>
+          ))}
+        </nav>
+
+        <div className="mt-3">
+          {data?.map((item, i) => (
+            <div
+              id={`store${i}`}
+              role="tabpanel"
+              aria-labelledby="basic-tabs-item-1"
+              className={activeTab !== "store" + i ? "hidden" : ""}
+              key={i}
+            >
+              <StoreFinancialTable
+                results={item}
+                setActiveStore={setActiveStore}
+              ></StoreFinancialTable>
+            </div>
+          ))}
+        </div>
+      </>
+    );
+  }
 
   return (
-    <section className="w-full overflow-hidden px-4 md:px-6 mt-6">
-      <div className="flex flex-col h-[640px]">
-        <section className="flex items-center bg-primaryMainDarkest px-6 py-3.5 rounded-t-md">
-          <p className="text-right text-2xl text-whiteHigh font-bold capitalize">
-            {storeData?.name}
-          </p>
-        </section>
-        <div className="h-full w-full overflow-auto flex flex-col items-end flex-wrap justify-between pb-4 gap-4 bg-whiteHigh rounded-b-md">
-          <table className="table w-full overflow-auto">
-            <thead className=" p-0">
-              <tr className="text-center font-bold text-sm sm:text-base ms:text-xl">
-                <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                  {t("tables.serial")}
-                </th>
-                {/* <th className="bg-primaryMainLightest text-blackHigh normal-case p-2">
-                  Paid to Owner
-                </th> */}
-
-                <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                  {t("tables.totalDue")}
-                </th>
-
-                <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                  {t("tables.totalRevenue")}
-                </th>
-                <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                  {t("tables.totalCost")}
-                </th>
-                <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                  {t("tables.totalSales")}
-                </th>
-                <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                  {t("date")}
-                </th>
-              </tr>
-            </thead>
-            {results?.length === 0 ? (
-              <tbody>
-                <tr className="border-none">
-                  <td colSpan="8" className="py-6">
-                    <h2 className="text-center text-lg text-blackRgb font-medium">
-                      {t("noData")}
-                    </h2>
-                  </td>
-                </tr>
-              </tbody>
-            ) : (
-              <tbody className="text-center">
-                {/* {currentRows?.map((customer, i)=>) */}
-                {currentRows?.map((result, i) => (
-                  <tr className="text-center text-xs sm:text-base" key={i}>
-                    <td className="py-2">
-                      {currentPage === 1 && i + 1 < 10
-                        ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
-                        : rowsPerPage * (currentPage - 1) + i + 1}
-                    </td>
-                    {/* <td className="py-2">{result?.totalPaidToOwner}</td> */}
-                    <td className="py-2">{result?.totalDue}</td>
-                    <td className="py-2">{result?.revenue}</td>
-                    <td className="py-2">{result?.totalCost}</td>
-                    <td className="py-2">{result?.totalSales}</td>
-                    <td className="py-2">{result?.date}</td>
-                  </tr>
-                ))}
-              </tbody>
-            )}
-          </table>
-          <div className="pr-6">
-            <Pagination
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              rowsPerPage={rowsPerPage}
-              setRowsPerPage={setRowsPerPage}
-              totalRows={results?.length}
-            ></Pagination>
-          </div>
-        </div>
-      </div>
-      <div className=" w-full overflow-auto flex flex-col items-end flex-wrap justify-between gap-4 bg-whiteHigh rounded-b-md">
-        <table className="table w-full overflow-auto">
-          <thead className=" p-0">
-            <tr className="font-bold text-center  text-sm sm:text-base ms:text-xl">
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {/* {t("tables.serial")} */}
-              </th>
-              <th className="bg-primaryMainLightest text-blackHigh normal-case p-2">
-                {t("tables.totalPaidOwner")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.totalRemaining")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.totalDue")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.totalRevenue")}
-              </th>
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.totalCost")}
-              </th>
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.totalSales")}
-              </th>
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.action")}
-              </th>
-            </tr>
-            {results?.length > 0 ? (
-              <tr className="text-center text-xs sm:text-base">
-                <th className="bg-secondaryMain text-blackHigh normal-case py-6">
-                  {t("tables.total")}
-                </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  {results[0]?.finalPaid}
-                </th>
-
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  {results[0]?.finalRemaining}
-                </th>
-
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  {totalDue}
-                </th>
-
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  {totalrevenue}
-                </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  {totalCost}
-                </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  {totalSales}
-                </th>
-                <th className="bg-secondaryMain text-blackHigh normal-case  py-6">
-                  <label
-                    type="button"
-                    // onClick={() => handleNavigate(result)}
-                    htmlFor="paidToOwnerModal"
-                    className="cursor-pointer inline-block px-6 py-2 bg-whiteHigh rounded-lg text-sm"
-                    onClick={() =>
-                      setActiveStore({
-                        id: storeData?._id,
-                        remaining: results[0]?.finalRemaining,
-                      })
-                    }
-                  >
-                    {t("buttons.recieve")}
-                  </label>
-                </th>
-              </tr>
-            ) : (
-              <tr className="border-none">
-                <th colSpan="8" className="py-6">
-                  <h2 className="text-center text-lg text-blackRgb font-medium">
-                    {t("noData")}
-                  </h2>
-                </th>
-              </tr>
-            )}
-          </thead>
-        </table>
-      </div>
+    <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
+      <div className="">{content}</div>
       {paymentLoading && <RequestLoader></RequestLoader>}
       <PaidToOwnerModal
         activeStore={activeStore}

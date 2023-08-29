@@ -147,6 +147,9 @@
     "suppliers": "suppliers",
     "supplier": "supplier",
     "supplies": "Supplies",
-    "store": "Store"
+    "store": "Store",
+    "storeSetting": "Store Settings",
+    "financial": "Financial Transactions",
+    "transactions": "Transactions"
   }
 }

@@ -12,8 +12,6 @@ const PaidToOwnerModal = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
-  console.log(activeStore);
-
   const [payment, setPayment] = useState("");
   const handlePayment = (event) => {
     const value = event.target.value;
@@ -51,7 +49,7 @@ const PaidToOwnerModal = ({
         <div className="modal-box w-11/12 max-w-5xl flex flex-col items-center justify-center gap-4 bg-white">
           <div className="w-full max-w-[618px]">
             <div className="flex justify-center mb-6">
-              <span className="inline-block p-3 rounded-full font-medium bg-warningLowColor">
+              <span className="inline-block rounded-full font-medium text-lg text-blackSemi">
                 {t("forms.paidToOwner")}
               </span>
             </div>
@@ -97,14 +95,14 @@ const PaidToOwnerModal = ({
                   <div className="modal-action flex items-center justify-center">
                     <label
                       htmlFor="paidToOwnerModal"
-                      className="btn bg-transparent hover:bg-transparent w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
+                      className="btn bg-transparent hover:bg-transparent w-[140px] sm:w-[160px] rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </label>
                     <button type="submit">
                       <label
                         htmlFor="paidToOwnerModal"
-                        className="btn w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
+                        className="btn w-[140px] sm:w-[160px] text-sm sm:text-base rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                       >
                         {t("buttons.save")}
                       </label>

@@ -66,7 +66,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
         <div className="modal-box w-11/12 max-w-5xl flex flex-col items-center justify-center gap-4 bg-white">
           <div className="w-full max-w-[618px]">
             <div className="flex justify-center mb-6">
-              <span className="inline-block p-3 rounded-full font-medium bg-warningLowColor">
+              <span className="inline-block rounded-full  font-medium text-lg text-blackSemi">
                 {t("buttons.reset")}
               </span>
             </div>

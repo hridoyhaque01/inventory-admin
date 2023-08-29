@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 import App from "./App.jsx";
 import { store } from "./app/store.jsx";
 import "./index.css";
+import("preline");
+
 const getCurrentLoadPath = (language) => {
   if (window.location.pathname.includes("/eyJhbGciOiJIUzI1NiIsInR5")) {
     return `../assets/langs/${language}/translation.json`;
