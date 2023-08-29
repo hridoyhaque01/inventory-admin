@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -15,6 +16,7 @@ function ResetPassword() {
   const [isShowConfirmPassword, setIsShowConfirmPassword] = useState(false);
   const [isShowConfirmIcon, setIsShowConfirmIcon] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const handleInputTwo = (event) => {
     setIsShowConfirmIcon(event.target.value.trim().length > 0);
   };
@@ -42,18 +44,6 @@ function ResetPassword() {
 
   const errorNotify = (message) =>
     toast.error(message, {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "light",
-    });
-
-  const infoNotify = (message) =>
-    toast.info(message, {
       position: "top-right",
       autoClose: 2000,
       hideProgressBar: false,
@@ -95,15 +85,15 @@ function ResetPassword() {
   };
 
   return (
-    <section className="h-screen w-full bg-reset bg-cover bg-center object-cover flex items-center justify-center">
-      <div className="w-full max-w-[760px] bg-whiteHigh px-6 py-14 relative">
+    <section className="min-h-screen w-full bg-reset bg-cover bg-center object-cover flex items-center justify-center overflow-auto">
+      <div className="w-full md:max-w-[760px] bg-whiteHigh px-6 py-14 relative h-screen overflow-auto md:h-full">
         <div className="w-full max-w-[400px] mx-auto">
           <div className="text-center">
             <div className="text-center flex items-center justify-center lg:text-left mb-6">
               <img src={logo} alt="" className="w-20 h-20" />
             </div>
             <h2 className="text-2xl text-blackSemi font-bold mt-2">
-              Reset Password
+              {t("buttons.reset")}
             </h2>
           </div>
 
@@ -112,7 +102,7 @@ function ResetPassword() {
 
             <div className="inline-flex flex-col justify-start items-start gap-4 w-full">
               <span className="text-xs text-fadeColor font-medium leading-none">
-                New Password
+                {t("forms.newPassword")}
               </span>
               <div className="w-full">
                 <PasswordInput
@@ -122,12 +112,11 @@ function ResetPassword() {
                   isShowIcon={isShowIcon}
                   required
                   name="newPassword"
-                  placeholder="Enter new password"
+                  placeholder={t("placeholders.enterNewPass")}
                 ></PasswordInput>
                 {!isStrong && (
-                  <p className="text-[10px] text-fadeColor mt-1">
-                    Must contain more than 7 character with uppercase,
-                    lowercase, symble and number
+                  <p className="text-[10px] text-fadeColor md:mt-1">
+                    {t("forms.restriction")}
                   </p>
                 )}
               </div>
@@ -136,7 +125,7 @@ function ResetPassword() {
 
             <div className="inline-flex flex-col justify-start items-start gap-4 w-full mt-6">
               <span className="text-xs text-fadeColor font-medium leading-none">
-                Confirm Password
+                {t("forms.confirmPassword")}
               </span>
               <div className="w-full">
                 <PasswordInput
@@ -146,7 +135,7 @@ function ResetPassword() {
                   isShowIcon={isShowConfirmIcon}
                   required
                   name="confirmPassword"
-                  placeholder="Enter confirm password"
+                  placeholder={t("placeholders.enterConfirmPass")}
                 ></PasswordInput>
               </div>
             </div>
@@ -156,7 +145,7 @@ function ResetPassword() {
                 className="w-full p-4 rounded-full bg-primaryMainLight font-medium text-whiteHigh"
                 disabled={!isStrong}
               >
-                RESET PASSWORD
+                {t("buttons.reset")}
               </button>
             </div>
           </form>

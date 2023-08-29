@@ -29,6 +29,7 @@ import Products from "../pages/products/Products";
 import Profile from "../pages/profile/Profile";
 import Store from "../pages/store/Store";
 import StoreDetails from "../pages/store/StoreDetails";
+import StoreFinancial from "../pages/store/StoreFinancial";
 import Suppliers from "../pages/supplier/Suppliers";
 import PrivateRouter from "./PrivateRouter";
 
@@ -152,6 +153,10 @@ export const routes = createBrowserRouter([
       {
         path: "/supplies-details",
         element: <BuySuppliesView></BuySuppliesView>,
+      },
+      {
+        path: "/store-financial",
+        element: <StoreFinancial></StoreFinancial>,
       },
       // {
       //   path: "/store-details",

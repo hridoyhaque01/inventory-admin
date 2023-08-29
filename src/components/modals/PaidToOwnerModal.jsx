@@ -12,6 +12,8 @@ const PaidToOwnerModal = ({
   const { t } = useTranslation();
   const dispatch = useDispatch();
 
+  console.log(activeStore);
+
   const [payment, setPayment] = useState("");
   const handlePayment = (event) => {
     const value = event.target.value;
@@ -29,6 +31,7 @@ const PaidToOwnerModal = ({
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
+
     handler({ id: activeStore?.id, data: formData })
       .unwrap()
       .then((res) => {

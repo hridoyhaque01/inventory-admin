@@ -20,6 +20,14 @@ function StoreTable({ data }) {
     });
   };
 
+  const handleDataNavigate = (data) => {
+    navigate("/store-financial", {
+      state: {
+        payload: data,
+      },
+    });
+  };
+
   return (
     <div className="h-full overflow-auto flex flex-col items-end justify-between pb-4 gap-4">
       <table className="table w-full">
@@ -56,30 +64,41 @@ function StoreTable({ data }) {
           </tbody>
         ) : (
           <tbody className="">
-            {currentRows?.map((store, i) => (
-              <tr className="text-xs sm:text-base" key={store?._id}>
-                <td className="py-3">
-                  {currentPage === 1 && i + 1 < 10
-                    ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
-                    : rowsPerPage * (currentPage - 1) + i + 1}
-                </td>
-                <td className="py-3">
-                  {new Date(store?.timestamp).toLocaleDateString("en-US")}
-                </td>
+            {currentRows?.map((item, i) => {
+              const { storeData: store, storeDetails } = item || {};
+              return (
+                <tr className="text-xs sm:text-base" key={store?._id}>
+                  <td className="py-3">
+                    {currentPage === 1 && i + 1 < 10
+                      ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
+                      : rowsPerPage * (currentPage - 1) + i + 1}
+                  </td>
+                  <td className="py-3">
+                    {new Date(store?.timestamp).toLocaleDateString("en-US")}
+                  </td>
 
-                <td className="py-3">{store?.name}</td>
-                <td className="py-3">{store?.location}</td>
-                <td className="py-3 text-center">
-                  <button
-                    type="button"
-                    className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer whitespace-nowrap"
-                    onClick={() => handleNavigate(store)}
-                  >
-                    {t("buttons.details")}
-                  </button>
-                </td>
-              </tr>
-            ))}
+                  <td className="py-3">{store?.name}</td>
+                  <td className="py-3">{store?.location}</td>
+                  <td className="py-3 text-center flex items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      className="inline-flex bg-successLight px-4 py-3 rounded-xl text-successColor cursor-pointer whitespace-nowrap"
+                      onClick={() => handleNavigate(store)}
+                    >
+                      {t("buttons.details")}
+                    </button>
+                    <button
+                      type="button"
+                      className="inline-flex bg-secondaryMain px-4 py-3 rounded-xl text-blackLow cursor-pointer whitespace-nowrap"
+                      onClick={() => handleDataNavigate(item)}
+                    >
+                      Financial
+                      {/* {t("buttons.details")} */}
+                    </button>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         )}
       </table>

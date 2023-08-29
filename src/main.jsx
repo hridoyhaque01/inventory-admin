@@ -8,6 +8,13 @@ import { Provider } from "react-redux";
 import App from "./App.jsx";
 import { store } from "./app/store.jsx";
 import "./index.css";
+const getCurrentLoadPath = (language) => {
+  if (window.location.pathname.includes("/eyJhbGciOiJIUzI1NiIsInR5")) {
+    return `../assets/langs/${language}/translation.json`;
+  } else {
+    return `./assets/langs/${language}/translation.json`;
+  }
+};
 
 i18n
   .use(initReactI18next)
@@ -21,7 +28,7 @@ i18n
       caches: ["cookie"],
     },
     backend: {
-      loadPath: "./assets/langs/{{lng}}/translation.json",
+      loadPath: getCurrentLoadPath("{{lng}}"),
     },
   });
 
