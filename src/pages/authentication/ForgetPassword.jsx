@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { logo } from "../../assets/getAssets";
+import { logoWhite } from "../../assets/getAssets";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import { useSendResetPasswordEmailMutation } from "../../features/auth/authApi";
 function ForgetPassword() {
@@ -77,7 +77,7 @@ function ForgetPassword() {
         <div className="w-full max-w-[400px] mx-auto mt-8 md:mt-0">
           <div className="text-center">
             <div className="text-center lg:text-left mb-6">
-              <img src={logo} alt="" className="w-20 h-20 mx-auto" />
+              <img src={logoWhite} alt="" className="w-1/2 mx-auto" />
             </div>
             <h2 className="text-blackSemi text-lg lg:text-2xl text-center  font-bold">
               {t("buttons.reset")}

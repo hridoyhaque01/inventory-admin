@@ -113,7 +113,7 @@ function StoreForm() {
               <div className="flex flex-col justify-start gap-6">
                 {/* Name: */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.name")} :
                   </span>
                   <input
@@ -127,7 +127,7 @@ function StoreForm() {
 
                 {/* Product Name */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.email")} :
                   </span>
                   <input
@@ -141,7 +141,7 @@ function StoreForm() {
 
                 {/* Product Name */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("tables.address")} :
                   </span>
                   <input
@@ -157,7 +157,7 @@ function StoreForm() {
 
                 <div className="">
                   <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                       {t("forms.newPassword")} :
                     </span>
                     <PasswordInput
@@ -171,7 +171,7 @@ function StoreForm() {
                     ></PasswordInput>
                   </div>
                   <div className="flex flex-col md:flex-row md:items-center gap-3">
-                    <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right"></span>
+                    <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right"></span>
                     {!isStrong && (
                       <p className="text-[10px] text-fadeColor md:mt-1">
                         {t("forms.restriction")}
@@ -182,7 +182,7 @@ function StoreForm() {
                 {/* confirm PASSWORD  */}
 
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
-                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                  <span className="inline-block w-[170px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("forms.confirmPassword")} :
                   </span>
                   <div className="w-full">
@@ -200,17 +200,17 @@ function StoreForm() {
 
                 {/* edit button */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3 mt-2">
-                  <span className="w-[140px]"></span>
+                  <span className="w-[170px]"></span>
                   <div className="flex items-center gap-3">
                     <Link
                       to="/store"
-                      className="w-[140px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
+                      className="w-[170px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </Link>
                     <button
                       type="submit"
-                      className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
+                      className="w-[170px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                       disabled={!isStrong}
                     >
                       {t("buttons.save")}

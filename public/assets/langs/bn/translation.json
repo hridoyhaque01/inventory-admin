@@ -105,7 +105,7 @@
     "totalDue": "মোট বাকি",
     "totalRevenue": "মোট আয়",
     "totalSales": "মোট বিক্রয়",
-    "totalPaidOwner": "মালিককে মোট প্রদান",
+    "totalPaidOwner": "মোট সংগ্রহ",
     "totalProfit": "মোট লাভ",
     "totalRecieved": "মোট প্রাপ্তি",
     "totalExpenses": "মোট খরচ"
@@ -117,7 +117,7 @@
     "total": "মোট",
     "totalRevenue": "মোট আয়",
     "totalSales": "মোট বিক্রয়",
-    "totalPaidOwner": "মালিককে মোট প্রদান",
+    "totalPaidOwner": "মোট সংগ্রহ",
     "totalRemaining": "মোট অবশিষ্ট",
     "action": "প্রক্রিয়া",
     "address": "ঠিকানা",

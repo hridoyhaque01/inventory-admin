@@ -105,7 +105,7 @@
     "totalDue": "Total Due",
     "totalRevenue": "Total Revenue",
     "totalSales": "Total Sales",
-    "totalPaidOwner": "Total Paid to Owner",
+    "totalPaidOwner": "Total Collection",
     "totalProfit": "Total Profit",
     "totalRecieved": "Total Recieved",
     "totalExpenses": "Total Expenses"
@@ -117,7 +117,7 @@
     "total": "Total",
     "totalRevenue": "Total Revenue",
     "totalSales": "Total Sales",
-    "totalPaidOwner": "Total Paid to Owner",
+    "totalPaidOwner": "Total Collection",
     "totalRemaining": "Total Remaining",
     "action": "Action",
     "address": "Address",

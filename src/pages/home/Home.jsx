@@ -101,12 +101,7 @@ const Dashboard = () => {
   } else if (!isLoading && !isError && !storeResult?.finalExpenseData) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && storeResult?.finalExpenseData) {
-    content = (
-      <>
-        <Charts data={storeResult}></Charts>
-        <section className="flex flex-col justify-between gap-8"></section>
-      </>
-    );
+    content = <Charts data={storeResult}></Charts>;
   }
   useEffect(() => {
     if (!isLoading && !isError) {

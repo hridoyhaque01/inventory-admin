@@ -39,7 +39,7 @@ const Charts = ({ data }) => {
           title="cards.totalRecieved"
         ></ChartRecieve>
       </div>
-      <div className="bg-whiteHigh rounded-xl p-4 md:p-6">
+      <div className="bg-whiteHigh rounded-xl p-4 md:p-6 md:col-span-2">
         <ChartExpenses
           data={finalExpenseData}
           title="cards.totalExpenses"

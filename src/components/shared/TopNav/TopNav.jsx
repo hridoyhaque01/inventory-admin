@@ -51,7 +51,7 @@ const TopNav = ({ isShowButton }) => {
         </button>
         <div>
           <Link to="/">
-            <img src={logo} alt="" className="w-10 h-10" />
+            <img src={logo} alt="" className="w-full h-10" />
           </Link>
         </div>
       </div>
@@ -62,7 +62,7 @@ const TopNav = ({ isShowButton }) => {
           <label className="cursor-pointer label">
             <input
               type="checkbox"
-              className="toggle toggle-accent"
+              className="toggle toggle-success"
               checked={lang === "en" ? true : false}
               onChange={(e) => handleLanguage(e)}
             />
