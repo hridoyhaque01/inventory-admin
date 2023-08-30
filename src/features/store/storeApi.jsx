@@ -252,7 +252,7 @@ const storeApi = apiSlice.injectEndpoints({
           console.log(error);
         }
       },
-      invalidatesTags: ["store"],
+      invalidatesTags: ["dashboard"],
     }),
   }),
 });

@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Area,
   CartesianGrid,
@@ -10,26 +11,30 @@ import {
 } from "recharts";
 
 const ChartArea = ({ title, data }) => {
-  const [activeChart, setActiveChart] = useState("weekly");
-  const handleChart = (value) => {
-    setActiveChart(value);
-  };
+  // console.log(chartData);
+
+  const { t } = useTranslation();
 
   return (
     <div className="flex flex-col justify-between">
-      <section className="flex items-center justify-between">
-        <p className="text-2xl text-blackHigh  font-bold">{title}</p>
-      </section>
-      <section className="flex items-center justify-start gap-6 mt-14 mb-8">
+      <div className="flex items-center justify-between">
+        <p className="text-base smtext-lg lg:text-2xl text-blackHigh font-bold">
+          {t(title)}
+        </p>
+        <span className="inline-block px-4 py-2 bg-primaryMainLight text-whiteHigh text-xs sm:text-sm rounded-full">
+          {t("navigations.monthly")}
+        </span>
+      </div>
+      <div className="flex items-center justify-start gap-6 mt-8 mb-10 text-xs sm:text-base">
         <div className="flex items-center justify-center gap-2">
           <div className="w-5 h-5 rounded-full bg-primaryMainLight"></div>
-          <p>This Month</p>
+          <p>{t("navigations.sales")}</p>
         </div>
         <div className="flex items-center justify-center gap-2">
           <div className="w-5 h-5 rounded-full bg-secondaryMain"></div>
-          <p>Last Month</p>
+          <p>{t("navigations.revenue")}</p>
         </div>
-      </section>
+      </div>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
         <ResponsiveContainer width="100%" height={400}>
           <ComposedChart
@@ -48,19 +53,19 @@ const ChartArea = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#E8E8E8" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="pv"
+              dataKey="revenue"
               fill="url(#gradientColor)"
               stroke="#FFC227"
               strokeWidth={2}
             />
             <Area
               type="monotone"
-              dataKey="uv"
+              dataKey="sales"
               fill="none"
               stroke="#54ADAA"
               strokeWidth={2}

@@ -64,6 +64,12 @@ input[type="number"] {
   background-color: #f9f9f9;
 }
 
+@media (max-width: 640px) {
+  tspan {
+    font-size: 12px;
+  }
+}
+
 .tabs-container::-webkit-scrollbar {
   width: 0;
 }

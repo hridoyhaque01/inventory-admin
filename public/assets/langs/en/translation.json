@@ -24,7 +24,13 @@
     "suppliers": "suppliers",
     "buySup": "Buy Supplies",
     "store": "Store",
-    "logout": "Logout"
+    "logout": "Logout",
+    "revenue": "Revenue",
+    "monthly": "Monthly",
+    "profit": "Profit",
+    "due": "Due",
+    "recieve": "Recieve",
+    "expense": "Expense"
   },
   "forms": {
     "name": "Name",
@@ -99,7 +105,10 @@
     "totalDue": "Total Due",
     "totalRevenue": "Total Revenue",
     "totalSales": "Total Sales",
-    "totalPaidOwner": "Total Paid to Owner"
+    "totalPaidOwner": "Total Paid to Owner",
+    "totalProfit": "Total Profit",
+    "totalRecieved": "Total Recieved",
+    "totalExpenses": "Total Expenses"
   },
   "tables": {
     "serial": "Serial",

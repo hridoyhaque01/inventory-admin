@@ -22,9 +22,9 @@ const HomeTopCard = ({ data }) => {
           />
         </svg>
       </div>
-      <div className="text-whiteHigh lg:text-center">
+      <div className="text-whiteHigh ">
         <p>{t(data?.title)}</p>
-        <p className="text-2xl xl:text-3xl font-bold">{data?.number}</p>
+        <p className="text-xl xl:text-2xl font-bold">{data?.number}</p>
       </div>
       <div
         className="w-24 h-36 bg-gradient-primary absolute -top-6 -right-2.5 rounded-2xl"

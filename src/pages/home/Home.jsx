@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import HomeTopCard from "../../Components/Cards/HomeTopCard";
@@ -9,20 +8,18 @@ import SearchLoader from "../../components/loaders/SearchLoader";
 import PaidToOwnerModal from "../../components/modals/PaidToOwnerModal";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
-import {
-  useGetAllStoreResultQuery,
-  useGetChartDataQuery,
-} from "../../features/dashboard/dashboardApi";
-import { setStoreData } from "../../features/dashboard/dashboardSlice";
+import { useGetChartDataQuery } from "../../features/dashboard/dashboardApi";
 import { useUpdatePaymentMutation } from "../../features/store/storeApi";
 
 const Dashboard = () => {
-  const [activeStore, setActiveStore] = useState({});
-  const { storeData: storeHouse } = useSelector((state) => state.storeData);
-  const { data } = useGetChartDataQuery();
+  const { data, isLoading, isError } = useGetChartDataQuery();
+  const { storeResult, cardData } = data || {};
+  const [activeStore, setActiveStore] = useState();
+  // const { data: Singlestore } = useGetSingleStoreChartDataQuery();
+  // const { data: storeData, isLoading, isError } = useGetAllStoreResultQuery();
 
-  console.log(data);
-  const dispatch = useDispatch();
+  console.log(storeResult);
+
   const errorNotify = (message) =>
     toast.error(message, {
       position: "top-right",
@@ -65,9 +62,6 @@ const Dashboard = () => {
   const [updatePayment, { isLoading: paymentLoading }] =
     useUpdatePaymentMutation();
 
-  const { data: storeData, isLoading, isError } = useGetAllStoreResultQuery();
-  const { resultData, cardData } = storeHouse || {};
-
   // console.log(storeData);
 
   const [dashboardData, setDashboardData] = useState([
@@ -104,12 +98,12 @@ const Dashboard = () => {
     content = <SearchLoader></SearchLoader>;
   } else if (!isLoading && isError) {
     content = <SomethingWrong></SomethingWrong>;
-  } else if (!isLoading && !isError && resultData?.length === 0) {
+  } else if (!isLoading && !isError && !storeResult?.finalExpenseData) {
     content = <NoData></NoData>;
-  } else if (!isLoading && !isError && resultData?.length > 0) {
+  } else if (!isLoading && !isError && storeResult?.finalExpenseData) {
     content = (
       <>
-        <Charts data={chartData}></Charts>
+        <Charts data={storeResult}></Charts>
         <section className="flex flex-col justify-between gap-8"></section>
       </>
     );
@@ -117,15 +111,14 @@ const Dashboard = () => {
   useEffect(() => {
     if (!isLoading && !isError) {
       const updatedData = [...dashboardData];
-      updatedData[0].number = cardData?.totalCosts || 0;
-      updatedData[1].number = cardData?.totalDue || 0;
-      updatedData[3].number = cardData?.totalSales || 0;
-      updatedData[2].number = cardData?.totalRevenue || 0;
-      updatedData[4].number = cardData?.totalPaidToOwner;
+      updatedData[0].number = cardData?.costs || 0;
+      updatedData[1].number = cardData?.due || 0;
+      updatedData[3].number = cardData?.revenue || 0;
+      updatedData[2].number = cardData?.sales || 0;
+      updatedData[4].number = cardData?.recive || 0;
       setDashboardData(updatedData);
-      dispatch(setStoreData(storeData));
     }
-  }, [isLoading, isError, cardData, storeData]);
+  }, [isLoading, isError, cardData]);
 
   return (
     <div className="w-full overflow-auto  pb-6 px-4 md:px-6 ">

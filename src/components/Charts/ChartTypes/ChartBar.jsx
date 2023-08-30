@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Bar,
   BarChart,
@@ -10,28 +11,29 @@ import {
 } from "recharts";
 
 const ChartBar = ({ title, data }) => {
-  const [activeChart, setActiveChart] = useState("weekly");
-  const handleChart = (value) => {
-    setActiveChart(value);
-  };
-
+  const { t } = useTranslation();
   return (
     <div className="flex flex-col justify-between">
-      <section className="flex items-center justify-between">
-        <p className="text-2xl text-blackHigh  font-bold">{title}</p>
-      </section>
-      <section className="flex items-center justify-start gap-6 mt-14 mb-8">
+      <div className="flex items-center justify-between">
+        <p className="text-base smtext-lg lg:text-2xl text-blackHigh font-bold">
+          {t(title)}
+        </p>
+        <span className="inline-block px-4 py-2 bg-primaryMainLight text-whiteHigh text-xs sm:text-sm rounded-full">
+          {t("navigations.monthly")}
+        </span>
+      </div>
+      <div className="flex items-center justify-start gap-6 mt-8 mb-10 text-xs sm:text-base">
         <div className="flex items-center justify-center gap-2">
           <div className="w-5 h-5 rounded-full bg-primaryMainLight"></div>
-          <p>This Month</p>
+          <p>{t("navigations.sales")}</p>
         </div>
         <div className="flex items-center justify-center gap-2">
           <div className="w-5 h-5 rounded-full bg-secondaryMain"></div>
-          <p>Last Month</p>
+          <p>{t("navigations.profit")}</p>
         </div>
-      </section>
+      </div>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
-        <ResponsiveContainer width="100%" height={300}>
+        <ResponsiveContainer width="100%" height={400}>
           <BarChart
             data={data}
             margin={{
@@ -54,16 +56,22 @@ const ChartBar = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
-            <XAxis dataKey="name" />
+            <XAxis dataKey="date" />
             <YAxis />
             <Tooltip />
             {/* <Legend /> */}
             <Bar
-              dataKey="pv"
+              type="monotone"
+              dataKey="profit"
               fill="url(#gradientTwo)"
               radius={[24, 24, 0, 0]}
             />
-            <Bar dataKey="uv" fill="url(#gradient)" radius={[24, 24, 0, 0]} />
+            <Bar
+              type="monotone"
+              dataKey="sales"
+              fill="url(#gradient)"
+              radius={[24, 24, 0, 0]}
+            />
           </BarChart>
         </ResponsiveContainer>
       </section>

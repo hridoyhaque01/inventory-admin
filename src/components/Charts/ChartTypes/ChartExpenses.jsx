@@ -1,21 +1,22 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
-  Line,
-  LineChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts";
 
-const ChartLine = ({ title, data }) => {
+const ChartExpenses = ({ title, data }) => {
   const { t } = useTranslation();
+
   return (
-    <div className="flex flex-col justify-between">
+    <div className="flex flex-col justify-between ">
       <div className="flex items-center justify-between">
-        <p className="text-base sm:text-lg lg:text-2xl text-blackHigh font-bold">
+        <p className="text-base smtext-lg lg:text-2xl text-blackHigh font-bold">
           {t(title)}
         </p>
         <span className="inline-block px-4 py-2 bg-primaryMainLight text-whiteHigh text-xs sm:text-sm rounded-full">
@@ -29,12 +30,12 @@ const ChartLine = ({ title, data }) => {
         </div>
         <div className="flex items-center justify-center gap-2">
           <div className="w-5 h-5 rounded-full bg-secondaryMain"></div>
-          <p>{t("navigations.due")}</p>
+          <p>{t("navigations.expense")}</p>
         </div>
       </div>
       <section className="overflow-x-auto overflow-y-hidden flex items-center justify-center">
         <ResponsiveContainer width="100%" height={400}>
-          <LineChart
+          <BarChart
             data={data}
             margin={{
               top: 5,
@@ -44,15 +45,15 @@ const ChartLine = ({ title, data }) => {
             }}
           >
             <defs>
-              <linearGradient id="gradientLine" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#FFC227" />
-                <stop offset="100%" stopColor="rgba(255, 194, 39, 0.29)" />
+              <linearGradient id="gradientLoan" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#54ADAA" />
+                <stop offset="100%" stopColor="rgba(84, 173, 170, 0.40)" />
               </linearGradient>
             </defs>
             <defs>
-              <linearGradient id="gradientLineTwo" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="#234B4C" />
-                <stop offset="100%" stopColor="rgba(84, 173, 170, 0.17)" />
+              <linearGradient id="gradientLoanTwo" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stopColor="#FD5D5D" />
+                <stop offset="100%" stopColor="rgba(253, 93, 93, 0.40)" />
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
@@ -60,27 +61,16 @@ const ChartLine = ({ title, data }) => {
             <YAxis />
             <Tooltip />
             {/* <Legend /> */}
-
-            <Line
-              type="monotone"
-              dataKey="due"
-              stroke="url(#gradientLine)"
-              strokeDasharray="5 5"
-              strokeWidth={2}
-              dot={false}
+            <Bar
+              dataKey="expense"
+              fill="url(#gradientLoanTwo)"
+              radius={[24, 24, 0, 0]}
             />
-            <Line
-              type="monotone"
-              dataKey="sales"
-              stroke="url(#gradientLineTwo)"
-              dot={false}
-              strokeWidth={2}
-            />
-          </LineChart>
+          </BarChart>
         </ResponsiveContainer>
       </section>
     </div>
   );
 };
 
-export default ChartLine;
+export default ChartExpenses;
