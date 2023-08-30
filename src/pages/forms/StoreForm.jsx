@@ -91,7 +91,7 @@ function StoreForm() {
         .unwrap()
         .then((res) => {
           form.reset();
-          navigate("/store");
+          navigate("/stores-settings");
         })
         .catch((error) => {
           errorNotify("Store register failed");
@@ -203,7 +203,7 @@ function StoreForm() {
                   <span className="w-[170px]"></span>
                   <div className="flex items-center gap-3">
                     <Link
-                      to="/store"
+                      to="/stores-settings"
                       className="w-[170px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}

@@ -16,7 +16,7 @@ function Login() {
 
   const [login, { isLoading }] = useLoginMutation();
   const [isShowPassword, setIsShowPassword] = useState(false);
-  const [isShowIcon, setIsShowIcon] = useState(false);
+  const [isShowIcon, setIsShowIcon] = useState(true);
   const navigate = useNavigate();
   const handleInput = (event) => {
     setIsShowIcon(event.target.value.trim().length > 0);
@@ -87,6 +87,7 @@ function Login() {
                     name="email"
                     placeholder={t("placeholders.enterEmail")}
                     className="w-full py-3 px-4 border border-fadeLight outline-none rounded-lg text-black text-sm sm:text-base"
+                    defaultValue="admin@gmail.com"
                   />
                 </div>
                 {/* password  */}
@@ -103,6 +104,7 @@ function Login() {
                     required
                     name="password"
                     placeholder={t("placeholders.enterPass")}
+                    defaultValue="Admin123#"
                   ></PasswordInput>
                 </div>
 
