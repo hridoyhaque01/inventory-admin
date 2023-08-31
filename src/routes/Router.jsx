@@ -8,10 +8,12 @@ import Login from "../pages/authentication/Login";
 import ResetPassword from "../pages/authentication/ResetPassword";
 import Signup from "../pages/authentication/Signup";
 import BuySupplies from "../pages/buySupplies/BuySupplies";
+import Categories from "../pages/categories/Categories";
 import Customer from "../pages/customer/Customer";
 import Expenses from "../pages/expenses/Expenses";
 import BuySuppliesForm from "../pages/forms/BuySuppliesForm";
 import BuySuppliesView from "../pages/forms/BuySuppliesView";
+import CategoryForm from "../pages/forms/CategoryForm";
 import CustomerForm from "../pages/forms/CustomerForm";
 import EditProfile from "../pages/forms/EditProfile";
 import ExpensesForm from "../pages/forms/ExpensesForm";
@@ -135,8 +137,16 @@ export const routes = createBrowserRouter([
         element: <SupplierForm></SupplierForm>,
       },
       {
-        path: "/supplier-edit",
-        element: <SupplierForm></SupplierForm>,
+        path: "/categories",
+        element: <Categories></Categories>,
+      },
+      {
+        path: "/category-add",
+        element: <CategoryForm></CategoryForm>,
+      },
+      {
+        path: "/category-edit",
+        element: <CategoryForm></CategoryForm>,
       },
       {
         path: "/products-add",

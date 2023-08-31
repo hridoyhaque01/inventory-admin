@@ -3,20 +3,20 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Pagination } from "../../shared/pagination/Pagination";
 
-function SalesTable({ data }) {
-  const navigate = useNavigate();
-
+function CategoriesTable({ data }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const indexOfLastRow = currentPage * rowsPerPage;
   const indexOfFirstRow = indexOfLastRow - rowsPerPage;
   const currentRows = data?.slice(indexOfFirstRow, indexOfLastRow);
+  const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const handleNavigate = (data) => {
-    navigate("/sales-edit", {
+  const handleNavigate = (category) => {
+    navigate("/category-edit", {
       state: {
-        payload: data,
+        payload: category,
+        type: "edit",
       },
     });
   };
@@ -26,36 +26,18 @@ function SalesTable({ data }) {
       <div className="overflow-auto w-full flex flex-col items-start justify-between pb-4 gap-4 ">
         <table className="table w-full overflow-auto ">
           <thead className=" p-0">
-            <tr className="font-bold text-center text-sm sm:text-base ms:text-xl">
-              <th className="bg-primaryMainLightest text-blackHigh normal-case p-2">
+            <tr className="font-bold text-sm sm:text-base ms:text-xl">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.serial")}
               </th>
-
               <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.productId")}
+                {t("tables.created")}
+              </th>
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
+                {t("tables.name")}
               </th>
 
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.productName")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("cards.totalSales")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.shopName")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.quantity")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
-                {t("tables.sellingPrice")}
-              </th>
-
-              <th className="bg-primaryMainLightest text-blackHigh normal-case">
+              <th className="bg-primaryMainLightest text-blackHigh normal-case text-center">
                 {t("tables.action")}
               </th>
             </tr>
@@ -71,35 +53,26 @@ function SalesTable({ data }) {
               </tr>
             </tbody>
           ) : (
-            <tbody className="text-center">
-              {currentRows?.map((item, i) => (
-                <tr
-                  className="text-center text-xs sm:text-base"
-                  key={item?._id}
-                >
-                  {/* <th className="py-3">
-                    <input
-                      type="checkbox"
-                      className="checkbox checkbox-accent border-fadeHigh  checkbox-sm rounded "
-                      name="checkbox"
-                    />
-                  </th> */}
+            <tbody className="">
+              {currentRows?.map((category, i) => (
+                <tr className="text-xs sm:text-base" key={category?._id}>
                   <td className="py-3">
                     {currentPage === 1 && i + 1 < 10
                       ? "0" + (rowsPerPage * (currentPage - 1) + i + 1)
                       : rowsPerPage * (currentPage - 1) + i + 1}
                   </td>
-                  <td className="py-3">{item?.productId}</td>
-
-                  <td className="py-3">{item?.productName}</td>
                   <td className="py-3">
-                    {parseInt(item?.unitCount) * parseInt(item?.unitPrice)}
+                    {new Date(category?.timestamp * 1000).toLocaleDateString(
+                      "en-US"
+                    )}
                   </td>
-                  <td className="py-3">{item?.storeName}</td>
-                  <td className="py-3">{item?.unitCount}</td>
-                  <td className="py-3">{item?.unitPrice}</td>
-                  <td className="py-3">
-                    <button type="button" onClick={() => handleNavigate(item)}>
+
+                  <td className="py-3">{category?.categoryName}</td>
+                  <td className="py-3 text-center">
+                    <button
+                      type="button"
+                      onClick={() => handleNavigate(category)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="24"
@@ -108,7 +81,7 @@ function SalesTable({ data }) {
                         fill="none"
                       >
                         <path
-                          d="M2.9416 12.2289L2.94163 12.2289L2.93686 12.2243C2.65588 11.9507 2.49805 11.5709 2.49805 11.1725V4.0025C2.49805 3.17864 3.17419 2.5025 3.99805 2.5025H11.168C11.5671 2.5025 11.9495 2.66102 12.2245 2.93606L21.0545 11.7661C21.6509 12.3624 21.6476 13.3058 21.0645 13.8889L13.8945 21.0589C13.3098 21.6437 12.3563 21.6437 11.7716 21.0589L2.9416 12.2289ZM4.49805 6.5025C4.49805 7.60864 5.3919 8.5025 6.49805 8.5025C7.60419 8.5025 8.49805 7.60864 8.49805 6.5025C8.49805 5.39636 7.60419 4.5025 6.49805 4.5025C5.3919 4.5025 4.49805 5.39636 4.49805 6.5025Z"
+                          d="M3.64355 16.3148L12.0605 7.89792M3.64355 16.3148L12.0605 7.89792M3.64355 16.3148C3.55625 16.4021 3.5 16.5354 3.5 16.6613V19.0013C3.5 19.2751 3.72614 19.5013 4 19.5013H6.34C6.46935 19.5013 6.59727 19.4496 6.70192 19.3523M3.64355 16.3148L6.70192 19.3523M12.0605 7.89792L15.1124 10.9418L6.70192 19.3523M12.0605 7.89792L6.70192 19.3523M19 19.5013H12.2071L15.2071 16.5013H19C19.8239 16.5013 20.5 17.1774 20.5 18.0013C20.5 18.8251 19.8239 19.5013 19 19.5013ZM18.3564 6.98483C18.5512 7.17957 18.5512 7.49299 18.3564 7.68773L16.88 9.16417L13.8371 6.12128L15.3136 4.64483C15.5083 4.45009 15.8217 4.45009 16.0164 4.64483L18.3564 6.98483Z"
                           fill="#F4A100"
                           stroke="#F4A100"
                         />
@@ -134,4 +107,4 @@ function SalesTable({ data }) {
   );
 }
 
-export default SalesTable;
+export default CategoriesTable;

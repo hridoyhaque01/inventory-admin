@@ -26,7 +26,7 @@ const TopNav = ({ isShowButton }) => {
   };
 
   return (
-    <div className="navbar bg-primaryMainDarkest px-6 py-2 relative z-[9999]">
+    <div className="navbar bg-primaryMainDarkest px-4 sm:px-6 py-2 relative z-[9999] gap-2">
       {/* top nav left */}
       <div className="flex-1 text-whiteHigh">
         <button
@@ -51,18 +51,18 @@ const TopNav = ({ isShowButton }) => {
         </button>
         <div>
           <Link to="/">
-            <img src={logo} alt="" className="w-full h-10" />
+            <img src={logo} alt="" className="max-w-[80px] sm:max-w-[120px]" />
           </Link>
         </div>
       </div>
       {/* top nav right */}
       <div className="flex-none">
-        <div className="inline-flex flex-row items-center gap-2 text-whiteHigh  mr-6">
+        <div className="inline-flex flex-row items-center gap-1 sm:gap-2 text-whiteHigh mr-2 sm:mr-6">
           <span>BN</span>
           <label className="cursor-pointer label">
             <input
               type="checkbox"
-              className="toggle toggle-success"
+              className="toggle toggle-sm md:toggle-md toggle-success"
               checked={lang === "en" ? true : false}
               onChange={(e) => handleLanguage(e)}
             />
@@ -75,7 +75,7 @@ const TopNav = ({ isShowButton }) => {
             tabIndex={3}
             className="btn btn-ghost btn-circle outline-none border-none avatar"
           >
-            <div className="w-10 h-10 rounded-full">
+            <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full">
               <img
                 src={user?.fileUrl || avatar}
                 alt=""

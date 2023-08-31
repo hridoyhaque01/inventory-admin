@@ -211,6 +211,31 @@ const storeApi = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    updateStore: builder.mutation({
+      query: ({ data, id }) => ({
+        url: `stores/update/${id}`,
+        method: "PATCH",
+        body: data,
+      }),
+      async onQueryStarted({ data, id }, { queryFulfilled, dispatch }) {
+        try {
+          const result = await queryFulfilled;
+
+          if (result?.data) {
+            dispatch(
+              apiSlice.util.updateQueryData("getStores", undefined, (draft) => {
+                const index = draft.findIndex((store) => store._id === id);
+                if (index !== -1) {
+                  draft[index] = { ...draft[index], ...result?.data };
+                }
+              })
+            );
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      },
+    }),
     registerStore: builder.mutation({
       query: (data) => ({
         url: "/stores/register",
@@ -263,4 +288,5 @@ export const {
   useRegisterStoreMutation,
   useUpdatePaymentMutation,
   useGetStoresResultQuery,
+  useUpdateStoreMutation,
 } = storeApi;

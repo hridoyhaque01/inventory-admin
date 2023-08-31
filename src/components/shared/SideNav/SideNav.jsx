@@ -21,21 +21,26 @@ const SideNav = () => {
     }
   };
 
+  const handleToggle = (value) => {
+    dispatch(toggleSidebar());
+    handleDropdown(value);
+  };
+
   return (
     <>
       <div
-        className={`bg-primaryMainDarkest min-h-screen pt-[66px] lg:pt-0 overflow-auto shrink-0 fixed top-0 bottom-0 left-0 lg:relative ${
-          isShowSidebar ? "w-56" : "w-0 lg:w-56"
+        className={`bg-primaryMainDarkest h-full flex flex-col justify-between pb-4 pt-[66px] lg:pt-0 overflow-auto shrink-0 fixed top-0 bottom-0 left-0 lg:relative ${
+          isShowSidebar ? "w-64" : "w-0 lg:w-64"
         }  text-whiteHigh sidebar duration-300 shrink-0 z-[80]`}
       >
         {/* routes */}
-        <section className="flex flex-col flex-1 justify-start items-start gap-4 py-4">
+        <section className="flex flex-col flex-1 justify-start items-start gap-4 py-4 shrink-0 whitespace-nowrap">
           {/* dashboard  */}
-          <div className="w-full overflow-hidden capitalize">
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
               to="/"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("dashboard")}
             >
               <span>
                 <svg
@@ -57,12 +62,155 @@ const SideNav = () => {
             </NavLink>
           </div>
 
-          {/* Products  */}
-          <div className="w-full overflow-hidden capitalize">
+          {/* stores  */}
+          <div className="w-full overflow-hidden capitalize shrink-0">
+            <div
+              className={`flex items-center px-4  py-2 gap-2 cursor-pointer select-none`}
+              onClick={() => handleDropdown("stores")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="shrink-0"
+              >
+                <path
+                  d="M20.16 7.8C20.07 7.34 19.66 7 19.18 7H4.82C4.34 7 3.93 7.34 3.84 7.8L3 12V13C3 13.55 3.45 14 4 14V19C4 19.55 4.45 20 5 20H13C13.55 20 14 19.55 14 19V14H18V19C18 19.55 18.45 20 19 20C19.55 20 20 19.55 20 19V14C20.55 14 21 13.55 21 13V12L20.16 7.8ZM12 18H6V14H12V18ZM5 6H19C19.55 6 20 5.55 20 5C20 4.45 19.55 4 19 4H5C4.45 4 4 4.45 4 5C4 5.55 4.45 6 5 6Z"
+                  fill="white"
+                />
+              </svg>
+              <p className={`flex-1  "hidden"} shrink-0`}>
+                <span>{t("tableTitle.store")}</span>
+              </p>
+              <span
+                className={`duration-100 ${
+                  isSubmenuOpen["stores"] ? "rotate-180" : "rotate-0"
+                }  "hidden"}`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M13.2292 7.5001L9.99584 10.7334L6.7625 7.5001C6.4375 7.1751 5.9125 7.1751 5.5875 7.5001C5.2625 7.8251 5.2625 8.3501 5.5875 8.6751L9.4125 12.5001C9.7375 12.8251 10.2625 12.8251 10.5875 12.5001L14.4125 8.6751C14.7375 8.3501 14.7375 7.8251 14.4125 7.5001C14.0875 7.18344 13.5542 7.1751 13.2292 7.5001Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </div>
+            {/* submenu  */}
+
+            <div
+              ref={(ref) => (submenuRef.current["stores"] = ref)}
+              className={`flex flex-col gap-1 duration-200`}
+              style={{
+                maxHeight: isSubmenuOpen["stores"]
+                  ? `${submenuRef.current["stores"]?.scrollHeight}px`
+                  : "0",
+              }}
+            >
+              {/* Submenu items */}
+              <NavLink
+                to="/stores-settings"
+                className="py-3 pl-12"
+                onClick={() => dispatch(toggleSidebar())}
+              >
+                <p>{t("tableTitle.storeSetting")}</p>
+              </NavLink>
+              <NavLink
+                to="/stores-financial"
+                className="py-3 pl-12"
+                onClick={() => dispatch(toggleSidebar())}
+              >
+                <p>{t("tableTitle.transactions")}</p>
+              </NavLink>
+            </div>
+          </div>
+
+          {/* product management  */}
+
+          <div className="w-full overflow-hidden capitalize shrink-0">
+            <div
+              className={`flex items-center px-4 py-2 gap-2 cursor-pointer select-none shrink-0 `}
+              onClick={() => handleDropdown("productsManagement")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                className="shrink-0"
+              >
+                <path
+                  d="M22 18.9262V8.27623C22 7.45623 21.5 6.72623 20.74 6.41623L12.74 3.21623C12.26 3.02623 11.73 3.02623 11.25 3.21623L3.25 6.41623C2.5 6.72623 2 7.46623 2 8.27623V18.9262C2 20.0262 2.9 20.9262 4 20.9262H7V11.9262H17V20.9262H20C21.1 20.9262 22 20.0262 22 18.9262ZM11 18.9262H9V20.9262H11V18.9262ZM13 15.9262H11V17.9262H13V15.9262ZM15 18.9262H13V20.9262H15V18.9262Z"
+                  fill="white"
+                />
+              </svg>
+              <p className={`flex-1  "hidden"} shrink-0`}>
+                <span>{t("navigations.productManagement")}</span>
+              </p>
+              <span
+                className={`duration-100 ${
+                  isSubmenuOpen["productsManagement"]
+                    ? "rotate-180"
+                    : "rotate-0"
+                }  "hidden"}`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 20 20"
+                  fill="none"
+                >
+                  <path
+                    d="M13.2292 7.5001L9.99584 10.7334L6.7625 7.5001C6.4375 7.1751 5.9125 7.1751 5.5875 7.5001C5.2625 7.8251 5.2625 8.3501 5.5875 8.6751L9.4125 12.5001C9.7375 12.8251 10.2625 12.8251 10.5875 12.5001L14.4125 8.6751C14.7375 8.3501 14.7375 7.8251 14.4125 7.5001C14.0875 7.18344 13.5542 7.1751 13.2292 7.5001Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+            </div>
+            {/* submenu  */}
+
+            <div
+              ref={(ref) => (submenuRef.current["productsManagement"] = ref)}
+              className={`flex flex-col gap-1 duration-200`}
+              style={{
+                maxHeight: isSubmenuOpen["productsManagement"]
+                  ? `${submenuRef.current["productsManagement"]?.scrollHeight}px`
+                  : "0",
+              }}
+            >
+              {/* Submenu items */}
+              <NavLink
+                to="/products"
+                className="py-3 pl-12"
+                onClick={() => dispatch(toggleSidebar())}
+              >
+                <p>{t("navigations.allProducts")}</p>
+              </NavLink>
+              <NavLink
+                to="/inventory"
+                className="py-3 pl-12"
+                onClick={() => dispatch(toggleSidebar())}
+              >
+                <p>{t("navigations.assignProducts")}</p>
+              </NavLink>
+            </div>
+          </div>
+
+          {/* Category  */}
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
-              to="/products"
+              to="/categories"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("categories")}
             >
               <span>
                 <svg
@@ -72,23 +220,39 @@ const SideNav = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                 >
-                  <path
-                    d="M22 18.9262V8.27623C22 7.45623 21.5 6.72623 20.74 6.41623L12.74 3.21623C12.26 3.02623 11.73 3.02623 11.25 3.21623L3.25 6.41623C2.5 6.72623 2 7.46623 2 8.27623V18.9262C2 20.0262 2.9 20.9262 4 20.9262H7V11.9262H17V20.9262H20C21.1 20.9262 22 20.0262 22 18.9262ZM11 18.9262H9V20.9262H11V18.9262ZM13 15.9262H11V17.9262H13V15.9262ZM15 18.9262H13V20.9262H15V18.9262Z"
-                    fill="white"
-                  />
+                  <g clip-path="url(#clip0_974_5842)">
+                    <path
+                      d="M11.1491 3.39992L7.42914 9.47992C7.01914 10.1399 7.49914 10.9999 8.27914 10.9999H15.7091C16.4891 10.9999 16.9691 10.1399 16.5591 9.47992L12.8491 3.39992C12.4591 2.75992 11.5391 2.75992 11.1491 3.39992Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M17.5 22C19.9853 22 22 19.9853 22 17.5C22 15.0147 19.9853 13 17.5 13C15.0147 13 13 15.0147 13 17.5C13 19.9853 15.0147 22 17.5 22Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M4 21.5H10C10.55 21.5 11 21.05 11 20.5V14.5C11 13.95 10.55 13.5 10 13.5H4C3.45 13.5 3 13.95 3 14.5V20.5C3 21.05 3.45 21.5 4 21.5Z"
+                      fill="white"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_974_5842">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
                 </svg>
               </span>
               <span className={`flex-1 shrink-0`}>
-                <span>{t("navigations.products")}</span>
+                <span>{t("navigations.categories")}</span>
               </span>
             </NavLink>
           </div>
-          {/* Inventory  */}
-          <div className="w-full overflow-hidden capitalize">
+
+          {/* buy-supplies */}
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
-              to="/inventory"
+              to="/supplies"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("supplies")}
             >
               <span>
                 <svg
@@ -99,27 +263,23 @@ const SideNav = () => {
                   fill="none"
                 >
                   <path
-                    d="M4.47266 6H6.47266V7C6.47266 8.1 7.37266 9 8.47266 9H14.4727C15.5727 9 16.4727 8.1 16.4727 7V6H18.4727V11H20.4727V6C20.4727 4.9 19.5727 4 18.4727 4H14.2927C13.8727 2.84 12.7727 2 11.4727 2C10.1727 2 9.07266 2.84 8.65266 4H4.47266C3.37266 4 2.47266 4.9 2.47266 6V20C2.47266 21.1 3.37266 22 4.47266 22H10.4727V20H4.47266V6ZM11.4727 4C12.0227 4 12.4727 4.45 12.4727 5C12.4727 5.55 12.0227 6 11.4727 6C10.9227 6 10.4727 5.55 10.4727 5C10.4727 4.45 10.9227 4 11.4727 4Z"
-                    fill="white"
-                  />
-                  <path
-                    d="M21.2227 13.25C20.8127 12.84 20.1327 12.84 19.7227 13.25L14.9827 18L12.7227 15.75C12.3127 15.34 11.6427 15.34 11.2227 15.75C10.8127 16.16 10.8127 16.84 11.2227 17.25L14.2727 20.29C14.6627 20.68 15.2927 20.68 15.6827 20.29L21.2127 14.75C21.6327 14.34 21.6327 13.66 21.2227 13.25Z"
+                    d="M7.99609 18C6.89609 18 6.00609 18.9 6.00609 20C6.00609 21.1 6.89609 22 7.99609 22C9.09609 22 9.99609 21.1 9.99609 20C9.99609 18.9 9.09609 18 7.99609 18ZM1.99609 3C1.99609 3.55 2.44609 4 2.99609 4H3.99609L7.59609 11.59L6.24609 14.03C5.51609 15.37 6.47609 17 7.99609 17H18.9961C19.5461 17 19.9961 16.55 19.9961 16C19.9961 15.45 19.5461 15 18.9961 15H7.99609L9.09609 13H16.5461C17.2961 13 17.9561 12.59 18.2961 11.97L21.8761 5.48C22.2461 4.82 21.7661 4 21.0061 4H6.20609L5.53609 2.57C5.37609 2.22 5.01609 2 4.63609 2H2.99609C2.44609 2 1.99609 2.45 1.99609 3ZM17.9961 18C16.8961 18 16.0061 18.9 16.0061 20C16.0061 21.1 16.8961 22 17.9961 22C19.0961 22 19.9961 21.1 19.9961 20C19.9961 18.9 19.0961 18 17.9961 18Z"
                     fill="white"
                   />
                 </svg>
               </span>
               <span className={`flex-1 shrink-0`}>
-                <span>{t("navigations.inventory")}</span>
+                <span>{t("navigations.buySup")}</span>
               </span>
             </NavLink>
           </div>
 
           {/* Sell  */}
-          <div className="w-full overflow-hidden capitalize">
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
               to="/sales"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("sales")}
             >
               <span>
                 <svg
@@ -141,39 +301,12 @@ const SideNav = () => {
             </NavLink>
           </div>
 
-          {/* customer  */}
-          <div className="w-full overflow-hidden capitalize">
-            <NavLink
-              to="/customer"
-              className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M4 3H10C10.55 3 11 3.45 11 4V10C11 10.55 10.55 11 10 11H4C3.45 11 3 10.55 3 10V4C3 3.45 3.45 3 4 3ZM14 3H20C20.55 3 21 3.45 21 4V10C21 10.55 20.55 11 20 11H14C13.45 11 13 10.55 13 10V4C13 3.45 13.45 3 14 3ZM4 13H10C10.55 13 11 13.45 11 14V20C11 20.55 10.55 21 10 21H4C3.45 21 3 20.55 3 20V14C3 13.45 3.45 13 4 13ZM17 13C16.45 13 16 13.45 16 14V16H14C13.45 16 13 16.45 13 17C13 17.55 13.45 18 14 18H16V20C16 20.55 16.45 21 17 21C17.55 21 18 20.55 18 20V18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H18V14C18 13.45 17.55 13 17 13Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-              <span className={`flex-1 shrink-0`}>
-                <span>{t("navigations.customers")}</span>
-              </span>
-            </NavLink>
-          </div>
-
           {/* Expenses  */}
-          <div className="w-full overflow-hidden capitalize">
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
               to="/expenses"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("expenses")}
             >
               <span>
                 <svg
@@ -196,11 +329,11 @@ const SideNav = () => {
           </div>
 
           {/* Money Owed  */}
-          <div className="w-full overflow-hidden capitalize">
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
               to="/moneyOwed"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("moneyOwed")}
             >
               <span>
                 <svg
@@ -222,12 +355,39 @@ const SideNav = () => {
             </NavLink>
           </div>
 
+          {/* customer  */}
+          <div className="w-full overflow-hidden capitalize shrink-0">
+            <NavLink
+              to="/customer"
+              className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
+              onClick={() => handleToggle("customer")}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <path
+                    d="M4 3H10C10.55 3 11 3.45 11 4V10C11 10.55 10.55 11 10 11H4C3.45 11 3 10.55 3 10V4C3 3.45 3.45 3 4 3ZM14 3H20C20.55 3 21 3.45 21 4V10C21 10.55 20.55 11 20 11H14C13.45 11 13 10.55 13 10V4C13 3.45 13.45 3 14 3ZM4 13H10C10.55 13 11 13.45 11 14V20C11 20.55 10.55 21 10 21H4C3.45 21 3 20.55 3 20V14C3 13.45 3.45 13 4 13ZM17 13C16.45 13 16 13.45 16 14V16H14C13.45 16 13 16.45 13 17C13 17.55 13.45 18 14 18H16V20C16 20.55 16.45 21 17 21C17.55 21 18 20.55 18 20V18H20C20.55 18 21 17.55 21 17C21 16.45 20.55 16 20 16H18V14C18 13.45 17.55 13 17 13Z"
+                    fill="white"
+                  />
+                </svg>
+              </span>
+              <span className={`flex-1 shrink-0`}>
+                <span>{t("navigations.customers")}</span>
+              </span>
+            </NavLink>
+          </div>
+
           {/* suppliers */}
-          <div className="w-full overflow-hidden capitalize">
+          <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
               to="/suppliers"
               className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
+              onClick={() => handleToggle("suppliers")}
             >
               <span>
                 <svg
@@ -248,150 +408,37 @@ const SideNav = () => {
               </span>
             </NavLink>
           </div>
+        </section>
 
-          {/* buy-supplies */}
-          <div className="w-full overflow-hidden capitalize">
-            <NavLink
-              to="/supplies"
-              className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M7.99609 18C6.89609 18 6.00609 18.9 6.00609 20C6.00609 21.1 6.89609 22 7.99609 22C9.09609 22 9.99609 21.1 9.99609 20C9.99609 18.9 9.09609 18 7.99609 18ZM1.99609 3C1.99609 3.55 2.44609 4 2.99609 4H3.99609L7.59609 11.59L6.24609 14.03C5.51609 15.37 6.47609 17 7.99609 17H18.9961C19.5461 17 19.9961 16.55 19.9961 16C19.9961 15.45 19.5461 15 18.9961 15H7.99609L9.09609 13H16.5461C17.2961 13 17.9561 12.59 18.2961 11.97L21.8761 5.48C22.2461 4.82 21.7661 4 21.0061 4H6.20609L5.53609 2.57C5.37609 2.22 5.01609 2 4.63609 2H2.99609C2.44609 2 1.99609 2.45 1.99609 3ZM17.9961 18C16.8961 18 16.0061 18.9 16.0061 20C16.0061 21.1 16.8961 22 17.9961 22C19.0961 22 19.9961 21.1 19.9961 20C19.9961 18.9 19.0961 18 17.9961 18Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-              <span className={`flex-1 shrink-0`}>
-                <span>{t("navigations.buySup")}</span>
-              </span>
-            </NavLink>
-          </div>
-
-          {/* Store */}
-          {/* <div className="w-full overflow-hidden capitalize">
-            <NavLink
-              to="/store"
-              className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(toggleSidebar())}
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <path
-                    d="M20.16 7.8C20.07 7.34 19.66 7 19.18 7H4.82C4.34 7 3.93 7.34 3.84 7.8L3 12V13C3 13.55 3.45 14 4 14V19C4 19.55 4.45 20 5 20H13C13.55 20 14 19.55 14 19V14H18V19C18 19.55 18.45 20 19 20C19.55 20 20 19.55 20 19V14C20.55 14 21 13.55 21 13V12L20.16 7.8ZM12 18H6V14H12V18ZM5 6H19C19.55 6 20 5.55 20 5C20 4.45 19.55 4 19 4H5C4.45 4 4 4.45 4 5C4 5.55 4.45 6 5 6Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-              <span className={`flex-1 shrink-0`}>
-                <span>{t("navigations.store")}</span>
-              </span>
-            </NavLink>
-          </div> */}
-
-          <div className="w-full overflow-hidden capitalize">
-            <div
-              className={`flex items-center px-4  py-2 gap-2 cursor-pointer select-none`}
-              onClick={() => handleDropdown("Wallpapers")}
-            >
+        {/* logout */}
+        <div className="w-full overflow-hidden capitalize shrink-0">
+          <button
+            className="inline-flex items-center w-full pl-5 px-4 py-2 gap-2 cursor-pointer select-none"
+            onClick={() => dispatch(logout())}
+          >
+            <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
                 fill="none"
               >
                 <path
-                  d="M20.16 7.8C20.07 7.34 19.66 7 19.18 7H4.82C4.34 7 3.93 7.34 3.84 7.8L3 12V13C3 13.55 3.45 14 4 14V19C4 19.55 4.45 20 5 20H13C13.55 20 14 19.55 14 19V14H18V19C18 19.55 18.45 20 19 20C19.55 20 20 19.55 20 19V14C20.55 14 21 13.55 21 13V12L20.16 7.8ZM12 18H6V14H12V18ZM5 6H19C19.55 6 20 5.55 20 5C20 4.45 19.55 4 19 4H5C4.45 4 4 4.45 4 5C4 5.55 4.45 6 5 6Z"
+                  d="M2.10352 2H8.10352C8.65352 2 9.10352 1.55 9.10352 1C9.10352 0.45 8.65352 0 8.10352 0H2.10352C1.00352 0 0.103516 0.9 0.103516 2V16C0.103516 17.1 1.00352 18 2.10352 18H8.10352C8.65352 18 9.10352 17.55 9.10352 17C9.10352 16.45 8.65352 16 8.10352 16H2.10352V2Z"
+                  fill="white"
+                />
+                <path
+                  d="M17.7535 8.65L14.9635 5.86C14.6435 5.54 14.1035 5.76 14.1035 6.21V8H7.10352C6.55352 8 6.10352 8.45 6.10352 9C6.10352 9.55 6.55352 10 7.10352 10H14.1035V11.79C14.1035 12.24 14.6435 12.46 14.9535 12.14L17.7435 9.35C17.9435 9.16 17.9435 8.84 17.7535 8.65Z"
                   fill="white"
                 />
               </svg>
-              <p className={`flex-1  "hidden"} shrink-0`}>
-                <span>{t("tableTitle.store")}</span>
-              </p>
-              <span
-                className={`duration-100 ${
-                  isSubmenuOpen["Wallpapers"] ? "rotate-90" : "rotate-0"
-                }  "hidden"}`}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 16"
-                  fill="none"
-                >
-                  <path
-                    d="M5.99999 5.41676L8.58666 8.00343L5.99999 10.5901C5.73999 10.8501 5.73999 11.2701 5.99999 11.5301C6.25999 11.7901 6.67999 11.7901 6.93999 11.5301L9.99999 8.4701C10.26 8.2101 10.26 7.7901 9.99999 7.5301L6.93999 4.4701C6.67999 4.2101 6.25999 4.2101 5.99999 4.4701C5.74666 4.7301 5.73999 5.15676 5.99999 5.41676Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-            </div>
-            {/* submenu  */}
-
-            <div
-              ref={(ref) => (submenuRef.current["Wallpapers"] = ref)}
-              className={`flex flex-col gap-1 duration-200`}
-              style={{
-                maxHeight: isSubmenuOpen["Wallpapers"]
-                  ? `${submenuRef.current["Wallpapers"]?.scrollHeight}px`
-                  : "0",
-              }}
-            >
-              {/* Submenu items */}
-              <NavLink to="/stores-settings" className="py-3 pl-12">
-                <p>{t("tableTitle.storeSetting")}</p>
-              </NavLink>
-              <NavLink to="/stores-financial" className="py-3 pl-12">
-                <p>{t("tableTitle.transactions")}</p>
-              </NavLink>
-            </div>
-          </div>
-          {/* logout */}
-          <div className="w-full overflow-hidden capitalize">
-            <button
-              className="flex items-center pl-5 px-4 py-2 gap-2 cursor-pointer select-none"
-              onClick={() => dispatch(logout())}
-            >
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 18 18"
-                  fill="none"
-                >
-                  <path
-                    d="M2.10352 2H8.10352C8.65352 2 9.10352 1.55 9.10352 1C9.10352 0.45 8.65352 0 8.10352 0H2.10352C1.00352 0 0.103516 0.9 0.103516 2V16C0.103516 17.1 1.00352 18 2.10352 18H8.10352C8.65352 18 9.10352 17.55 9.10352 17C9.10352 16.45 8.65352 16 8.10352 16H2.10352V2Z"
-                    fill="white"
-                  />
-                  <path
-                    d="M17.7535 8.65L14.9635 5.86C14.6435 5.54 14.1035 5.76 14.1035 6.21V8H7.10352C6.55352 8 6.10352 8.45 6.10352 9C6.10352 9.55 6.55352 10 7.10352 10H14.1035V11.79C14.1035 12.24 14.6435 12.46 14.9535 12.14L17.7435 9.35C17.9435 9.16 17.9435 8.84 17.7535 8.65Z"
-                    fill="white"
-                  />
-                </svg>
-              </span>
-              <span className={`flex-1 shrink-0`}>
-                <span>{t("navigations.logout")}</span>
-              </span>
-            </button>
-          </div>
-        </section>
+            </span>
+            <span className={` shrink-0`}>
+              <span>{t("navigations.logout")}</span>
+            </span>
+          </button>
+        </div>
       </div>
       <div
         className={`${

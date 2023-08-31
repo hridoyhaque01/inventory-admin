@@ -6,25 +6,20 @@
   font-variation-settings: "FILL" 1, "wght" 300, "GRAD" 200, "opsz" 24;
 }
 
-.sideNav::-webkit-scrollbar {
-  width: 0px;
-}
-
 .active {
   background-color: #f16b16;
 }
-/* 
+
 .sideNav::-webkit-scrollbar {
-  width: 8px;
+  width: 6px !important;
 }
 
 .sideNav::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: #F5F5F5; 
-
+  background: #f5f5f5;
 }
- 
+
 .sideNav::-webkit-scrollbar-thumb {
   border-radius: 10px;
   background-color: #c9c9c9;
-} */
+}

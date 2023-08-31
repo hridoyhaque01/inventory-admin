@@ -30,7 +30,11 @@
     "profit": "লাভ",
     "due": "বাকি",
     "recieve": "গ্রহণ",
-    "expense": "খরচ"
+    "expense": "খরচ",
+    "productManagement": "পণ্য ব্যবস্থাপনা",
+    "allProducts": "সমস্ত পণ্য",
+    "assignProducts": "পণ্য বরাদ্দ",
+    "categories": "বিভাগ"
   },
   "forms": {
     "name": "নাম",
@@ -55,7 +59,8 @@
     "totalAmount": "সর্বমোট পরিমাণ",
     "paid": "পরিশোধ",
     "paidAmount": "প্রদত্ত পরিমাণ",
-    "passReset": "পাসওয়ার্ড রিসেট করুন"
+    "passReset": "পাসওয়ার্ড রিসেট করুন",
+    "updateStore": "স্টোর আপডেট করুন"
   },
   "placeholders": {
     "enterFirstName": "নামের প্রথম অংশ লিখুন",
@@ -98,7 +103,8 @@
     "signUp": "নিবন্ধন করুন",
     "forgetPass": "পাসওয়ার্ড ভুলে গেছেন",
     "noAcc": "অ্যাকাউন্ট নেই?",
-    "haveAcc": "ইতিমধ্যে অ্যাকাউন্ট আছে?"
+    "haveAcc": "ইতিমধ্যে অ্যাকাউন্ট আছে?",
+    "enterCategory": "বিভাগের নাম লিখুন"
   },
   "cards": {
     "totalCost": "মোট খরচ",
@@ -159,6 +165,7 @@
     "store": "দোকান",
     "storeSetting": "স্টোর সেটিংস",
     "financial": "আর্থিক লেনদেন",
-    "transactions": "লেনদেন"
+    "transactions": "লেনদেন",
+    "category": "বিভাগ"
   }
 }

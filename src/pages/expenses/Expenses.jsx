@@ -49,7 +49,7 @@ function Expenses() {
           onChange={onChange}
         ></SearchBar>
 
-        <div className="h-[calc(100%-80px)] overflow-auto flex flex-col justify-between flex-wrap pb-4">
+        <div className="h-[calc(100%-104px)] sm:h-[calc(100%-80px)] w-full flex flex-col justify-between">
           {content}
         </div>
       </div>

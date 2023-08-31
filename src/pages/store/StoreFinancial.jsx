@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
@@ -12,14 +11,14 @@ import {
   useGetStoresResultQuery,
   useUpdatePaymentMutation,
 } from "../../features/store/storeApi";
-import { setActiveTab } from "../../features/store/storeSlice";
 function StoreFinancial() {
   const { data, isLoading, isError } = useGetStoresResultQuery();
   const [updatePayment, { isLoading: paymentLoading }] =
     useUpdatePaymentMutation();
+
   const [activeStore, setActiveStore] = useState({});
-  const { activeTab } = useSelector((state) => state.store);
-  const dispatch = useDispatch();
+  const [showStoreId, setShowStoreId] = useState("");
+
   const errorNotify = (message) =>
     toast.error(message, {
       position: "top-right",
@@ -53,50 +52,29 @@ function StoreFinancial() {
   } else if (!isLoading && !isError && data?.length === 0) {
     content = <NoData></NoData>;
   } else if (!isLoading && !isError && data?.length > 0) {
-    content = (
-      <>
-        <nav
-          className="w-full flex items-center px-1 gap-2 rounded-sm  overflow-auto tabs-container"
-          aria-label="Tabs"
-          role="tablist"
-        >
-          {data?.map((item, i) => (
-            <button
-              type="button"
-              className={`hs-tab-active:bg-primaryMainLight hs-tab-active:text-whiteHigh bg-whiteHigh border-transparent rounded py-2 px-6 inline-flex items-center gap-2 text-sm whitespace-nowrap font-medium ${
-                activeTab === "store" + i ? "active" : ""
-              }`}
-              id={item?.storeData?.email}
-              data-hs-tab={`#store${i}`}
-              aria-controls={`store${i}`}
-              role="tab"
-              key={i}
-              onClick={() => dispatch(setActiveTab(`store${i}`))}
-            >
-              {item?.storeData?.name}
-            </button>
-          ))}
-        </nav>
-
-        <div className="mt-3">
-          {data?.map((item, i) => (
-            <div
-              id={`store${i}`}
-              role="tabpanel"
-              aria-labelledby="basic-tabs-item-1"
-              className={activeTab !== "store" + i ? "hidden" : ""}
-              key={i}
-            >
-              <StoreFinancialTable
-                results={item}
-                setActiveStore={setActiveStore}
-              ></StoreFinancialTable>
-            </div>
-          ))}
-        </div>
-      </>
+    const singleStore = data?.find(
+      (item) => item?.storeData?._id === showStoreId
     );
+
+    if (singleStore?.storeData?._id) {
+      content = (
+        <StoreFinancialTable
+          setActiveStore={setActiveStore}
+          setShowStoreId={setShowStoreId}
+          stores={data}
+          showStore={singleStore}
+        ></StoreFinancialTable>
+      );
+    } else {
+      content = <NoData></NoData>;
+    }
   }
+
+  useEffect(() => {
+    if (!isError && !isLoading) {
+      setShowStoreId(data[0]?.storeData?._id);
+    }
+  }, [isError, isLoading]);
 
   return (
     <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">

@@ -30,7 +30,11 @@
     "profit": "Profit",
     "due": "Due",
     "recieve": "Recieve",
-    "expense": "Expense"
+    "expense": "Expense",
+    "productManagement": "Product Management",
+    "allProducts": "All Prodcuts",
+    "assignProducts": "Assign Products",
+    "categories": "Categories"
   },
   "forms": {
     "name": "Name",
@@ -55,7 +59,8 @@
     "description": "Description",
     "totalAmount": "Total Amount",
     "paidAmount": "Paid Amount",
-    "passReset": "Reset Password"
+    "passReset": "Reset Password",
+    "updateStore": "Update Store"
   },
   "placeholders": {
     "enterFirstName": "Enter first name",
@@ -82,7 +87,8 @@
     "enterTotalPrice": "Enter total price",
     "enterDueAmount": "Enter due amount",
     "storeAddress": "Enter store address",
-    "storeName": "Enter store name"
+    "storeName": "Enter store name",
+    "enterCategory": "Enter category name"
   },
   "buttons": {
     "cancel": "Cancel",
@@ -159,6 +165,7 @@
     "store": "Store",
     "storeSetting": "Store Settings",
     "financial": "Financial Transactions",
-    "transactions": "Transactions"
+    "transactions": "Transactions",
+    "category": "Category"
   }
 }

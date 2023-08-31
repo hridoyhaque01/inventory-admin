@@ -63,7 +63,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
     <section>
       <input type="checkbox" id="resetPasswordModal" className="modal-toggle" />
       <div className="modal">
-        <div className="modal-box w-11/12 max-w-5xl flex flex-col items-center justify-center gap-4 bg-white">
+        <div className="modal-box max-w-2xl flex flex-col items-center justify-center gap-4 bg-white">
           <div className="w-full max-w-[618px]">
             <div className="flex justify-center mb-6">
               <span className="inline-block rounded-full  font-medium text-lg text-blackSemi">
@@ -124,14 +124,14 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                   <div className="flex items-center gap-3">
                     <label
                       htmlFor="resetPasswordModal"
-                      className="btn bg-transparent hover:bg-transparent w-[170px] sm:w-[160px]  rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
+                      className="btn bg-transparent hover:bg-transparent w-[110px] sm:w-[160px]  rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </label>
                     <button type="submit" disabled={!isStrong}>
                       <label
                         htmlFor="resetPasswordModal"
-                        className="btn w-[170px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
+                        className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                         disabled={!isStrong}
                       >
                         {t("buttons.save")}

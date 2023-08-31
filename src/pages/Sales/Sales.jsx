@@ -74,7 +74,7 @@ function Sales() {
           onChange={onChange}
           isNotAddable={true}
         >
-          <div className="dropdown dropdown-bottom z-50">
+          <div className="dropdown dropdown-end dropdown-bottom z-50">
             <label
               tabIndex={0}
               className="text-whiteHigh flex items-center gap-1 cursor-pointer  text-sm md:text-base whitespace-nowrap"
@@ -113,7 +113,7 @@ function Sales() {
           </div>
         </SearchBar>
 
-        <div className="h-[calc(100%-80px)] overflow-auto flex flex-col justify-between flex-wrap pb-4">
+        <div className="h-[calc(100%-104px)] sm:h-[calc(100%-80px)] w-full flex flex-col justify-between">
           {content}
         </div>
       </div>

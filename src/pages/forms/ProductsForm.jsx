@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
+import { useGetCategoriesQuery } from "../../features/categories/categoriesApi";
 import {
   useAddProductMutation,
   useUpdateProductMutation,
@@ -11,6 +12,8 @@ import {
 
 function ProductsForm() {
   const [addProduct, { isLoading }] = useAddProductMutation();
+  const { data, isLoading: categoryLoading, isError } = useGetCategoriesQuery();
+
   const [updateProduct, { isLoading: productUpdateLoading }] =
     useUpdateProductMutation();
   const { state } = useLocation();
@@ -87,7 +90,11 @@ function ProductsForm() {
     }
   };
 
-  return (
+  return categoryLoading ? (
+    <div>{t("loading")}...</div>
+  ) : isError ? (
+    <div>{t("somethingWrong")}</div>
+  ) : (
     <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
@@ -148,11 +155,11 @@ function ProductsForm() {
                       <option value="" disabled>
                         {t("placeholders.selectProductCat")}
                       </option>
-                      <option value="category one">Category one</option>
-                      <option value="category two">Category two</option>
-                      <option value="category three">Category three</option>
-                      <option value="category four">Category four</option>
-                      <option value="category five">Category five</option>
+                      {data?.map((item, index) => (
+                        <option value={item?.categoryName} key={index}>
+                          {item?.categoryName}
+                        </option>
+                      ))}
                     </select>
                     <div className="absolute inset-y-0 right-3 flex items-center text-secondaryColor pointer-events-none">
                       <svg

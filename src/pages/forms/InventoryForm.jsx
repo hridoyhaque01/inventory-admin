@@ -112,7 +112,7 @@ function InventoryForm() {
       <div className="shadow-sm w-full rounded-2xl overflow-hidden">
         <div className="bg-primaryMainDarkest p-4">
           <h4 className=" text-whiteHigh text-lg md:text-2xl font-bold">
-            {t("tableTitle.inventory")}
+            {t("navigations.assignProducts")}
           </h4>
         </div>
         <div className="bg-whiteHigh px-4 w-full">

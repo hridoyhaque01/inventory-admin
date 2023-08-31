@@ -44,6 +44,7 @@ module.exports = {
       primaryMainLight: "#F16B16",
       primaryMainLighter: "#979EE9",
       primaryMainLightest: "#FAD2B8",
+      primaryMainLow: "#ffecd4",
 
       secondaryMain: "#E2D9AA",
       secondaryMainDark: "#1EBB66",

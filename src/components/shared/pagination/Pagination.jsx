@@ -31,17 +31,17 @@ export const Pagination = ({
   };
 
   return (
-    <section className="flex items-center justify-end gap-4 text-darkHigh w-full flex-nowrap whitespace-nowrap">
+    <section className="flex items-center gap-4 text-darkHigh w-full flex-nowrap whitespace-nowrap pb-6">
       {/* <div>{renderPagination()}</div> */}
 
       <div className="flex items-center gap-2">
-        <p className="font-semibold text-sm sm:text-base ">
+        {/* <p className="font-semibold text-xs sm:text-base ">
           {t("pagination.perPage")} :
-        </p>
+        </p> */}
         <div className="dropdown dropdown-top dropdown-end">
           <label
             tabIndex={3}
-            className="rounded-lg px-2 py-2 border border-blackLow  cursor-pointer flex items-center"
+            className="rounded-lg p-1 sm:p-2 border border-blackLow  cursor-pointer flex items-center"
           >
             {rowsPerPage} &nbsp;
             <svg

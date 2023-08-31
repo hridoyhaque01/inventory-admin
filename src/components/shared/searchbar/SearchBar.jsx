@@ -6,19 +6,19 @@ function SearchBar({ title, value, onChange, path, isNotAddable, children }) {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-primaryMainDarkest px-3 py-4 sm:p-4 flex items-center justify-between gap-1">
-      <div className="flex items-center gap-2 sm:gap-4 md:gap-8">
-        <h4 className=" text-whiteHigh text-base sm:text-2xl font-bold">
+    <div className="bg-primaryMainDarkest px-3 py-4 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+      <div className="flex justify-between items-center sm:justify-start sm:gap-4 md:gap-8">
+        <h4 className=" text-whiteHigh text-lg sm:text-2xl font-bold">
           {t(title)}
         </h4>
         {children}
       </div>
       <div
-        className={`flex items-center justify-end ${
+        className={`flex items-center justify-end full ${
           isNotAddable ? "" : "gap-2 md:gap-6"
         } `}
       >
-        <div className="relative">
+        <div className="relative w-full">
           <label
             className="absolute left-1 sm:left-3 top-1/2 -translate-y-1/2"
             htmlFor="search"
@@ -39,7 +39,7 @@ function SearchBar({ title, value, onChange, path, isNotAddable, children }) {
             id="search"
             value={value}
             onChange={onChange}
-            className="pl-6 sm:pl-9 p-3 h-full w-[160px] sm:w-[380px] lg:w-[512px] text-xs sm:text-sm md:text-base text-blackMid rounded-md border-none focus:outline-none bg-whiteHigh"
+            className="pl-6 sm:pl-9 p-2.5 sm:py-3 h-full w-full sm:w-[380px] lg:w-[512px] text-xs sm:text-sm md:text-base text-blackMid rounded-md border-none focus:outline-none bg-whiteHigh"
             type="text"
             name="searchInput"
             placeholder={t("search")}

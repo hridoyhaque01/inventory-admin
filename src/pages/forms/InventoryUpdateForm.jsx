@@ -72,7 +72,7 @@ function InventoryUpdateForm() {
         navigate("/inventory");
       })
       .catch((error) => {
-        errorNotify("Update inventory failed");
+        errorNotify("Update assign product failed");
       });
   };
 

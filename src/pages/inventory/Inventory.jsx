@@ -47,12 +47,12 @@ function Inventory() {
     <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
       <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
         <SearchBar
-          title="tableTitle.inventory"
+          title="navigations.assignProducts"
           path="/inventory-add"
           value={searchValue}
           onChange={onChange}
         ></SearchBar>
-        <div className="h-[calc(100%-80px)] overflow-auto flex flex-col justify-between flex-wrap pb-4">
+        <div className="h-[calc(100%-104px)] sm:h-[calc(100%-80px)] w-full flex flex-col justify-between">
           {content}
         </div>
       </div>

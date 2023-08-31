@@ -198,7 +198,7 @@ function StoreForm() {
                   </div>
                 </div>
 
-                {/* edit button */}
+                {/* submit buttons*/}
                 <div className="flex flex-col md:flex-row md:items-center gap-3 mt-2">
                   <span className="w-[170px]"></span>
                   <div className="flex items-center gap-3">

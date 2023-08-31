@@ -6,8 +6,6 @@ import ChartLine from "./ChartTypes/ChartLine";
 import ChartRecieve from "./ChartTypes/ChartRecieve";
 
 const Charts = ({ data }) => {
-  console.log(data);
-
   const {
     finalExpenseData,
     revenueAndSalesData,
