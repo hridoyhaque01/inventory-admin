@@ -13,7 +13,7 @@ function UnitTable({ data }) {
   const { t } = useTranslation();
 
   const handleNavigate = (category) => {
-    navigate("/category-edit", {
+    navigate("/unit-edit", {
       state: {
         payload: category,
         type: "edit",
