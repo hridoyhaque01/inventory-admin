@@ -101,7 +101,7 @@ function MoneyOwedTable({ data }) {
           )}
         </table>
       </div>
-      <div className="pr-6">
+      <div className="px-6">
         <Pagination
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}

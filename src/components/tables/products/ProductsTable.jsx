@@ -76,7 +76,7 @@ function ProductsTable({ data }) {
                   </td>
                   <td className="py-3">{item?.productId}</td>
                   <td className="py-3">{item?.productName}</td>
-                  <td className="py-3">{item?.productUnit}</td>
+                  <td className="py-3">{item?.productCategory}</td>
                   <td className="py-3">{item?.productLeft}</td>
 
                   <td className="py-3">
