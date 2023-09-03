@@ -21,9 +21,9 @@ function Suppliers() {
 
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
-      return data?.customerId
+      return data?.supplierPhone
         ?.toLowerCase()
-        .includes(searchValue?.toLowerCase());
+        .startsWith(searchValue?.toLowerCase());
     } else {
       return true;
     }

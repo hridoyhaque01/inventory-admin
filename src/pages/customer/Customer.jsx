@@ -33,7 +33,7 @@ function Customer() {
     if (searchValue.trim().length > 0) {
       return data?.customerPhone
         ?.toLowerCase()
-        .includes(searchValue?.toLowerCase());
+        .startsWith(searchValue?.toLowerCase());
     } else {
       return true;
     }

@@ -53,8 +53,7 @@ function SupplierTable({ data }) {
               <tr className="border-none">
                 <td colSpan="10" className="py-6">
                   <h2 className="text-center text-lg text-blackRgb font-medium">
-                    No data found!
-                    {t("tables.serial")}
+                    {t("noData")}
                   </h2>
                 </td>
               </tr>
