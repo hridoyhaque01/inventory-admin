@@ -124,11 +124,17 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                   <div className="flex items-center gap-3">
                     <label
                       htmlFor="resetPasswordModal"
-                      className="btn bg-transparent hover:bg-transparent w-[110px] sm:w-[160px]  rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
+                      className="btn bg-transparent hover:bg-transparent w-[110px] sm:w-[160px]  rounded-full border border-errorLightColor hover:border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </label>
-                    <button type="submit" disabled={!isStrong}>
+                    <label
+                      htmlFor="confirmationPopup"
+                      className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
+                    >
+                      {t("buttons.save")}
+                    </label>
+                    {/* <button type="submit" disabled={!isStrong}>
                       <label
                         htmlFor="resetPasswordModal"
                         className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
@@ -136,7 +142,7 @@ const ResetPasswordModal = ({ email, errorNotify, infoNotify, handler }) => {
                       >
                         {t("buttons.save")}
                       </label>
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

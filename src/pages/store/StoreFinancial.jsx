@@ -3,6 +3,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
 import SearchLoader from "../../components/loaders/SearchLoader";
+import ConfirmationModal from "../../components/modals/ConfirmationModal";
 import PaidToOwnerModal from "../../components/modals/PaidToOwnerModal";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
@@ -86,6 +87,7 @@ function StoreFinancial() {
         infoNotify={infoNotify}
         handler={updatePayment}
       ></PaidToOwnerModal>
+      <ConfirmationModal status="tableTitle.editNotAllow"></ConfirmationModal>
       <div>
         <ToastContainer
           position="top-right"

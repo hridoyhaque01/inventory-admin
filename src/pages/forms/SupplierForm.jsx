@@ -96,7 +96,7 @@ function SupplierForm() {
 
   const handlePaid = (event) => {
     const value = event.target.value;
-    if (Number(payload?.supplierDue) < Number(value)) {
+    if (Number(payload?.supplierDue) < Number(value) || Number(value) < 0) {
       return;
     } else {
       setPaidAmount(value);

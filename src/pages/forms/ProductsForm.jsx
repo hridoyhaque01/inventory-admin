@@ -9,10 +9,16 @@ import {
   useAddProductMutation,
   useUpdateProductMutation,
 } from "../../features/products/productsApi";
+import { useGetUnitsQuery } from "../../features/unit/unitApi";
 
 function ProductsForm() {
   const [addProduct, { isLoading }] = useAddProductMutation();
   const { data, isLoading: categoryLoading, isError } = useGetCategoriesQuery();
+  const {
+    data: unit,
+    isLoading: unitLoading,
+    isError: unitError,
+  } = useGetUnitsQuery();
 
   const [updateProduct, { isLoading: productUpdateLoading }] =
     useUpdateProductMutation();
@@ -90,9 +96,9 @@ function ProductsForm() {
     }
   };
 
-  return categoryLoading ? (
+  return categoryLoading || unitLoading ? (
     <div>{t("loading")}...</div>
-  ) : isError ? (
+  ) : isError || unitError ? (
     <div>{t("somethingWrong")}</div>
   ) : (
     <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
@@ -177,9 +183,46 @@ function ProductsForm() {
                     </div>
                   </div>
                 </div>
+                {/* Product Category: */}
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                    {t("placeholders.unit")} :
+                  </span>
+                  <div className="relative w-full">
+                    <select
+                      className="w-full bg-transparent p-3 border border-whiteLow rounded-md flex items-center text-darkSemi placeholder:text-blackSemi appearance-none outline-none text-sm sm:text-base"
+                      name="productUnit"
+                      defaultValue={payload ? payload?.productUnit : ""}
+                      required
+                    >
+                      <option value="" disabled>
+                        {t("placeholders.selectUnit")}
+                      </option>
+                      {data?.map((item, index) => (
+                        <option value={item?.unitName} key={index}>
+                          {item?.unitName}
+                        </option>
+                      ))}
+                    </select>
+                    <div className="absolute inset-y-0 right-3 flex items-center text-secondaryColor pointer-events-none">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="17"
+                        height="16"
+                        viewBox="0 0 17 16"
+                        fill="none"
+                      >
+                        <path
+                          d="M12.0561 5.53003L8.99609 8.58336L5.93609 5.53003L4.99609 6.47003L8.99609 10.47L12.9961 6.47003L12.0561 5.53003Z"
+                          fill={type === "edit" ? "#808080" : "#303030"}
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
 
                 {/* Quantity Price/productUnit: */}
-                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                {/* <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
                     {t("placeholders.unit")}
                   </span>
@@ -209,7 +252,7 @@ function ProductsForm() {
                       </svg>
                     </div>
                   </div>
-                </div>
+                </div> */}
 
                 {/* product id */}
 

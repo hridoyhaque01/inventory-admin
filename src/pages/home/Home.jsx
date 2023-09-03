@@ -18,8 +18,6 @@ const Dashboard = () => {
   // const { data: Singlestore } = useGetSingleStoreChartDataQuery();
   // const { data: storeData, isLoading, isError } = useGetAllStoreResultQuery();
 
-  console.log(storeResult);
-
   const errorNotify = (message) =>
     toast.error(message, {
       position: "top-right",

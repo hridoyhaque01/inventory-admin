@@ -12,8 +12,7 @@ const PaidToOwnerModal = ({
   const [payment, setPayment] = useState("");
   const handlePayment = (event) => {
     const value = event.target.value;
-
-    if (Number(value) > activeStore?.remaining) {
+    if (Number(value) > activeStore?.remaining || Number(value) < 0) {
       return;
     } else {
       setPayment(value);
@@ -96,14 +95,20 @@ const PaidToOwnerModal = ({
                     >
                       {t("buttons.cancel")}
                     </label>
-                    <button type="submit">
+                    {/* <button type="submit">
                       <label
                         htmlFor="paidToOwnerModal"
                         className="btn w-[140px] sm:w-[160px] text-sm sm:text-base rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                       >
                         {t("buttons.save")}
                       </label>
-                    </button>
+                    </button> */}
+                    <label
+                      htmlFor="confirmationPopup"
+                      className="btn w-[140px] sm:w-[160px] text-sm sm:text-base rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
+                    >
+                      {t("buttons.save")}
+                    </label>
                   </div>
                 </div>
               </div>

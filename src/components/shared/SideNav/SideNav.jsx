@@ -220,7 +220,7 @@ const SideNav = () => {
                   viewBox="0 0 24 24"
                   fill="none"
                 >
-                  <g clip-path="url(#clip0_974_5842)">
+                  <g clipPath="url(#clip0_974_5842)">
                     <path
                       d="M11.1491 3.39992L7.42914 9.47992C7.01914 10.1399 7.49914 10.9999 8.27914 10.9999H15.7091C16.4891 10.9999 16.9691 10.1399 16.5591 9.47992L12.8491 3.39992C12.4591 2.75992 11.5391 2.75992 11.1491 3.39992Z"
                       fill="white"
@@ -243,6 +243,47 @@ const SideNav = () => {
               </span>
               <span className={`flex-1 shrink-0`}>
                 <span>{t("navigations.categories")}</span>
+              </span>
+            </NavLink>
+          </div>
+          {/* Category  */}
+          <div className="w-full overflow-hidden capitalize shrink-0">
+            <NavLink
+              to="/unit"
+              className="flex items-center px-4 py-2 gap-2 cursor-pointer select-none"
+              onClick={() => handleToggle("unit")}
+            >
+              <span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                >
+                  <g clipPath="url(#clip0_974_5842)">
+                    <path
+                      d="M11.1491 3.39992L7.42914 9.47992C7.01914 10.1399 7.49914 10.9999 8.27914 10.9999H15.7091C16.4891 10.9999 16.9691 10.1399 16.5591 9.47992L12.8491 3.39992C12.4591 2.75992 11.5391 2.75992 11.1491 3.39992Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M17.5 22C19.9853 22 22 19.9853 22 17.5C22 15.0147 19.9853 13 17.5 13C15.0147 13 13 15.0147 13 17.5C13 19.9853 15.0147 22 17.5 22Z"
+                      fill="white"
+                    />
+                    <path
+                      d="M4 21.5H10C10.55 21.5 11 21.05 11 20.5V14.5C11 13.95 10.55 13.5 10 13.5H4C3.45 13.5 3 13.95 3 14.5V20.5C3 21.05 3.45 21.5 4 21.5Z"
+                      fill="white"
+                    />
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_974_5842">
+                      <rect width="24" height="24" fill="white" />
+                    </clipPath>
+                  </defs>
+                </svg>
+              </span>
+              <span className={`flex-1 shrink-0`}>
+                <span>{t("placeholders.unit")}</span>
               </span>
             </NavLink>
           </div>

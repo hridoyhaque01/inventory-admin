@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
+import ConfirmationModal from "../../components/modals/ConfirmationModal";
 import ResetPasswordModal from "../../components/modals/ResetPasswordModal";
 import StoreModal from "../../components/modals/StoreModal";
 import {
@@ -137,6 +138,7 @@ function StoreDetails() {
           handler={updateStore}
           activeStore={payload}
         ></StoreModal>
+        <ConfirmationModal status="tableTitle.editNotAllow"></ConfirmationModal>
       </div>
       {(isLoading || storeUpdateLoading) && <RequestLoader></RequestLoader>}
       <div>

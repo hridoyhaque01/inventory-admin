@@ -24,6 +24,7 @@ import ProductsForm from "../pages/forms/ProductsForm";
 import SalesForm from "../pages/forms/SalesForm";
 import StoreForm from "../pages/forms/StoreForm";
 import SupplierForm from "../pages/forms/SupplierForm";
+import UnitForm from "../pages/forms/UnitForm";
 import Home from "../pages/home/Home";
 import Inventory from "../pages/inventory/Inventory";
 import Money from "../pages/money/Money";
@@ -33,6 +34,7 @@ import Store from "../pages/store/Store";
 import StoreDetails from "../pages/store/StoreDetails";
 import StoreFinancial from "../pages/store/StoreFinancial";
 import Suppliers from "../pages/supplier/Suppliers";
+import Unit from "../pages/unit/Unit";
 import PrivateRouter from "./PrivateRouter";
 
 export const routes = createBrowserRouter([
@@ -147,6 +149,18 @@ export const routes = createBrowserRouter([
       {
         path: "/category-edit",
         element: <CategoryForm></CategoryForm>,
+      },
+      {
+        path: "/unit",
+        element: <Unit></Unit>,
+      },
+      {
+        path: "/unit-add",
+        element: <UnitForm></UnitForm>,
+      },
+      {
+        path: "/unit-edit",
+        element: <UnitForm></UnitForm>,
       },
       {
         path: "/products-add",

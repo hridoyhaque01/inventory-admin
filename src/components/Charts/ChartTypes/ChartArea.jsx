@@ -53,19 +53,19 @@ const ChartArea = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid stroke="#E8E8E8" />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="Date" />
             <YAxis />
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="revenue"
+              dataKey="Revenue"
               fill="url(#gradientColor)"
               stroke="#FFC227"
               strokeWidth={2}
             />
             <Area
               type="monotone"
-              dataKey="sales"
+              dataKey="Sales"
               fill="none"
               stroke="#54ADAA"
               strokeWidth={2}

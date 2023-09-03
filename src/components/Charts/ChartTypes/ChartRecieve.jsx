@@ -56,17 +56,17 @@ const ChartRecieve = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="Date" />
             <YAxis />
             <Tooltip />
             {/* <Legend /> */}
             <Bar
-              dataKey="recieved"
+              dataKey="Recieved"
               fill="url(#gradientLoanTwo)"
               radius={[24, 24, 0, 0]}
             />
             <Bar
-              dataKey="sales"
+              dataKey="Sales"
               fill="url(#gradientLoan)"
               radius={[24, 24, 0, 0]}
             />

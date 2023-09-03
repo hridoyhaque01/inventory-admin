@@ -56,19 +56,19 @@ const ChartBar = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="Date" />
             <YAxis />
             <Tooltip />
             {/* <Legend /> */}
             <Bar
               type="monotone"
-              dataKey="profit"
+              dataKey="Profit"
               fill="url(#gradientTwo)"
               radius={[24, 24, 0, 0]}
             />
             <Bar
               type="monotone"
-              dataKey="sales"
+              dataKey="Sales"
               fill="url(#gradient)"
               radius={[24, 24, 0, 0]}
             />

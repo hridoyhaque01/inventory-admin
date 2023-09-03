@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import RequestLoader from "../../components/loaders/RequestLoader";
+import ConfirmationModal from "../../components/modals/ConfirmationModal";
 import PasswordInput from "../../components/shared/ui/PasswordInput";
 import { useRegisterStoreMutation } from "../../features/store/storeApi";
 
@@ -204,17 +205,23 @@ function StoreForm() {
                   <div className="flex items-center gap-3">
                     <Link
                       to="/stores-settings"
-                      className="w-[170px] sm:w-[160px] p-3 sm:p-4 rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
+                      className="btn w-[110px] sm:w-[160px] rounded-full border bg-transparent hover:bg-transparent border-errorLightColor hover:border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </Link>
-                    <button
+                    {/* <button
                       type="submit"
                       className="w-[170px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                       disabled={!isStrong}
                     >
                       {t("buttons.save")}
-                    </button>
+                    </button> */}
+                    <label
+                      htmlFor="confirmationPopup"
+                      className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
+                    >
+                      {t("buttons.save")}
+                    </label>
                   </div>
                 </div>
               </div>
@@ -236,6 +243,7 @@ function StoreForm() {
           pauseOnHover
           theme="light"
         />
+        <ConfirmationModal status="tableTitle.addNotAllow"></ConfirmationModal>
       </div>
     </section>
   );

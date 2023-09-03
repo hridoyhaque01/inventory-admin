@@ -86,14 +86,20 @@ const StoreModal = ({ errorNotify, infoNotify, handler, activeStore }) => {
                     >
                       {t("buttons.cancel")}
                     </label>
-                    <button type="submit">
+                    {/* <button type="submit">
                       <label
                         htmlFor="storeModal"
                         className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                       >
                         {t("buttons.save")}
                       </label>
-                    </button>
+                    </button> */}
+                    <label
+                      htmlFor="confirmationPopup"
+                      className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
+                    >
+                      {t("buttons.save")}
+                    </label>
                   </div>
                 </div>
               </div>

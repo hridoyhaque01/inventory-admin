@@ -1,11 +1,13 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
-const ConfirmationModal = ({ handleStatus, status, modalClose }) => {
+const ConfirmationModal = ({ status }) => {
+  const { t } = useTranslation();
   return (
     <section>
       <input type="checkbox" id="confirmationPopup" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle ">
-        <div className="modal-box flex flex-col items-center justify-center gap-4 bg-white">
+      <div className="modal">
+        <div className="modal-box w-11/12 max-w-md flex flex-col items-center justify-center gap-4 bg-white">
           <div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -34,24 +36,14 @@ const ConfirmationModal = ({ handleStatus, status, modalClose }) => {
             </svg>
           </div>
           <div>
-            <p className="font-bold text-lg">
-              Do you want to <span className="capitalize">{status}</span>?
-            </p>
+            <p className="font-bold text-lg text-center">{t(status)}</p>
           </div>
           <div className="modal-action flex items-center justify-center">
             <label
               htmlFor="confirmationPopup"
-              className="btn rounded-full bg-primaryMainLight hover:bg-primaryMainLight border-secondaryColor hover:border-primaryMainLight text-whiteHigh  w-full"
-              onClick={handleStatus}
-              data-hs-overlay={modalClose || ""}
+              className="btn w-[110px] sm:w-[160px] text-sm sm:text-base  rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
             >
-              Confirm
-            </label>
-            <label
-              htmlFor="confirmationPopup"
-              className="btn rounded-full bg-transparent text-errorLowColor w-full border-errorLowColor hover:border-errorLowColor hover:bg-transparent"
-            >
-              Cancel
+              {t("tableTitle.close")}
             </label>
           </div>
         </div>

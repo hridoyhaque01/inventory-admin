@@ -70,15 +70,17 @@
     "enterPhone": "ফোন নম্বর লিখুন",
     "enterNewPass": "নতুন পাসওয়ার্ড লিখুন",
     "enterPass": "পাসওয়ার্ড লিখুন",
-    "enterConfirmPass": "নিশ্চিত পাসওয়ার্ড লিখুন",
+    "enterConfirmPass": "নিশ্চিত পাসওয়ার্ড",
     "enterProductId": "পণ্যের আইডি লিখুন",
     "enterProductName": "পণ্যের নাম লিখুন",
     "enterSupplierName": "সরবরাহকারীর নাম লিখুন",
     "selectProductCat": "পণ্যের বিভাগ নির্বাচন করুন",
+    "selectUnit": "ইউনিট নির্বাচন করুন",
     "selectShopName": "দোকানের নাম নির্বাচন করুন",
     "enterBuyingPrice": "ক্রয় মূল্য লিখুন",
     "enterSellingPrice": "বিক্রয় মূল্য লিখুন",
     "unit": "ইউনিট",
+    "enterUnit": "ইউনিট লিখুন",
     "enterDescription": "বর্ণনা লিখুন",
     "enterAmount": "পরিমান লিখুন",
     "enterAddress": "ঠিকানা লিখুন",
@@ -166,6 +168,9 @@
     "storeSetting": "স্টোর সেটিংস",
     "financial": "আর্থিক লেনদেন",
     "transactions": "লেনদেন",
-    "category": "বিভাগ"
+    "category": "বিভাগ",
+    "editNotAllow": "সংশোধন করার অনুমতি নেই",
+    "addNotAllow": "যোগ করার অনুমতি নেই",
+    "close": "বন্ধ"
   }
 }

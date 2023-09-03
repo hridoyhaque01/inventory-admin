@@ -75,13 +75,13 @@ function Profile() {
                 <div className="flex items-center justify-end gap-3 sm:gap-6">
                   <Link
                     to="/"
-                    className="w-full max-w-[120px] lg:max-w-[160px] p-4 rounded-full font-medium border border-errorLightColor text-errorLightColor text-center text-[10px] sm:text-base"
+                    className="btn w-full max-w-[110px] lg:max-w-[160px]  rounded-full font-medium border bg-transparent hover:bg-transparent border-errorLightColor hover:border-errorLightColor text-errorLightColor text-center text-[10px] sm:text-base"
                   >
                     {t("buttons.cancel")}
                   </Link>
                   <Link
                     to="/edit-profile"
-                    className="w-full max-w-max p-4 px-4 sm:px-6 rounded-full bg-primaryMainLight font-medium text-whiteHigh text-center text-[10px] sm:text-base"
+                    className="btn w-full max-w-[130px] sm:max-w-max sm:px-6  rounded-full bg-primaryMainLight hover:bg-primaryMainLight font-medium text-whiteHigh text-center text-[10px] sm:text-base whitespace-nowrap"
                   >
                     {t("buttons.editProfile")}
                   </Link>

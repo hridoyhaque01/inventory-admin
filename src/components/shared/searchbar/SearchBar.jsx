@@ -39,7 +39,7 @@ function SearchBar({ title, value, onChange, path, isNotAddable, children }) {
             id="search"
             value={value}
             onChange={onChange}
-            className="pl-6 sm:pl-9 p-2.5 sm:py-3 h-full w-full sm:w-[380px] lg:w-[512px] text-xs sm:text-sm md:text-base text-blackMid rounded-md border-none focus:outline-none bg-whiteHigh"
+            className="pl-6 sm:pl-9 p-2.5 sm:py-3 h-8 md:h-12 w-full sm:w-[380px] lg:w-[512px] text-xs sm:text-sm md:text-base text-blackMid rounded-md border-none focus:outline-none bg-whiteHigh"
             type="text"
             name="searchInput"
             placeholder={t("search")}

@@ -56,14 +56,14 @@ const ChartLine = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="Date" />
             <YAxis />
             <Tooltip />
             {/* <Legend /> */}
 
             <Line
               type="monotone"
-              dataKey="due"
+              dataKey="Due"
               stroke="url(#gradientLine)"
               strokeDasharray="5 5"
               strokeWidth={2}
@@ -71,7 +71,7 @@ const ChartLine = ({ title, data }) => {
             />
             <Line
               type="monotone"
-              dataKey="sales"
+              dataKey="Sales"
               stroke="url(#gradientLineTwo)"
               dot={false}
               strokeWidth={2}

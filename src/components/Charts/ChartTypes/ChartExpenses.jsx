@@ -57,12 +57,12 @@ const ChartExpenses = ({ title, data }) => {
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="#E8E8E8" />
-            <XAxis dataKey="date" />
+            <XAxis dataKey="Date" />
             <YAxis />
             <Tooltip />
             {/* <Legend /> */}
             <Bar
-              dataKey="expense"
+              dataKey="Expense"
               fill="url(#gradientLoanTwo)"
               radius={[24, 24, 0, 0]}
             />
