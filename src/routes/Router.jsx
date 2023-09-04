@@ -139,6 +139,10 @@ export const routes = createBrowserRouter([
         element: <SupplierForm></SupplierForm>,
       },
       {
+        path: "/supplier-edit",
+        element: <SupplierForm></SupplierForm>,
+      },
+      {
         path: "/categories",
         element: <Categories></Categories>,
       },

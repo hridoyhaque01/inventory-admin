@@ -67,7 +67,7 @@ function UnitTable({ data }) {
                     )}
                   </td>
 
-                  <td className="py-3">{category?.categoryName}</td>
+                  <td className="py-3">{category?.unitName}</td>
                   <td className="py-3 text-center">
                     <button
                       type="button"

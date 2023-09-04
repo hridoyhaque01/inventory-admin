@@ -41,6 +41,12 @@ function ExpensesForm() {
       description,
       amount: Number(amount),
     };
+
+    if (parseInt(amount) < 0) {
+      errorNotify("Negative values are not accepted");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
 

@@ -22,7 +22,7 @@ function Products() {
     if (searchValue.trim().length > 0) {
       return data?.productId
         ?.toLowerCase()
-        .includes(searchValue?.toLowerCase());
+        .startsWith(searchValue?.toLowerCase());
     } else {
       return true;
     }

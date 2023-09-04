@@ -41,7 +41,7 @@ function Profile() {
                     <img
                       src={user?.fileUrl || avatar}
                       alt=""
-                      className="w-40 h-40 rounded-full bg-cover bg-center object-cover"
+                      className="w-40 h-40 rounded-full bg-cover bg-center object-cover border border-blueLight"
                     />
                   </div>
                 </div>

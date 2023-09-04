@@ -282,7 +282,6 @@ export const dashboardApi = apiSlice.injectEndpoints({
           }
           salesAndRecieveData.push(...dayData);
         }
-        console.log(paidToOnwerData);
 
         // sales and profit
 

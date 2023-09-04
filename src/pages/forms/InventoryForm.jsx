@@ -66,6 +66,15 @@ function InventoryForm() {
       unitLeft: productQuantity,
     };
 
+    if (
+      parseInt(productQuantity) < 0 ||
+      parseInt(buyingPrice) < 0 ||
+      parseInt(sellingPrice) < 0
+    ) {
+      errorNotify("Negative values are not accepted");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
 
@@ -73,7 +82,6 @@ function InventoryForm() {
       parseInt(selectedProduct?.productLeft) - parseInt(productQuantity);
     const productData = { productLeft: productLeftInit };
     const productForm = new FormData();
-
     productForm.append("data", JSON.stringify(productData));
 
     addProducts({
@@ -96,6 +104,7 @@ function InventoryForm() {
 
   const handleQuantity = (event) => {
     const value = event.target.value;
+
     if (Number(value) > Number(selectedProduct?.productLeft)) {
       return;
     } else {
@@ -268,7 +277,6 @@ function InventoryForm() {
                     </Link>
                     <button
                       type="submit"
-                      disabled={Number(quantity) <= 0}
                       className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
                       {t("buttons.save")}

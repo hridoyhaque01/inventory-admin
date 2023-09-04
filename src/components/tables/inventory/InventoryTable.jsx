@@ -48,6 +48,9 @@ function InventoryTable({ data }) {
               <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.quantity")}
               </th>
+              <th className="bg-primaryMainLightest text-blackHigh normal-case">
+                {t("tables.productLeft")}
+              </th>
 
               <th className="bg-primaryMainLightest text-blackHigh normal-case">
                 {t("tables.buyingPrice")}
@@ -95,6 +98,7 @@ function InventoryTable({ data }) {
                     <td className="py-3">{item?.productCategory}</td>
                     <td className="py-3">{item?.storeName}</td>
                     <td className="py-3">{item?.productQuantity} </td>
+                    <td className="py-3">{item?.unitLeft} </td>
                     <td className="py-3">{item?.buyingPrice}</td>
                     <td className="py-3">{item?.sellingPrice}</td>
                     <td className="py-3">

@@ -65,7 +65,7 @@ const StoreFinancialTable = ({
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-1 shadow bg-whiteHigh rounded w-36 sm:w-48 mt-2 text-sm md:text-base whitespace-nowrap overflow-visible"
+              className="dropdown-content z-[1] menu p-1 shadow bg-whiteHigh rounded w-36 sm:w-44 mt-2 text-sm md:text-base whitespace-nowrap overflow-visible"
             >
               {stores?.map((store, i) => (
                 <li

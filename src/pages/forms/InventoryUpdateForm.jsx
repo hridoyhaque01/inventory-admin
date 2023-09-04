@@ -48,6 +48,11 @@ function InventoryUpdateForm() {
       unitLeft: productLeft,
     };
 
+    if (!isSubmitAcc) {
+      errorNotify("Invalid quantity");
+      return;
+    }
+
     const productLeftInit =
       parseInt(data?.productLeft) -
       (parseInt(quantity) - parseInt(payload?.productQuantity));
@@ -79,8 +84,9 @@ function InventoryUpdateForm() {
   const handleQuantity = (e) => {
     const value = e.target.value;
     if (
-      parseInt(value) < parseInt(payload?.productQuantity) ||
-      parseInt(value) > parseInt(data?.productLeft)
+      parseInt(value) < parseInt(payload?.unitLeft) ||
+      parseInt(value) >
+        parseInt(payload?.unitLeft) + parseInt(data?.productLeft)
     ) {
       setIsSubmitAcc(false);
     } else {
@@ -95,10 +101,10 @@ function InventoryUpdateForm() {
 
   useEffect(() => {
     if (payload?.productId) {
-      setQuantity(payload?.productQuantity);
+      setQuantity(payload?.unitLeft);
       setProductLeft(payload?.unitLeft);
     }
-  }, [payload?.productId, payload?.productQuantity, payload?.unitLeft]);
+  }, [payload?.productId, payload?.unitLeft]);
 
   return productLoading ? (
     <div>{t("loading")}...</div>
@@ -179,32 +185,46 @@ function InventoryUpdateForm() {
                   />
                 </div>
 
-                {/* Quantity Price/Unit: */}
-                {/* Quantity Price/Unit: */}
+                {/* Quantity Left: */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
                   <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
-                    {t("tables.quantity")} :
+                    {t("tables.productLeft")} :
                   </span>
-                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor ">
+                  <div className="w-full py-3 px-4 flex items-center border border-whiteLow outline-none rounded text-fadeColor bg-whiteMid">
                     <input
                       type="number"
-                      name="unitCount"
-                      className={`w-28 border-none outline-none text-blackLow text-sm sm:text-base`}
-                      placeholder={t("tables.quantity")}
-                      value={quantity}
-                      onChange={(e) => handleQuantity(e)}
+                      name="prevQuntity"
+                      className={`w-28 border-none outline-none text-fadeColor text-sm sm:text-base bg-transparent`}
+                      placeholder={t("tables.productLeft")}
+                      readOnly
+                      defaultValue={payload?.unitLeft}
                       // readOnly
                     />
 
                     <div className="relative w-full max-w-max">
                       <input
                         type="text"
-                        className="appearance-none outline-none  w-16 text-fadeColor text-sm sm:text-base"
+                        className="appearance-none outline-none  w-16 text-fadeColor text-sm sm:text-base bg-transparent"
                         readOnly
                         defaultValue={payload?.unit}
                       />
                     </div>
                   </div>
+                </div>
+                {/* Quantity Price/Unit: */}
+                <div className="flex flex-col md:flex-row md:items-center gap-3">
+                  <span className="inline-block w-[140px] shrink-0 whitespace-nowrap text-sm sm:text-base text-left md:text-right">
+                    {t("tables.quantity")} :
+                  </span>
+                  <input
+                    type="number"
+                    name="unitCount"
+                    placeholder={t("placeholders.enterBuyingPrice")}
+                    required
+                    className={`w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm sm:text-base`}
+                    value={quantity}
+                    onChange={(e) => handleQuantity(e)}
+                  />
                 </div>
                 {/* Buying Price/Unit: */}
                 <div className="flex flex-col md:flex-row md:items-center gap-3">
@@ -249,7 +269,6 @@ function InventoryUpdateForm() {
                     </Link>
                     <button
                       type="submit"
-                      disabled={Number(quantity) <= 0}
                       className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
                     >
                       {t("buttons.save")}

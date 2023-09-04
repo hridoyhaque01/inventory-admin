@@ -38,7 +38,7 @@ const ProductSuggestions = ({
   const inputProps = {
     placeholder: t("placeholders.enterProductId"),
     required: true,
-    class: "text-sm sm:text-base",
+    className: "text-sm sm:text-base",
     value,
     onChange: (event, { newValue }) => {
       setValue(newValue);

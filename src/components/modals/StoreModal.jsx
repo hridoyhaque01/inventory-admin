@@ -21,9 +21,7 @@ const StoreModal = ({ errorNotify, infoNotify, handler, activeStore }) => {
       .unwrap()
       .then((res) => {
         infoNotify("Update store successfull");
-
         const store = { ...activeStore, name, email };
-
         navigate("/store-details", {
           state: {
             payload: store,
@@ -82,7 +80,7 @@ const StoreModal = ({ errorNotify, infoNotify, handler, activeStore }) => {
                   <div className="flex items-center gap-3">
                     <label
                       htmlFor="storeModal"
-                      className="btn bg-transparent hover:bg-transparent w-[110px] sm:w-[160px]  rounded-full border border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
+                      className="btn bg-transparent hover:bg-transparent w-[110px] sm:w-[160px]  rounded-full border border-errorLightColor hover:border-errorLightColor text-errorLightColor font-medium text-center text-sm sm:text-base"
                     >
                       {t("buttons.cancel")}
                     </label>

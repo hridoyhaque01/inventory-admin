@@ -21,9 +21,9 @@ function BuySupplies() {
 
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
-      return data?.customerId
+      return data?.productId
         ?.toLowerCase()
-        .includes(searchValue?.toLowerCase());
+        .startsWith(searchValue?.toLowerCase());
     } else {
       return true;
     }

@@ -68,6 +68,11 @@ function SupplierForm() {
     formData.append("data", JSON.stringify(data));
 
     if (type === "edit") {
+      if (parseInt(paidAmount) < 0) {
+        errorNotify("Negative values are not accepted");
+        return;
+      }
+
       updateSuppliers({ data: formData, id: payload?._id })
         .unwrap()
         .then((res) => {
@@ -96,7 +101,7 @@ function SupplierForm() {
 
   const handlePaid = (event) => {
     const value = event.target.value;
-    if (Number(payload?.supplierDue) < Number(value) || Number(value) < 0) {
+    if (Number(payload?.supplierDue) < Number(value)) {
       return;
     } else {
       setPaidAmount(value);

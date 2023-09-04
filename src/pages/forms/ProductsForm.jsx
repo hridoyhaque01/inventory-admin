@@ -198,7 +198,7 @@ function ProductsForm() {
                       <option value="" disabled>
                         {t("placeholders.selectUnit")}
                       </option>
-                      {data?.map((item, index) => (
+                      {unit?.map((item, index) => (
                         <option value={item?.unitName} key={index}>
                           {item?.unitName}
                         </option>

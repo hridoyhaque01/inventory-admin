@@ -4,10 +4,10 @@ import SearchBar from "../../components/shared/searchbar/SearchBar";
 import NoData from "../../components/shared/ui/NoData";
 import SomethingWrong from "../../components/shared/ui/SomethingWrong";
 import UnitTable from "../../components/tables/unit/UnitTable";
-import { useGetCategoriesQuery } from "../../features/categories/categoriesApi";
+import { useGetUnitsQuery } from "../../features/unit/unitApi";
 
 function Unit() {
-  const { data, isLoading, isError } = useGetCategoriesQuery();
+  const { data, isLoading, isError } = useGetUnitsQuery();
   const [searchValue, setSearchValue] = useState("");
 
   const sortByTime = (a, b) => {
@@ -21,7 +21,7 @@ function Unit() {
 
   const filterBySearch = (data) => {
     if (searchValue.trim().length > 0) {
-      return data?.categoryName
+      return data?.unitName
         ?.toLowerCase()
         ?.includes(searchValue?.toLowerCase());
     } else {

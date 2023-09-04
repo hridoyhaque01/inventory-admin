@@ -96,6 +96,17 @@ function BuySuppliesForm() {
       unitCount,
     };
 
+    if (
+      parseInt(unitCount) < 0 ||
+      parseInt(unitPrice) < 0 ||
+      parseInt(paidAmount) < 0 ||
+      parseInt(totalAmount) < 0 ||
+      parseInt(dueAmount) < 0
+    ) {
+      errorNotify("Negative values are not accepted");
+      return;
+    }
+
     // supplies data
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
@@ -240,7 +251,7 @@ function BuySuppliesForm() {
                     {t("tables.unitPrice")} :
                   </span>
                   <input
-                    type="text"
+                    type="number"
                     placeholder={t("placeholders.enterUnitPrice")}
                     name="unitPrice"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-blackLow text-sm"
@@ -255,7 +266,7 @@ function BuySuppliesForm() {
                     {t("tables.totalPrice")} :
                   </span>
                   <input
-                    type="text"
+                    type="number"
                     placeholder={t("placeholders.enterTotalPrice")}
                     name="totalAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
@@ -270,7 +281,7 @@ function BuySuppliesForm() {
                     {t("forms.paidAmount")} :
                   </span>
                   <input
-                    type="text"
+                    type="number"
                     placeholder={t("placeholders.enterPaid")}
                     name="paidAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm"
@@ -285,7 +296,7 @@ function BuySuppliesForm() {
                     {t("tables.dueAmount")} :
                   </span>
                   <input
-                    type="text"
+                    type="number"
                     placeholder={t("placeholders.enterDueAmount")}
                     name="dueAmount"
                     className="w-full py-3 px-4 border border-whiteLow outline-none rounded text-fadeColor text-sm bg-whiteMid"
@@ -311,6 +322,7 @@ function BuySuppliesForm() {
                     <button
                       type="submit"
                       className="w-[140px] sm:w-[160px] text-sm sm:text-base p-3 sm:p-4 rounded-full border bg-primaryMainLight text-whiteHigh font-medium text-center"
+                      disabled={!selectedProduct?._id || !selectedSupplier?._id}
                     >
                       {t("buttons.save")}
                     </button>

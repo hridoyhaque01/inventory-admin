@@ -101,7 +101,7 @@ function StoreDetails() {
                   </label>
                   <label
                     htmlFor="storeModal"
-                    className="inline-flex bg-primaryMainLow px-4 sm:py-2 py-3 rounded-md text-successColor cursor-pointer whitespace-nowrap"
+                    className="inline-flex bg-primaryMainLow px-4 py-2 rounded-md text-successColor cursor-pointer whitespace-nowrap"
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

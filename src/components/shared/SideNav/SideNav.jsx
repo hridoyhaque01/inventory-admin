@@ -246,7 +246,7 @@ const SideNav = () => {
               </span>
             </NavLink>
           </div>
-          {/* Category  */}
+          {/* Unit  */}
           <div className="w-full overflow-hidden capitalize shrink-0">
             <NavLink
               to="/unit"

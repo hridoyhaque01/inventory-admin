@@ -321,7 +321,6 @@ function EditProfile() {
                     {t("forms.phone")} :
                   </span>
                   <input
-                    required
                     type="number"
                     name="phoneNumber"
                     placeholder={t("placeholders.enterPhone")}

@@ -89,7 +89,8 @@
     "enterTotalPrice": "মোট মূল্য লিখুন",
     "enterDueAmount": "প্রাপ্য মূল্য লিখুন",
     "storeAddress": "দোকানের ঠিকানা লিখুন",
-    "storeName": "দোকানের নাম লিখুন"
+    "storeName": "দোকানের নাম লিখুন",
+    "enterCategory": "বিভাগের নাম লিখুন"
   },
   "buttons": {
     "cancel": "বাতিল",
@@ -105,8 +106,7 @@
     "signUp": "নিবন্ধন করুন",
     "forgetPass": "পাসওয়ার্ড ভুলে গেছেন",
     "noAcc": "অ্যাকাউন্ট নেই?",
-    "haveAcc": "ইতিমধ্যে অ্যাকাউন্ট আছে?",
-    "enterCategory": "বিভাগের নাম লিখুন"
+    "haveAcc": "ইতিমধ্যে অ্যাকাউন্ট আছে?"
   },
   "cards": {
     "totalCost": "মোট খরচ",
