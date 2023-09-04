@@ -12,7 +12,7 @@ const PaidToOwnerModal = ({
   const [payment, setPayment] = useState("");
   const handlePayment = (event) => {
     const value = event.target.value;
-    if (Number(value) > activeStore?.remaining || Number(value) < 0) {
+    if (Number(value) > activeStore?.remaining) {
       return;
     } else {
       setPayment(value);
@@ -23,6 +23,12 @@ const PaidToOwnerModal = ({
     const data = {
       payment: payment,
     };
+
+    if (parseInt(payment) < 0) {
+      errorNotify("Negative values are not accepted");
+      return;
+    }
+
     const formData = new FormData();
     formData.append("data", JSON.stringify(data));
 
@@ -95,20 +101,14 @@ const PaidToOwnerModal = ({
                     >
                       {t("buttons.cancel")}
                     </label>
-                    {/* <button type="submit">
+                    <button type="submit">
                       <label
                         htmlFor="paidToOwnerModal"
                         className="btn w-[140px] sm:w-[160px] text-sm sm:text-base rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
                       >
                         {t("buttons.save")}
                       </label>
-                    </button> */}
-                    <label
-                      htmlFor="confirmationPopup"
-                      className="btn w-[140px] sm:w-[160px] text-sm sm:text-base rounded-full border bg-primaryMainLight hover:bg-primaryMainLight text-whiteHigh font-medium text-center whitespace-nowrap"
-                    >
-                      {t("buttons.save")}
-                    </label>
+                    </button>
                   </div>
                 </div>
               </div>
