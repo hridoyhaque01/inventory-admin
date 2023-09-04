@@ -6,7 +6,7 @@ function SearchBar({ title, value, onChange, path, isNotAddable, children }) {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-primaryMainDarkest px-3 py-4 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+    <div className="bg-primaryMainDarkest px-3 py-4 sm:p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-t-2xl">
       <div className="flex justify-between items-center sm:justify-start sm:gap-4 md:gap-8">
         <h4 className=" text-whiteHigh text-lg sm:text-2xl font-bold">
           {t(title)}

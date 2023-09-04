@@ -78,7 +78,7 @@ function Expenses() {
           onChange={onChange}
           isNotAddable={true}
         >
-          <div className="dropdown dropdown-bottom z-50">
+          <div className="dropdown dropdown-end dropdown-bottom z-50">
             <label
               tabIndex={0}
               className="text-whiteHigh flex items-center gap-1 cursor-pointer  text-sm md:text-base whitespace-nowrap"

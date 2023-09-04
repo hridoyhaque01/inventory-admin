@@ -66,7 +66,7 @@ function Sales() {
   }
   return (
     <section className="h-full w-full overflow-auto px-4 md:px-6 py-6">
-      <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-hidden">
+      <div className="bg-whiteHigh shadow-sm w-full h-full rounded-2xl overflow-visible">
         <SearchBar
           title="tableTitle.sales"
           path="/sales-add"
@@ -98,7 +98,7 @@ function Sales() {
             </label>
             <ul
               tabIndex={0}
-              className="dropdown-content z-[1] menu p-1 shadow bg-whiteHigh rounded w-36 sm:w-48 mt-2 text-sm md:text-base whitespace-nowrap overflow-visible"
+              className="dropdown-content z-50 menu p-1 shadow bg-whiteHigh rounded w-36 sm:w-48 mt-2 text-sm md:text-base whitespace-nowrap overflow-visible"
             >
               <li onClick={() => setSelectedShop("All Shop")}>
                 <p>{t("allShop")}</p>
